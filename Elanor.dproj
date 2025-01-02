@@ -1,0 +1,350 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{A916A4C9-C7BA-41FC-97B8-F35422964978}</ProjectGuid>
+        <MainSource>Elanor.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <ProjectName Condition="'$(ProjectName)'==''">Elanor</ProjectName>
+        <TargetedPlatforms>1606675</TargetedPlatforms>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_E>false</DCC_E>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+        <DCC_N>true</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_DebugInformation>1</DCC_DebugInformation>
+        <DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+        <DCC_UnitAlias>WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;$(DCC_UnitAlias)</DCC_UnitAlias>
+        <DCC_UnitSearchPath>C:\AppElanor_Fontes\Prototipos;C:\AppElanor_Fontes\Prototipos\EstimativaMensal;C:\AppElanor_Fontes;C:\AppElanor_Fontes\NumEdit;C:\AppElanor_Fontes\NumPed;C:\AppElanor_Fontes\pngdelphi-master\pngdelphi-master;C:\AppElanor_Fontes\PNGImage-156;C:\AppElanor_Fontes\VCLSkin4.8\Source;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UsePackage>vcl;rtl;vclx;indy;inet;xmlrtl;vclie;inetdbbde;inetdbxpress;dbrtl;dsnap;dsnapcon;vcldb;soaprtl;VclSmp;dbexpress;dbxcds;inetdb;bdertl;vcldbx;webdsnap;websnap;adortl;ibxpress;teeui;teedb;tee;dss;visualclx;visualdbclx;vclactnband;vclshlctrls;IntrawebDB_50_70;Intraweb_50_70;Rave50CLX;Rave50VCL;dclOfficeXP;qrpt;dclaxserver;teeqr;delphiclxide;proide;delphivclide;direct;stride;$(DCC_UsePackage)</DCC_UsePackage>
+        <SanitizedProjectName>Elanor</SanitizedProjectName>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_RangeChecking>true</DCC_RangeChecking>
+        <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="UPrincipal.pas">
+            <Form>FrmPrincipal</Form>
+        </DCCReference>
+        <DCCReference Include="UPadrao.pas">
+            <Form>FrmPadrao</Form>
+        </DCCReference>
+        <DCCReference Include="UCadProdutos.pas">
+            <Form>FrmCadProd</Form>
+        </DCCReference>
+        <DCCReference Include="UBuscarProdutos.pas">
+            <Form>FrmBuscarPrd</Form>
+        </DCCReference>
+        <DCCReference Include="uMensagens.pas">
+            <Form>frmMensagens</Form>
+        </DCCReference>
+        <DCCReference Include="UEntraEstoque.pas">
+            <Form>FrmEntEstoque</Form>
+        </DCCReference>
+        <DCCReference Include="UCadUser.pas">
+            <Form>FrmCadUser</Form>
+        </DCCReference>
+        <DCCReference Include="UBuscarUser.pas">
+            <Form>FrmBuscarUser</Form>
+        </DCCReference>
+        <DCCReference Include="ULogin.pas">
+            <Form>FrmLogin</Form>
+        </DCCReference>
+        <DCCReference Include="UCadPedido.pas">
+            <Form>FrmNPedido</Form>
+        </DCCReference>
+        <DCCReference Include="UCadCli.pas">
+            <Form>FrmCadCli</Form>
+        </DCCReference>
+        <DCCReference Include="UCadPrazos.pas">
+            <Form>FrmCadPrazos</Form>
+        </DCCReference>
+        <DCCReference Include="UBuscarPrazos.pas">
+            <Form>FrmBuscaPrazos</Form>
+        </DCCReference>
+        <DCCReference Include="UBuscarCliente.pas">
+            <Form>FrmBuscarCliente</Form>
+        </DCCReference>
+        <DCCReference Include="USelecionarProd.pas">
+            <Form>FrmSelecionarProd</Form>
+        </DCCReference>
+        <DCCReference Include="UImpressaoPedidos.pas">
+            <Form>FrmImprePedidos</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultarEstoque.pas">
+            <Form>FrmConsultarEstoque</Form>
+        </DCCReference>
+        <DCCReference Include="USelecionaProdPreco.pas">
+            <Form>FrmSelProdPre</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultarPedCli.pas">
+            <Form>FrmConsultarPedCli</Form>
+        </DCCReference>
+        <DCCReference Include="UConsMovEntrada.pas">
+            <Form>FrmConsMovEntrada</Form>
+        </DCCReference>
+        <DCCReference Include="UNumProxPed.pas">
+            <Form>FrmNumProxPed</Form>
+        </DCCReference>
+        <DCCReference Include="UEnfestadoPRolo.pas">
+            <Form>FrmEnfestadoPRolo</Form>
+        </DCCReference>
+        <DCCReference Include="USelecionaProdestoque.pas">
+            <Form>FrmSelecionarProdEstoque</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultaPedData.pas">
+            <Form>FrmConsultarPedData</Form>
+        </DCCReference>
+        <DCCReference Include="UGraficoVenProd.pas">
+            <Form>FrmGraficoVenProd</Form>
+        </DCCReference>
+        <DCCReference Include="UAtendeCliente1.pas"/>
+        <DCCReference Include="UAtendeCliente.pas"/>
+        <DCCReference Include="UCadCheque.pas">
+            <Form>FrmCadCheque</Form>
+        </DCCReference>
+        <DCCReference Include="UBuscarCheque.pas">
+            <Form>FrmBuscarCheques</Form>
+        </DCCReference>
+        <DCCReference Include="UImpressaoEtiquetas.pas">
+            <Form>FrmImpEtiquetas</Form>
+        </DCCReference>
+        <DCCReference Include="UQRepEtiquetas.pas">
+            <Form>FrmQrepEtiquetas</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedData.pas">
+            <Form>FrmRelatorioPedData</Form>
+        </DCCReference>
+        <DCCReference Include="URelPedidosdata.pas">
+            <Form>FrmRelPedidos</Form>
+        </DCCReference>
+        <DCCReference Include="UImpressaoEtiquetasNProd.pas">
+            <Form>FrmImpEtiquetasNProd</Form>
+        </DCCReference>
+        <DCCReference Include="UImpressaoEtiquetasNProdpas.pas">
+            <Form>FrmQrepEtiquetasNProd</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedPrazo.pas">
+            <Form>FrmConsultarPedPrazo</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedidosPrazo.pas">
+            <Form>FrmRelPedidosPrazo</Form>
+        </DCCReference>
+        <DCCReference Include="UCancelpedidos.pas">
+            <Form>FrmCancelPedidos</Form>
+        </DCCReference>
+        <DCCReference Include="URelEntradasemEStoque.pas">
+            <Form>FrmRelEntradas</Form>
+        </DCCReference>
+        <DCCReference Include="UTabelaPrecos.pas">
+            <Form>FrmTabelaPrecos</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultaPedidosVista.pas">
+            <Form>FrmConsultarPedVista</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedidosVista.pas">
+            <Form>FrmRelPedidosVista</Form>
+        </DCCReference>
+        <DCCReference Include="UConcultaPedCancelado.pas">
+            <Form>FrmConsultarPedCancelado</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultarContaREC.pas">
+            <Form>FrmConsultarContaRec</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultarContaRecPaga.pas">
+            <Form>FrmConsultarContaRecPaga</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ContasPagar\UBaixarContasPag.pas">
+            <Form>FrmBaixarContasPag</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ContasPagar\UBuscarContas.pas">
+            <Form>FrmBuscarContas</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ContasPagar\UBuscarFornecedor.pas">
+            <Form>FrmBuscarFornecedor</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ContasPagar\UcadContasPagar.pas">
+            <Form>FrmCadContasaPagar</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ContasPagar\UCadFornecedor.pas">
+            <Form>FrmCadFornec</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ContasPagar\URelContasEmAberto.pas">
+            <Form>FrmRelContasAberto</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedDataCliente.pas">
+            <Form>FrmRelatorioPedDataCli</Form>
+        </DCCReference>
+        <DCCReference Include="URelEstoqueAtual.pas">
+            <Form>FrmRelEstoqueAtual</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedOrdemCompra.pas">
+            <Form>FrmConsultarPedOrdemCompra</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedData_e_OC.pas">
+            <Form>FrmRelPedidosOC</Form>
+        </DCCReference>
+        <DCCReference Include="UIncluir_OBS_Pedidos.pas">
+            <Form>FrmIncluirObsPedidos</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\FrmQuantidade\UQuantidade.pas">
+            <Form>FrmQuantidade</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\NumPed\UNumPed.pas">
+            <Form>FrmNumPed</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultaPedDia.pas">
+            <Form>FrmConsultarPedDia</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioPedDias.pas">
+            <Form>FrmRelPedidosDia</Form>
+        </DCCReference>
+        <DCCReference Include="UGraficoDeFaturamentoDiario.pas">
+            <Form>FrmGraficoFaturamentodia</Form>
+        </DCCReference>
+        <DCCReference Include="UEntradaDeGastos.pas">
+            <Form>FrmCadGastos</Form>
+        </DCCReference>
+        <DCCReference Include="ULocalizarGastos.pas">
+            <Form>FrmBuscarGastos</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultaDespesas.pas">
+            <Form>FrmConsultarDespesas</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioDespesas.pas">
+            <Form>FrmRelDespesas</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\ModuloSQL\UModuloSql.pas">
+            <Form>FormConsultaSQL</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\EstimativaMensal\URelFaturamentoMes.pas">
+            <Form>FrmRelFaturamentoMensal</Form>
+        </DCCReference>
+        <DCCReference Include="UConsultaPedProduto.pas">
+            <Form>FrmConsultarPedProduto</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\RomaneioEntrega\URomaneioEntrega.pas">
+            <Form>FrmRomaneioEntrega</Form>
+        </DCCReference>
+        <DCCReference Include="UPrintRomaneio.pas">
+            <Form>FrmPrintRomaneio</Form>
+        </DCCReference>
+        <DCCReference Include="USelecionarSkin.pas">
+            <Form>FrmSelectSkin</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\Controle de Perdas\UFrmControlePerdas.pas">
+            <Form>FrmControlePerdas</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\Controle de Perdas\UConsultarPerdasMes.pas">
+            <Form>FrmImpressaoPerdasMes</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Prototipos\Controle de Perdas\UConsultarPerdas.pas">
+            <Form>FrmConsultarPerdas</Form>
+        </DCCReference>
+        <DCCReference Include="Prototipos\Controle de Perdas\UImpressaoPerdas.pas">
+            <Form>FrmImpressaoPerdas</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="Prototipos\Controle de Perdas\UConsultarLancamentos.pas">
+            <Form>FrmConsultarLancamentos</Form>
+        </DCCReference>
+        <DCCReference Include="UReimpressaoPerdas.pas">
+            <Form>FrmReImpressaoPerdas</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UCadastroDespesas.pas">
+            <Form>FrmCadDespesas</Form>
+        </DCCReference>
+        <DCCReference Include="USelecionarDespesas.pas">
+            <Form>FrmSelecionaDespesas</Form>
+        </DCCReference>
+        <DCCReference Include="URelatorioDeCustos.pas">
+            <Form>FrmRelCustos</Form>
+        </DCCReference>
+        <DCCReference Include="UBuscarLote.pas">
+            <Form>FrmBuscarLote</Form>
+        </DCCReference>
+        <DCCReference Include="UZerarEStoqueNegativo.pas">
+            <Form>FrmEstoqueNegativo</Form>
+        </DCCReference>
+        <DCCReference Include="UAlterarControledePerdas.pas">
+            <Form>FrmAlterarControlePerdas</Form>
+        </DCCReference>
+        <DCCReference Include="UReimpressaoAlterarPerdas.pas">
+            <Form>FrmImpressaoAlteraPerdas</Form>
+            <DesignClass>TQuickRep</DesignClass>
+        </DCCReference>
+        <DCCReference Include="UReimpressaoRomaneio.pas">
+            <Form>FrmReimpressaoRomaneio</Form>
+        </DCCReference>
+        <DCCReference Include="URelReimpressaoRomaneio.pas">
+            <Form>FrmPrintRomaneio1</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">Elanor.dpr</Source>
+                </Source>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Android">True</Platform>
+                <Platform value="Android64">True</Platform>
+                <Platform value="iOSDevice64">True</Platform>
+                <Platform value="iOSSimARM64">True</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">True</Platform>
+                <Platform value="Win64x">True</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>
