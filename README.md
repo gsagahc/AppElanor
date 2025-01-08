@@ -1,4 +1,4 @@
 # AppElanor
 Aplicação de gestão empresarial para fábrica de elásticos
-Aplicação em Delphi 7 
-Banco de dados Firebird
+<td>Aplicação em Delphi 7 </td>
+<td>Banco de dados Firebird</td>
