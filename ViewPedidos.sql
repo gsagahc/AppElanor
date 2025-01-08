@@ -1,0 +1,52 @@
+create view VIEW_PEDIDO (ID_PEDIDO,
+                         TBPED_DATA,
+                         ID_CLIENTE,
+                         TBPED_NOME,
+                         TBPED_ENDERECO,
+                         TBPED_CIDADE,
+                         TBPED_TELEFONE,
+                         ID_PRAZO,
+                         TBPED_VALTOTAL,
+                         TBPED_VENC01,
+                         TBPED_VENC02,
+                         TBPED_VENC03,
+                         ID_USUARIO,
+                         TBPED_BAIRRO,
+                         TBPED_CNPJ,
+                         ID_PRODUTO,
+                         TBITPED_QUANT,
+                         TBITPED_VALUNI,
+                         TBITPED_VALTOT,
+                         TBITPED_UNIDADE,
+                         TBPED_NOME ,
+                         ID_PRODUTO)
+as
+select    TB_PEDIDOS.ID_PEDIDO,
+          TBPED_DATA,
+          TB_PEDIDOS.id_cliente,
+          TB_PEDIDOS.TBPED_NOME,
+          TBPED_ENDERECO,
+          TBPED_CIDADE,
+          TBPED_TELEFONE,
+          TB_PEDIDOS.ID_PRAZO,
+          TBPED_VALTOTAL,
+          TBPED_VENC01,
+          TBPED_VENC02,
+          TBPED_VENC03,
+          TB_PEDIDOS.ID_USUARIO,
+          TBPED_BAIRRO,
+          TBPED_CNPJ,
+          ID_PRODUTO,
+          TBITPED_QUANT,
+          TBITPED_VALUNI,
+          TBITPED_VALTOT,
+          TBITPED_UNIDADE,
+          TB_PRODUTOS.TBPRD_NOME,
+          TB_ITENSPEDIDO.ID_PRODUTO,
+          TB_PRODUTOS.ID_PRODUTO
+
+FROM TB_PEDIDOS
+INNER JOIN TB_ITENSPEDIDO
+ON (TB_PEDIDOS.ID_PEDIDO = TB_ITENSPEDIDO.ID_PEDIDO )
+INNER JOIN TB_PRODUTOS
+ON (TB_PRODUTOS.ID_PRODUTO = TB_ITENSPEDIDO.ID_PRODUTO )
