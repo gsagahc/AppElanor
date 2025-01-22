@@ -28,7 +28,6 @@ type
     IBTableProdutosTBES_TAMANHO: TIBBCDField;
     procedure BitBtn1Click(Sender: TObject);
     procedure Lerini;
-    procedure FormShow(Sender: TObject);
     
   private
     { Private declarations }
@@ -47,6 +46,7 @@ procedure TForm1.BitBtn1Click(Sender: TObject);
 begin
 
   try
+    LerIni;
     IBTableProdutos.Open;
 
     if not IBTableProdutos.IsEmpty then
@@ -159,16 +159,10 @@ begin
   ArqIni := TIniFile.Create(caminho+'Config.ini');
   try
     IBDatabase1.Connected:=False;
-
     IBDatabase1.DatabaseName := ArqIni.ReadString('Configuracoes', 'DATABASE', BancoDados);
     IBDatabase1.Connected:=True;
   finally
     ArqIni.Free;
   end;
 end;
-procedure TForm1.FormShow(Sender: TObject);
-begin
-  Lerini;
-end;
-
 end.

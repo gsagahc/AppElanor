@@ -1,8 +1,8 @@
 object FrmControlePerdas: TFrmControlePerdas
   Left = 124
   Top = 210
-  Width = 1099
-  Height = 411
+  Width = 1125
+  Height = 449
   BorderIcons = []
   Caption = 'Controle de perdas'
   Color = clBtnFace
@@ -21,16 +21,16 @@ object FrmControlePerdas: TFrmControlePerdas
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 177
-    Width = 1083
-    Height = 195
+    Top = 161
+    Width = 1109
+    Height = 249
     Align = alClient
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1081
-      Height = 193
+      Width = 1107
+      Height = 247
       TabStop = False
       Align = alClient
       BorderStyle = bsNone
@@ -118,12 +118,12 @@ object FrmControlePerdas: TFrmControlePerdas
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1083
-    Height = 177
+    Width = 1109
+    Height = 161
     Align = alTop
     TabOrder = 1
     object PNGBNovo: TPNGButton
-      Left = 776
+      Left = 812
       Top = 88
       Width = 57
       Height = 62
@@ -211,7 +211,7 @@ object FrmControlePerdas: TFrmControlePerdas
       OnClick = PNGBNovoClick
     end
     object PNGImprimir: TPNGButton
-      Left = 950
+      Left = 986
       Top = 88
       Width = 57
       Height = 62
@@ -293,7 +293,7 @@ object FrmControlePerdas: TFrmControlePerdas
       OnClick = PNGImprimirClick
     end
     object PNGButton2: TPNGButton
-      Left = 1008
+      Left = 1044
       Top = 88
       Width = 57
       Height = 62
@@ -433,8 +433,8 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label4: TLabel
-      Left = 817
-      Top = 8
+      Left = 25
+      Top = 48
       Width = 73
       Height = 13
       Caption = 'Comprimento'
@@ -446,7 +446,7 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label5: TLabel
-      Left = 24
+      Left = 288
       Top = 48
       Width = 63
       Height = 13
@@ -459,7 +459,7 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 290
+      Left = 553
       Top = 48
       Width = 146
       Height = 13
@@ -472,7 +472,7 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 552
+      Left = 816
       Top = 48
       Width = 66
       Height = 13
@@ -485,8 +485,8 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label8: TLabel
-      Left = 816
-      Top = 48
+      Left = 24
+      Top = 88
       Width = 46
       Height = 13
       Caption = 'Primeira'
@@ -498,7 +498,7 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label9: TLabel
-      Left = 24
+      Left = 288
       Top = 88
       Width = 51
       Height = 13
@@ -511,7 +511,7 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object Label10: TLabel
-      Left = 288
+      Left = 553
       Top = 88
       Width = 62
       Height = 13
@@ -524,7 +524,7 @@ object FrmControlePerdas: TFrmControlePerdas
       ParentFont = False
     end
     object PNGButton1: TPNGButton
-      Left = 892
+      Left = 928
       Top = 88
       Width = 57
       Height = 62
@@ -636,7 +636,7 @@ object FrmControlePerdas: TFrmControlePerdas
       OnClick = PNGButton1Click
     end
     object PNGBSalvar: TPNGButton
-      Left = 834
+      Left = 870
       Top = 88
       Width = 57
       Height = 62
@@ -736,7 +736,7 @@ object FrmControlePerdas: TFrmControlePerdas
     object ComboBoxElastico: TComboBox
       Left = 552
       Top = 24
-      Width = 249
+      Width = 513
       Height = 22
       Style = csOwnerDrawFixed
       Ctl3D = False
@@ -759,8 +759,8 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditComprimento: TNumEdit
-      Left = 816
-      Top = 24
+      Left = 24
+      Top = 64
       Width = 249
       Height = 19
       Ctl3D = False
@@ -771,7 +771,7 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditPesoBruto: TNumEdit
-      Left = 24
+      Left = 288
       Top = 64
       Width = 249
       Height = 19
@@ -783,7 +783,7 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditQuantidadeRC: TNumEdit
-      Left = 288
+      Left = 552
       Top = 64
       Width = 249
       Height = 19
@@ -796,7 +796,7 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditQuantidade: TNumEdit
-      Left = 552
+      Left = 816
       Top = 64
       Width = 249
       Height = 19
@@ -808,8 +808,8 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditPrimeira: TNumEdit
-      Left = 816
-      Top = 64
+      Left = 24
+      Top = 104
       Width = 249
       Height = 19
       Ctl3D = False
@@ -820,7 +820,7 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditSegunda: TNumEdit
-      Left = 24
+      Left = 288
       Top = 104
       Width = 249
       Height = 19
@@ -833,7 +833,7 @@ object FrmControlePerdas: TFrmControlePerdas
       Numerico = True
     end
     object EditPercentual: TNumEdit
-      Left = 288
+      Left = 552
       Top = 104
       Width = 249
       Height = 19

@@ -296,8 +296,10 @@ end;
 procedure TFrmControlePerdas.FormShow(Sender: TObject);
 var Elastico : TProduto;
 begin
+
   IBQElasticos.Open;
   IBQElasticos.First;
+// Preencher combobox Elásticos
  while not IBQElasticos.Eof do
  begin
    Elastico      := TProduto.Create;
@@ -313,35 +315,26 @@ begin
 end;
 
 procedure TFrmControlePerdas.AtualizarEstoque;
-Var Formato: string;
+Var
     SaldoAtual:Integer;
     IdEstoque:Integer;
 begin
    SaldoAtual:=0;
    IdEstoque:=0;
-//  //Verificar Tipo
-//  //25 até 50 Rolo
-//  if (CDSPerdasComprimento.AsInteger >=25) and (CDSPerdasComprimento.AsInteger <=50) Then
-//    Formato := 'ROLO';
-//  //100 até 500 Carretel
-//  if (CDSPerdasComprimento.AsInteger >=100) and (CDSPerdasComprimento.AsInteger <=500) Then
-//    Formato:='CARRETEL';
-//  // 1000 até 1800 enfestado
-//  if (CDSPerdasComprimento.AsInteger >=1000) and (CDSPerdasComprimento.AsInteger <=1800) Then
-//    Formato:='ENFESTADO';
+
   //Verificar se já tem entrada estoque e guardar saldo atual
   IBQEstoque.Close;
   IBQEstoque.SQL.Clear;
   IBQEstoque.SQL.Add('SELECT TBES_QUANTI, '+
                             'ID_ESTOQUE '+
                      'FROM TB_ESTOQUE '+
-                     'WHERE ID_PRODUTO=:pProduto '+
-                     'AND   TBES_FORMATO=:pFormato');
+                     'WHERE ID_PRODUTO=:pProduto ');
+
 
   IBQEstoque.ParamByName('pProduto').AsInteger :=CDSPerdasElastico.AsInteger;
-  IBQEstoque.ParamByName('pFormato').AsString  :='METROS';
-  IBQEstoque.Open;
+
   Try
+    IBQEstoque.Open;
     if Not IBQEstoque.IsEmpty then
     begin
 
@@ -353,9 +346,9 @@ begin
                            'SET '+
                            'TBES_QUANTI = :TBES_QUANTI '+
                            'WHERE '+
-                           'ID_ESTOQUE = :OLD_ID_ESTOQUE ');
+                           'ID_ESTOQUE = :ID_ESTOQUE ');
       IBSQLEstoque.ParamByName('TBES_QUANTI').AsInteger:=SaldoAtual+CDSPerdasQuantidade.AsInteger;
-      IBSQLEstoque.ParamByName('OLD_ID_ESTOQUE').AsInteger:=IdEstoque;
+      IBSQLEstoque.ParamByName('ID_ESTOQUE').AsInteger:=IdEstoque;
       IBSQLEstoque.ExecQuery;
     end
     else
@@ -368,7 +361,7 @@ begin
                            '(:ID_PRODUTO, :TBES_FORMATO, :TBES_QUANTI)');
 
       IBSQLEstoque.ParamByName('ID_PRODUTO').AsInteger:=CDSPerdasElastico.AsInteger;
-      IBSQLEstoque.ParamByName('TBES_FORMATO').AsString := Formato;
+      IBSQLEstoque.ParamByName('TBES_FORMATO').AsString := 'METRO';
       IBSQLEstoque.ParamByName('TBES_QUANTI').AsInteger:=SaldoAtual+CDSPerdasQuantidade.AsInteger;
       IBSQLEstoque.ExecQuery;
 
