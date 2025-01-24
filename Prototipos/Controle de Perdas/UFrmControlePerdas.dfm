@@ -4,7 +4,7 @@ object FrmControlePerdas: TFrmControlePerdas
   Width = 1125
   Height = 449
   BorderIcons = []
-  Caption = 'Controle de perdas'
+  Caption = 'Lan'#231'amento de produ'#231#227'o dos enroladores'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

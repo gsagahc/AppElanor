@@ -1722,7 +1722,7 @@ object FrmPrincipal: TFrmPrincipal
     object Produo1: TMenuItem
       Caption = 'Produ'#231#227'o'
       object Controledeperdas1: TMenuItem
-        Caption = 'Controle de perdas'
+        Caption = 'Produ'#231#227'o dos enroladores'
         OnClick = Controledeperdas1Click
       end
       object CorrigirAlerar1: TMenuItem
