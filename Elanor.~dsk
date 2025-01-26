@@ -11,19 +11,19 @@ File_8=SourceModule,'C:\AppElanor_Fontes\URelEstoqueAtual.pas',0,1,61,9,85,1,0
 File_9=SourceModule,'C:\AppElanor_Fontes\Prototipos\Controle de Perdas\UFrmControlePerdas.pas',0,1,337,116,348,1,0
 
 [Modules]
-Module0=C:\git_repository\AppElanor\UPrincipal.pas
-Module1=C:\git_repository\AppElanor\URelEstoqueAtual.pas
+Module0=C:\git_repository\AppElanor\URelEstoqueAtual.pas
+Module1=C:\git_repository\AppElanor\UPrincipal.pas
 Module2=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
 Module3=C:\git_repository\AppElanor\UConsMovEntrada.pas
 Count=4
 EditWindowCount=1
 
-[C:\git_repository\AppElanor\UPrincipal.pas]
+[C:\git_repository\AppElanor\URelEstoqueAtual.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
-[C:\git_repository\AppElanor\URelEstoqueAtual.pas]
+[C:\git_repository\AppElanor\UPrincipal.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0

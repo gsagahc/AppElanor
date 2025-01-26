@@ -13,7 +13,7 @@ create or alter procedure sp_atualiza_movi (
 as
 declare  variable videstoque integer;
 declare  variable vsaldoanterior float;
-declare variable vSoma float;
+declare variable vSaldoAtual float;
 declare variable vData Date;
 declare variable vHora Time;
 begin
@@ -22,10 +22,9 @@ begin
  vData =  current_date;
  vHora = current_time;
  IF (:ITIPO = 'E') THEN
-   vSoma = :vsaldoanterior + :iquant;
-
+   vSaldoAtual = :vsaldoanterior - :iquant;
  ELSE
-   vSoma = :vsaldoanterior - :iquant;
+   vSaldoAtual = :vsaldoanterior + :iquant;
 
 
   insert INTO tb_movestoque(TBMOVE_DATA,
@@ -49,7 +48,7 @@ begin
                          :iproduto,
                          :iformato,
                          :vsaldoanterior,
-                         :vSoma,
+                         :vSaldoAtual,
                          :itamanho,
                          :iquant);
     

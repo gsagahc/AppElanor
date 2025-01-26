@@ -109,11 +109,10 @@ begin
                   'TBMOVE_TIPO, '+
                   'TBES_QUANTI, '+
                   'TBES_QUANTI AS SALDO_ATUAL,  '+
-                  'CASE WHEN TB_MOVESTOQUE.ID_PEDIDO<>0 THEN  '+
-                    '(SELECT TBPED_NUMPED FROM TB_PEDIDOS WHERE ID_PEDIDO=TB_MOVESTOQUE.ID_PEDIDO) '+
-                  ' ELSE '+
-                  '''''' +
-                 '  END AS PEDIDO '+
+                  'CASE WHEN (TB_MOVESTOQUE.ID_PEDIDO <> 0 AND TB_MOVESTOQUE.ID_PEDIDO IS NOT NULL) THEN '+
+                     '(SELECT TBPED_NUMPED FROM TB_PEDIDOS WHERE ID_PEDIDO=TB_MOVESTOQUE.ID_PEDIDO) '+
+                 ' ELSE NULL '+
+                 'END AS PEDIDO '+
              'FROM TB_MOVESTOQUE '+
            ' INNER JOIN TB_PRODUTOS '+
                'ON TB_PRODUTOS.ID_PRODUTO=TB_MOVESTOQUE.ID_PRODUTO '+
@@ -130,7 +129,7 @@ begin
 
 
   StrSql:=StrSQL + ' AND TBMOVE_DATA BETWEEN :pDataIni AND :pDataFin' +
-                   ' AND TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2 ';
+                   ' AND (TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2) ';
 
   StrSql:= StrSQL + ' ORDER BY TBMOVE_DATA,TBMOVE_HORA';
   IBQMovEstoque.Close;

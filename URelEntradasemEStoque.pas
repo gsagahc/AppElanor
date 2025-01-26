@@ -20,14 +20,9 @@ type
     QRDBText1: TQRDBText;
     QRLabel2: TQRLabel;
     QRDBText2: TQRDBText;
-    QRLabel3: TQRLabel;
     QRDBText3: TQRDBText;
-    QRLabel4: TQRLabel;
-    QRDBText4: TQRDBText;
     QRLabel5: TQRLabel;
     QRDBText5: TQRDBText;
-    QRLabel6: TQRLabel;
-    QRDBText6: TQRDBText;
     QRLabel7: TQRLabel;
     QRLabel9: TQRLabel;
     QRLDataIni: TQRLabel;
@@ -37,6 +32,12 @@ type
     QRDBText9: TQRDBText;
     QRLabel10: TQRLabel;
     QRDBText10: TQRDBText;
+    QRLabelTipo: TQRLabel;
+    QRShape1: TQRShape;
+    QRLabel3: TQRLabel;
+    QRDBText4: TQRDBText;
+    procedure QRBand2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
@@ -50,5 +51,22 @@ implementation
 Uses UPrincipal, UMensagens, URelatorioPedData, Math, UConsMovEntrada;
 
 {$R *.dfm}
+
+procedure TFrmRelEntradas.QRBand2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  if Trim(FrmConsMovEntrada.IBQMovEstoqueTBMOVE_TIPO.AsString) = 'E' Then
+  begin
+    QRLabelTipo.Caption:='ENTRADA';
+    QRLabelTipo.Font.Color:=clGreen;
+  end
+  else
+  if Trim(FrmConsMovEntrada.IBQMovEstoqueTBMOVE_TIPO.AsString) = 'S' Then
+  begin
+    QRLabelTipo.Caption:='SAÍDA';
+    QRLabelTipo.Font.Color:=clRed;
+  end;
+
+end;
 
 end.
