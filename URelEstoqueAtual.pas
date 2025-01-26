@@ -46,6 +46,7 @@ type
     QRBand2: TQRBand;
     QRLabel10: TQRLabel;
     QRLValTotal: TQRLabel;
+    IBQEstoque:TIBQuery;
     procedure QRSubDetail1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private

@@ -1,6 +1,6 @@
 object FrmEntEstoque: TFrmEntEstoque
   Left = 408
-  Top = 153
+  Top = 184
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Entrada no estoque'
@@ -564,9 +564,9 @@ object FrmEntEstoque: TFrmEntEstoque
     object Label4: TLabel
       Left = 16
       Top = 88
-      Width = 204
+      Width = 345
       Height = 13
-      Caption = 'Formato ("Metro", "Unidade", "Kg")'
+      Caption = 'Formato ("Enfestado", "Rolo", "Carretel" ou "Com ponteira")'
       FocusControl = DBEdit2
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -630,9 +630,10 @@ object FrmEntEstoque: TFrmEntEstoque
       TabOrder = 2
       OnChange = CBoxFormatoChange
       Items.Strings = (
-        'METRO'
-        'UNIDADE'
-        'KG')
+        'ROLO'
+        'CARRETEL'
+        'ENFESTADO'
+        'COM PONTEIRA')
     end
     object DBEditTamanho: TDBEdit
       Left = 16

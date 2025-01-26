@@ -1,10 +1,10 @@
 object FrmConsMovEntrada: TFrmConsMovEntrada
   Left = 190
-  Top = 159
-  Width = 928
-  Height = 480
+  Top = 154
+  Width = 1080
+  Height = 394
   BorderIcons = []
-  Caption = 'Movimenta'#231#245'es de entrada'
+  Caption = 'Movimenta'#231#245'es de estoque'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 920
+    Width = 1064
     Height = 105
     Align = alTop
     TabOrder = 0
@@ -360,9 +360,8 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       Text = 'TODOS'
       Items.Strings = (
         'TODOS'
-        'ROLO'
-        'CARRETEL'
-        'ENFESTADO')
+        'METRO'
+        'UNIDADE')
     end
     object GroupBox1: TGroupBox
       Left = 447
@@ -400,15 +399,15 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
   object Panel2: TPanel
     Left = 0
     Top = 105
-    Width = 920
-    Height = 348
+    Width = 1064
+    Height = 250
     Align = alClient
     TabOrder = 1
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 918
-      Height = 346
+      Width = 1062
+      Height = 248
       Align = alClient
       Ctl3D = False
       DataSource = DsEstoque
@@ -419,6 +418,7 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       TitleFont.Height = -11
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
+      OnDrawColumnCell = DBGrid1DrawColumnCell
       Columns = <
         item
           Expanded = False
@@ -490,7 +490,7 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
         item
           Expanded = False
           FieldName = 'TBMOVE_QUANT'
-          Title.Caption = 'Entrada'
+          Title.Caption = 'Entrada/Sa'#237'da'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -11
@@ -502,37 +502,31 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
         item
           Expanded = False
           FieldName = 'TBMOVE_SOMA'
-          Title.Caption = 'Acumulado'
-          Title.Font.Charset = DEFAULT_CHARSET
-          Title.Font.Color = clWindowText
-          Title.Font.Height = -11
-          Title.Font.Name = 'MS Sans Serif'
-          Title.Font.Style = [fsBold]
-          Width = 97
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TBES_QUANTI'
           Title.Caption = 'Saldo Atual'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
-          Width = 106
+          Width = 94
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBUSR_NOME'
-          Title.Caption = 'Nome funcion'#225'rio'
+          FieldName = 'PEDIDO'
+          Title.Caption = 'Pedido'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TBMOVE_TIPO'
+          Title.Caption = 'Tipo'
+          Visible = False
         end>
     end
   end
@@ -568,22 +562,54 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       'SELECT TBMOVE_DATA,'
       '       TBMOVE_QUANT,'
       '       TBMOVE_FORMATO,'
-      '       TBMOVE_TAMANHO,'
       '       TBMOVE_SALDOANT,'
-      '       TBUSR_NOME,'
       '       TBES_QUANTI,'
       '       TBPRD_NOME,'
       '       TBMOVE_SOMA,'
-      '       TBMOVE_HORA'
-      'FROM TB_MOVESTOQUE'
-      'INNER JOIN TB_USUARIO'
-      'ON TB_USUARIO.ID_USUARIO=TB_MOVESTOQUE.ID_USUARIO'
-      'INNER JOIN TB_PRODUTOS'
-      'ON TB_PRODUTOS.ID_PRODUTO=TB_MOVESTOQUE.ID_PRODUTO'
-      'INNER JOIN TB_ESTOQUE'
-      'ON TB_ESTOQUE.ID_ESTOQUE=TB_MOVESTOQUE.ID_ESTOQUE ')
+      '       TBMOVE_HORA,'
+      '       TBMOVE_TAMANHO,'
+      '       TBMOVE_TIPO,'
+      '       TBES_QUANTI AS SALDO_ATUAL,  '
+      '       CASE WHEN TB_MOVESTOQUE.ID_PEDIDO<>0 THEN'
+      
+        '           (SELECT TBPED_NUMPED FROM TB_PEDIDOS WHERE ID_PEDIDO=' +
+        'TB_MOVESTOQUE.ID_PEDIDO)'
+      '       ELSE '#39#39
+      '       END AS PEDIDO'
+      ' FROM TB_MOVESTOQUE'
+      
+        ' INNER JOIN TB_PRODUTOS ON TB_PRODUTOS.ID_PRODUTO=TB_MOVESTOQUE.' +
+        'ID_PRODUTO'
+      
+        ' INNER JOIN TB_ESTOQUE ON TB_ESTOQUE.ID_ESTOQUE=TB_MOVESTOQUE.ID' +
+        '_ESTOQUE'
+      ' WHERE TB_MOVESTOQUE.ID_PRODUTO IS  NOT NULL'
+      ' AND TBMOVE_DATA BETWEEN :pDataIni AND :pDataFin'
+      ' AND TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2'
+      ' ORDER BY TBMOVE_DATA,TBMOVE_HORA')
     Left = 312
     Top = 105
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'pDataIni'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pDataFin'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pTipo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pTipo2'
+        ParamType = ptUnknown
+      end>
     object IBQMovEstoqueTBMOVE_DATA: TDateField
       FieldName = 'TBMOVE_DATA'
       Origin = 'TB_MOVESTOQUE.TBMOVE_DATA'
@@ -605,11 +631,6 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       Origin = 'TB_MOVESTOQUE.TBMOVE_TAMANHO'
       Precision = 9
       Size = 3
-    end
-    object IBQMovEstoqueTBUSR_NOME: TIBStringField
-      FieldName = 'TBUSR_NOME'
-      Origin = 'TB_USUARIO.TBUSR_NOME'
-      Size = 60
     end
     object IBQMovEstoqueTBPRD_NOME: TIBStringField
       FieldName = 'TBPRD_NOME'
@@ -635,6 +656,22 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
     object IBQMovEstoqueTBMOVE_SOMA: TIBBCDField
       FieldName = 'TBMOVE_SOMA'
       Origin = 'TB_MOVESTOQUE.TBMOVE_SOMA'
+      Precision = 18
+      Size = 2
+    end
+    object IBQMovEstoquePEDIDO: TIBStringField
+      FieldName = 'PEDIDO'
+      Size = 10
+    end
+    object IBQMovEstoqueTBMOVE_TIPO: TIBStringField
+      FieldName = 'TBMOVE_TIPO'
+      Origin = 'TB_MOVESTOQUE.TBMOVE_TIPO'
+      FixedChar = True
+      Size = 2
+    end
+    object IBQMovEstoqueSALDO_ATUAL: TIBBCDField
+      FieldName = 'SALDO_ATUAL'
+      Origin = 'TB_ESTOQUE.TBES_QUANTI'
       Precision = 18
       Size = 2
     end

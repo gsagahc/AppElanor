@@ -33,16 +33,20 @@ type
     IBQMovEstoqueTBMOVE_QUANT: TIBBCDField;
     IBQMovEstoqueTBMOVE_FORMATO: TIBStringField;
     IBQMovEstoqueTBMOVE_TAMANHO: TIBBCDField;
-    IBQMovEstoqueTBUSR_NOME: TIBStringField;
     IBQMovEstoqueTBPRD_NOME: TIBStringField;
     IBQMovEstoqueTBMOVE_HORA: TTimeField;
     IBQMovEstoqueTBMOVE_SALDOANT: TIBBCDField;
     IBQMovEstoqueTBES_QUANTI: TIBBCDField;
     IBQMovEstoqueTBMOVE_SOMA: TIBBCDField;
+    IBQMovEstoquePEDIDO: TIBStringField;
+    IBQMovEstoqueTBMOVE_TIPO: TIBStringField;
+    IBQMovEstoqueSALDO_ATUAL: TIBBCDField;
     procedure PNGButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PNGButton1Click(Sender: TObject);
     procedure PNGButton6Click(Sender: TObject);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -98,20 +102,24 @@ begin
                   'TBMOVE_QUANT, '+
                   'TBMOVE_FORMATO, '+
                   'TBMOVE_SALDOANT, '+
-                  'TBUSR_NOME, '+
-                  'TBES_QUANTI, '+
                   'TBPRD_NOME, '+
                   'TBMOVE_SOMA, '+
                   'TBMOVE_HORA, '+
-                  'TBMOVE_TAMANHO '+
+                  'TBMOVE_TAMANHO, '+
+                  'TBMOVE_TIPO, '+
+                  'TBES_QUANTI, '+
+                  'TBES_QUANTI AS SALDO_ATUAL,  '+
+                  'CASE WHEN TB_MOVESTOQUE.ID_PEDIDO<>0 THEN  '+
+                    '(SELECT TBPED_NUMPED FROM TB_PEDIDOS WHERE ID_PEDIDO=TB_MOVESTOQUE.ID_PEDIDO) '+
+                  ' ELSE '+
+                  '''''' +
+                 '  END AS PEDIDO '+
              'FROM TB_MOVESTOQUE '+
-            'INNER JOIN TB_USUARIO '+
-              ' ON TB_USUARIO.ID_USUARIO=TB_MOVESTOQUE.ID_USUARIO '+
            ' INNER JOIN TB_PRODUTOS '+
                'ON TB_PRODUTOS.ID_PRODUTO=TB_MOVESTOQUE.ID_PRODUTO '+
           '  INNER JOIN TB_ESTOQUE '+
                'ON TB_ESTOQUE.ID_ESTOQUE=TB_MOVESTOQUE.ID_ESTOQUE  ';
-               
+
   If CBBoxProdutos.Text<>'TODOS' Then
     StrSql:=StrSql+' WHERE TB_MOVESTOQUE.ID_PRODUTO=:pProduto '
   Else
@@ -122,14 +130,14 @@ begin
 
 
   StrSql:=StrSQL + ' AND TBMOVE_DATA BETWEEN :pDataIni AND :pDataFin' +
-                   ' AND (TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2) ';
+                   ' AND TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2 ';
 
   StrSql:= StrSQL + ' ORDER BY TBMOVE_DATA,TBMOVE_HORA';
   IBQMovEstoque.Close;
   IBQMovEstoque.SQL.Clear;
   IBQMovEstoque.SQL.Add(StrSql);
   IBQMovEstoque.ParamByName('pTipo').AsString:='E';
-  IBQMovEstoque.ParamByName('pTipo').AsString:='ET';
+  IBQMovEstoque.ParamByName('pTipo2').AsString:='S';
   if CBBoxProdutos.Text <>'TODOS' Then
     IBQMovEstoque.ParamByName('pProduto').AsInteger  := (CBBoxProdutos.Items.Objects[CBBoxProdutos.ITemIndex] As TProduto).Id;
   if CBBoxFormato.Text <>'TODOS' Then
@@ -150,6 +158,21 @@ begin
   Application.CreateForm(TFrmRelEntradas,FrmRelEntradas);
   FrmRelEntradas.QuickRep1.PreviewModal;
   FreeAndNil(FrmRelEntradas);
+end;
+
+procedure TFrmConsMovEntrada.DBGrid1DrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  If Trim(IBQMovEstoque.FieldByName('TBMOVE_TIPO').asString)='S'  then // condição
+  Begin
+    Dbgrid1.Canvas.Font.Color:= clRed; // coloque aqui a cor desejada
+  end;
+  If Trim(IBQMovEstoque.FieldByName('TBMOVE_TIPO').asString)='E'  then // condição
+  Begin
+    Dbgrid1.Canvas.Font.Color:= clGreen; // coloque aqui a cor desejada
+  end;
+  Dbgrid1.DefaultDrawDataCell(Rect, dbgrid1.columns[datacol].field, State);
 end;
 
 end.

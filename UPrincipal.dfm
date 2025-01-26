@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 140
-  Top = 168
+  Top = 139
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1561,12 +1561,9 @@ object FrmPrincipal: TFrmPrincipal
         Caption = 'Estoque atual'
         OnClick = Saldoatual2Click
       end
-      object Consultar1: TMenuItem
-        Caption = 'Consultar'
-        object Entradas1: TMenuItem
-          Caption = 'Entradas'
-          OnClick = Entradas1Click
-        end
+      object Entradas1: TMenuItem
+        Caption = 'Movimenta'#231#245'es'
+        OnClick = Entradas1Click
       end
       object ransfernciapararolo1: TMenuItem
         Caption = 'Transfer'#234'ncia para rolo'
@@ -1663,6 +1660,7 @@ object FrmPrincipal: TFrmPrincipal
       end
       object Estoquegeral1: TMenuItem
         Caption = 'Estoque atual'
+        OnClick = Estoquegeral1Click
       end
       object Despesas2: TMenuItem
         Caption = 'Custos'
@@ -1722,7 +1720,7 @@ object FrmPrincipal: TFrmPrincipal
     object Produo1: TMenuItem
       Caption = 'Produ'#231#227'o'
       object Controledeperdas1: TMenuItem
-        Caption = 'Produ'#231#227'o dos enroladores'
+        Caption = 'Lan'#231'amento produ'#231#227'o enroladores'
         OnClick = Controledeperdas1Click
       end
       object CorrigirAlerar1: TMenuItem
@@ -1783,7 +1781,7 @@ object FrmPrincipal: TFrmPrincipal
     Top = 96
   end
   object IBTMain: TIBTransaction
-    Active = False
+    Active = True
     DefaultDatabase = IBDMain
     AutoStopAction = saNone
     Left = 72
@@ -2906,5 +2904,48 @@ object FrmPrincipal: TFrmPrincipal
     Left = 624
     Top = 144
     SkinStream = {00000000}
+  end
+  object IBSPATUALIZAMOVI: TIBStoredProc
+    Database = IBDMain
+    Transaction = IBTMain
+    StoredProcName = 'SP_ATUALIZA_MOVI'
+    Left = 568
+    Top = 289
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'IPRODUTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'IUSUARIO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'ITIPO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftString
+        Name = 'IFORMATO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'IPEDIDO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'ITAMANHO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IQUANT'
+        ParamType = ptInput
+      end>
   end
 end

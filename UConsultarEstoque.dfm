@@ -1,6 +1,6 @@
 object FrmConsultarEstoque: TFrmConsultarEstoque
-  Left = 304
-  Top = 266
+  Left = 274
+  Top = 195
   Width = 1099
   Height = 446
   HorzScrollBar.Visible = False
@@ -433,7 +433,7 @@ object FrmConsultarEstoque: TFrmConsultarEstoque
           Expanded = False
           FieldName = 'TBES_FORMATO'
           ReadOnly = True
-          Title.Caption = 'Unidade'
+          Title.Caption = 'Formato'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
           Title.Font.Height = -11
@@ -561,7 +561,6 @@ object FrmConsultarEstoque: TFrmConsultarEstoque
     CachedUpdates = True
     SQL.Strings = (
       'SELECT ID_ESTOQUE,'
-      '       TB_PRODUTOS.ID_PRODUTO,'
       '       TBPRD_NOME,'
       '       TBPRD_PRECOVENDA,'
       '       TBPRD_DESCRICAO,'
@@ -633,11 +632,6 @@ object FrmConsultarEstoque: TFrmConsultarEstoque
     end
     object IBQEstoquePRECOTOTAL: TFloatField
       FieldName = 'PRECOTOTAL'
-    end
-    object IBQEstoqueID_PRODUTO: TIntegerField
-      FieldName = 'ID_PRODUTO'
-      Origin = 'TB_PRODUTOS.ID_PRODUTO'
-      Required = True
     end
   end
   object tmr1: TTimer

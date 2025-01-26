@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids,pngextra, DB, DBClient, IBCustomDataSet, IBTable, DBGrids,
   ExtCtrls, IBUpdateSQL, IBSQL, IBQuery, DBCtrls, StdCtrls, Mask, ComCtrls, DateUtils,
-  NumEdit;
+  NumEdit,
+  IBStoredProc;
 
 type
   TCPerdas     = class
@@ -138,8 +139,11 @@ type
     procedure EditSegundaExit(Sender: TObject);
     procedure ReadOnly;
     procedure DBGrid1DblClick(Sender: TObject);
+    function SaldoAnterior(idProduto: Integer):Real ;
+
+
   private
-    { Private declarations }
+
   public
     { Public declarations }
   end;
@@ -277,9 +281,11 @@ begin
        End;
 
        FrmImpressaoPerdas.PreviewModal;
-    finally
-      FrmPrincipal.IBTMain.Commit;
-      FreeAndNil(FrmImpressaoPerdas);
+       FrmPrincipal.IBTMain.Commit;
+       FreeAndNil(FrmImpressaoPerdas);
+    Except
+       FrmPrincipal.IBTMain.Rollback;
+
 
     end;
     Close;
@@ -334,11 +340,13 @@ begin
   IBQEstoque.ParamByName('pProduto').AsInteger :=CDSPerdasElastico.AsInteger;
 
   Try
+
     IBQEstoque.Open;
     if Not IBQEstoque.IsEmpty then
     begin
-
       SaldoAtual:=IBQEstoque.FieldbyName('TBES_QUANTI').AsInteger;
+      FrmPrincipal.atualizaMovimentacao(CDSPerdasElastico.AsInteger,0,CDSPerdasQuantidade.AsInteger,0,'E','METRO');
+     //(idProduto,  idPedido: Integer;Quantidade, Tamanho: Real; Tipo, Formato: String);
       IdEstoque :=IBQEstoque.FieldbyName('ID_ESTOQUE').AsInteger;
       IBSQLEstoque.Close;
       IBSQLEstoque.SQL.Clear;
@@ -353,6 +361,8 @@ begin
     end
     else
     Begin
+      SaldoAtual:=0;
+      FrmPrincipal.atualizaMovimentacao(CDSPerdasElastico.AsInteger,0,CDSPerdasQuantidade.AsInteger,0,'E','METRO');
       IBSQLEstoque.Close;
       IBSQLEstoque.SQL.Clear;
       IBSQLEstoque.SQL.Add('INSERT INTO TB_ESTOQUE '+
@@ -366,7 +376,11 @@ begin
       IBSQLEstoque.ExecQuery;
 
     end;
+
   except
+      tFrmMensagens.Mensagem('Erro ao Atualizar o estoque: ' +'AtualizarEstoque','E',[mbOK]);
+      Abort;
+
 
   end;
 
@@ -588,5 +602,20 @@ begin
   ReadOnly;
   CDSPerdas.Edit;
 end;
+
+function TFrmControlePerdas.SaldoAnterior(idProduto: Integer):Real ;
+begin
+  IBSQLEstoque.Close;
+  IBSQLEstoque.SQL.Clear;
+  IBSQLEstoque.SQL.Add('SELECT TBES_QUANTI '+
+                       'FROM VIEW_ESTOQUES '+
+                       'WHERE ID_PRODUTO=:pProduto '+
+                       'AND TBES_FORMATO=''METRO''');
+
+  IBSQLEstoque.ParamByName('pProduto').AsInteger :=idProduto;
+  IBSQLEstoque.ExecQuery;
+  Result :=IBSQLEstoque.FieldByName('TBES_QUANTI').Value;
+end;
+
 
 end.
