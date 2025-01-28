@@ -1,41 +1,36 @@
-package WinSkinD7D;
+package ElanorPackage;
 
 {$R *.res}
-{$R '..\Source\WinSkinReg.dcr'}
 {$ALIGN 8}
-{$ASSERTIONS OFF}
+{$ASSERTIONS ON}
 {$BOOLEVAL OFF}
-{$DEBUGINFO OFF}
+{$DEBUGINFO ON}
 {$EXTENDEDSYNTAX ON}
 {$IMPORTEDDATA ON}
 {$IOCHECKS ON}
-{$LOCALSYMBOLS OFF}
+{$LOCALSYMBOLS ON}
 {$LONGSTRINGS ON}
 {$OPENSTRINGS ON}
 {$OPTIMIZATION ON}
 {$OVERFLOWCHECKS OFF}
 {$RANGECHECKS OFF}
-{$REFERENCEINFO OFF}
+{$REFERENCEINFO ON}
 {$SAFEDIVIDE OFF}
 {$STACKFRAMES OFF}
 {$TYPEDADDRESS OFF}
 {$VARSTRINGCHECKS ON}
-{$WRITEABLECONST ON}
+{$WRITEABLECONST OFF}
 {$MINENUMSIZE 1}
 {$IMAGEBASE $400000}
-{$DESCRIPTION 'VclSkin Design Package'}
-{$DESIGNONLY}
 {$IMPLICITBUILD OFF}
 
 requires
   rtl,
-  vcl,
-  vclx,
-  designide,
-  vclactnband;
+  vcl;
 
 contains
-  WinSkinReg in '..\Source\WinSkinReg.pas';
-
+  NumEdit in '..\..\NumEdit\NumEdit.pas',
+  NumPed in '..\..\NumPed\NumPed.pas',
+  criptografia in '..\..\Criptografia.pas';
 
 end.

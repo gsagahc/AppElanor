@@ -17,6 +17,7 @@ type
     QRLabel20: TQRLabel;
     QRLabel21: TQRLabel;
     QRLabel7: TQRLabel;
+    IBQEstoque: TIBQuery;
     QRSubDetail1: TQRSubDetail;
     QRDBText6: TQRDBText;
     QRDBText4: TQRDBText;
@@ -29,8 +30,21 @@ type
     QRLabel5: TQRLabel;
     QRLabel3: TQRLabel;
     QRLabel6: TQRLabel;
+    IBQEstoqueTBES_QUANTI: TIBBCDField;
+    IBQEstoqueTBES_FORMATO: TIBStringField;
+    IBQEstoqueTBES_TAMANHO: TIBBCDField;
+    IBQEstoqueID_PRODUTO1: TIntegerField;
+    IBQEstoqueTBPRD_NOME: TIBStringField;
+    IBQEstoqueTBPRD_PRECOCUSTO: TIBBCDField;
+    IBQEstoqueTBPRD_PRECOVENDA: TIBBCDField;
+    IBQEstoqueTBPRD_TIPO: TIntegerField;
+    IBQEstoqueTBPRD_DESCRICAO: TIBStringField;
+    IBQEstoqueTBPRD_UNIDADE: TIBStringField;
+    IBQEstoqueTBPRD_NCM: TIBStringField;
+    IBQEstoqueTBPRD_CODIGO: TIBStringField;
     QRDBText1: TQRDBText;
     QRLabel2: TQRLabel;
+    IBQEstoqueVALOR: TCurrencyField;
     CDSEstoque: TClientDataSet;
     CDSEstoqueCODIGO: TIntegerField;
     CDSEstoqueNOME: TStringField;
@@ -46,7 +60,6 @@ type
     QRBand2: TQRBand;
     QRLabel10: TQRLabel;
     QRLValTotal: TQRLabel;
-    IBQEstoque:TIBQuery;
     procedure QRSubDetail1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
@@ -70,7 +83,7 @@ begin
   if CDSEstoqueQUANTIDADE.AsInteger >= 0 then
     QRDBText6.Font.Color  := clGreen
   Else
-    QRDBText6.Font.Color:= clRed;
+    QRDBText6.Font.Color:= clRed; 
 
 end;
 

@@ -1,6 +1,6 @@
 object FrmConsultarPedCli: TFrmConsultarPedCli
   Left = 224
-  Top = 107
+  Top = 73
   AutoScroll = False
   BorderIcons = []
   ClientHeight = 502

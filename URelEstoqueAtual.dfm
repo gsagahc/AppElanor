@@ -1,6 +1,6 @@
 object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
-  Left = 416
-  Top = 310
+  Left = 378
+  Top = 154
   Width = 928
   Height = 480
   Color = clBtnFace

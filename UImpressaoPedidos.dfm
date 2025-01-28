@@ -1,6 +1,6 @@
 object FrmImprePedidos: TFrmImprePedidos
   Left = 340
-  Top = 147
+  Top = 152
   Width = 928
   Height = 482
   VertScrollBar.Position = 5

@@ -125,7 +125,7 @@ begin
         FrmPrincipal.IBTMain.Commit;
         IBQProdutos.Close;
         IBTbEstoque.Close;
-        CBoxFormato.ItemIndex := -1;
+        CBoxFormato.ItemIndex :=-1;
         StatusBotoes;
       End
       Else
