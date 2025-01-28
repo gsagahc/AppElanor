@@ -1,6 +1,6 @@
 object FrmRelEntradas: TFrmRelEntradas
   Left = 378
-  Top = 207
+  Top = 154
   Width = 911
   Height = 480
   Color = clBtnFace
@@ -1033,7 +1033,7 @@ object FrmRelEntradas: TFrmRelEntradas
         AutoStretch = False
         Color = clWhite
         DataSet = FrmConsMovEntrada.IBQMovEstoque
-        DataField = 'TBES_QUANTI'
+        DataField = 'TBMOVE_SOMA'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11

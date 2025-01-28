@@ -47,6 +47,7 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure PNGButtonSalvarClick(Sender: TObject);
     procedure CheckBoxProdutosPesoClick(Sender: TObject);
+    procedure IBQEstoqueBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -189,6 +190,11 @@ end;
 procedure TFrmConsultarEstoque.CheckBoxProdutosPesoClick(Sender: TObject);
 begin
   tmr1.Enabled:=True;
+end;
+
+procedure TFrmConsultarEstoque.IBQEstoqueBeforePost(DataSet: TDataSet);
+begin
+  FrmPrincipal.atualizaMovimentacao(IBQEstoqueTBPRD_CODIGO.AsInteger,0,IBQEstoqueTBES_QUANTI.AsFloat,0,'A',IBQEstoqueTBES_FORMATO.AsString);
 end;
 
 end.

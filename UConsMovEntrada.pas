@@ -129,13 +129,14 @@ begin
 
 
   StrSql:=StrSQL + ' AND TBMOVE_DATA BETWEEN :pDataIni AND :pDataFin' +
-                   ' AND (TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2) ';
+                   ' AND (TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo1 OR TBMOVE_TIPO=:pTipo2) ';
 
   StrSql:= StrSQL + ' ORDER BY TBMOVE_DATA,TBMOVE_HORA';
   IBQMovEstoque.Close;
   IBQMovEstoque.SQL.Clear;
   IBQMovEstoque.SQL.Add(StrSql);
   IBQMovEstoque.ParamByName('pTipo').AsString:='E';
+  IBQMovEstoque.ParamByName('pTipo1').AsString:='A';
   IBQMovEstoque.ParamByName('pTipo2').AsString:='S';
   if CBBoxProdutos.Text <>'TODOS' Then
     IBQMovEstoque.ParamByName('pProduto').AsInteger  := (CBBoxProdutos.Items.Objects[CBBoxProdutos.ITemIndex] As TProduto).Id;
@@ -154,9 +155,14 @@ end;
 
 procedure TFrmConsMovEntrada.PNGButton6Click(Sender: TObject);
 begin
+  IBQMovEstoque.DisableControls;
+  IBQMovEstoque.First;
   Application.CreateForm(TFrmRelEntradas,FrmRelEntradas);
+  FrmRelEntradas.QRLDataIni.Caption:= DateToStr(DTPickerIni.Date);
+  FrmRelEntradas.QRLDataFin.Caption:= DateToStr(DTPickerFin.Date);
   FrmRelEntradas.QuickRep1.PreviewModal;
   FreeAndNil(FrmRelEntradas);
+  IBQMovEstoque.EnableControls;
 end;
 
 procedure TFrmConsMovEntrada.DBGrid1DrawColumnCell(Sender: TObject;
@@ -165,11 +171,15 @@ procedure TFrmConsMovEntrada.DBGrid1DrawColumnCell(Sender: TObject;
 begin
   If Trim(IBQMovEstoque.FieldByName('TBMOVE_TIPO').asString)='S'  then // condição
   Begin
-    Dbgrid1.Canvas.Font.Color:= clRed; // coloque aqui a cor desejada
+    Dbgrid1.Canvas.Font.Color:= clRed; 
   end;
   If Trim(IBQMovEstoque.FieldByName('TBMOVE_TIPO').asString)='E'  then // condição
   Begin
-    Dbgrid1.Canvas.Font.Color:= clGreen; // coloque aqui a cor desejada
+    Dbgrid1.Canvas.Font.Color:= clGreen;
+  end;
+  If Trim(IBQMovEstoque.FieldByName('TBMOVE_TIPO').asString)='A'  then // condição
+  Begin
+    Dbgrid1.Canvas.Font.Color:= clBlack;
   end;
   Dbgrid1.DefaultDrawDataCell(Rect, dbgrid1.columns[datacol].field, State);
 end;

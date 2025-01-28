@@ -27,7 +27,7 @@ type
     { Private declarations }
   public
     { Public declarations }
-     class function Mensagem(Texto: String; Tipo: Char; Botoes: array of TMyButtons): Boolean;
+     class function Mensagem(Texto: String; Tipo: Char; Botoes: array of TMyButtons;MsgErro:string=''): Boolean;
   end;
 
 var
@@ -43,7 +43,7 @@ implementation
 { TfrmMensagens }
 
 class function TfrmMensagens.Mensagem(Texto: String; Tipo: Char;
-  Botoes: array of TMyButtons): Boolean;
+  Botoes: array of TMyButtons;MsgErro:string=''): Boolean;
 var
   i: Integer;
   frm :TfrmMensagens;
@@ -51,6 +51,8 @@ var
 begin
   frm := TfrmMensagens.Create(nil);
   try
+    if Tipo='E' then
+      Texto:=Texto+#13#10+ MsgErro;
     frm.lblMensagem.Caption := Texto;
     frm.Caption := TITULO;
 

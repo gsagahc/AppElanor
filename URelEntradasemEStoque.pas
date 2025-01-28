@@ -59,14 +59,21 @@ begin
   begin
     QRLabelTipo.Caption:='ENTRADA';
     QRLabelTipo.Font.Color:=clGreen;
+    QRLabel3.Font.Color:=clWhite;
   end
   else
   if Trim(FrmConsMovEntrada.IBQMovEstoqueTBMOVE_TIPO.AsString) = 'S' Then
   begin
-    QRLabelTipo.Caption:='SAÍDA';
+    QRLabelTipo.Caption:='VENDA';
     QRLabelTipo.Font.Color:=clRed;
+    QRLabel3.Font.Color:=clBlack
   end;
-
+  if Trim(FrmConsMovEntrada.IBQMovEstoqueTBMOVE_TIPO.AsString) = 'A' Then
+  begin
+    QRLabelTipo.Caption:='AJUSTE MANUAL';
+    QRLabelTipo.Font.Color:=clBlack;
+    QRLabel3.Font.Color:=clWhite;
+  end;
 end;
 
 end.

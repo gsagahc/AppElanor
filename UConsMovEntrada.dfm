@@ -1,6 +1,6 @@
 object FrmConsMovEntrada: TFrmConsMovEntrada
   Left = 190
-  Top = 154
+  Top = 157
   Width = 1080
   Height = 394
   BorderIcons = []
@@ -477,7 +477,7 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
         end
         item
           Expanded = False
-          FieldName = 'TBMOVE_SOMA'
+          FieldName = 'TBMOVE_SALDOANT'
           Title.Caption = 'Saldo anterior'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText
@@ -501,7 +501,7 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
         end
         item
           Expanded = False
-          FieldName = 'SALDO_ATUAL'
+          FieldName = 'TBMOVE_SOMA'
           Title.Caption = 'Saldo Atual'
           Title.Font.Charset = DEFAULT_CHARSET
           Title.Font.Color = clWindowText

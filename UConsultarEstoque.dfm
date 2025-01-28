@@ -557,6 +557,7 @@ object FrmConsultarEstoque: TFrmConsultarEstoque
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
     ObjectView = True
+    BeforePost = IBQEstoqueBeforePost
     BufferChunks = 1000
     CachedUpdates = True
     SQL.Strings = (

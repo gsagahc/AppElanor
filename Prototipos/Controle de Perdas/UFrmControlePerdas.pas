@@ -160,7 +160,7 @@ uses Math, uMensagens,UImpressaoPerdas, UPrincipal;
 procedure TFrmControlePerdas.PNGBNovoClick(Sender: TObject);
 begin
   LimparCampos;
-  CDSPerdas.Insert;
+  CDSPerdas.Append;
   ReadOnly;
   EditMaquina.SetFocus;
 end;
@@ -509,7 +509,7 @@ begin
      EditSegundaExit(self);
 
   if  not (CDSPerdas.State  in [dsInsert]) then
-   CDSPerdas.Insert;
+   CDSPerdas.Append;
   if (EditMaquina.Text<>'0') and (EditComprimento.Text<>'0') and
            (EditQuantidadeRC.Text <>'0') and (EditPesoBruto.Text <>'0') and
            (ComboBoxElastico.ItemIndex <> -1 ) then

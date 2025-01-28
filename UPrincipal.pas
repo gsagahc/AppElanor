@@ -1565,16 +1565,24 @@ end;
 procedure TFrmPrincipal.atualizaMovimentacao(idProduto,  idPedido: Integer;
 Quantidade, Tamanho: Real; Tipo, Formato: String);
 begin
-  IBSPATUALIZAMOVI.Close;
-  IBSPATUALIZAMOVI.Params.Items[0].AsInteger := idProduto;
-  IBSPATUALIZAMOVI.Params.Items[1].Value     := IdUsuario;
-  IBSPATUALIZAMOVI.Params.Items[2].AsString  := Tipo;
-  IBSPATUALIZAMOVI.Params.Items[3].AsString  := Formato ;
-  IBSPATUALIZAMOVI.Params.Items[4].Value     :=idPedido;
-  IBSPATUALIZAMOVI.Params.Items[5].Value     :=Tamanho;
-  IBSPATUALIZAMOVI.Params.Items[6].Value     :=Quantidade;
-  IBSPATUALIZAMOVI.Prepare;
-  IBSPATUALIZAMOVI.ExecProc;
+  try
+    IBSPATUALIZAMOVI.Close;
+    IBSPATUALIZAMOVI.Params.Items[0].AsInteger := idProduto;
+    IBSPATUALIZAMOVI.Params.Items[1].Value     := IdUsuario;
+    IBSPATUALIZAMOVI.Params.Items[2].AsString  := Trim(Tipo);
+    IBSPATUALIZAMOVI.Params.Items[3].AsString  := Trim(Formato) ;
+    IBSPATUALIZAMOVI.Params.Items[4].Value     := idPedido;
+    IBSPATUALIZAMOVI.Params.Items[5].Value     := Tamanho;
+    IBSPATUALIZAMOVI.Params.Items[6].Value     := Quantidade;
+    IBSPATUALIZAMOVI.Prepare;
+    IBSPATUALIZAMOVI.ExecProc;
+  except
+   on E: EDatabaseError do
+   begin
+     tFrmMensagens.Mensagem('Erro ao atualizar movimentação do estoque.','E',[mbOK], E.Message);
+
+   end;
+  end;
 end;
 
 end.
