@@ -895,7 +895,10 @@ object FrmControlePerdas: TFrmControlePerdas
   end
   object CDSPerdas: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
     Params = <>
+    StoreDefs = True
     Left = 472
     Top = 255
     object CDSPerdasData: TDateField

@@ -57,7 +57,7 @@ begin
  IF (:ITIPO = 'A') THEN  
  BEGIN
    iquant=:iquant - :vSaldoAtual ;
-   vSomaSaldo = ABS(:iQuant) + vSaldoAtual;
+   vSomaSaldo = :iQuant + vSaldoAtual;
    insert INTO tb_movestoque(TBMOVE_DATA,
                             TBMOVE_HORA,
                             TBMOVE_TIPO,

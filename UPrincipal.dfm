@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 140
-  Top = 139
+  Top = 130
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1564,10 +1564,6 @@ object FrmPrincipal: TFrmPrincipal
       object Entradas1: TMenuItem
         Caption = 'Movimenta'#231#245'es'
         OnClick = Entradas1Click
-      end
-      object ransfernciapararolo1: TMenuItem
-        Caption = 'Transfer'#234'ncia para rolo'
-        OnClick = ransfernciapararolo1Click
       end
       object EStoquenegativo1: TMenuItem
         Caption = 'Estoque negativo'

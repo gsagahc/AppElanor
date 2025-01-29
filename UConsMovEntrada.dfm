@@ -306,19 +306,6 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       ButtonStyle = pbsFlat
       OnClick = PNGButton2Click
     end
-    object Label3: TLabel
-      Left = 32
-      Top = 53
-      Width = 46
-      Height = 13
-      Caption = 'Formato'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
     object CBBoxProdutos: TComboBox
       Left = 32
       Top = 25
@@ -340,29 +327,6 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       Items.Strings = (
         'TODOS')
     end
-    object CBBoxFormato: TComboBox
-      Left = 32
-      Top = 69
-      Width = 385
-      Height = 21
-      Style = csDropDownList
-      Ctl3D = False
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ItemHeight = 13
-      ItemIndex = 0
-      ParentCtl3D = False
-      ParentFont = False
-      TabOrder = 1
-      Text = 'TODOS'
-      Items.Strings = (
-        'TODOS'
-        'METRO'
-        'UNIDADE')
-    end
     object GroupBox1: TGroupBox
       Left = 447
       Top = 15
@@ -375,7 +339,7 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 2
+      TabOrder = 1
       object DTPickerIni: TDateTimePicker
         Left = 13
         Top = 31
@@ -569,7 +533,6 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       '       TBMOVE_HORA,'
       '       TBMOVE_TAMANHO,'
       '       TBMOVE_TIPO,'
-      '       TBES_QUANTI AS SALDO_ATUAL,  '
       '       CASE WHEN TB_MOVESTOQUE.ID_PEDIDO<>0 THEN'
       
         '           (SELECT TBPED_NUMPED FROM TB_PEDIDOS WHERE ID_PEDIDO=' +
@@ -584,32 +547,10 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
         ' INNER JOIN TB_ESTOQUE ON TB_ESTOQUE.ID_ESTOQUE=TB_MOVESTOQUE.ID' +
         '_ESTOQUE'
       ' WHERE TB_MOVESTOQUE.ID_PRODUTO IS  NOT NULL'
-      ' AND TBMOVE_DATA BETWEEN :pDataIni AND :pDataFin'
-      ' AND TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo2'
-      ' ORDER BY TBMOVE_DATA,TBMOVE_HORA')
+      ' ORDER BY TBMOVE_DATA,TBMOVE_HORA, tb_movestoque.id_produto,'
+      '          TBMOVE_SALDOANT')
     Left = 312
     Top = 105
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'pDataIni'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pDataFin'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pTipo'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pTipo2'
-        ParamType = ptUnknown
-      end>
     object IBQMovEstoqueTBMOVE_DATA: TDateField
       FieldName = 'TBMOVE_DATA'
       Origin = 'TB_MOVESTOQUE.TBMOVE_DATA'
@@ -667,12 +608,6 @@ object FrmConsMovEntrada: TFrmConsMovEntrada
       FieldName = 'TBMOVE_TIPO'
       Origin = 'TB_MOVESTOQUE.TBMOVE_TIPO'
       FixedChar = True
-      Size = 2
-    end
-    object IBQMovEstoqueSALDO_ATUAL: TIBBCDField
-      FieldName = 'SALDO_ATUAL'
-      Origin = 'TB_ESTOQUE.TBES_QUANTI'
-      Precision = 18
       Size = 2
     end
   end

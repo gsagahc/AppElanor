@@ -109,7 +109,6 @@ type
     Porcliente1: TMenuItem;
     Geral1: TMenuItem;
     Nmerodopedido1: TMenuItem;
-    ransfernciapararolo1: TMenuItem;
     Vendas1: TMenuItem;
     HTTPRIO1: THTTPRIO;
     Cheques1: TMenuItem;

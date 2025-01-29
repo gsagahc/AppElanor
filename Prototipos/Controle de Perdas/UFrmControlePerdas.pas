@@ -195,17 +195,27 @@ procedure TFrmControlePerdas.PNGImprimirClick(Sender: TObject);
 Var Mes, Ano: string;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
 begin
-  PNGBSalvarClick(self); 
+  PNGBSalvarClick(self);
   if  tFrmMensagens.Mensagem('Deseja salvar estes lançamentos e adicionar ao estoque?','Q',[mbSIM, mbNAO]) then
   begin
     CDSPerdas.DisableControls;
+    //Ordenando a tabela por produto
+    with CDSPerdas.IndexDefs.AddIndexDef do
+    begin
+      Name := 'IdxElastico';
+      Fields :='Elastico' ;
+      Options := [ixDescending];
+    end;
+
     CDSPerdas.First;
+   
     TotalSegunda:=0;
     try
       IBTBControlePerdas.Open;
       //
       While Not CDSPerdas.Eof Do
       begin
+
          IBTBControlePerdas.Append;
          IBTBControlePerdasTBCP_DATA.AsDateTime       :=CDSPerdasData.AsDateTime;
          IBTBControlePerdasTBCP_MAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
@@ -346,7 +356,6 @@ begin
     begin
       SaldoAtual:=IBQEstoque.FieldbyName('TBES_QUANTI').AsInteger;
       FrmPrincipal.atualizaMovimentacao(CDSPerdasElastico.AsInteger,0,CDSPerdasQuantidade.AsInteger,0,'E','METRO');
-     //(idProduto,  idPedido: Integer;Quantidade, Tamanho: Real; Tipo, Formato: String);
       IdEstoque :=IBQEstoque.FieldbyName('ID_ESTOQUE').AsInteger;
       IBSQLEstoque.Close;
       IBSQLEstoque.SQL.Clear;

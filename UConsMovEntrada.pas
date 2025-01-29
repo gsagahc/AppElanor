@@ -23,8 +23,6 @@ type
     DsEstoque: TDataSource;
     CDSEstoque: TClientDataSet;
     IBSQLUtil1: TIBSQL;
-    CBBoxFormato: TComboBox;
-    Label3: TLabel;
     GroupBox1: TGroupBox;
     DTPickerIni: TDateTimePicker;
     DTPickerFin: TDateTimePicker;
@@ -40,7 +38,6 @@ type
     IBQMovEstoqueTBMOVE_SOMA: TIBBCDField;
     IBQMovEstoquePEDIDO: TIBStringField;
     IBQMovEstoqueTBMOVE_TIPO: TIBStringField;
-    IBQMovEstoqueSALDO_ATUAL: TIBBCDField;
     procedure PNGButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PNGButton1Click(Sender: TObject);
@@ -124,14 +121,12 @@ begin
   Else
      StrSql:=StrSql+' WHERE TB_MOVESTOQUE.ID_PRODUTO IS  NOT NULL ';
 
-  if CBBoxFormato.Text <>'TODOS' Then
-    StrSql:=StrSql+' AND TBMOVE_FORMATO=:pFormato ';
 
 
   StrSql:=StrSQL + ' AND TBMOVE_DATA BETWEEN :pDataIni AND :pDataFin' +
                    ' AND (TBMOVE_TIPO=:pTipo OR TBMOVE_TIPO=:pTipo1 OR TBMOVE_TIPO=:pTipo2) ';
 
-  StrSql:= StrSQL + ' ORDER BY TBMOVE_DATA,TBMOVE_HORA';
+  StrSql:= StrSQL + ' ORDER BY TBMOVE_DATA,TBMOVE_HORA, tb_movestoque.id_produto, TBMOVE_SALDOANT';
   IBQMovEstoque.Close;
   IBQMovEstoque.SQL.Clear;
   IBQMovEstoque.SQL.Add(StrSql);
@@ -140,8 +135,7 @@ begin
   IBQMovEstoque.ParamByName('pTipo2').AsString:='S';
   if CBBoxProdutos.Text <>'TODOS' Then
     IBQMovEstoque.ParamByName('pProduto').AsInteger  := (CBBoxProdutos.Items.Objects[CBBoxProdutos.ITemIndex] As TProduto).Id;
-  if CBBoxFormato.Text <>'TODOS' Then
-     IBQMovEstoque.ParamByName('pFormato').AsString  := CBBoxFormato.Text;
+
 
   IBQMovEstoque.ParamByName('pDataIni').AsDate    := DTPickerIni.Date;
   IBQMovEstoque.ParamByName('pDataFin').AsDate    := DTPickerFin.Date;
