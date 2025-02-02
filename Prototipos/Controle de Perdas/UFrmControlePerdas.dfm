@@ -21,16 +21,16 @@ object FrmControlePerdas: TFrmControlePerdas
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 161
+    Top = 201
     Width = 1109
-    Height = 249
+    Height = 209
     Align = alClient
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
       Width = 1107
-      Height = 247
+      Height = 207
       TabStop = False
       Align = alClient
       BorderStyle = bsNone
@@ -51,27 +51,27 @@ object FrmControlePerdas: TFrmControlePerdas
         item
           Expanded = False
           FieldName = 'Data'
-          Width = 76
+          Width = 66
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Maquina'
           Title.Caption = 'M'#225'quina'
-          Width = 95
+          Width = 48
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'NomeElastico'
           Title.Caption = 'El'#225'stico'
-          Width = 292
+          Width = 265
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Comprimento'
-          Width = 83
+          Width = 67
           Visible = True
         end
         item
@@ -84,20 +84,20 @@ object FrmControlePerdas: TFrmControlePerdas
           Expanded = False
           FieldName = 'QuantidadeRC'
           Title.Caption = 'Quantidade Rolo/Carretel'
-          Width = 136
+          Width = 130
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Quantidade'
-          Width = 70
+          Width = 65
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'Primeira'
           Title.Caption = 'El'#225'stico Primeira'
-          Width = 91
+          Width = 86
           Visible = True
         end
         item
@@ -112,6 +112,12 @@ object FrmControlePerdas: TFrmControlePerdas
           Expanded = False
           FieldName = 'Percentual'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NomeEnrolador'
+          Title.Caption = 'Enrolador'
+          Visible = True
         end>
     end
   end
@@ -119,12 +125,12 @@ object FrmControlePerdas: TFrmControlePerdas
     Left = 0
     Top = 0
     Width = 1109
-    Height = 161
+    Height = 201
     Align = alTop
     TabOrder = 1
     object PNGBNovo: TPNGButton
       Left = 812
-      Top = 88
+      Top = 133
       Width = 57
       Height = 62
       Hint = 'F4'
@@ -212,7 +218,7 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object PNGImprimir: TPNGButton
       Left = 986
-      Top = 88
+      Top = 133
       Width = 57
       Height = 62
       Hint = 'F6'
@@ -294,7 +300,7 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object PNGButton2: TPNGButton
       Left = 1044
-      Top = 88
+      Top = 133
       Width = 57
       Height = 62
       ButtonLayout = pbsImageAbove
@@ -525,7 +531,7 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object PNGButton1: TPNGButton
       Left = 928
-      Top = 88
+      Top = 133
       Width = 57
       Height = 62
       Hint = 'F3'
@@ -637,7 +643,7 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object PNGBSalvar: TPNGButton
       Left = 870
-      Top = 88
+      Top = 133
       Width = 57
       Height = 62
       Hint = 'F4'
@@ -718,6 +724,19 @@ object FrmControlePerdas: TFrmControlePerdas
         AE426082}
       ButtonStyle = pbsFlat
       OnClick = PNGBSalvarClick
+    end
+    object Label11: TLabel
+      Left = 816
+      Top = 88
+      Width = 55
+      Height = 13
+      Caption = 'Enrolador'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
     object DTPData: TDateTimePicker
       Left = 25
@@ -844,6 +863,19 @@ object FrmControlePerdas: TFrmControlePerdas
       Text = '0'
       Numerico = True
     end
+    object ComboBoxEnroladores: TComboBox
+      Left = 816
+      Top = 104
+      Width = 249
+      Height = 22
+      Style = csOwnerDrawFixed
+      Ctl3D = False
+      Enabled = False
+      ItemHeight = 16
+      ParentCtl3D = False
+      TabOrder = 10
+      OnExit = ComboBoxElasticoExit
+    end
   end
   object IBTBControlePerdas: TIBTable
     Database = FrmPrincipal.IBDMain
@@ -886,6 +918,9 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object IBTBControlePerdasID_CONTROLEPERDAS: TIntegerField
       FieldName = 'ID_CONTROLEPERDAS'
+    end
+    object IBTBControlePerdasID_ENROLADOR: TIntegerField
+      FieldName = 'ID_ENROLADOR'
     end
   end
   object DSPerdas: TDataSource
@@ -940,6 +975,13 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object CDSPerdasCBoxIndex: TIntegerField
       FieldName = 'CBoxIndex'
+    end
+    object CDSPerdasEnrolador: TIntegerField
+      FieldName = 'Enrolador'
+    end
+    object CDSPerdasNomeEnrolador: TStringField
+      FieldName = 'NomeEnrolador'
+      Size = 80
     end
   end
   object DSProdutos: TDataSource
@@ -1229,5 +1271,31 @@ object FrmControlePerdas: TFrmControlePerdas
     CachedUpdates = False
     Left = 536
     Top = 321
+  end
+  object CDSTotalizadorEnroladores: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 568
+    Top = 289
+    object CDSTotalizadorEnroladoresid_enrolador: TIntegerField
+      FieldName = 'id_enrolador'
+    end
+    object CDSTotalizadorEnroladoresnome: TStringField
+      FieldName = 'nome'
+      Size = 100
+    end
+    object CDSTotalizadorEnroladoresid_elastico: TIntegerField
+      FieldName = 'id_elastico'
+    end
+    object CDSTotalizadorEnroladoresNomeElastico: TStringField
+      FieldName = 'NomeElastico'
+      Size = 100
+    end
+    object CDSTotalizadorEnroladoresData: TDateField
+      FieldName = 'Data'
+    end
+    object CDSTotalizadorEnroladoresTotal: TIntegerField
+      FieldName = 'Total'
+    end
   end
 end

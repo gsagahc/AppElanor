@@ -1,11 +1,11 @@
-object FrmBuscarUser: TFrmBuscarUser
+object FrmBuscarEnrolador: TFrmBuscarEnrolador
   Left = 267
-  Top = 317
+  Top = 385
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Localizar'
   ClientHeight = 136
-  ClientWidth = 623
+  ClientWidth = 693
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,15 +19,16 @@ object FrmBuscarUser: TFrmBuscarUser
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 623
+    Width = 693
     Height = 136
     Align = alClient
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
-      Top = 1
-      Width = 621
-      Height = 136
+      Top = 33
+      Width = 691
+      Height = 102
+      Align = alClient
       Ctl3D = False
       DataSource = DsUser
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines]
@@ -43,50 +44,63 @@ object FrmBuscarUser: TFrmBuscarUser
       Columns = <
         item
           Expanded = False
-          FieldName = 'ID_USUARIO'
-          Title.Caption = 'ID'
+          FieldName = 'NOME'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBUSR_LOGIN'
-          Title.Caption = 'LOGIN'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TBUSR_NOME'
-          Title.Caption = 'NOME'
+          FieldName = 'CPF'
           Visible = True
         end>
     end
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 691
+      Height = 32
+      Align = alTop
+      TabOrder = 1
+      object CheckBox1: TCheckBox
+        Left = 104
+        Top = 8
+        Width = 97
+        Height = 17
+        Caption = 'Exibir inativos'
+        TabOrder = 0
+      end
+    end
   end
-  object IBQUser: TIBQuery
+  object IBQEnrolador: TIBQuery
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
-      'SELECT *  FROM TB_USUARIO')
+      'SELECT *  FROM TB_ENROLADORES')
     Left = 440
     Top = 40
-    object IBQUserID_USUARIO: TIntegerField
-      FieldName = 'ID_USUARIO'
-      Origin = 'TB_USUARIO.ID_USUARIO'
+    object IBQEnroladorNOME: TIBStringField
+      FieldName = 'NOME'
+      Origin = 'TB_ENROLADORES.NOME'
       Required = True
+      Size = 100
     end
-    object IBQUserTBUSR_NOME: TIBStringField
-      FieldName = 'TBUSR_NOME'
-      Origin = 'TB_USUARIO.TBUSR_NOME'
-      Size = 60
+    object IBQEnroladorCPF: TIBStringField
+      FieldName = 'CPF'
+      Origin = 'TB_ENROLADORES.CPF'
+      Required = True
+      Size = 11
     end
-    object IBQUserTBUSR_LOGIN: TIBStringField
-      FieldName = 'TBUSR_LOGIN'
-      Origin = 'TB_USUARIO.TBUSR_LOGIN'
+    object IBQEnroladorSN_ATIVO: TIBStringField
+      FieldName = 'SN_ATIVO'
+      Origin = 'TB_ENROLADORES.SN_ATIVO'
+      Required = True
+      FixedChar = True
+      Size = 1
     end
   end
   object DsUser: TDataSource
-    DataSet = IBQUser
+    DataSet = IBQEnrolador
     Left = 400
     Top = 40
   end

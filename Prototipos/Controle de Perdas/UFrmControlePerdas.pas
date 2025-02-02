@@ -29,6 +29,11 @@ type
   id            : Integer;
 end;
 type
+  TEnrolador      = class
+  Nome          : string;
+  id            : Integer;
+end;
+type
   TFrmControlePerdas = class(TForm)
     Panel1: TPanel;
     Panel2: TPanel;
@@ -112,6 +117,18 @@ type
     EditPrimeira: TNumEdit;
     EditSegunda: TNumEdit;
     EditPercentual: TNumEdit;
+    CDSPerdasEnrolador: TIntegerField;
+    IBTBControlePerdasID_ENROLADOR: TIntegerField;
+    ComboBoxEnroladores: TComboBox;
+    CDSPerdasNomeEnrolador: TStringField;
+    Label11: TLabel;
+    CDSTotalizadorEnroladores: TClientDataSet;
+    CDSTotalizadorEnroladoresid_enrolador: TIntegerField;
+    CDSTotalizadorEnroladoresnome: TStringField;
+    CDSTotalizadorEnroladoresid_elastico: TIntegerField;
+    CDSTotalizadorEnroladoresNomeElastico: TStringField;
+    CDSTotalizadorEnroladoresData: TDateField;
+    CDSTotalizadorEnroladoresTotal: TIntegerField;
     procedure PNGBNovoClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -140,8 +157,7 @@ type
     procedure ReadOnly;
     procedure DBGrid1DblClick(Sender: TObject);
     function SaldoAnterior(idProduto: Integer):Real ;
-
-
+    procedure preencherComboboxEnroladores;
   private
 
   public
@@ -159,7 +175,13 @@ uses Math, uMensagens,UImpressaoPerdas, UPrincipal;
 
 procedure TFrmControlePerdas.PNGBNovoClick(Sender: TObject);
 begin
+  if ComboBoxEnroladores.Items.Count < 1 then
+  begin
+    tFrmMensagens.Mensagem('Cadastro de enroladores vazia, favor cadastrar' ,'E',[mbOK]);
+    Close
+  End;
   LimparCampos;
+
   CDSPerdas.Append;
   ReadOnly;
   EditMaquina.SetFocus;
@@ -227,6 +249,7 @@ begin
          IBTBControlePerdasTBCP_PRIMEIRA.AsFloat      :=CDSPerdasPrimeira.AsFloat;
          IBTBControlePerdasTBCP_SEGUNDA.AsFloat       :=CDSPerdasSegunda.AsFloat;
          IBTBControlePerdasTBCP_PERCENTUAL.AsFloat    :=CDSPerdasPercentual.AsFloat;
+         IBTBControlePerdasID_ENROLADOR.AsInteger     :=CDSPerdasEnrolador.AsInteger;
          IBTBControlePerdas.Post;
          TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
          AtualizarEstoque;
@@ -312,21 +335,21 @@ end;
 procedure TFrmControlePerdas.FormShow(Sender: TObject);
 var Elastico : TProduto;
 begin
-
   IBQElasticos.Open;
   IBQElasticos.First;
 // Preencher combobox Elásticos
- while not IBQElasticos.Eof do
- begin
-   Elastico      := TProduto.Create;
-   Elastico.Nome := IBQElasticos.FieldByName('TBPRD_NOME').AsString;
-   Elastico.id   := IBQElasticos.FieldByName('ID_PRODUTO').AsInteger;
-   ComboBoxElastico.AddItem(Elastico.Nome, Elastico);
-   IBQElasticos.Next;
- end;
+  while not IBQElasticos.Eof do
+  begin
+    Elastico      := TProduto.Create;
+    Elastico.Nome := IBQElasticos.FieldByName('TBPRD_NOME').AsString;
+    Elastico.id   := IBQElasticos.FieldByName('ID_PRODUTO').AsInteger;
+    ComboBoxElastico.AddItem(Elastico.Nome, Elastico);
+    IBQElasticos.Next;
+  end;
   DTPData.Date := Now-1;
   CDSPerdas.CreateDataSet;
   EditMaquina.SetFocus;
+  preencherComboboxEnroladores;
 
 end;
 
@@ -482,8 +505,8 @@ procedure TFrmControlePerdas.FormKeyDown(Sender: TObject; var Key: Word;
 begin
   case key of
    vk_f4:begin
-            PNGBNovoClick(self);
-          end;
+           PNGBNovoClick(self);
+         end;
     vk_f5:PNGBSalvarClick(Self);
     vk_f6:PNGImprimirClick(Self);
   end;
@@ -508,39 +531,49 @@ begin
   EditSegunda.Text:= '0';
   EditPercentual.Text:= '0';
   ComboBoxElastico.ItemIndex := -1;
+  ComboBoxEnroladores.ItemIndex := -1;
 end;
 
 procedure TFrmControlePerdas.PNGBSalvarClick(Sender: TObject);
 begin
-  if (EditPrimeira.Text='0') or (EditQuantidade.Text='0') then
-     EditQuantidadeRCExit(self);
-  if (EditPercentual.Text='0')  then
-     EditSegundaExit(self);
-
-  if  not (CDSPerdas.State  in [dsInsert]) then
-   CDSPerdas.Append;
-  if (EditMaquina.Text<>'0') and (EditComprimento.Text<>'0') and
-           (EditQuantidadeRC.Text <>'0') and (EditPesoBruto.Text <>'0') and
-           (ComboBoxElastico.ItemIndex <> -1 ) then
+  if ComboBoxEnroladores.ItemIndex < 0 Then
   begin
-    CDSPerdasData.AsDateTime       := DTPData.Date;
-    CDSPerdasMaquina.AsInteger     := StrToInt(EditMaquina.Text);
-    CDSPerdasElastico.AsInteger    := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Id;
-    CDSPerdasComprimento.AsInteger := StrToInt(EditComprimento.Text);
-    CDSPerdasPesoB.AsFloat         := StrToFloat(EditPesoBruto.Text);
-    CDSPerdasQuantidadeRC.AsInteger:= StrToInt( EditQuantidadeRC.Text);
-    CDSPerdasQuantidade.AsInteger  := StrToInt(EditQuantidade.Text);
-    CDSPerdasPrimeira.AsFloat      := StrToFloat(EditPrimeira.Text);
-    CDSPerdasSegunda.AsFloat       := StrToFloat(EditSegunda.Text);
-    CDSPerdasPercentual.AsFloat    := StrToFloat(EditPercentual.Text);
-    CDSPerdasNomeElastico.AsString := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Nome;
-    CDSPerdasCBoxIndex.AsInteger   := ComboBoxElastico.ItemIndex;
-    CDSPerdas.Post;
-    LimparCampos;
-    ReadOnly;
+    tFrmMensagens.Mensagem('Favor selecionar um enrolador na lista.' ,'E',[mbOK]);
   end
   else
-    tFrmMensagens.Mensagem('Os dados atuais não serão salvos pois existe campo com valor 0','I',[mbOK]);
+  begin
+    if (EditPrimeira.Text='0') or (EditQuantidade.Text='0') then
+       EditQuantidadeRCExit(self);
+    if (EditPercentual.Text='0')  then
+       EditSegundaExit(self);
+
+    if  not (CDSPerdas.State  in [dsInsert]) then
+     CDSPerdas.Append;
+    if (EditMaquina.Text<>'0') and (EditComprimento.Text<>'0') and
+             (EditQuantidadeRC.Text <>'0') and (EditPesoBruto.Text <>'0') and
+             (ComboBoxElastico.ItemIndex <> -1 ) then
+    begin
+      CDSPerdasData.AsDateTime       := DTPData.Date;
+      CDSPerdasMaquina.AsInteger     := StrToInt(EditMaquina.Text);
+      CDSPerdasElastico.AsInteger    := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Id;
+      CDSPerdasComprimento.AsInteger := StrToInt(EditComprimento.Text);
+      CDSPerdasPesoB.AsFloat         := StrToFloat(EditPesoBruto.Text);
+      CDSPerdasQuantidadeRC.AsInteger:= StrToInt( EditQuantidadeRC.Text);
+      CDSPerdasQuantidade.AsInteger  := StrToInt(EditQuantidade.Text);
+      CDSPerdasPrimeira.AsFloat      := StrToFloat(EditPrimeira.Text);
+      CDSPerdasSegunda.AsFloat       := StrToFloat(EditSegunda.Text);
+      CDSPerdasPercentual.AsFloat    := StrToFloat(EditPercentual.Text);
+      CDSPerdasNomeElastico.AsString := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Nome;
+      CDSPerdasCBoxIndex.AsInteger   := ComboBoxElastico.ItemIndex;
+      CDSPerdasEnrolador.AsInteger   := (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Id;
+      CDSPerdasNomeEnrolador.AsString:= (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Nome;
+      CDSPerdas.Post;
+      LimparCampos;
+      ReadOnly;
+    end
+    else
+      tFrmMensagens.Mensagem('Os dados atuais não serão salvos pois existe campo com valor 0','I',[mbOK]);
+  end;
 end;
 
 procedure TFrmControlePerdas.EditQuantidadeRCExit(Sender: TObject);
@@ -593,6 +626,7 @@ begin
   EditQuantidade.ReadOnly         := not EditQuantidade.ReadOnly;
   EditSegunda.ReadOnly            := not EditSegunda.ReadOnly ;
   ComboBoxElastico.Enabled        := not ComboBoxElastico.Enabled ;
+  ComboBoxEnroladores.Enabled     := not ComboBoxEnroladores.Enabled ;
 end;
 
 procedure TFrmControlePerdas.DBGrid1DblClick(Sender: TObject);
@@ -607,7 +641,9 @@ begin
   EditPrimeira.Text              := FloatToStr(CDSPerdasPrimeira.AsFloat);
   EditSegunda.Text               := FloatToStr(CDSPerdasSegunda.AsFloat);
   EditPercentual.Text            := FloatToStr(CDSPerdasPercentual.AsFloat);
-  ComboBoxElastico.ItemIndex     :=  CDSPerdasCBoxIndex.AsInteger;
+  ComboBoxElastico.ItemIndex     := CDSPerdasCBoxIndex.AsInteger;
+  ComboBoxEnroladores.Text       := CDSPerdasNomeEnrolador.AsString;
+
   ReadOnly;
   CDSPerdas.Edit;
 end;
@@ -626,5 +662,34 @@ begin
   Result :=IBSQLEstoque.FieldByName('TBES_QUANTI').Value;
 end;
 
+
+procedure TFrmControlePerdas.preencherComboboxEnroladores;
+var Enrolador:TEnrolador;
+begin
+  IBQUtil.Close;
+  IBQUtil.SQL.Clear;
+  IBQUtil.SQL.Add('SELECT ID_ENROLADOR,NOME FROM TB_ENROLADORES WHERE SN_ATIVO=''S''');
+  try
+    IBQUtil.Open;
+    if not IBQUtil.IsEmpty Then
+    begin
+      while not IBQUtil.Eof do
+      begin
+        Enrolador:=TEnrolador.Create;
+        Enrolador.Nome:=IBQUtil.FieldByName('NOME').AsString;
+        Enrolador.id  :=IBQUtil.FieldByName('ID_ENROLADOR').AsInteger;
+        ComboBoxEnroladores.AddItem(Enrolador.Nome, Enrolador);
+        IBQUtil.Next;
+      end;
+    end;
+
+
+  except
+    on E: EDatabaseError do
+      tFrmMensagens.Mensagem('Erro ao carregar combobox enroladores.' ,'E',[mbOK], E.Message);
+
+  End;
+
+end;
 
 end.

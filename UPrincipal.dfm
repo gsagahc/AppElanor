@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 140
-  Top = 130
+  Top = 139
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1456,6 +1456,7 @@ object FrmPrincipal: TFrmPrincipal
       Top = 2
       Width = 70
       Height = 55
+      Visible = False
       ButtonLayout = pbsImageAbove
       Caption = 'Custos'
       ImageNormal.Data = {
@@ -1549,6 +1550,10 @@ object FrmPrincipal: TFrmPrincipal
       object Despesas1: TMenuItem
         Caption = 'Tipo de despesas'
         OnClick = Despesas1Click
+      end
+      object Enroladores1: TMenuItem
+        Caption = 'Enroladores'
+        OnClick = Enroladores1Click
       end
     end
     object Estoque1: TMenuItem

@@ -254,6 +254,7 @@ type
     SkinData1: TSkinData;
     Skin1: TMenuItem;
     IBSPATUALIZAMOVI: TIBStoredProc;
+    Enroladores1: TMenuItem;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -333,6 +334,7 @@ type
     procedure CorrigirAlerar1Click(Sender: TObject);
     procedure Reimpressoromaneio1Click(Sender: TObject);
     procedure Skin1Click(Sender: TObject);
+    procedure Enroladores1Click(Sender: TObject);
   private
        TotalGeral:Currency;
     { Private declarations }
@@ -381,7 +383,7 @@ uses UCadProdutos, UEntraEstoque, UCadUser, UCadPedido, UCadCli,
   USelecionarSkin, UFrmControlePerdas, UConsultarPerdas,
   UConsultarLancamentos, UCadastroDespesas, USelecionarDespesas,
   UBuscarLote, UZerarEStoqueNegativo, UAlterarControledePerdas,
-  UReimpressaoRomaneio;
+  UReimpressaoRomaneio, UCadEnrolador;
 
    
 
@@ -1582,6 +1584,15 @@ begin
 
    end;
   end;
+end;
+
+procedure TFrmPrincipal.Enroladores1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadEnrolador, FrmCadEnrolador);
+  StatusBar1.Panels.Items[5].Text:= FrmCadEnrolador.Caption;
+  FrmCadEnrolador.ShowModal;
+  FreeAndNil(FrmCadEnrolador);
+  StatusBar1.Panels.Items[5].Text:='';
 end;
 
 end.

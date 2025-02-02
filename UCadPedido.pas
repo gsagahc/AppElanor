@@ -278,8 +278,11 @@ begin
         Close;
       End;
     Except
-      FrmPrincipal.IBTMain.Rollback;
-      tFrmMensagens.Mensagem('Erro ao salvar pedido.' ,'E',[mbOK])
+      on E: EDatabaseError do
+      begin
+        FrmPrincipal.IBTMain.Rollback;
+        tFrmMensagens.Mensagem('Erro ao salvar pedido.' ,'E',[mbOK])
+      End;
     end;
 
   End;

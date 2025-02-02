@@ -88,7 +88,9 @@ uses
   UAlterarControledePerdas in 'UAlterarControledePerdas.pas' {FrmAlterarControlePerdas},
   UReimpressaoAlterarPerdas in 'UReimpressaoAlterarPerdas.pas' {FrmImpressaoAlteraPerdas: TQuickRep},
   UReimpressaoRomaneio in 'UReimpressaoRomaneio.pas' {FrmReimpressaoRomaneio},
-  URelReimpressaoRomaneio in 'URelReimpressaoRomaneio.pas' {FrmPrintRomaneio1};
+  URelReimpressaoRomaneio in 'URelReimpressaoRomaneio.pas' {FrmPrintRomaneio1},
+  UCadEnrolador in 'UCadEnrolador.pas' {FrmCadEnrolador},
+  UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador};
 
 {$R *.res}
 var
@@ -101,7 +103,7 @@ begin
     Application.Initialize;
     Application.Title := 'Sistema de Gestão Elanor';
     Application.CreateForm(TFrmPrincipal, FrmPrincipal);
-    Try
+  Try
       FrmPrincipal.IBDMain.Close;
       FrmPrincipal.IBDMain.DatabaseName:= FrmPrincipal.BancoDados;
       FrmPrincipal.IBDMain.Open;
