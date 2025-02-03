@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
   Left = 124
-  Top = 191
+  Top = 228
   Width = 1125
   Height = 449
   BorderIcons = []
@@ -1272,29 +1272,29 @@ object FrmControlePerdas: TFrmControlePerdas
     Left = 536
     Top = 321
   end
-  object CDSTotalizadorEnroladores: TClientDataSet
+  object CDSEnroladores: TClientDataSet
     Aggregates = <>
     Params = <>
     Left = 568
     Top = 289
-    object CDSTotalizadorEnroladoresid_enrolador: TIntegerField
+    object CDSEnroladoresid_enrolador: TIntegerField
       FieldName = 'id_enrolador'
     end
-    object CDSTotalizadorEnroladoresnome: TStringField
+    object CDSEnroladoresnome: TStringField
       FieldName = 'nome'
       Size = 100
     end
-    object CDSTotalizadorEnroladoresid_elastico: TIntegerField
+    object CDSEnroladoresid_elastico: TIntegerField
       FieldName = 'id_elastico'
     end
-    object CDSTotalizadorEnroladoresNomeElastico: TStringField
+    object CDSEnroladoresNomeElastico: TStringField
       FieldName = 'NomeElastico'
       Size = 100
     end
-    object CDSTotalizadorEnroladoresData: TDateField
+    object CDSEnroladoresData: TDateField
       FieldName = 'Data'
     end
-    object CDSTotalizadorEnroladoresTotal: TIntegerField
+    object CDSEnroladoresTotal: TIntegerField
       FieldName = 'Total'
     end
   end

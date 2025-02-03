@@ -1,6 +1,6 @@
 object FrmConsMovEntrada: TFrmConsMovEntrada
   Left = 190
-  Top = 164
+  Top = 196
   Width = 1080
   Height = 394
   BorderIcons = []

@@ -1,6 +1,6 @@
 object FrmBuscarEnrolador: TFrmBuscarEnrolador
   Left = 267
-  Top = 385
+  Top = 461
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Localizar'
