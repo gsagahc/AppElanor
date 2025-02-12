@@ -366,6 +366,7 @@ begin
       CDSRomaneio.Next;
     End;
     FrmPrincipal.IBTMain.Commit;
+    FrmPrincipal.IBDMain.CloseDataSets;
   except
    on  E: EDatabaseError do
    begin

@@ -255,6 +255,7 @@ type
     Skin1: TMenuItem;
     IBSPATUALIZAMOVI: TIBStoredProc;
     Enroladores1: TMenuItem;
+    Configurarparmetros1: TMenuItem;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -335,6 +336,7 @@ type
     procedure Reimpressoromaneio1Click(Sender: TObject);
     procedure Skin1Click(Sender: TObject);
     procedure Enroladores1Click(Sender: TObject);
+    procedure Configurarparmetros1Click(Sender: TObject);
   private
        TotalGeral:Currency;
     { Private declarations }
@@ -383,7 +385,7 @@ uses UCadProdutos, UEntraEstoque, UCadUser, UCadPedido, UCadCli,
   USelecionarSkin, UFrmControlePerdas, UConsultarPerdas,
   UConsultarLancamentos, UCadastroDespesas, USelecionarDespesas,
   UBuscarLote, UZerarEStoqueNegativo, UAlterarControledePerdas,
-  UReimpressaoRomaneio, UCadEnrolador;
+  UReimpressaoRomaneio, UCadEnrolador, UParamMedicao;
 
    
 
@@ -457,13 +459,6 @@ procedure TFrmPrincipal.Novo1Click(Sender: TObject);
 begin
   Application.CreateForm(TFrmNPedido,FrmNPedido);
   StatusBar1.Panels.Items[5].Text:= FrmNPedido.Caption;
-  if not IBTMain.Active Then
-    IBTMain.StartTransaction;
-    If  not  FrmNPedido.IBTbPedidos.Active then
-       FrmNPedido.IBTbPedidos.Open;
-  FrmNPedido.IBTbPedidos.Append;
-  FrmNPedido.CDSItensPedido.CreateDataSet;
-  FrmNPedido.CDSItensPedido.Open;
   FrmNPedido.ShowModal;
   FreeAndNil(FrmNPedido);
   StatusBar1.Panels.Items[5].Text:='';
@@ -1592,6 +1587,15 @@ begin
   StatusBar1.Panels.Items[5].Text:= FrmCadEnrolador.Caption;
   FrmCadEnrolador.ShowModal;
   FreeAndNil(FrmCadEnrolador);
+  StatusBar1.Panels.Items[5].Text:='';
+end;
+
+procedure TFrmPrincipal.Configurarparmetros1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadParamElasticos, FrmCadParamElasticos);
+  StatusBar1.Panels.Items[5].Text:= FrmCadParamElasticos.Caption;
+  FrmCadParamElasticos.ShowModal;
+  FreeAndNil(FrmCadParamElasticos);
   StatusBar1.Panels.Items[5].Text:='';
 end;
 

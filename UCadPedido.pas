@@ -270,6 +270,7 @@ begin
 
         CDSItensPedido.EmptyDataSet;
         FrmPrincipal.IBTMain.Commit;
+        FrmPrincipal.IBDMain.CloseDataSets;
         Application.CreateForm(TFrmImprePedidos, FrmImprePedidos);
         FrmImprePedidos.IBQImpressaoPed.ParamByName('pIDPedido').AsInteger:=IdPedido;
         FrmImprePedidos.IBQImpressaoPed.Open;
@@ -464,14 +465,27 @@ end;
 
 procedure TFrmNPedido.FormShow(Sender: TObject);
 begin
-   QuantItens :=0;
-   IBQPrazos.Open;
-   IBSQLUTIL.Close;
-   IBSQLUTIL.SQL.Clear;
-   IBSQLUTIL.SQL.Add('SELECT MAX(ID_PEDIDO) FROM TB_PEDIDOS');
-   IBSQLUTIL.ExecQuery;
-   IdPedido:= IBSQLUTIL.FieldByName('MAX').AsInteger+1;
-   DSPrazos.DataSet.First;
+  try
+    if not FrmPrincipal.IBTMain.Active Then
+      FrmPrincipal.IBTMain.StartTransaction;
+    If  not  FrmNPedido.IBTbPedidos.Active then
+      IBTbPedidos.Open;
+    IBTbPedidos.Append;
+    CDSItensPedido.Close;
+    CDSItensPedido.CreateDataSet;
+    CDSItensPedido.Open;
+    QuantItens :=0;
+    IBQPrazos.Open;
+    IBSQLUTIL.Close;
+    IBSQLUTIL.SQL.Clear;
+    IBSQLUTIL.SQL.Add('SELECT MAX(ID_PEDIDO) FROM TB_PEDIDOS');
+    IBSQLUTIL.ExecQuery;
+    IdPedido:= IBSQLUTIL.FieldByName('MAX').AsInteger+1;
+    DSPrazos.DataSet.First;
+  except
+    on E: EDatabaseError do
+       tFrmMensagens.Mensagem('Erro ao inicializer pedido.: "FormShow"' ,'E',[mbOK], E.Message);
+  end;
 end;
 
 function TFrmNPedido.NumPed: String;

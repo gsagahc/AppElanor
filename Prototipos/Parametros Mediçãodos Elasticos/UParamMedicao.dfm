@@ -1,6 +1,6 @@
 object FrmCadParamElasticos: TFrmCadParamElasticos
   Left = 540
-  Top = 309
+  Top = 260
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de par'#226'metros dos el'#225'sticos'
@@ -388,12 +388,10 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
       end
       object Label1: TLabel
         Left = 30
-        Top = 13
-        Width = 252
-        Height = 26
-        Caption = 
-          'Determine o par'#226'metro m'#237'nimo de produ'#231#227'o geral entre dois valore' +
-          's'
+        Top = 21
+        Width = 181
+        Height = 13
+        Caption = 'Valor m'#237'nimo geral de produ'#231#227'o'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -402,43 +400,17 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         ParentFont = False
         WordWrap = True
       end
-      object Label2: TLabel
-        Left = 126
-        Top = 44
-        Width = 8
-        Height = 13
-        Caption = 'e'
-        FocusControl = DBEdit2
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
       object DBEdit1: TDBEdit
         Left = 31
         Top = 41
-        Width = 89
+        Width = 194
         Height = 19
         CharCase = ecUpperCase
         Ctl3D = False
-        DataField = 'RANGEMININF'
+        DataField = 'MINIMO'
         DataSource = DSParamGeral
         ParentCtl3D = False
         TabOrder = 0
-      end
-      object DBEdit2: TDBEdit
-        Left = 143
-        Top = 41
-        Width = 89
-        Height = 19
-        CharCase = ecUpperCase
-        Ctl3D = False
-        DataField = 'RANGEMINSUP'
-        DataSource = DSParamGeral
-        ParentCtl3D = False
-        TabOrder = 1
       end
     end
   end
@@ -461,9 +433,9 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
       object Label3: TLabel
         Left = 9
         Top = 1
-        Width = 134
+        Width = 140
         Height = 13
-        Caption = 'Par'#226'metros espec'#237'ficos'
+        Caption = 'Par'#226'metros por el'#225'sticos'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -489,30 +461,22 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
             Expanded = False
             FieldName = 'NOME'
             Title.Caption = 'Nome'
-            Width = 367
+            Width = 427
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'RANGEMININF'
-            Title.Caption = 'Limite inferior'
+            FieldName = 'MINIMO'
+            Title.Caption = 'M'#237'nimo'
             Width = 83
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'RANGEMINSUP'
-            Title.Caption = 'Limite Superior'
-            Width = 89
             Visible = True
           end>
       end
     end
   end
   object IBQProdutos: TIBQuery
-    Database = IBDatabase1
-    Transaction = IBTMain
-    Active = True
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
@@ -533,9 +497,8 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
     end
   end
   object IBTbParamGeral: TIBTable
-    Database = IBDatabase1
-    Transaction = IBTMain
-    Active = True
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
@@ -544,7 +507,7 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         DataType = ftInteger
       end
       item
-        Name = 'RANGEMININF'
+        Name = 'MINIMO'
         Attributes = [faRequired]
         DataType = ftInteger
       end
@@ -557,42 +520,19 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
     TableName = 'TB_P_ELASTICO_GERAL'
     Left = 432
     Top = 32
-    object IBTbParamGeralRANGEMININF: TIntegerField
-      FieldName = 'RANGEMININF'
-    end
-    object IBTbParamGeralRANGEMINSUP: TIntegerField
-      FieldName = 'RANGEMINSUP'
+    object IBTbParamGeralMINIMO: TIntegerField
+      FieldName = 'MINIMO'
+      Required = True
     end
   end
   object DSParamGeral: TDataSource
     DataSet = IBTbParamGeral
-    Left = 432
-    Top = 8
-  end
-  object IBDatabase1: TIBDatabase
-    Connected = True
-    DatabaseName = 'C:\AppElanor\DATABASE-PRODUCAO.FDB'
-    Params.Strings = (
-      'user_name=sysdba'
-      'password=P4o3l8l1')
-    LoginPrompt = False
-    DefaultTransaction = IBTMain
-    IdleTimer = 0
-    SQLDialect = 3
-    TraceFlags = []
-    Left = 296
-    Top = 16
-  end
-  object IBTMain: TIBTransaction
-    Active = True
-    DefaultDatabase = IBDatabase1
-    AutoStopAction = saNone
-    Left = 328
-    Top = 24
+    Left = 456
+    Top = 32
   end
   object IBTbParamIndividual: TIBTable
-    Database = IBDatabase1
-    Transaction = IBTMain
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
     BufferChunks = 1000
     CachedUpdates = False
     FieldDefs = <
@@ -605,7 +545,7 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         DataType = ftInteger
       end
       item
-        Name = 'RANGEMININF'
+        Name = 'MINIMO'
         DataType = ftInteger
       end
       item
@@ -626,17 +566,12 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
       Size = 60
       Lookup = True
     end
-    object IBTbParamIndividualRANGEMININF: TIntegerField
-      DisplayWidth = 36
-      FieldName = 'RANGEMININF'
-    end
-    object IBTbParamIndividualRANGEMINSUP: TIntegerField
-      DisplayWidth = 35
-      FieldName = 'RANGEMINSUP'
-    end
     object IBTbParamIndividualID_PRODUTO: TIntegerField
       FieldName = 'ID_PRODUTO'
       Visible = False
+    end
+    object IBTbParamIndividualMINIMO: TIntegerField
+      FieldName = 'MINIMO'
     end
   end
   object DataSource1: TDataSource

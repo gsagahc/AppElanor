@@ -216,6 +216,9 @@ end;
 procedure TFrmControlePerdas.PNGImprimirClick(Sender: TObject);
 Var Mes, Ano: string;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
+    slProdutos:TStringList;
+    slEnroladores:TStringList;
+    I:Integer;
 begin
   PNGBSalvarClick(self);
   if  tFrmMensagens.Mensagem('Deseja salvar estes lançamentos e adicionar ao estoque?','Q',[mbSIM, mbNAO]) then
@@ -235,6 +238,8 @@ begin
     try
       IBTBControlePerdas.Open;
       //
+      slProdutos   :=TStringList.Create;
+      slEnroladores:=TStringList.Create;
       While Not CDSPerdas.Eof Do
       begin
 
@@ -242,6 +247,9 @@ begin
          IBTBControlePerdasTBCP_DATA.AsDateTime       :=CDSPerdasData.AsDateTime;
          IBTBControlePerdasTBCP_MAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
          IBTBControlePerdasTBCP_ELASTICO.AsString     :=CDSPerdasElastico.AsString;
+         //Adicionando produtos na stringlist
+         if slProdutos.IndexOf(CDSPerdasElastico.AsString)< 0 then
+           slProdutos.Add(CDSPerdasElastico.AsString);
          IBTBControlePerdasTBCP_COMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
          IBTBControlePerdasTBCP_PESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
          IBTBControlePerdasTBCP_QUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
@@ -250,6 +258,9 @@ begin
          IBTBControlePerdasTBCP_SEGUNDA.AsFloat       :=CDSPerdasSegunda.AsFloat;
          IBTBControlePerdasTBCP_PERCENTUAL.AsFloat    :=CDSPerdasPercentual.AsFloat;
          IBTBControlePerdasID_ENROLADOR.AsInteger     :=CDSPerdasEnrolador.AsInteger;
+         //Adicionando os enroladores na stringlist
+         if slEnroladores.IndexOf(CDSPerdasEnrolador.AsString)< 0 then
+           slEnroladores.Add(CDSPerdasEnrolador.AsString);
          IBTBControlePerdas.Post;
          TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
          AtualizarEstoque;
@@ -292,12 +303,20 @@ begin
                               '(:ID_PRODUTO, :TBES_FORMATO, :TBES_QUANTI)');
 
          IBSQLEstoque.ParamByName('ID_PRODUTO').AsInteger:=78;
-         IBSQLEstoque.ParamByName('TBES_FORMATO').AsString := 'ENFESTADO';
+         IBSQLEstoque.ParamByName('TBES_FORMATO').AsString := 'METRO';
          IBSQLEstoque.ParamByName('TBES_QUANTI').AsFloat:=TotalSegunda;
          IBSQLEstoque.ExecQuery;
        end;
+       //Relatório de produção dos enroladores
+       for i:=0 to slEnroladores.Count - 1 do
+       begin
+         CDSPerdas.Filtered:=False;
+         CDSPerdas.Filter  := 'ENROLADOR='''+slEnroladores.Strings[i]+'''';
+         CDSPerdas.Filtered:=True;
+         CDSPerdas.First;
 
-       CDSPerdas.First;
+       End;
+
        CDSPerdas.EnableControls;
        Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
        Acumulado:=CalculaAcumuladoMes(Mes, Ano);
@@ -315,7 +334,10 @@ begin
 
        FrmImpressaoPerdas.PreviewModal;
        FrmPrincipal.IBTMain.Commit;
+       FrmPrincipal.IBDMain.CloseDataSets;
        FreeAndNil(FrmImpressaoPerdas);
+       if Assigned(slProdutos) then
+         slProdutos.Destroy;
     Except
        FrmPrincipal.IBTMain.Rollback;
 

@@ -1,6 +1,6 @@
 object FrmCadEnrolador: TFrmCadEnrolador
   Left = 380
-  Top = 226
+  Top = 191
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de enroladores'

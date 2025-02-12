@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 140
-  Top = 166
+  Top = 116
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1735,6 +1735,10 @@ object FrmPrincipal: TFrmPrincipal
       object Reimpressopordata1: TMenuItem
         Caption = 'Reimpress'#227'o por data'
         OnClick = Reimpressopordata1Click
+      end
+      object Configurarparmetros1: TMenuItem
+        Caption = 'Configurar par'#226'metros'
+        OnClick = Configurarparmetros1Click
       end
     end
     object Qualidade1: TMenuItem

@@ -22,23 +22,17 @@ type
     DSParamGeral: TDataSource;
     PanelGrid: TPanel;
     DBGrid1: TDBGrid;
-    IBDatabase1: TIBDatabase;
-    IBTMain: TIBTransaction;
-    IBTbParamGeralRANGEMININF: TIntegerField;
-    IBTbParamGeralRANGEMINSUP: TIntegerField;
     IBTbParamIndividual: TIBTable;
     DataSource1: TDataSource;
-    IBTbParamIndividualRANGEMININF: TIntegerField;
-    IBTbParamIndividualRANGEMINSUP: TIntegerField;
     IBQProdutosID_PRODUTO: TIntegerField;
     IBQProdutosTBPRD_NOME: TIBStringField;
     IBTbParamIndividualID_PRODUTO: TIntegerField;
     IBTbParamIndividualNOMEEL: TStringField;
     Label1: TLabel;
     DBEdit1: TDBEdit;
-    Label2: TLabel;
-    DBEdit2: TDBEdit;
     Label3: TLabel;
+    IBTbParamIndividualMINIMO: TIntegerField;
+    IBTbParamGeralMINIMO: TIntegerField;
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
@@ -57,15 +51,15 @@ var
   FrmCadParamElasticos: TFrmCadParamElasticos;
 
 implementation
-Uses uMensagens;
+Uses uMensagens, UPrincipal;
 
 {$R *.dfm}
 
 procedure TFrmCadParamElasticos.PNGButton7Click(Sender: TObject);
 begin
   try
-   if not IBTMain.Active Then
-      IBTMain.StartTransaction;
+   if not FrmPrincipal.IBTMain.Active Then
+      FrmPrincipal.IBTMain.StartTransaction;
     If  not IBTbParamIndividual.Active then
       IBTbParamIndividual.Open;
 
@@ -98,7 +92,7 @@ begin
       IBTbParamIndividual.Post;
 
   end;
-  IBTMain.Commit;
+  FrmPrincipal.IBTMain.Commit;
   IBTbParamIndividual.Open;
   IBTbParamGeral.Open;
 

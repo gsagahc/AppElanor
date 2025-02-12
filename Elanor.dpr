@@ -90,7 +90,8 @@ uses
   UReimpressaoRomaneio in 'UReimpressaoRomaneio.pas' {FrmReimpressaoRomaneio},
   URelReimpressaoRomaneio in 'URelReimpressaoRomaneio.pas' {FrmPrintRomaneio1},
   UCadEnrolador in 'UCadEnrolador.pas' {FrmCadEnrolador},
-  UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador};
+  UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador},
+  UParamMedicao in 'Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas' {FrmCadParamElasticos};
 
 {$R *.res}
 var
