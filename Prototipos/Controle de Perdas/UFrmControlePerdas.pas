@@ -216,9 +216,6 @@ end;
 procedure TFrmControlePerdas.PNGImprimirClick(Sender: TObject);
 Var Mes, Ano: string;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
-    slProdutos:TStringList;
-    slEnroladores:TStringList;
-    I:Integer;
 begin
   PNGBSalvarClick(self);
   if  tFrmMensagens.Mensagem('Deseja salvar estes lançamentos e adicionar ao estoque?','Q',[mbSIM, mbNAO]) then
@@ -233,40 +230,57 @@ begin
     end;
 
     CDSPerdas.First;
-   
+
     TotalSegunda:=0;
     try
       IBTBControlePerdas.Open;
-      //
-      slProdutos   :=TStringList.Create;
-      slEnroladores:=TStringList.Create;
+      CDSEnroladores.CreateDataSet;
       While Not CDSPerdas.Eof Do
       begin
 
-         IBTBControlePerdas.Append;
-         IBTBControlePerdasTBCP_DATA.AsDateTime       :=CDSPerdasData.AsDateTime;
-         IBTBControlePerdasTBCP_MAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
-         IBTBControlePerdasTBCP_ELASTICO.AsString     :=CDSPerdasElastico.AsString;
-         //Adicionando produtos na stringlist
-         if slProdutos.IndexOf(CDSPerdasElastico.AsString)< 0 then
-           slProdutos.Add(CDSPerdasElastico.AsString);
-         IBTBControlePerdasTBCP_COMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
-         IBTBControlePerdasTBCP_PESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
-         IBTBControlePerdasTBCP_QUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
-         IBTBControlePerdasTBCP_QUANTIDADE.AsInteger  :=CDSPerdasQuantidade.AsInteger;
-         IBTBControlePerdasTBCP_PRIMEIRA.AsFloat      :=CDSPerdasPrimeira.AsFloat;
-         IBTBControlePerdasTBCP_SEGUNDA.AsFloat       :=CDSPerdasSegunda.AsFloat;
-         IBTBControlePerdasTBCP_PERCENTUAL.AsFloat    :=CDSPerdasPercentual.AsFloat;
-         IBTBControlePerdasID_ENROLADOR.AsInteger     :=CDSPerdasEnrolador.AsInteger;
-         //Adicionando os enroladores na stringlist
-         if slEnroladores.IndexOf(CDSPerdasEnrolador.AsString)< 0 then
-           slEnroladores.Add(CDSPerdasEnrolador.AsString);
-         IBTBControlePerdas.Post;
-         TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
-         AtualizarEstoque;
-         Mes:=Copy (CDSPerdasData.AsString ,4,2);
-         Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
-         CDSPerdas.Next;
+        IBTBControlePerdas.Append;
+        IBTBControlePerdasTBCP_DATA.AsDateTime       :=CDSPerdasData.AsDateTime;
+        IBTBControlePerdasTBCP_MAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
+        IBTBControlePerdasTBCP_ELASTICO.AsString     :=CDSPerdasElastico.AsString;
+//        Adicionando produtos na stringlist
+//        if slProdutos.IndexOf(CDSPerdasElastico.AsString)< 0 then
+//          slProdutos.Add(CDSPerdasElastico.AsString);
+        IBTBControlePerdasTBCP_COMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
+        IBTBControlePerdasTBCP_PESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
+        IBTBControlePerdasTBCP_QUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
+        IBTBControlePerdasTBCP_QUANTIDADE.AsInteger  :=CDSPerdasQuantidade.AsInteger;
+        IBTBControlePerdasTBCP_PRIMEIRA.AsFloat      :=CDSPerdasPrimeira.AsFloat;
+        IBTBControlePerdasTBCP_SEGUNDA.AsFloat       :=CDSPerdasSegunda.AsFloat;
+        IBTBControlePerdasTBCP_PERCENTUAL.AsFloat    :=CDSPerdasPercentual.AsFloat;
+        IBTBControlePerdasID_ENROLADOR.AsInteger     :=CDSPerdasEnrolador.AsInteger;
+        IBTBControlePerdas.Post;
+
+        if CDSEnroladores.Locate('id_enrolador;id_elastico',VarArrayOf([CDSPerdasEnrolador.AsInteger,
+           CDSPerdasElastico.AsString]), [loPartialKey] ) then
+        begin
+          CDSEnroladores.Edit;
+          CDSEnroladoresTotal.AsFloat:= CDSEnroladoresTotal.AsFloat + CDSPerdasQuantidade.AsInteger;
+        end
+        else
+        begin
+          CDSEnroladores.Insert;
+          CDSEnroladoresid_enrolador.AsInteger         :=CDSPerdasEnrolador.AsInteger;
+          CDSEnroladoresnome.AsString                  :=CDSPerdasNomeEnrolador.AsString;
+          CDSEnroladoresid_elastico.AsString           :=CDSPerdasElastico.AsString;
+          CDSEnroladoresNomeElastico.AsString          :=CDSPerdasNomeElastico.AsString;
+          CDSEnroladoresData.AsDateTime                :=CDSPerdasData.AsDateTime;
+          CDSEnroladoresTotal.AsInteger                :=CDSPerdasQuantidade.AsInteger;
+        end;
+
+        CDSEnroladores.Post;
+
+
+
+        TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
+        AtualizarEstoque;
+        Mes:=Copy (CDSPerdasData.AsString ,4,2);
+        Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
+        CDSPerdas.Next;
       end;
 
       //Elástico de segunda
@@ -307,15 +321,7 @@ begin
          IBSQLEstoque.ParamByName('TBES_QUANTI').AsFloat:=TotalSegunda;
          IBSQLEstoque.ExecQuery;
        end;
-       //Relatório de produção dos enroladores
-       for i:=0 to slEnroladores.Count - 1 do
-       begin
-         CDSPerdas.Filtered:=False;
-         CDSPerdas.Filter  := 'ENROLADOR='''+slEnroladores.Strings[i]+'''';
-         CDSPerdas.Filtered:=True;
-         CDSPerdas.First;
 
-       End;
 
        CDSPerdas.EnableControls;
        Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
@@ -336,8 +342,7 @@ begin
        FrmPrincipal.IBTMain.Commit;
        FrmPrincipal.IBDMain.CloseDataSets;
        FreeAndNil(FrmImpressaoPerdas);
-       if Assigned(slProdutos) then
-         slProdutos.Destroy;
+
     Except
        FrmPrincipal.IBTMain.Rollback;
 
@@ -558,9 +563,10 @@ end;
 
 procedure TFrmControlePerdas.PNGBSalvarClick(Sender: TObject);
 begin
-  if ComboBoxEnroladores.ItemIndex < 0 Then
+  if (ComboBoxEnroladores.ItemIndex < 0) and (CDSPerdas.State  in [dsInsert]) Then
   begin
     tFrmMensagens.Mensagem('Favor selecionar um enrolador na lista.' ,'E',[mbOK]);
+  
   end
   else
   begin

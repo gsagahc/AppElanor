@@ -1274,7 +1274,14 @@ object FrmControlePerdas: TFrmControlePerdas
   end
   object CDSEnroladores: TClientDataSet
     Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <
+      item
+        Name = 'Index1'
+        Fields = 'id_enrolador;id_elastico'
+      end>
     Params = <>
+    StoreDefs = True
     Left = 568
     Top = 289
     object CDSEnroladoresid_enrolador: TIntegerField

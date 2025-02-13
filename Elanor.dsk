@@ -1,54 +1,35 @@
 [Closed Files]
-File_0=SourceModule,'C:\git_repository\AppElanor\UConsMovEntrada.pas',0,1,131,67,134,1,1
-File_1=SourceModule,'C:\git_repository\AppElanor\UCadCli.pas',0,1,1,1,1,1,0
-File_2=SourceModule,'C:\git_repository\AppElanor\UBuscarUser.pas',0,1,16,1,28,1,0
-File_3=SourceModule,'C:\git_repository\AppElanor\UEntradaDeGastos.pas',0,1,186,31,173,1,0
-File_4=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\DB.pas',0,1,9883,1,9859,0,0
-File_5=SourceModule,'C:\AppElanor_Fontes\pngdelphi-master\pngdelphi-master\pngextra.pas',0,1,279,1,301,0,0
-File_6=SourceModule,'c:\appelanor_fontes\vclskin4.8\source\Winskinform.pas',0,1,3729,1,3749,0,0
-File_7=SourceModule,'C:\AppElanor_Fontes\UConsultaPedDia.pas',0,1,94,71,101,1,0
-File_8=SourceModule,'C:\AppElanor_Fontes\Prototipos\RomaneioEntrega\URomaneioEntrega.pas',0,1,259,8,294,1,0
-File_9=SourceModule,'C:\AppElanor_Fontes\UPrintRomaneio.pas',0,1,7,1,8,1,0
+File_0=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UImpressaoPerdas.pas',0,1,25,1,34,1,0
+File_1=SourceModule,'C:\git_repository\AppElanor\UConsMovEntrada.pas',0,1,131,67,134,1,1
+File_2=SourceModule,'C:\git_repository\AppElanor\UCadCli.pas',0,1,1,1,1,1,0
+File_3=SourceModule,'C:\git_repository\AppElanor\UBuscarUser.pas',0,1,16,1,28,1,0
+File_4=SourceModule,'C:\git_repository\AppElanor\UEntradaDeGastos.pas',0,1,186,31,173,1,0
+File_5=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\DB.pas',0,1,9883,1,9859,0,0
+File_6=SourceModule,'C:\AppElanor_Fontes\pngdelphi-master\pngdelphi-master\pngextra.pas',0,1,279,1,301,0,0
+File_7=SourceModule,'c:\appelanor_fontes\vclskin4.8\source\Winskinform.pas',0,1,3729,1,3749,0,0
+File_8=SourceModule,'C:\AppElanor_Fontes\UConsultaPedDia.pas',0,1,94,71,101,1,0
 
 [Modules]
-Module0=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-Module1=C:\git_repository\AppElanor\UBuscarEnrolador.pas
-Module2=C:\git_repository\AppElanor\UCadPedido.pas
-Module3=C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas
-Module4=C:\git_repository\AppElanor\Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas
+Module0=C:\git_repository\AppElanor\URelProducaoEnroladores.pas
+Module1=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
+Module2=C:\git_repository\AppElanor\UCadEnrolador.pas
+Module3=C:\git_repository\AppElanor\UConsultaPedDia.pas
+Module4=C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas
 Module5=C:\git_repository\AppElanor\UPrincipal.pas
-Module6=C:\git_repository\AppElanor\UCadEnrolador.pas
-Module7=C:\git_repository\AppElanor\UCadUser.pas
-Module8=C:\git_repository\AppElanor\Elanor.dpr
-Count=9
+Module6=C:\git_repository\AppElanor\UCadUser.pas
+Module7=C:\git_repository\AppElanor\Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas
+Module8=C:\git_repository\AppElanor\UCadPedido.pas
+Module9=C:\git_repository\AppElanor\UBuscarEnrolador.pas
+Module10=C:\git_repository\AppElanor\Elanor.dpr
+Count=11
 EditWindowCount=1
 
+[C:\git_repository\AppElanor\URelProducaoEnroladores.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
 [C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UBuscarEnrolador.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UCadPedido.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UPrincipal.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -58,7 +39,37 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
+[C:\git_repository\AppElanor\UConsultaPedDia.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UPrincipal.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
 [C:\git_repository\AppElanor\UCadUser.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UCadPedido.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UBuscarEnrolador.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -73,8 +84,8 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=9
-CurrentView=8
+ViewCount=11
+CurrentView=3
 View0=0
 View1=1
 View2=2
@@ -84,26 +95,30 @@ View5=5
 View6=6
 View7=7
 View8=8
+View9=9
+View10=10
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
-State=0
+State=2
 Left=200
 Top=124
 Width=1166
 Height=485
 MaxLeft=-8
-MaxTop=-8
-ClientWidth=1150
-ClientHeight=446
+MaxTop=107
+MaxWidth=1382
+MaxHeight=629
+ClientWidth=1366
+ClientHeight=590
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
 BottomPanelSize=146
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000007E04000000000000029200000000000000010000000000000000000000000100000000560500000000000001000000005605000000000000010000000056050000000000000100000000560500000000000001000000005605000000000000010000000056050000000000000100000000400600000000000001000000007E0400000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000560500000000000002920000000000000001000000000000000000000000010000000056050000000000000100000000560500000000000001000000005605000000000000010000000056050000000000000100000000560500000000000001000000005605000000000000010000000040060000000000000100000000560500000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=C:\git_repository\AppElanor\Elanor.dpr
@@ -114,69 +129,84 @@ LeftCol=1
 
 [View1]
 Module=C:\git_repository\AppElanor\UPrincipal.pas
-CursorX=47
-CursorY=1595
-TopLine=1590
+CursorX=49
+CursorY=1330
+TopLine=1327
 LeftCol=1
 
 [View2]
+Module=C:\git_repository\AppElanor\UConsultaPedDia.pas
+CursorX=55
+CursorY=75
+TopLine=1
+LeftCol=1
+
+[View3]
+Module=C:\git_repository\AppElanor\URelProducaoEnroladores.pas
+CursorX=36
+CursorY=50
+TopLine=37
+LeftCol=1
+
+[View4]
 Module=C:\git_repository\AppElanor\UCadPedido.pas
 CursorX=1
 CursorY=475
 TopLine=464
 LeftCol=1
 
-[View3]
+[View5]
 Module=C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas
 CursorX=40
 CursorY=369
 TopLine=356
 LeftCol=1
 
-[View4]
+[View6]
 Module=C:\git_repository\AppElanor\Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas
 CursorX=90
 CursorY=72
 TopLine=48
 LeftCol=1
 
-[View5]
+[View7]
 Module=C:\git_repository\AppElanor\UBuscarEnrolador.pas
 CursorX=11
 CursorY=43
 TopLine=42
 LeftCol=1
 
-[View6]
+[View8]
 Module=C:\git_repository\AppElanor\UCadEnrolador.pas
 CursorX=12
 CursorY=91
 TopLine=85
 LeftCol=1
 
-[View7]
+[View9]
 Module=C:\git_repository\AppElanor\UCadUser.pas
 CursorX=42
 CursorY=116
 TopLine=110
 LeftCol=1
 
-[View8]
+[View10]
 Module=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-CursorX=92
-CursorY=308
-TopLine=296
+CursorX=24
+CursorY=1
+TopLine=1
 LeftCol=1
 
 [Watches]
 Count=0
 
 [Breakpoints]
-Count=4
+Count=5
 Breakpoint0='C:\AppElanor_Fontes\ULogin.pas',50,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='C:\AppElanor_Fontes\UCadCli.pas',216,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='C:\AppElanor_Fontes\UCadPedido.pas',514,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint3='C:\git_repository\AppElanor\UCadEnrolador.pas',117,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint4='C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas',258,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -248,18 +278,18 @@ Visible=1
 State=0
 Left=27
 Top=145
-Width=355
+Width=416
 Height=572
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=339
+ClientWidth=400
 ClientHeight=533
 TBDockHeight=365
 LRDockWidth=190
 Dockable=1
 SplitPos=107
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Caption
 ExpandedItems=Bands,BorderIcons,Brush,FileType,FilterOptions,Font,Frame,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title,Title.Font
 HiddenCategories=
 
@@ -302,11 +332,11 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=285
+Height=429
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=285
+ClientHeight=429
 TBDockHeight=305
 LRDockWidth=140
 Dockable=1
@@ -317,11 +347,11 @@ Visible=1
 State=0
 Left=12
 Top=0
-Width=1138
+Width=1354
 Height=146
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1138
+ClientWidth=1354
 ClientHeight=146
 TBDockHeight=146
 LRDockWidth=443
