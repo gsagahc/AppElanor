@@ -84,6 +84,7 @@ begin
         IBTbEnroladorSN_ATIVO.AsString:='S';
         IBTbEnrolador.Post;
         FrmPrincipal.IBTMain.Commit;
+        FrmPrincipal.IBDMain.CloseDataSets;
         StatusBotoes;
       except
         on E: EDatabaseError do

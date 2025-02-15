@@ -1,6 +1,6 @@
 object FrmRomaneioEntrega: TFrmRomaneioEntrega
   Left = 392
-  Top = 67
+  Top = 69
   Width = 747
   Height = 542
   BorderIcons = []

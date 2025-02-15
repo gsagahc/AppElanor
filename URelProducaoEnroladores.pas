@@ -8,7 +8,7 @@ uses
   StdCtrls, DBCtrls, IBCustomDataSet, IBQuery;
 
 type
-  TFrmRelPedidosDia1 = class(TForm)
+  TFrmRelProdEnroladores = class(TForm)
     QuickRep1: TQuickRep;
     QRBand2: TQRBand;
     QRDBText1: TQRDBText;
@@ -23,18 +23,13 @@ type
     QRLabel1: TQRLabel;
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
-    QRLabelde: TQRLabel;
-    QrLabelAte: TQRLabel;
-    QRLabel6: TQRLabel;
-    QRBand3: TQRBand;
-    QrLabelTotal: TQRLabel;
     QRLabel4: TQRLabel;
     QRDBText3: TQRDBText;
-    QRLabelQuantDias: TQRLabel;
-    QRLabelMedia: TQRLabel;
+    QRDBText4: TQRDBText;
     QRLabel5: TQRLabel;
-    QRLabel8: TQRLabel;
-    QRLabel9: TQRLabel;
+    QRDBText5: TQRDBText;
+    procedure QRBand2BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
   private
     { Private declarations }
   public
@@ -43,13 +38,22 @@ type
   end;
 
 var
-  FrmRelPedidosDia1: TFrmRelPedidosDia1;
+  FrmRelProdEnroladores: TFrmRelProdEnroladores;
 
 implementation
 
-uses UPrincipal, UFrmControlePerdas;
+uses UPrincipal, UFrmControlePerdas, Math;
 
 
 {$R *.dfm}
+
+procedure TFrmRelProdEnroladores.QRBand2BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+   if QRDBText3.DataSet.FieldByName('Total').AsInteger < QRDBText3.DataSet.FieldByName('MinimoDesejado').AsInteger then
+     QRDBText3.Font.Color:=clRed
+   Else
+     QRDBText3.Font.Color:=clBlack;
+end;
 
 end.

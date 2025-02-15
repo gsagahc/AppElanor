@@ -27,6 +27,7 @@ type
   TProduto      = class
   Nome          : string;
   id            : Integer;
+  Minimo        : Integer;
 end;
 type
   TEnrolador      = class
@@ -129,6 +130,9 @@ type
     CDSEnroladoresNomeElastico: TStringField;
     CDSEnroladoresData: TDateField;
     CDSEnroladoresTotal: TIntegerField;
+    CDSPerdasMinimoDesejado: TIntegerField;
+    CDSEnroladoresMinimoDesejado: TIntegerField;
+    IBQElasticosMINIMO: TIntegerField;
     procedure PNGBNovoClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -169,7 +173,7 @@ var
 
 implementation
 
-uses Math, uMensagens,UImpressaoPerdas, UPrincipal;
+uses Math, uMensagens,UImpressaoPerdas, UPrincipal, URelProducaoEnroladores;
 
 {$R *.dfm}
 
@@ -242,9 +246,6 @@ begin
         IBTBControlePerdasTBCP_DATA.AsDateTime       :=CDSPerdasData.AsDateTime;
         IBTBControlePerdasTBCP_MAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
         IBTBControlePerdasTBCP_ELASTICO.AsString     :=CDSPerdasElastico.AsString;
-//        Adicionando produtos na stringlist
-//        if slProdutos.IndexOf(CDSPerdasElastico.AsString)< 0 then
-//          slProdutos.Add(CDSPerdasElastico.AsString);
         IBTBControlePerdasTBCP_COMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
         IBTBControlePerdasTBCP_PESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
         IBTBControlePerdasTBCP_QUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
@@ -270,6 +271,7 @@ begin
           CDSEnroladoresNomeElastico.AsString          :=CDSPerdasNomeElastico.AsString;
           CDSEnroladoresData.AsDateTime                :=CDSPerdasData.AsDateTime;
           CDSEnroladoresTotal.AsInteger                :=CDSPerdasQuantidade.AsInteger;
+          CDSEnroladoresMinimoDesejado.AsInteger       :=CDSPerdasMinimoDesejado.AsInteger;
         end;
 
         CDSEnroladores.Post;
@@ -339,11 +341,17 @@ begin
        End;
 
        FrmImpressaoPerdas.PreviewModal;
+
+       Application.CreateForm(TFrmRelProdEnroladores, FrmRelProdEnroladores);
+       FrmRelProdEnroladores.QuickRep1.PreviewModal;
+       FreeAndNil(FrmRelProdEnroladores);
+       Acumulado:=CalculaAcumuladoMes(Mes, Ano);
        FrmPrincipal.IBTMain.Commit;
        FrmPrincipal.IBDMain.CloseDataSets;
        FreeAndNil(FrmImpressaoPerdas);
 
     Except
+       tFrmMensagens.Mensagem('Erro ao registrar dados ' +'PNGImprimirClick '+ E.message,'E',[mbOK]);
        FrmPrincipal.IBTMain.Rollback;
 
 
@@ -367,9 +375,10 @@ begin
 // Preencher combobox Elásticos
   while not IBQElasticos.Eof do
   begin
-    Elastico      := TProduto.Create;
-    Elastico.Nome := IBQElasticos.FieldByName('TBPRD_NOME').AsString;
-    Elastico.id   := IBQElasticos.FieldByName('ID_PRODUTO').AsInteger;
+    Elastico        := TProduto.Create;
+    Elastico.Nome   := IBQElasticos.FieldByName('TBPRD_NOME').AsString;
+    Elastico.id     := IBQElasticos.FieldByName('ID_PRODUTO').AsInteger;
+    Elastico.Minimo:=  IBQElasticos.FieldByName('MINIMO').AsInteger;
     ComboBoxElastico.AddItem(Elastico.Nome, Elastico);
     IBQElasticos.Next;
   end;
@@ -581,20 +590,21 @@ begin
              (EditQuantidadeRC.Text <>'0') and (EditPesoBruto.Text <>'0') and
              (ComboBoxElastico.ItemIndex <> -1 ) then
     begin
-      CDSPerdasData.AsDateTime       := DTPData.Date;
-      CDSPerdasMaquina.AsInteger     := StrToInt(EditMaquina.Text);
-      CDSPerdasElastico.AsInteger    := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Id;
-      CDSPerdasComprimento.AsInteger := StrToInt(EditComprimento.Text);
-      CDSPerdasPesoB.AsFloat         := StrToFloat(EditPesoBruto.Text);
-      CDSPerdasQuantidadeRC.AsInteger:= StrToInt( EditQuantidadeRC.Text);
-      CDSPerdasQuantidade.AsInteger  := StrToInt(EditQuantidade.Text);
-      CDSPerdasPrimeira.AsFloat      := StrToFloat(EditPrimeira.Text);
-      CDSPerdasSegunda.AsFloat       := StrToFloat(EditSegunda.Text);
-      CDSPerdasPercentual.AsFloat    := StrToFloat(EditPercentual.Text);
-      CDSPerdasNomeElastico.AsString := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Nome;
-      CDSPerdasCBoxIndex.AsInteger   := ComboBoxElastico.ItemIndex;
-      CDSPerdasEnrolador.AsInteger   := (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Id;
-      CDSPerdasNomeEnrolador.AsString:= (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Nome;
+      CDSPerdasData.AsDateTime         := DTPData.Date;
+      CDSPerdasMaquina.AsInteger       := StrToInt(EditMaquina.Text);
+      CDSPerdasElastico.AsInteger      := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Id;
+      CDSPerdasComprimento.AsInteger   := StrToInt(EditComprimento.Text);
+      CDSPerdasPesoB.AsFloat           := StrToFloat(EditPesoBruto.Text);
+      CDSPerdasQuantidadeRC.AsInteger  := StrToInt( EditQuantidadeRC.Text);
+      CDSPerdasQuantidade.AsInteger    := StrToInt(EditQuantidade.Text);
+      CDSPerdasPrimeira.AsFloat        := StrToFloat(EditPrimeira.Text);
+      CDSPerdasSegunda.AsFloat         := StrToFloat(EditSegunda.Text);
+      CDSPerdasPercentual.AsFloat      := StrToFloat(EditPercentual.Text);
+      CDSPerdasNomeElastico.AsString   := (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Nome;
+      CDSPerdasCBoxIndex.AsInteger     := ComboBoxElastico.ItemIndex;
+      CDSPerdasEnrolador.AsInteger     := (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Id;
+      CDSPerdasNomeEnrolador.AsString  := (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Nome;
+      CDSPerdasMinimoDesejado.AsInteger:= (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Minimo;
       CDSPerdas.Post;
       LimparCampos;
       ReadOnly;

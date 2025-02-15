@@ -1,6 +1,6 @@
 object FrmConsultarPedDia: TFrmConsultarPedDia
   Left = 385
-  Top = 267
+  Top = 269
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Faturamento consolidado por dia'

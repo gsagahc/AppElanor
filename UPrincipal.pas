@@ -1164,69 +1164,77 @@ var objExcel,Sheet,Chart,s : Variant;
     i, l : integer;
     ExcApp: OleVariant;
 begin
-  CriarContasPagTemp;
-  cTitulo := 'Títulos a pagar pendentes';
-  ExcApp := CreateOleObject('Excel.Application');
-  ExcApp.Visible := True;
-  ExcApp.WorkBooks.Add;
-  ExcApp.Caption := cTitulo;
-  // Adiciona planilha(sheet)
+  Try
+    CriarContasPagTemp;
+    cTitulo := 'Títulos a pagar pendentes';
+    ExcApp := CreateOleObject('Excel.Application');
+    ExcApp.Visible := True;
+    ExcApp.WorkBooks.Add;
+    ExcApp.Caption := cTitulo;
+    // Adiciona planilha(sheet)
 
 
-  ExcApp.Workbooks[1].WorkSheets[1].Name := cTitulo;
-  Sheet := ExcApp.Workbooks[1].WorkSheets[cTitulo];
+    ExcApp.Workbooks[1].WorkSheets[1].Name := cTitulo;
+    Sheet := ExcApp.Workbooks[1].WorkSheets[cTitulo];
 
-  //Criando cabeçalho
-  Sheet.Range['A1'] := 'Mês';
-  Sheet.Range['B1'] := 'Nota';
-  Sheet.Range['C1'] := 'Data de emissão';
-  Sheet.Range['D1'] := 'Fornecedor';
-  Sheet.Range['F1'] := 'Vencimento';
-  Sheet.Range['E1'] := 'Valor da Nota';
-  Sheet.Range['G1'] := 'Valor a ser pago';
-  Sheet.Range['H1'] := 'Total';
+    //Criando cabeçalho
+    Sheet.Range['A1'] := 'Mês';
+    Sheet.Range['B1'] := 'Nota';
+    Sheet.Range['C1'] := 'Data de emissão';
+    Sheet.Range['D1'] := 'Fornecedor';
+    Sheet.Range['F1'] := 'Vencimento';
+    Sheet.Range['E1'] := 'Valor da Nota';
+    Sheet.Range['G1'] := 'Valor a ser pago';
+    Sheet.Range['H1'] := 'Total';
 
- //Formatando cabeçalho
- // Formatando o Cabeçalho
-  Sheet.Range['A1','H1'].font.name := 'Verdana'; // Fonte
-  Sheet.Range['A1','H1'].font.size := 12; // Tamanho da Fonte
-  Sheet.Range['A1','H1'].font.bold := true; // Negrito
-  Sheet.Range['A1','H1'].font.italic := true; // Italico
-  Sheet.Range['A1','H1'].font.color := clYellow; // Cor da Fonte
-  Sheet.Range['A1','H1'].Interior.Color := $00ffcf9c; // Cor da Célula
-  // Define o tamanho das Colunas (basta fazer em uma delas e as demais serão alteradas)
-  Sheet.Range['B1','C1' ].ColumnWidth := 27;
-  Sheet.Range['B1','C1' ].RowHeight := 25;
-  Sheet.Range['D1'] .ColumnWidth := 16;
-  
-  
-  // Alinhando as Células
-  Sheet.Range['A2','H100' ].HorizontalAlignment := 3; // 3=Center - 4=Right
+   //Formatando cabeçalho
+   // Formatando o Cabeçalho
+    Sheet.Range['A1','H1'].font.name := 'Verdana'; // Fonte
+    Sheet.Range['A1','H1'].font.size := 12; // Tamanho da Fonte
+    Sheet.Range['A1','H1'].font.bold := true; // Negrito
+    Sheet.Range['A1','H1'].font.italic := true; // Italico
+    Sheet.Range['A1','H1'].font.color := clYellow; // Cor da Fonte
+    Sheet.Range['A1','H1'].Interior.Color := $00ffcf9c; // Cor da Célula
+    // Define o tamanho das Colunas (basta fazer em uma delas e as demais serão alteradas)
+    Sheet.Range['B1','C1' ].ColumnWidth := 27;
+    Sheet.Range['B1','C1' ].RowHeight := 25;
+    Sheet.Range['D1'] .ColumnWidth := 16;
 
-  IBQContasPag.First;
-  l := 2;  
-  While not IBQContasPag.Eof do
-  begin
-    for i := 0 to IBQContasPag.Fields.Count - 1 do
+
+    // Alinhando as Células
+    Sheet.Range['A2','H100' ].HorizontalAlignment := 3; // 3=Center - 4=Right
+
+    IBQContasPag.First;
+    l := 2;
+    While not IBQContasPag.Eof do
     begin
-      If IBQContasPag.Fields[i].DisplayText<>'R$ 0,00' Then
-        ExcApp.WorkBooks[1].Sheets[1].Cells[l,i + 1] :=
-         IBQContasPag.Fields[i].DisplayText;
-      if (IBQContasPag.Fields[i].Name='IBQContasPagTBCONT_VALORNOTA') or  (IBQContasPag.Fields[i].Name='IBQContasPagTBCONT_VALOR')
-         or (IBQContasPag.Fields[i].Name='IBQContasPagTBCONT_VALOR')  then
-         Sheet.Cells[l,i + 1].NumberFormat := 'R$ #.##0,00_);(R$ #.##0,00)';
+      for i := 0 to IBQContasPag.Fields.Count - 1 do
+      begin
+        If IBQContasPag.Fields[i].DisplayText<>'R$ 0,00' Then
+          ExcApp.WorkBooks[1].Sheets[1].Cells[l,i + 1] :=
+           IBQContasPag.Fields[i].DisplayText;
+        if (IBQContasPag.Fields[i].Name='IBQContasPagTBCONT_VALORNOTA') or  (IBQContasPag.Fields[i].Name='IBQContasPagTBCONT_VALOR')
+           or (IBQContasPag.Fields[i].Name='IBQContasPagTBCONT_VALOR')  then
+           Sheet.Cells[l,i + 1].NumberFormat := 'R$ #.##0,00_);(R$ #.##0,00)';
+      end;
+      IBQContasPag.Next;
+      l := l + 1;
     end;
-    IBQContasPag.Next;
-    l := l + 1;
+    Sheet.Cells[l+1,7] := 'Total R$';
+    // Na linha abaixo inclui uma soma e converti para Moeda atravez do NUMBERFORMAT
+  //  Sheet.Cells[i,4].NumberFormat := 'R$ #.##0,00_);(R$ #.##0,00)';
+    Sheet.Cells[l+1,8].formula := '=SUM(G2:'+'G'+IntToStr(l)+')';
+
+    ExcApp.WorkBooks[1].SaveAs('C:\AppElanor\Excel\Contas'+FormatDateTime('ddmmyyyyhhnnss',Now())+'.xlsx');
+    IBTMain.Rollback;
+  except
+   on E: EOleSysError do
+   begin
+     tFrmMensagens.Mensagem('Erro executar excel, verifique se está instalado.','E',[mbOK], E.Message);
+
+   end;
+
   end;
-  Sheet.Cells[l+1,7] := 'Total R$';
-  // Na linha abaixo inclui uma soma e converti para Moeda atravez do NUMBERFORMAT
-//  Sheet.Cells[i,4].NumberFormat := 'R$ #.##0,00_);(R$ #.##0,00)';
-  Sheet.Cells[l+1,8].formula := '=SUM(G2:'+'G'+IntToStr(l)+')';
-
-  ExcApp.WorkBooks[1].SaveAs('C:\AppElanor\Excel\Contas'+FormatDateTime('ddmmyyyyhhnnss',Now())+'.xlsx');
-  IBTMain.Rollback;
-
 end;
 
 procedure TFrmPrincipal.Cadastrodefornecedores1Click(Sender: TObject);

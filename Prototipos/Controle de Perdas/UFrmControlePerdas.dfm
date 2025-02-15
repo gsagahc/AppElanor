@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
   Left = 124
-  Top = 160
+  Top = 163
   Width = 1125
   Height = 449
   BorderIcons = []
@@ -983,6 +983,9 @@ object FrmControlePerdas: TFrmControlePerdas
       FieldName = 'NomeEnrolador'
       Size = 80
     end
+    object CDSPerdasMinimoDesejado: TIntegerField
+      FieldName = 'MinimoDesejado'
+    end
   end
   object DSProdutos: TDataSource
     AutoEdit = False
@@ -1241,10 +1244,18 @@ object FrmControlePerdas: TFrmControlePerdas
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
-      'SELECT ID_PRODUTO, TBPRD_NOME'
+      'SELECT ID_PRODUTO, TBPRD_NOME,'
+      'CASE WHEN (SELECT MINIMO FROM TB_P_ELAST_ESPEC ESP  WHERE'
+      '         ESP.id_produto= tb_produtos.id_produto) IS NOT NULL'
+      ' THEN (SELECT MINIMO FROM TB_P_ELAST_ESPEC ESP  WHERE'
+      '         ESP.id_produto= tb_produtos.id_produto)'
+      'ELSE (SELECT MINIMO FROM tb_p_elastico_geral)'
+      'END AS MINIMO'
       'FROM TB_PRODUTOS'
-      'WHERE TBPRD_NOME LIKE '#39'%EL%'#39' OR '
+      ''
+      'WHERE TBPRD_NOME LIKE '#39'%EL'#193'S%'#39' OR'
       '               TBPRD_NOME LIKE '#39'%PERSO%'#39' '
+      '               OR TBPRD_NOME LIKE '#39'%ELAS%'#39
       'ORDER BY TBPRD_NOME')
     Left = 536
     Top = 257
@@ -1257,6 +1268,9 @@ object FrmControlePerdas: TFrmControlePerdas
       FieldName = 'TBPRD_NOME'
       Origin = 'TB_PRODUTOS.TBPRD_NOME'
       Size = 60
+    end
+    object IBQElasticosMINIMO: TIntegerField
+      FieldName = 'MINIMO'
     end
   end
   object DSElasticos: TDataSource
@@ -1303,6 +1317,9 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object CDSEnroladoresTotal: TIntegerField
       FieldName = 'Total'
+    end
+    object CDSEnroladoresMinimoDesejado: TIntegerField
+      FieldName = 'MinimoDesejado'
     end
   end
 end

@@ -1,6 +1,6 @@
 object FrmCadParamElasticos: TFrmCadParamElasticos
   Left = 540
-  Top = 260
+  Top = 262
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de par'#226'metros dos el'#225'sticos'

@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
   Left = 140
-  Top = 116
+  Top = 118
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1613,7 +1613,7 @@ object FrmPrincipal: TFrmPrincipal
         OnClick = Romaneiodeentrega1Click
       end
       object Reimpressoromaneio1: TMenuItem
-        Caption = 'Reimpress'#227'o romaneio'
+        Caption = 'Reimpress'#227'o/Altera'#231#227'o romaneio'
         OnClick = Reimpressoromaneio1Click
       end
     end

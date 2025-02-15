@@ -85,19 +85,32 @@ begin
     IBTbProdutos.Insert;
     StatusBotoes;
     IBTbProdutosTBPRD_CODIGO.AsString:=gerarCod;   
-  Except;
+  Except
+    on  E: EDatabaseError do
+    begin
+     tFrmMensagens.Mensagem('Erro ao Incluir produto: PNGButton7Click '+ E.Message,'E',[mbOK]);
 
+    end;
   end;
 
 end;
 
 procedure TFrmCadProd.PNGBSalvarClick(Sender: TObject);
 begin
-  
   If (IBTbProdutos.State in [dsEdit, dsInsert]) Then
   Begin
-    IBTbProdutos.Post;
-    FrmPrincipal.IBTMain.Commit;
+    try
+      IBTbProdutos.Post;
+      FrmPrincipal.IBTMain.Commit;
+      FrmPrincipal.IBDMain.CloseDataSets;
+    Except
+     on  E: EDatabaseError do
+     begin
+       tFrmMensagens.Mensagem('Erro ao Salvar produto no banco: PNGBSalvarClick '+ E.Message,'E',[mbOK]);
+
+     end;
+
+    End;
     StatusBotoes;
   End;
 end;
