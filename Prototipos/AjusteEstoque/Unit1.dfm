@@ -1,8 +1,8 @@
 object Form1: TForm1
   Left = 369
   Top = 153
-  Width = 652
-  Height = 362
+  Width = 509
+  Height = 267
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -14,8 +14,8 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtn1: TBitBtn
-    Left = 216
-    Top = 112
+    Left = 168
+    Top = 72
     Width = 169
     Height = 57
     Caption = 'Iniciar'
@@ -23,7 +23,6 @@ object Form1: TForm1
     OnClick = BitBtn1Click
   end
   object IBDatabase1: TIBDatabase
-    Connected = True
     DatabaseName = 'C:\AppElanor\DATABASE-PRODUCAO.FDB'
     Params.Strings = (
       'user_name=sysdba'

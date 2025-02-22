@@ -1,6 +1,6 @@
 object FrmBuscarEnrolador: TFrmBuscarEnrolador
   Left = 267
-  Top = 390
+  Top = 329
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Localizar'
@@ -73,6 +73,7 @@ object FrmBuscarEnrolador: TFrmBuscarEnrolador
   object IBQEnrolador: TIBQuery
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
+    Active = True
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
@@ -97,6 +98,11 @@ object FrmBuscarEnrolador: TFrmBuscarEnrolador
       Required = True
       FixedChar = True
       Size = 1
+    end
+    object IBQEnroladorID_ENROLADOR: TIntegerField
+      FieldName = 'ID_ENROLADOR'
+      Origin = 'TB_ENROLADORES.ID_ENROLADOR'
+      Required = True
     end
   end
   object DsUser: TDataSource

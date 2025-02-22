@@ -32,6 +32,7 @@ type
     IBTbEnroladorCPF: TIBStringField;
     IBTbEnroladorSN_ATIVO: TIBStringField;
     DBChBoxSNAtivo: TDBCheckBox;
+    IBTbEnroladorID_ENROLADOR: TIntegerField;
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
@@ -44,6 +45,7 @@ type
   private
     { Private declarations }
   public
+    idEnrolador:String;
     { Public declarations }
   end;
 
@@ -110,12 +112,13 @@ end;
 
 procedure TFrmCadEnrolador.PNGButton6Click(Sender: TObject);
 begin
+  idEnrolador:=EmptyStr;
   Application.CreateForm(TFrmBuscarEnrolador, FrmBuscarEnrolador);
   FrmBuscarEnrolador.ShowModal;
   If Not IBTbEnrolador.Active Then
     IBTbEnrolador.Open;
-  if not FrmBuscarEnrolador.IBQEnrolador.IsEmpty Then
-    if IBTbEnrolador.Locate('ID_ENROLADOR', FrmBuscarEnrolador.IBQEnrolador.Fieldbyname('ID_ENROLADOR').AsString,[loCaseInsensitive, loPartialKey]) Then
+  if idEnrolador <> EmptyStr Then
+    if IBTbEnrolador.Locate('ID_ENROLADOR', idEnrolador,[loPartialKey]) Then
       StatusBotoes;
   FreeAndNil(FrmBuscarEnrolador);
 end;

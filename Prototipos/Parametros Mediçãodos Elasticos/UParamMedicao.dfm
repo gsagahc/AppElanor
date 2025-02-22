@@ -1,10 +1,10 @@
 object FrmCadParamElasticos: TFrmCadParamElasticos
   Left = 540
-  Top = 262
+  Top = 222
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de par'#226'metros dos el'#225'sticos'
-  ClientHeight = 244
+  ClientHeight = 305
   ClientWidth = 561
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,22 +21,22 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
   TextHeight = 13
   object PnlBottom: TPanel
     Left = 0
-    Top = 167
+    Top = 177
     Width = 561
-    Height = 77
-    Align = alBottom
+    Height = 128
+    Align = alClient
     TabOrder = 0
     object PnlBotoes: TPanel
       Left = 1
       Top = 1
       Width = 559
-      Height = 75
+      Height = 126
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
       object PNGButton2: TPNGButton
-        Left = 491
-        Top = 6
+        Left = 496
+        Top = 56
         Width = 57
         Height = 65
         ButtonLayout = pbsImageAbove
@@ -136,8 +136,8 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         OnClick = PNGButton2Click
       end
       object PNGButton3: TPNGButton
-        Left = 431
-        Top = 5
+        Left = 436
+        Top = 55
         Width = 57
         Height = 65
         ButtonLayout = pbsImageAbove
@@ -217,8 +217,8 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         OnClick = PNGButton3Click
       end
       object PNGButton5: TPNGButton
-        Left = 370
-        Top = 5
+        Left = 375
+        Top = 55
         Width = 57
         Height = 65
         ButtonLayout = pbsImageAbove
@@ -300,8 +300,8 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         OnClick = PNGButton5Click
       end
       object PNGButton7: TPNGButton
-        Left = 309
-        Top = 5
+        Left = 314
+        Top = 55
         Width = 57
         Height = 65
         ButtonLayout = pbsImageAbove
@@ -387,8 +387,8 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         OnClick = PNGButton7Click
       end
       object Label1: TLabel
-        Left = 30
-        Top = 21
+        Left = 14
+        Top = 34
         Width = 181
         Height = 13
         Caption = 'Valor m'#237'nimo geral de produ'#231#227'o'
@@ -400,10 +400,23 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         ParentFont = False
         WordWrap = True
       end
+      object Label2: TLabel
+        Left = 80
+        Top = 8
+        Width = 31
+        Height = 13
+        Caption = 'Geral'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
       object DBEdit1: TDBEdit
-        Left = 31
-        Top = 41
-        Width = 194
+        Left = 15
+        Top = 54
+        Width = 170
         Height = 19
         CharCase = ecUpperCase
         Ctl3D = False
@@ -412,20 +425,40 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
         ParentCtl3D = False
         TabOrder = 0
       end
+      object DBCheckBox1: TDBCheckBox
+        Left = 16
+        Top = 93
+        Width = 161
+        Height = 17
+        Caption = 'Visualizar impress'#227'o'
+        Ctl3D = False
+        DataField = 'SNVISUALIZAR'
+        DataSource = DSParamGeral
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentCtl3D = False
+        ParentFont = False
+        TabOrder = 1
+        ValueChecked = 'S'
+        ValueUnchecked = 'N'
+      end
     end
   end
   object PnlMain: TPanel
     Left = 0
     Top = 0
     Width = 561
-    Height = 167
-    Align = alClient
+    Height = 177
+    Align = alTop
     TabOrder = 1
     object PanelGrid: TPanel
       Left = 1
       Top = 1
       Width = 559
-      Height = 165
+      Height = 175
       Align = alClient
       Ctl3D = False
       ParentCtl3D = False
@@ -445,7 +478,7 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
       end
       object DBGrid1: TDBGrid
         Left = 1
-        Top = 16
+        Top = 26
         Width = 557
         Height = 148
         Align = alBottom
@@ -508,13 +541,12 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
       end
       item
         Name = 'MINIMO'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
-        Name = 'RANGEMINSUP'
-        Attributes = [faRequired]
-        DataType = ftInteger
+        Name = 'SNVISUALIZAR'
+        DataType = ftString
+        Size = 1
       end>
     StoreDefs = True
     TableName = 'TB_P_ELASTICO_GERAL'
@@ -523,6 +555,10 @@ object FrmCadParamElasticos: TFrmCadParamElasticos
     object IBTbParamGeralMINIMO: TIntegerField
       FieldName = 'MINIMO'
       Required = True
+    end
+    object IBTbParamGeralSNVISUALIZAR: TIBStringField
+      FieldName = 'SNVISUALIZAR'
+      Size = 1
     end
   end
   object DSParamGeral: TDataSource

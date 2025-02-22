@@ -33,6 +33,9 @@ type
     Label3: TLabel;
     IBTbParamIndividualMINIMO: TIntegerField;
     IBTbParamGeralMINIMO: TIntegerField;
+    DBCheckBox1: TDBCheckBox;
+    Label2: TLabel;
+    IBTbParamGeralSNVISUALIZAR: TIBStringField;
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
@@ -64,7 +67,7 @@ begin
       IBTbParamIndividual.Open;
 
     IBTbParamIndividual.Insert;
-//    StatusBotoes;
+
 
   Except;
 
@@ -153,6 +156,10 @@ begin
   IBTbParamIndividual.Open;
   IBTbParamGeral.Open;
   IBQProdutos.Open;
+  if IBTbParamGeralSNVISUALIZAR.AsString='S' then
+    DBCheckBox1.Checked := True
+  else
+    DBCheckBox1.Checked:= False;  
 end;
 
 end.

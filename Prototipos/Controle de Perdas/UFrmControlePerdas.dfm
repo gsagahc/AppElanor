@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
-  Left = 124
-  Top = 163
+  Left = 290
+  Top = 224
   Width = 1125
   Height = 449
   BorderIcons = []
@@ -1286,40 +1286,42 @@ object FrmControlePerdas: TFrmControlePerdas
     Left = 536
     Top = 321
   end
-  object CDSEnroladores: TClientDataSet
+  object IBQueryEnroladoresCad: TIBQuery
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 568
+    Top = 321
+  end
+  object CDSRelatorio: TClientDataSet
     Aggregates = <>
-    FieldDefs = <>
-    IndexDefs = <
-      item
-        Name = 'Index1'
-        Fields = 'id_enrolador;id_elastico'
-      end>
     Params = <>
-    StoreDefs = True
     Left = 568
     Top = 289
-    object CDSEnroladoresid_enrolador: TIntegerField
-      FieldName = 'id_enrolador'
+    object CDSRelatorioNOME: TStringField
+      FieldName = 'NOME'
     end
-    object CDSEnroladoresnome: TStringField
-      FieldName = 'nome'
-      Size = 100
+    object CDSRelatorioNOME_ELASTICO: TStringField
+      FieldName = 'NOME_ELASTICO'
     end
-    object CDSEnroladoresid_elastico: TIntegerField
-      FieldName = 'id_elastico'
+    object CDSRelatorioMINIMO: TIntegerField
+      FieldName = 'MINIMO'
     end
-    object CDSEnroladoresNomeElastico: TStringField
-      FieldName = 'NomeElastico'
-      Size = 100
+    object CDSRelatorioPRODUZIDO: TIntegerField
+      FieldName = 'PRODUZIDO'
     end
-    object CDSEnroladoresData: TDateField
-      FieldName = 'Data'
+    object CDSRelatorioMEDIA: TFloatField
+      FieldName = 'MEDIA'
     end
-    object CDSEnroladoresTotal: TIntegerField
-      FieldName = 'Total'
+    object CDSRelatorioQTDITENS: TIntegerField
+      FieldName = 'QTDITENS'
     end
-    object CDSEnroladoresMinimoDesejado: TIntegerField
-      FieldName = 'MinimoDesejado'
+    object CDSRelatorioTOTAL: TIntegerField
+      FieldName = 'TOTAL'
+    end
+    object CDSRelatorioDATA: TDateField
+      FieldName = 'DATA'
     end
   end
 end

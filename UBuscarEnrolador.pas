@@ -18,6 +18,7 @@ type
     IBQEnroladorNOME: TIBStringField;
     IBQEnroladorCPF: TIBStringField;
     IBQEnroladorSN_ATIVO: TIBStringField;
+    IBQEnroladorID_ENROLADOR: TIntegerField;
     procedure PNGButton2Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);
   private
@@ -30,7 +31,7 @@ var
   FrmBuscarEnrolador: TFrmBuscarEnrolador;
 
 implementation
-Uses UPrincipal, uMensagens, UCadUser;
+Uses UPrincipal, uMensagens, UCadEnrolador;
 
 {$R *.dfm}
 
@@ -41,6 +42,7 @@ end;
 
 procedure TFrmBuscarEnrolador.DBGrid1DblClick(Sender: TObject);
 begin
+  FrmCadEnrolador.idEnrolador:=IBQEnroladorID_ENROLADOR.AsString;
   Close;
 end;
 

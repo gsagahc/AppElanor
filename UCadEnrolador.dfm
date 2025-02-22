@@ -1,6 +1,6 @@
 object FrmCadEnrolador: TFrmCadEnrolador
-  Left = 380
-  Top = 194
+  Left = 449
+  Top = 216
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de enroladores'
@@ -810,8 +810,8 @@ object FrmCadEnrolador: TFrmCadEnrolador
       end>
     IndexDefs = <
       item
-        Name = 'PK_TB_USUARIO'
-        Fields = 'ID_USUARIO'
+        Name = 'IDX_TBENROLADORCPF'
+        Fields = 'CPF'
         Options = [ixUnique]
       end>
     StoreDefs = True
@@ -829,6 +829,9 @@ object FrmCadEnrolador: TFrmCadEnrolador
     object IBTbEnroladorSN_ATIVO: TIBStringField
       FieldName = 'SN_ATIVO'
       Size = 1
+    end
+    object IBTbEnroladorID_ENROLADOR: TIntegerField
+      FieldName = 'ID_ENROLADOR'
     end
   end
   object IBSQLUser: TIBSQL
