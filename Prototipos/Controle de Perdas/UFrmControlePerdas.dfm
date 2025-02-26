@@ -1244,15 +1244,8 @@ object FrmControlePerdas: TFrmControlePerdas
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
-      'SELECT ID_PRODUTO, TBPRD_NOME,'
-      'CASE WHEN (SELECT MINIMO FROM TB_P_ELAST_ESPEC ESP  WHERE'
-      '         ESP.id_produto= tb_produtos.id_produto) IS NOT NULL'
-      ' THEN (SELECT MINIMO FROM TB_P_ELAST_ESPEC ESP  WHERE'
-      '         ESP.id_produto= tb_produtos.id_produto)'
-      'ELSE (SELECT MINIMO FROM tb_p_elastico_geral)'
-      'END AS MINIMO'
+      'SELECT ID_PRODUTO, TBPRD_NOME'
       'FROM TB_PRODUTOS'
-      ''
       'WHERE TBPRD_NOME LIKE '#39'%EL'#193'S%'#39' OR'
       '               TBPRD_NOME LIKE '#39'%PERSO%'#39' '
       '               OR TBPRD_NOME LIKE '#39'%ELAS%'#39
@@ -1268,9 +1261,6 @@ object FrmControlePerdas: TFrmControlePerdas
       FieldName = 'TBPRD_NOME'
       Origin = 'TB_PRODUTOS.TBPRD_NOME'
       Size = 60
-    end
-    object IBQElasticosMINIMO: TIntegerField
-      FieldName = 'MINIMO'
     end
   end
   object DSElasticos: TDataSource
@@ -1292,36 +1282,6 @@ object FrmControlePerdas: TFrmControlePerdas
     BufferChunks = 1000
     CachedUpdates = False
     Left = 568
-    Top = 321
-  end
-  object CDSRelatorio: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 568
     Top = 289
-    object CDSRelatorioNOME: TStringField
-      FieldName = 'NOME'
-    end
-    object CDSRelatorioNOME_ELASTICO: TStringField
-      FieldName = 'NOME_ELASTICO'
-    end
-    object CDSRelatorioMINIMO: TIntegerField
-      FieldName = 'MINIMO'
-    end
-    object CDSRelatorioPRODUZIDO: TIntegerField
-      FieldName = 'PRODUZIDO'
-    end
-    object CDSRelatorioMEDIA: TFloatField
-      FieldName = 'MEDIA'
-    end
-    object CDSRelatorioQTDITENS: TIntegerField
-      FieldName = 'QTDITENS'
-    end
-    object CDSRelatorioTOTAL: TIntegerField
-      FieldName = 'TOTAL'
-    end
-    object CDSRelatorioDATA: TDateField
-      FieldName = 'DATA'
-    end
   end
 end

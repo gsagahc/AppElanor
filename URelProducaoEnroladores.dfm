@@ -1,6 +1,6 @@
 object FrmRelProdEnroladores: TFrmRelProdEnroladores
-  Left = 396
-  Top = 204
+  Left = 375
+  Top = 10
   Width = 935
   Height = 602
   Color = clBtnFace
@@ -611,7 +611,7 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         FontSize = 10
       end
       object QRLabel2: TQRLabel
-        Left = 144
+        Left = 217
         Top = 152
         Width = 43
         Height = 17
@@ -622,7 +622,7 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          381.000000000000000000
+          574.145833333333300000
           402.166666666666700000
           113.770833333333300000)
         Alignment = taLeftJustify
@@ -641,39 +641,8 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         WordWrap = True
         FontSize = 10
       end
-      object QRLabel4: TQRLabel
-        Left = 400
-        Top = 152
-        Width = 52
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          1058.333333333333000000
-          402.166666666666700000
-          137.583333333333300000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Caption = 'M'#237'nimo:'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-        WordWrap = True
-        FontSize = 10
-      end
       object QRLabel5: TQRLabel
-        Left = 480
+        Left = 600
         Top = 152
         Width = 37
         Height = 17
@@ -684,7 +653,7 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1270.000000000000000000
+          1587.500000000000000000
           402.166666666666700000
           97.895833333333330000)
         Alignment = taLeftJustify
@@ -703,10 +672,10 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         WordWrap = True
         FontSize = 10
       end
-      object QRLabel10: TQRLabel
-        Left = 536
+      object QRLabel3: TQRLabel
+        Left = 384
         Top = 152
-        Width = 95
+        Width = 62
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -715,14 +684,14 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1418.166666666667000000
+          1016.000000000000000000
           402.166666666666700000
-          251.354166666666700000)
+          164.041666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Qtd de Artigos:'
+        Caption = 'Segunda:'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -734,10 +703,10 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         WordWrap = True
         FontSize = 10
       end
-      object QRLabel11: TQRLabel
-        Left = 656
-        Top = 152
-        Width = 44
+      object QRDBText4: TQRDBText
+        Left = 400
+        Top = 176
+        Width = 70
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -746,21 +715,14 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1735.666666666667000000
-          402.166666666666700000
-          116.416666666666700000)
+          1058.333333333333000000
+          465.666666666666700000
+          185.208333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'M'#233'dia:'
         Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
         Transparent = False
         WordWrap = True
         FontSize = 10
@@ -817,7 +779,7 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         FontSize = 10
       end
       object QRDBText2: TQRDBText
-        Left = 140
+        Left = 219
         Top = 2
         Width = 110
         Height = 17
@@ -828,7 +790,7 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          370.416666666666700000
+          579.437500000000000000
           5.291666666666667000
           291.041666666666700000)
         Alignment = taLeftJustify
@@ -848,40 +810,8 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         WordWrap = True
         FontSize = 10
       end
-      object QRDBText5: TQRDBText
-        Left = 401
-        Top = 2
-        Width = 48
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          1060.979166666667000000
-          5.291666666666667000
-          127.000000000000000000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Color = clWhite
-        DataSet = FrmControlePerdas.CDSRelatorio
-        DataField = 'MINIMO'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        Transparent = False
-        WordWrap = True
-        FontSize = 10
-      end
       object QRDBText3: TQRDBText
-        Left = 473
+        Left = 601
         Top = 2
         Width = 41
         Height = 17
@@ -892,7 +822,7 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1251.479166666667000000
+          1590.145833333333000000
           5.291666666666667000
           108.479166666666700000)
         Alignment = taLeftJustify
@@ -912,10 +842,10 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         WordWrap = True
         FontSize = 10
       end
-      object QRDBText6: TQRDBText
-        Left = 560
-        Top = 2
-        Width = 64
+      object QRDBText5: TQRDBText
+        Left = 384
+        Top = 0
+        Width = 65
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -924,42 +854,16 @@ object FrmRelProdEnroladores: TFrmRelProdEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1481.666666666667000000
-          5.291666666666667000
-          169.333333333333300000)
+          1016.000000000000000000
+          0.000000000000000000
+          171.979166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
         Color = clWhite
         DataSet = FrmControlePerdas.CDSRelatorio
-        DataField = 'QTDITENS'
-        Transparent = False
-        WordWrap = True
-        FontSize = 10
-      end
-      object QRDBText7: TQRDBText
-        Left = 656
-        Top = 2
-        Width = 42
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          1735.666666666667000000
-          5.291666666666667000
-          111.125000000000000000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Color = clWhite
-        DataSet = FrmControlePerdas.CDSRelatorio
-        DataField = 'MEDIA'
+        DataField = 'SEGUNDA'
         Transparent = False
         WordWrap = True
         FontSize = 10

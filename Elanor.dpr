@@ -91,8 +91,8 @@ uses
   URelReimpressaoRomaneio in 'URelReimpressaoRomaneio.pas' {FrmPrintRomaneio1},
   UCadEnrolador in 'UCadEnrolador.pas' {FrmCadEnrolador},
   UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador},
-  UParamMedicao in 'Prototipos\Parametros Mediçãodos Elasticos\UParamMedicao.pas' {FrmCadParamElasticos},
-  URelProducaoEnroladores in 'URelProducaoEnroladores.pas' {FrmRelProdEnroladores};
+  UConfiguracoes in 'UConfiguracoes.pas' {FrmConfiguracoes},
+  URelatorioEnroladores in 'Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas' {FormEnroladores};
 
 {$R *.res}
 var

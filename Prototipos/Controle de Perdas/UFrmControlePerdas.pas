@@ -26,7 +26,6 @@ type
   TProduto      = class
   Nome          : string;
   id            : Integer;
-  Minimo        : Integer;
 end;
 type
   TEnrolador      = class
@@ -124,17 +123,7 @@ type
     CDSPerdasNomeEnrolador: TStringField;
     Label11: TLabel;
     CDSPerdasMinimoDesejado: TIntegerField;
-    IBQElasticosMINIMO: TIntegerField;
     IBQueryEnroladoresCad: TIBQuery;
-    CDSRelatorio: TClientDataSet;
-    CDSRelatorioNOME: TStringField;
-    CDSRelatorioNOME_ELASTICO: TStringField;
-    CDSRelatorioMINIMO: TIntegerField;
-    CDSRelatorioPRODUZIDO: TIntegerField;
-    CDSRelatorioMEDIA: TFloatField;
-    CDSRelatorioQTDITENS: TIntegerField;
-    CDSRelatorioTOTAL: TIntegerField;
-    CDSRelatorioDATA: TDateField;
     procedure PNGBNovoClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -168,6 +157,7 @@ type
 
   public
     { Public declarations }
+     SN_UsarCores: Boolean;
   end;
 
 var
@@ -175,7 +165,7 @@ var
 
 implementation
 
-uses Math, uMensagens,UImpressaoPerdas, UPrincipal, URelProducaoEnroladores;
+uses Math, uMensagens,UImpressaoPerdas, UPrincipal, URelatorioEnroladores;
 
 {$R *.dfm}
 
@@ -226,6 +216,7 @@ Var Mes, Ano: string;
     i, iQuantidade, iTotal:Integer;
     SN_Visualizar:Boolean;
 
+    fTotalSegunda:Real;
 begin
   PNGBSalvarClick(self);
   if  tFrmMensagens.Mensagem('Deseja salvar estes lançamentos e adicionar ao estoque?','Q',[mbSIM, mbNAO]) then
@@ -244,21 +235,12 @@ begin
     try
       IBQUtil.Close;
       IBQUtil.SQL.Clear;
-      IBQUtil.SQL.Add('SELECT SNVISUALIZAR FROM TB_P_ELASTICO_GERAL');
+      IBQUtil.SQL.Add('SELECT SNVISUALIZARRELENROL,SN_USARCORESRELENROL FROM TB_CONFIG');
       IBQUtil.Open;
-      SN_Visualizar:=IBQUtil.FieldByName('SNVISUALIZAR').AsString = 'S';
-      //Limpar tabelas temporarias
-      IBQUtil.Close;
-      IBQUtil.SQL.Clear;
-      IBQUtil.SQL.Add('DELETE FROM TMP_PRODUCAOEN');
-      IBQUtil.ExecSQL;
-
-      IBQUtil.Close;
-      IBQUtil.SQL.Clear;
-      IBQUtil.SQL.Add('DELETE FROM TMP_TOTALENROL');
-      IBQUtil.ExecSQL;
+      SN_Visualizar:=IBQUtil.FieldByName('SNVISUALIZARRELENROL').AsString = 'S';
+      SN_UsarCores :=IBQUtil.FieldByName('SN_USARCORESRELENROL').AsString = 'S';
       IBTBControlePerdas.Open;
-        
+
       While Not CDSPerdas.Eof Do
       begin
 
@@ -279,138 +261,19 @@ begin
         IBQueryEnroladoresCad.SQL.Clear;
         IBQUtil.Close;
         IBQUtil.SQL.Clear;
-        IBQUtil.SQL.Add('SELECT TOTAL  '+
+        IBQUtil.SQL.Add('SELECT TOTAL, SEGUNDA  '+
                         '  FROM TMP_PRODUCAOEN  '+
                         ' WHERE ID_ENROLADOR= :pEnrolador '+
                         ' AND   ID_ELASTICO=  :pElastico');
         IBQUtil.ParamByName('pEnrolador').AsInteger:=CDSPerdasEnrolador.AsInteger;
         IBQUtil.ParamByName('pElastico').AsInteger:=CDSPerdasElastico.AsInteger;
         IBQUtil.Open;
-        if slEnroladores.IndexOf(CDSPerdasEnrolador.AsString) < 0 then
-          slEnroladores.Add(CDSPerdasEnrolador.AsString);
-        if not IBQUtil.IsEmpty then
-        begin
-          iTotal:=IBQUtil.FieldByName('TOTAL').AsInteger + CDSPerdasQuantidade.AsInteger;
-          IBQueryEnroladoresCad.SQL.Add('UPDATE TMP_PRODUCAOEN  '+
-                                           'SET TOTAL=:pTotal  '+
-                                        ' WHERE ID_ENROLADOR= :pEnrolador '+
-                                          ' AND  ID_ELASTICO=  :pElastico');
-          IBQueryEnroladoresCad.ParamByName('pEnrolador').AsInteger:=CDSPerdasEnrolador.AsInteger;
-          IBQueryEnroladoresCad.ParamByName('pElastico').AsInteger:=CDSPerdasElastico.AsInteger;
-          IBQueryEnroladoresCad.ParamByName('pTotal').AsInteger:=iTotal;
-          IBQueryEnroladoresCad.ExecSQL;
-        end
-        else
-        begin
-          IBQueryEnroladoresCad.SQL.Add('INSERT INTO TMP_PRODUCAOEN '+
-                                                  '  (ID_ENROLADOR, '+
-                                                  '  NOME, '+
-                                                  '  ID_ELASTICO, '+
-                                                  '  NOME_ELASTICO, '+
-                                                  '  DATA, '+
-                                                  '  TOTAL, '+
-                                                  '  MINIMO) '+
-                                         'VALUES (:pIdEnrolador,  '+
-                                                  ':pNome, '+
-                                                  ':pIdElastico, '+
-                                                  ':pNomeElastico, '+
-                                                  ':pData, '+
-                                                  ':pTotal, '+
-                                                  ':pMinimo)');
-          IBQueryEnroladoresCad.ParamByName('pIdEnrolador').AsInteger:=CDSPerdasEnrolador.AsInteger;
-          IBQueryEnroladoresCad.ParamByName('pNome').ASString        := CDSPerdasNomeEnrolador.AsString;
-          IBQueryEnroladoresCad.ParamByName('pIdElastico').AsInteger :=CDSPerdasElastico.AsInteger;
-          IBQueryEnroladoresCad.ParamByName('pNomeElastico').AsString:=CDSPerdasNomeElastico.AsString;
-          IBQueryEnroladoresCad.ParamByName('pData').AsDate          := CDSPerdasData.AsDateTime;
-          IBQueryEnroladoresCad.ParamByName('pTotal').AsInteger      :=CDSPerdasQuantidade.AsInteger;
-          IBQueryEnroladoresCad.ParamByName('pMinimo').AsInteger     :=CDSPerdasMinimoDesejado.AsInteger;
-          IBQueryEnroladoresCad.ExecSQL;
-
-        end;
         TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
         AtualizarEstoque;
         Mes:=Copy (CDSPerdasData.AsString ,4,2);
         Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
         CDSPerdas.Next;
       end;
-      //  Totalizando os enroladores
-      IBQueryEnroladoresCad.Close;
-      IBQueryEnroladoresCad.SQL.Clear;
-      IBQueryEnroladoresCad.SQL.Add('INSERT INTO TMP_TOTALENROL '+
-                                            '  (ID_ENROLADOR, '+
-                                            '   NOME,    '+
-                                            '   QTDITENS, '+
-                                            '   TOTAL, '+
-                                            '   MEDIA) '+
-
-                                   'VALUES (:pIdEnrolador,  '+
-                                            ':pNome, '+
-                                            ':pQtdItens, '+
-                                            ':pTotal, '+
-                                            ':pMedia) ');
-      for i:=0 to slEnroladores.Count - 1 do
-      begin
-        iQuantidade:=0;
-        iTotal    :=0;
-        IBQUtil.Close;
-        IBQUtil.SQL.Clear;
-        IBQUtil.SQL.Add('SELECT TOTAL, NOME,ID_ENROLADOR  '+
-                        '  FROM TMP_PRODUCAOEN  '+
-                        ' WHERE ID_ENROLADOR = :pEnrolador ');
-        IBQUtil.ParamByName('pEnrolador').AsInteger:=StrToInt(slEnroladores[i]);
-        IBQUtil.Open;
-        while not IBQUtil.eof do
-        begin
-          inc(iQuantidade);
-          iTotal     :=iTotal + IBQUtil.FieldByName('TOTAL').AsInteger;
-          IBQUtil.Next;
-        end;
-        IBQueryEnroladoresCad.Close;
-        IBQueryEnroladoresCad.ParamByName('pIdEnrolador').AsInteger:=IBQUtil.FieldByname('ID_ENROLADOR').AsInteger;
-        IBQueryEnroladoresCad.ParamByName('pNome').ASString        :=IBQUtil.FieldByname('NOME').AsString;
-        IBQueryEnroladoresCad.ParamByName('pQtdItens').AsInteger   :=iQuantidade;
-        IBQueryEnroladoresCad.ParamByName('pTotal').AsInteger      :=iTotal;
-        IBQueryEnroladoresCad.ParamByName('pMedia').AsFloat        :=iTotal /iQuantidade;
-        IBQueryEnroladoresCad.ExecSQL;
-      end;
-      CDSRelatorio.CreateDataSet;
-      for i:=0 to slEnroladores.Count - 1 do
-      begin
-        IBQUtil.Close;
-        IBQUtil.SQL.Clear;
-        IBQUtil.SQL.Add('SELECT TOTAL, NOME,NOME_ELASTICO, MINIMO, DATA  '+
-                        '  FROM TMP_PRODUCAOEN  '+
-                        ' WHERE ID_ENROLADOR = :pEnrolador ');
-        IBQUtil.ParamByName('pEnrolador').AsInteger:=StrToInt(slEnroladores[i]);
-        IBQUtil.Open;
-        while not IBQUtil.Eof do
-        begin
-          CDSRelatorio.Insert;
-          CDSRelatorioNOME_ELASTICO.AsString:=IBQUtil.FieldByName('NOME_ELASTICO').AsString;
-          CDSRelatorioTOTAL.AsInteger       :=IBQUtil.FieldByName('TOTAL').AsInteger;
-          CDSRelatorioMINIMO.AsInteger      :=IBQUtil.FieldByName('MINIMO').AsInteger;
-          CDSRelatorioDATA.AsDateTime       :=IBQUtil.FieldByName('DATA').AsDateTime;
-          CDSRelatorio.Post;
-          IBQUtil.Next;
-        end;
-        IBQUtil.Close;
-        IBQUtil.SQL.Clear;
-        IBQUtil.SQL.Add('SELECT TOTAL, QTDITENS,MEDIA, NOME  '+
-                        '  FROM TMP_TOTALENROL  '+
-                        ' WHERE ID_ENROLADOR = :pEnrolador ');
-        IBQUtil.ParamByName('pEnrolador').AsInteger:=StrToInt(slEnroladores[i]);
-        IBQUtil.Open;
-        while not IBQUtil.Eof do
-        begin
-          CDSRelatorio.Insert;
-          CDSRelatorioQTDITENS.AsInteger    :=IBQUtil.FieldByName('QTDITENS').AsInteger;
-          CDSRelatorioMEDIA.AsInteger       :=IBQUtil.FieldByName('MEDIA').AsInteger;
-          CDSRelatorioNOME.AsString         :=IBQUtil.FieldByName('NOME').AsString;
-          CDSRelatorio.Post;
-          IBQUtil.Next;
-        end;
-      end;
-
 
       //Elástico de segunda
       SaldoSegunda:=0;
@@ -450,10 +313,9 @@ begin
          IBSQLEstoque.ParamByName('TBES_QUANTI').AsFloat:=TotalSegunda;
          IBSQLEstoque.ExecQuery;
        end;
-
-
        CDSPerdas.EnableControls;
        Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
+
        Acumulado:=CalculaAcumuladoMes(Mes, Ano);
        FrmImpressaoPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
        if Acumulado <= 2 then
@@ -472,17 +334,18 @@ begin
          FrmImpressaoPerdas.Print;
        Acumulado:=CalculaAcumuladoMes(Mes, Ano);
        FreeAndNil(FrmImpressaoPerdas);
-       Application.CreateForm(TFrmRelProdEnroladores, FrmRelProdEnroladores);
-       FrmRelProdEnroladores.QRLabelData.Caption:='Data: '+ DateToStr(DTPData.Date);
+       Application.CreateForm(TFormEnroladores, FormEnroladores);
+       FormEnroladores.IBQuery1.ParamByName('pData').AsDate:=DTPData.Date;
+       FormEnroladores.IBQuery1.Open;
        if SN_Visualizar then
        begin
-         FrmRelProdEnroladores.QuickRepDetalhes.PreviewModal;
+         FormEnroladores.QuickRepEnroladores.PreviewModal;
        end
        Else
        begin
-         FrmRelProdEnroladores.QuickRepDetalhes.Print;
+         FormEnroladores.QuickRepEnroladores.Print;
        end;
-       FreeAndNil(FrmRelProdEnroladores);
+       FreeAndNil(FormEnroladores);
        FrmPrincipal.IBTMain.Commit;
        FrmPrincipal.IBDMain.CloseDataSets;
     Except
@@ -516,7 +379,6 @@ begin
     Elastico        := TProduto.Create;
     Elastico.Nome   := IBQElasticos.FieldByName('TBPRD_NOME').AsString;
     Elastico.id     := IBQElasticos.FieldByName('ID_PRODUTO').AsInteger;
-    Elastico.Minimo:=  IBQElasticos.FieldByName('MINIMO').AsInteger;
     ComboBoxElastico.AddItem(Elastico.Nome, Elastico);
     IBQElasticos.Next;
   end;
@@ -742,7 +604,6 @@ begin
       CDSPerdasCBoxIndex.AsInteger     := ComboBoxElastico.ItemIndex;
       CDSPerdasEnrolador.AsInteger     := (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Id;
       CDSPerdasNomeEnrolador.AsString  := (ComboBoxEnroladores.Items.Objects[ComboBoxEnroladores.ITemIndex] As TEnrolador).Nome;
-      CDSPerdasMinimoDesejado.AsInteger:= (ComboBoxElastico.Items.Objects[ComboBoxElastico.ITemIndex] As TProduto).Minimo;
       CDSPerdas.Post;
       LimparCampos;
       ReadOnly;

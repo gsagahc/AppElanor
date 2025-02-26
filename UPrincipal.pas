@@ -255,7 +255,7 @@ type
     Skin1: TMenuItem;
     IBSPATUALIZAMOVI: TIBStoredProc;
     Enroladores1: TMenuItem;
-    Configurarparmetros1: TMenuItem;
+    Configuraes1: TMenuItem;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -336,7 +336,7 @@ type
     procedure Reimpressoromaneio1Click(Sender: TObject);
     procedure Skin1Click(Sender: TObject);
     procedure Enroladores1Click(Sender: TObject);
-    procedure Configurarparmetros1Click(Sender: TObject);
+    procedure Configuraes1Click(Sender: TObject);
   private
        TotalGeral:Currency;
     { Private declarations }
@@ -385,7 +385,7 @@ uses UCadProdutos, UEntraEstoque, UCadUser, UCadPedido, UCadCli,
   USelecionarSkin, UFrmControlePerdas, UConsultarPerdas,
   UConsultarLancamentos, UCadastroDespesas, USelecionarDespesas,
   UBuscarLote, UZerarEStoqueNegativo, UAlterarControledePerdas,
-  UReimpressaoRomaneio, UCadEnrolador, UParamMedicao;
+  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes;
 
    
 
@@ -1598,13 +1598,14 @@ begin
   StatusBar1.Panels.Items[5].Text:='';
 end;
 
-procedure TFrmPrincipal.Configurarparmetros1Click(Sender: TObject);
+procedure TFrmPrincipal.Configuraes1Click(Sender: TObject);
 begin
-  Application.CreateForm(TFrmCadParamElasticos, FrmCadParamElasticos);
-  StatusBar1.Panels.Items[5].Text:= FrmCadParamElasticos.Caption;
-  FrmCadParamElasticos.ShowModal;
-  FreeAndNil(FrmCadParamElasticos);
+  Application.CreateForm(TFrmConfiguracoes, FrmConfiguracoes);
+  StatusBar1.Panels.Items[5].Text:= FrmConfiguracoes.Caption;
+  FrmConfiguracoes.ShowModal;
+  FreeAndNil(FrmConfiguracoes);
   StatusBar1.Panels.Items[5].Text:='';
+
 end;
 
 end.

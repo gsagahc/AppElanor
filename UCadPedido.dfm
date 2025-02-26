@@ -1,6 +1,6 @@
 object FrmNPedido: TFrmNPedido
-  Left = 237
-  Top = 58
+  Left = 278
+  Top = 70
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Novo pedido'

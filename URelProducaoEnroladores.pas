@@ -21,16 +21,13 @@ type
     DetailBand1: TQRBand;
     QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
-    QRDBText5: TQRDBText;
     QRDBText3: TQRDBText;
     QRLabel1: TQRLabel;
     QRLabel2: TQRLabel;
-    QRLabel4: TQRLabel;
     QRLabel5: TQRLabel;
-    QRLabel10: TQRLabel;
-    QRLabel11: TQRLabel;
-    QRDBText6: TQRDBText;
-    QRDBText7: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
   private
     { Private declarations }
   public

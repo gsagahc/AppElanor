@@ -144,6 +144,8 @@ type
     IdPedido:Integer;
     IsNumber :Boolean;
     Estoque:TEstoque;
+    bVisualizaImpressao,
+    bGerarContaRec: Boolean;
   public
      StrFormato:String;
      StrTamanho:String;
@@ -250,13 +252,15 @@ begin
               NumParcelas:=NumParcelas+1;
           if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
              NumParcelas:=NumParcelas+1;
-
-          if IBTbPedidosTBPED_VENC01.AsDateTime <> 0 then
-            GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC01.AsDateTime );
-          if IBTbPedidosTBPED_VENC02.AsDateTime <> 0 then
-            GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC02.AsDateTime);
-          if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
-            GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC03.AsDateTime);
+          if bGerarContaRec Then
+          begin
+            if IBTbPedidosTBPED_VENC01.AsDateTime <> 0 then
+              GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC01.AsDateTime );
+            if IBTbPedidosTBPED_VENC02.AsDateTime <> 0 then
+              GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC02.AsDateTime);
+            if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
+              GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC03.AsDateTime);
+          end;
         end
         else
           IBTbPedidosTBPED_BOLETO.AsString:='S';
@@ -275,14 +279,17 @@ begin
         FrmImprePedidos.IBQImpressaoPed.ParamByName('pIDPedido').AsInteger:=IdPedido;
         FrmImprePedidos.IBQImpressaoPed.Open;
         FrmImprePedidos.MontarCDs;
-        FrmImprePedidos.QuickRepEmpresa.Preview; //Empresa
+        if bVisualizaImpressao Then
+          FrmImprePedidos.QuickRepEmpresa.Preview
+        else
+          FrmImprePedidos.QuickRepEmpresa.Print;
         Close;
       End;
     Except
       on E: EDatabaseError do
       begin
         FrmPrincipal.IBTMain.Rollback;
-        tFrmMensagens.Mensagem('Erro ao salvar pedido.' ,'E',[mbOK])
+        tFrmMensagens.Mensagem('Erro ao salvar pedido. : '+'PNGButton5Click/ '+E.Message ,'E',[mbOK])
       End;
     end;
 
@@ -356,15 +363,21 @@ Begin
             If Not IBSQLUTIL.Eof Then
               CDSItensPedidoTBITPED_VALUNI.AsCurrency :=IBSQLUTIL.FieldByName('TBPRECLI_PRECO').AsCurrency
             Else
-              CDSItensPedidoTBITPED_VALUNI.AsCurrency      :=  IBQProdutos.FieldbyName('TBPRD_PRECOVENDA').AsCurrency   ;
+              CDSItensPedidoTBITPED_VALUNI.AsCurrency    :=  IBQProdutos.FieldbyName('TBPRD_PRECOVENDA').AsCurrency   ;
             CDSItensPedidoTBITPED_VALTOT.AsCurrency      :=  CDSItensPedidoTBITPED_VALUNI.AsCurrency * Quantidade;
           End;
-        End;  
+        End;
       End;
       except
-         Begin
-          (tFrmMensagens.Mensagem('Favor digitar apenas números','I',[mbOK]));
-         End;
+        on E: EDatabaseError do
+        begin
+          tFrmMensagens.Mensagem('Erro ao adicionar produto ' +'PNGBNovoProdClick '+ E.message,'E',[mbOK]);
+          FrmPrincipal.IBTMain.Rollback;
+        end;
+        on E: EConvertError do
+        Begin
+         (tFrmMensagens.Mensagem('Favor digitar apenas números','I',[mbOK]));
+        End;
       end;
 
     End;    
@@ -389,76 +402,88 @@ begin
   Result:=False;
   lEstoque:= TEstoque.Create;
   lEstoque:=(pEstoque as TEstoque)  ;
-  If Operacao ='D' Then
-  Begin
+  try
+    If Operacao ='D' Then
+    Begin
 
-    If Quantidade <= Estoque.Quantidade    Then
+      If Quantidade <= Estoque.Quantidade    Then
+      Begin
+        IBSQLUTIL.Close;
+        IBSQLUTIL.SQL.Clear;
+        IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                          ' SET ' +
+                          ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
+                          'WHERE ID_PRODUTO=:pIdProduto ' +
+                          ' AND ID_ESTOQUE= :pIdEstoque ');
+        IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
+        IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
+        IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
+        IBSQLUTIL.ExecQuery;
+        Result:=True;
+      End
+      Else
+      Begin
+      If Quantidade > Estoque.Quantidade  Then
+         // Se produto for elástico então Result True
+         IBQUtil.Close;
+         IBQUtil.SQL.Clear;
+         IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
+                        ' FROM TB_PRODUTOS '+
+                        ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
+         IBQUtil.Open;
+       //  if (Copy(IBQUtil.FieldByName('TBPRD_NOME').AsString,1 ,2)='EL') or
+     //       (Copy(IBQUtil.FieldByName('TBPRD_NOME').AsString,1 ,5)='PERSO') then
+      //   begin
+       sMensagem:= 'A quantidade informada é maior do que o estoque '+
+                   'atual deste produto, o estoque ficará negativo.' +
+                   'Deseja continuar?' ;
+       if  tFrmMensagens.Mensagem(sMensagem,'Q',[mbSIM, mbNAO]) Then
+       Begin
+         IBSQLUTIL.Close;
+         IBSQLUTIL.SQL.Clear;
+         IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                          ' SET ' +
+                          ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
+                          ' WHERE ID_PRODUTO=:pIdProduto ' +
+                          ' AND ID_ESTOQUE= :pIdEstoque ');
+         IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
+         IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
+         IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
+         IBSQLUTIL.ExecQuery;
+         Result:=True;
+       end;
+     //    end ;
+       //  else
+       //      tFrmMensagens.Mensagem('A quantidade informada é maior do que o estoque '+
+       //                             'atual deste produto, favor lançar estoque antes.' ,'E',[mbOK]);
+
+
+      end;
+    End;
+    If Operacao ='S' Then
     Begin
       IBSQLUTIL.Close;
       IBSQLUTIL.SQL.Clear;
       IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
                         ' SET ' +
-                        ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
-                        'WHERE ID_PRODUTO=:pIdProduto ' +
-                        ' AND ID_ESTOQUE= :pIdEstoque ');
-      IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
-      IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
-      IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
+                        ' TBES_QUANTI = TBES_QUANTI + :pQuantidade ' +
+                        'WHERE ID_ESTOQUE=:pIdEstoque ' );
+      IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque;
+      IBSQLUTIL.ParamByName('pQuantidade').Value := lEstoque.Quantidade ;
       IBSQLUTIL.ExecQuery;
       Result:=True;
-    End
-    Else
-    Begin
-    If Quantidade > Estoque.Quantidade  Then
-       // Se produto for elástico então Result True
-       IBQUtil.Close;
-       IBQUtil.SQL.Clear;
-       IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
-                      ' FROM TB_PRODUTOS '+
-                      ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
-       IBQUtil.Open;
-     //  if (Copy(IBQUtil.FieldByName('TBPRD_NOME').AsString,1 ,2)='EL') or
-   //       (Copy(IBQUtil.FieldByName('TBPRD_NOME').AsString,1 ,5)='PERSO') then
-    //   begin
-     sMensagem:= 'A quantidade informada é maior do que o estoque '+
-                 'atual deste produto, o estoque ficará negativo.' +
-                 'Deseja continuar?' ;
-     if  tFrmMensagens.Mensagem(sMensagem,'Q',[mbSIM, mbNAO]) Then
-     Begin
-       IBSQLUTIL.Close;
-       IBSQLUTIL.SQL.Clear;
-       IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                        ' SET ' +
-                        ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
-                        ' WHERE ID_PRODUTO=:pIdProduto ' +
-                        ' AND ID_ESTOQUE= :pIdEstoque ');
-       IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
-       IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
-       IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
-       IBSQLUTIL.ExecQuery;
-       Result:=True;
+    End;
+  except
+     on E: EDatabaseError do
+     begin
+       tFrmMensagens.Mensagem('Erro ao atualizar estoque ' +'AtualizaEstoque '+ E.message,'E',[mbOK]);
+          FrmPrincipal.IBTMain.Rollback;
      end;
-   //    end ;
-     //  else
-     //      tFrmMensagens.Mensagem('A quantidade informada é maior do que o estoque '+
-     //                             'atual deste produto, favor lançar estoque antes.' ,'E',[mbOK]);
-
-
-    end;
-  End;
-  If Operacao ='S' Then
-  Begin
-    IBSQLUTIL.Close;
-    IBSQLUTIL.SQL.Clear;
-    IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                      ' SET ' +
-                      ' TBES_QUANTI = TBES_QUANTI + :pQuantidade ' +
-                      'WHERE ID_ESTOQUE=:pIdEstoque ' );
-    IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque;
-    IBSQLUTIL.ParamByName('pQuantidade').Value := lEstoque.Quantidade ;
-    IBSQLUTIL.ExecQuery;
-    Result:=True;
-  End;
+     on E: EConvertError do
+     Begin
+       (tFrmMensagens.Mensagem('Favor digitar apenas números','I',[mbOK]));
+     End;
+  end;
 
 
 end;
@@ -482,6 +507,13 @@ begin
     IBSQLUTIL.ExecQuery;
     IdPedido:= IBSQLUTIL.FieldByName('MAX').AsInteger+1;
     DSPrazos.DataSet.First;
+    IBSQLUTIL.Close;
+    IBSQLUTIL.SQL.Clear;
+    IBSQLUTIL.SQL.Add('SELECT SN_VISUALIZAIMPRESSAO, SN_GERACONTASREC FROM TB_CONFIG');
+    IBSQLUTIL.ExecQuery;
+    bVisualizaImpressao:=IBSQLUTIL.FieldByName('SN_VISUALIZAIMPRESSAO').AsString ='S';
+    bGerarContaRec     :=IBSQLUTIL.FieldByName('SN_GERACONTASREC').AsString ='S';
+
   except
     on E: EDatabaseError do
        tFrmMensagens.Mensagem('Erro ao inicializer pedido.: "FormShow"' ,'E',[mbOK], E.Message);
@@ -631,8 +663,12 @@ end;
 
 procedure TFrmNPedido.CDSItensPedidoTBITPED_VALUNIChange(Sender: TField);
 begin
-  CDSItensPedidoTBITPED_VALTOT.AsCurrency :=CDSItensPedidoTBITPED_VALUNI.AsCurrency*CDSItensPedidoTBITPED_QUANT.Value ;
-  
+  try
+    CDSItensPedidoTBITPED_VALTOT.AsCurrency :=CDSItensPedidoTBITPED_VALUNI.AsCurrency*CDSItensPedidoTBITPED_QUANT.Value ;
+   
+  except
+
+  end
 end;
 
 procedure TFrmNPedido.CalculaPrazos;
@@ -670,23 +706,32 @@ end;
 procedure TFrmNPedido.GerarContaRec(idpedido: Integer; ValorTotal,
   Valor: Currency; Vencimento: TDate);
 begin
-  IBSQLUTIL.Close;
-  IBSQLUTIL.SQL.Clear;
-  IBSQLUTIL.SQL.Add('INSERT INTO TB_CONTAREC '+
-                               ' (ID_PEDIDO, '+
-                               ' TBCONTAREC_VALORTOTAL, '+
-                               ' TBCONTAREC_VALOR, '+
-                               ' TBCONTAREC_VENCIMENTO) '+
+  try
+    IBSQLUTIL.Close;
+    IBSQLUTIL.SQL.Clear;
+    IBSQLUTIL.SQL.Add('INSERT INTO TB_CONTAREC '+
+                                 ' (ID_PEDIDO, '+
+                                 ' TBCONTAREC_VALORTOTAL, '+
+                                 ' TBCONTAREC_VALOR, '+
+                                 ' TBCONTAREC_VENCIMENTO) '+
 
-                   ' VALUES    (:pID_PEDIDO, '+
-                           '    :pVALORTOTAL, '+
-                           '   :pVALOR, '+
-                           '   :pVENCIMENTO) ');
-  IBSQLUTIL.ParamByName('pID_PEDIDO').AsInteger  :=  idpedido;
-  IBSQLUTIL.ParamByName('pVALORTOTAL').AsCurrency:=  ValorTotal;
-  IBSQLUTIL.ParamByName('pVALOR').AsCurrency     :=  Valor;
-  IBSQLUTIL.ParamByName('pVENCIMENTO').AsDate    :=  Vencimento;
-  IBSQLUTIL.ExecQuery;
+                     ' VALUES    (:pID_PEDIDO, '+
+                             '    :pVALORTOTAL, '+
+                             '   :pVALOR, '+
+                             '   :pVENCIMENTO) ');
+    IBSQLUTIL.ParamByName('pID_PEDIDO').AsInteger  :=  idpedido;
+    IBSQLUTIL.ParamByName('pVALORTOTAL').AsCurrency:=  ValorTotal;
+    IBSQLUTIL.ParamByName('pVALOR').AsCurrency     :=  Valor;
+    IBSQLUTIL.ParamByName('pVENCIMENTO').AsDate    :=  Vencimento;
+    IBSQLUTIL.ExecQuery;
+  except
+    on E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao registrar contas a receber ' +'GerarContaRec '+ E.message,'E',[mbOK]);
+      FrmPrincipal.IBTMain.Rollback;
+    end;
+
+  end;
 end;
 
 procedure TFrmNPedido.atualizarTotal;
