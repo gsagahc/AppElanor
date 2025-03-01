@@ -1,12 +1,12 @@
 object FrmPrincipal: TFrmPrincipal
-  Left = 230
-  Top = 163
+  Left = 143
+  Top = 0
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Sistema de Gest'#227'o Elanor'
-  ClientHeight = 434
+  ClientHeight = 366
   ClientWidth = 920
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -29,7 +29,7 @@ object FrmPrincipal: TFrmPrincipal
     Left = 216
     Top = 65
     Width = 488
-    Height = 343
+    Height = 275
     Align = alClient
     Center = True
     Picture.Data = {
@@ -273,7 +273,7 @@ object FrmPrincipal: TFrmPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 408
+    Top = 340
     Width = 920
     Height = 26
     Panels = <
@@ -303,7 +303,7 @@ object FrmPrincipal: TFrmPrincipal
     Left = 704
     Top = 65
     Width = 216
-    Height = 343
+    Height = 275
     Align = alRight
     TabOrder = 1
     Visible = False
@@ -326,7 +326,7 @@ object FrmPrincipal: TFrmPrincipal
       Left = 1
       Top = 26
       Width = 214
-      Height = 157
+      Height = 89
       Align = alClient
       HideSelection = False
       Images = ImageList2
@@ -336,7 +336,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object MemoDados: TMemo
       Left = 1
-      Top = 200
+      Top = 132
       Width = 214
       Height = 142
       Align = alBottom
@@ -345,7 +345,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object Panel3: TPanel
       Left = 1
-      Top = 183
+      Top = 115
       Width = 214
       Height = 17
       Align = alBottom
@@ -363,7 +363,7 @@ object FrmPrincipal: TFrmPrincipal
     Left = 0
     Top = 65
     Width = 216
-    Height = 343
+    Height = 275
     Align = alLeft
     TabOrder = 2
     Visible = False
@@ -386,7 +386,7 @@ object FrmPrincipal: TFrmPrincipal
       Left = 1
       Top = 26
       Width = 214
-      Height = 157
+      Height = 89
       Align = alClient
       Images = ImageList2
       Indent = 19
@@ -396,7 +396,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object MemoDadosPag: TMemo
       Left = 1
-      Top = 200
+      Top = 132
       Width = 214
       Height = 142
       Align = alBottom
@@ -405,7 +405,7 @@ object FrmPrincipal: TFrmPrincipal
     end
     object Panel5: TPanel
       Left = 1
-      Top = 183
+      Top = 115
       Width = 214
       Height = 17
       Align = alBottom

@@ -1,8 +1,8 @@
 object FormEnroladores: TFormEnroladores
-  Left = 536
-  Top = 232
-  Width = 1056
-  Height = 563
+  Left = -7
+  Top = 3
+  Width = 1050
+  Height = 423
   VertScrollBar.Position = 21
   Caption = 'Relat'#243'rio de Produ'#231#227'o dos Enroladores'
   Color = clBtnFace

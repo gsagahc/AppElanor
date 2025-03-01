@@ -1,10 +1,10 @@
 object FrmNPedido: TFrmNPedido
-  Left = 278
-  Top = 70
+  Left = 245
+  Top = 0
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Novo pedido'
-  ClientHeight = 512
+  ClientHeight = 386
   ClientWidth = 843
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -593,14 +593,14 @@ object FrmNPedido: TFrmNPedido
     Left = 0
     Top = 265
     Width = 843
-    Height = 247
+    Height = 121
     Align = alClient
     TabOrder = 1
     object PanelBotoesProd: TPanel
       Left = 787
       Top = 1
       Width = 55
-      Height = 204
+      Height = 78
       Align = alRight
       TabOrder = 0
       object PNGBRemoverProd: TPNGButton
@@ -880,7 +880,7 @@ object FrmNPedido: TFrmNPedido
       Left = 1
       Top = 1
       Width = 786
-      Height = 204
+      Height = 78
       Align = alClient
       Ctl3D = False
       DataSource = DsItensPedido
@@ -951,7 +951,7 @@ object FrmNPedido: TFrmNPedido
     end
     object Panel1: TPanel
       Left = 1
-      Top = 205
+      Top = 79
       Width = 841
       Height = 41
       Align = alBottom

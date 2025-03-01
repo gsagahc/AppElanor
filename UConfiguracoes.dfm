@@ -1,6 +1,6 @@
 object FrmConfiguracoes: TFrmConfiguracoes
-  Left = 583
-  Top = 269
+  Left = 501
+  Top = 108
   BorderStyle = bsDialog
   Caption = 'Configura'#231#245'es'
   ClientHeight = 323
@@ -28,7 +28,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
       Top = 5
       Width = 576
       Height = 270
-      ActivePage = TabSheetEnroladores
+      ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       object TabSheet1: TTabSheet
@@ -270,6 +270,34 @@ object FrmConfiguracoes: TFrmConfiguracoes
               5F178439A247BA82BD232482E6FFFF0577C2566C68064C320000000049454E44
               AE426082}
             ButtonStyle = pbsFlat
+            OnClick = PNGButton5Click
+          end
+          object Label1: TLabel
+            Left = 14
+            Top = 34
+            Width = 74
+            Height = 13
+            Caption = 'Valor m'#237'nimo'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+            WordWrap = True
+          end
+          object Label2: TLabel
+            Left = 80
+            Top = 8
+            Width = 31
+            Height = 13
+            Caption = 'Geral'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
           end
           object PNGButton7: TPNGButton
             Left = 378
@@ -358,33 +386,6 @@ object FrmConfiguracoes: TFrmConfiguracoes
             ButtonStyle = pbsFlat
             OnClick = PNGButton7Click
           end
-          object Label1: TLabel
-            Left = 14
-            Top = 34
-            Width = 74
-            Height = 13
-            Caption = 'Valor m'#237'nimo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-            WordWrap = True
-          end
-          object Label2: TLabel
-            Left = 80
-            Top = 8
-            Width = 31
-            Height = 13
-            Caption = 'Geral'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object DBEdit1: TDBEdit
             Left = 15
             Top = 54
@@ -460,82 +461,10 @@ object FrmConfiguracoes: TFrmConfiguracoes
       OnClick = OKBtnClick
     end
   end
-  object IBQConfiguracoes: TIBQuery
-    Database = FrmPrincipal.IBDMain
-    Transaction = FrmPrincipal.IBTMain
-    BufferChunks = 1000
-    CachedUpdates = False
-    SQL.Strings = (
-      'select * from TB_CONFIG')
-    UpdateObject = IBUpdateConfiguracoes
-    Left = 193
-    Top = 69
-    object IBQConfiguracoesSN_GERACONTASREC: TIBStringField
-      FieldName = 'SN_GERACONTASREC'
-      Origin = 'TB_CONFIG.SN_GERACONTASREC'
-      Required = True
-      FixedChar = True
-      Size = 1
-    end
-    object IBQConfiguracoesSN_VISUALIZAIMPRESSAO: TIBStringField
-      FieldName = 'SN_VISUALIZAIMPRESSAO'
-      Origin = 'TB_CONFIG.SN_VISUALIZAIMPRESSAO'
-      Required = True
-      FixedChar = True
-      Size = 1
-    end
-    object IBQConfiguracoesMINIMO: TIntegerField
-      FieldName = 'MINIMO'
-      Origin = 'TB_CONFIG.MINIMO'
-    end
-    object IBQConfiguracoesSNVISUALIZARRELENROL: TIBStringField
-      FieldName = 'SNVISUALIZARRELENROL'
-      Origin = 'TB_CONFIG.SNVISUALIZARRELENROL'
-      FixedChar = True
-      Size = 1
-    end
-    object IBQConfiguracoesSN_USARCORESRELENROL: TIBStringField
-      FieldName = 'SN_USARCORESRELENROL'
-      Origin = 'TB_CONFIG.SN_USARCORESRELENROL'
-      Required = True
-      FixedChar = True
-      Size = 1
-    end
-  end
   object DSConfiguracoes: TDataSource
-    DataSet = IBQConfiguracoes
+    DataSet = IBTableConfig
     Left = 225
     Top = 69
-  end
-  object IBUpdateConfiguracoes: TIBUpdateSQL
-    RefreshSQL.Strings = (
-      'Select '
-      '  SN_VISUALIZAIMPRESSAO,'
-      '  SN_GERACONTASREC'
-      'from TB_CONFIG '
-      'where'
-      '  SN_VISUALIZAIMPRESSAO = :SN_VISUALIZAIMPRESSAO and'
-      '  SN_GERACONTASREC = :SN_GERACONTASREC')
-    ModifySQL.Strings = (
-      'update TB_CONFIG'
-      'set'
-      '  SN_VISUALIZAIMPRESSAO = :SN_VISUALIZAIMPRESSAO,'
-      '  SN_GERACONTASREC = :SN_GERACONTASREC'
-      'where'
-      '  SN_VISUALIZAIMPRESSAO = :OLD_SN_VISUALIZAIMPRESSAO and'
-      '  SN_GERACONTASREC = :OLD_SN_GERACONTASREC')
-    InsertSQL.Strings = (
-      'insert into TB_CONFIG'
-      '  (SN_VISUALIZAIMPRESSAO, SN_GERACONTASREC)'
-      'values'
-      '  (:SN_VISUALIZAIMPRESSAO, :SN_GERACONTASREC)')
-    DeleteSQL.Strings = (
-      'delete from TB_CONFIG'
-      'where'
-      '  SN_VISUALIZAIMPRESSAO = :OLD_SN_VISUALIZAIMPRESSAO and'
-      '  SN_GERACONTASREC = :OLD_SN_GERACONTASREC')
-    Left = 193
-    Top = 101
   end
   object IBTbParamIndividual: TIBTable
     Database = FrmPrincipal.IBDMain
@@ -602,6 +531,34 @@ object FrmConfiguracoes: TFrmConfiguracoes
       FieldName = 'TBPRD_NOME'
       Origin = 'TB_PRODUTOS.TBPRD_NOME'
       Size = 60
+    end
+  end
+  object IBTableConfig: TIBTable
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
+    BufferChunks = 1000
+    CachedUpdates = False
+    TableName = 'TB_CONFIG'
+    Left = 193
+    Top = 69
+    object IBTableConfigSN_VISUALIZAIMPRESSAO: TIBStringField
+      FieldName = 'SN_VISUALIZAIMPRESSAO'
+      Size = 1
+    end
+    object IBTableConfigSN_GERACONTASREC: TIBStringField
+      FieldName = 'SN_GERACONTASREC'
+      Size = 1
+    end
+    object IBTableConfigMINIMO: TIntegerField
+      FieldName = 'MINIMO'
+    end
+    object IBTableConfigSNVISUALIZARRELENROL: TIBStringField
+      FieldName = 'SNVISUALIZARRELENROL'
+      Size = 1
+    end
+    object IBTableConfigSN_USARCORESRELENROL: TIBStringField
+      FieldName = 'SN_USARCORESRELENROL'
+      Size = 1
     end
   end
 end

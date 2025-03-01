@@ -10,14 +10,24 @@ File_7=SourceModule,'C:\git_repository\AppElanor\UReimpressaoRomaneio.pas',0,1,1
 File_8=SourceModule,'C:\git_repository\AppElanor\UConsultaPedDia.pas',0,1,1,90,4,1,0
 
 [Modules]
-Module0=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-Module1=C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas
-Module2=C:\git_repository\AppElanor\UCadPedido.pas
-Module3=C:\git_repository\AppElanor\UPrincipal.pas
-Module4=C:\git_repository\AppElanor\UConfiguracoes.pas
+Module0=C:\git_repository\AppElanor\UConfiguracoes.pas
+Module1=C:\git_repository\AppElanor\UPrincipal.pas
+Module2=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
+Module3=C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas
+Module4=C:\git_repository\AppElanor\UCadPedido.pas
 Module5=C:\git_repository\AppElanor\Elanor.dpr
 Count=6
 EditWindowCount=1
+
+[C:\git_repository\AppElanor\UConfiguracoes.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UPrincipal.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
 
 [C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas]
 ModuleType=SourceModule
@@ -34,16 +44,6 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UPrincipal.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UConfiguracoes.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
 [C:\git_repository\AppElanor\Elanor.dpr]
 ModuleType=SourceModule
 FormState=0
@@ -55,7 +55,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=6
-CurrentView=5
+CurrentView=3
 View0=0
 View1=1
 View2=2
@@ -66,24 +66,22 @@ CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
-State=2
-Left=601
-Top=90
+State=0
+Left=118
+Top=124
 Width=999
-Height=537
+Height=433
 MaxLeft=-8
-MaxTop=107
-MaxWidth=1616
-MaxHeight=761
-ClientWidth=1600
-ClientHeight=722
+MaxTop=-8
+ClientWidth=983
+ClientHeight=394
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
 BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000004006000000000000025500000000000000010000000000000000000000000100000000400600000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=0000040000000000D703000000000000025500000000000000010000000000000000000000000100000000D70300000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=C:\git_repository\AppElanor\Elanor.dpr
@@ -102,29 +100,29 @@ LeftCol=1
 [View2]
 Module=C:\git_repository\AppElanor\UPrincipal.pas
 CursorX=1
-CursorY=1463
-TopLine=1461
+CursorY=1606
+TopLine=1583
 LeftCol=1
 
 [View3]
 Module=C:\git_repository\AppElanor\UConfiguracoes.pas
-CursorX=1
-CursorY=66
-TopLine=64
+CursorX=3
+CursorY=88
+TopLine=75
 LeftCol=1
 
 [View4]
 Module=C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas
-CursorX=46
+CursorX=23
 CursorY=49
-TopLine=47
+TopLine=14
 LeftCol=1
 
 [View5]
 Module=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-CursorX=88
-CursorY=257
-TopLine=252
+CursorX=38
+CursorY=253
+TopLine=249
 LeftCol=1
 
 [Watches]
@@ -163,15 +161,15 @@ Count=0
 Create=1
 Visible=1
 State=2
-Left=0
+Left=-8
 Top=0
-Width=1600
+Width=1053
 Height=123
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1616
+MaxWidth=1382
 MaxHeight=123
-ClientWidth=1600
+ClientWidth=1366
 ClientHeight=84
 
 [ProjectManager]
@@ -194,14 +192,14 @@ Dockable=1
 Create=1
 Visible=0
 State=0
-Left=187
-Top=52
-Width=1138
-Height=565
+Left=1
+Top=3
+Width=1036
+Height=416
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1122
-ClientHeight=526
+ClientWidth=1020
+ClientHeight=377
 DumpPane=79
 DisassemblyPane=187
 RegisterPane=231
@@ -237,7 +235,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=107
 ArrangeBy=Name
-SelectedItem=Active
+SelectedItem=Caption
 ExpandedItems=Bands,BorderIcons,Brush,CalColors,FileType,Font,Frame,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title,Title.Font
 HiddenCategories=
 
@@ -280,11 +278,11 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=622
+Height=294
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=622
+ClientHeight=294
 TBDockHeight=305
 LRDockWidth=140
 Dockable=1
@@ -295,11 +293,11 @@ Visible=1
 State=0
 Left=12
 Top=0
-Width=1588
+Width=971
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1588
+ClientWidth=971
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443

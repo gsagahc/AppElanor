@@ -259,15 +259,7 @@ begin
         IBTBControlePerdas.Post;
         IBQueryEnroladoresCad.Close;
         IBQueryEnroladoresCad.SQL.Clear;
-        IBQUtil.Close;
-        IBQUtil.SQL.Clear;
-        IBQUtil.SQL.Add('SELECT TOTAL, SEGUNDA  '+
-                        '  FROM TMP_PRODUCAOEN  '+
-                        ' WHERE ID_ENROLADOR= :pEnrolador '+
-                        ' AND   ID_ELASTICO=  :pElastico');
-        IBQUtil.ParamByName('pEnrolador').AsInteger:=CDSPerdasEnrolador.AsInteger;
-        IBQUtil.ParamByName('pElastico').AsInteger:=CDSPerdasElastico.AsInteger;
-        IBQUtil.Open;
+
         TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
         AtualizarEstoque;
         Mes:=Copy (CDSPerdasData.AsString ,4,2);
