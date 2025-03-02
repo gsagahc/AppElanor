@@ -47,12 +47,27 @@ class function TfrmMensagens.Mensagem(Texto: String; Tipo: Char;
 var
   i: Integer;
   frm :TfrmMensagens;
-
+  sFileName:string;
+  MemoMsgErro:TMemo;
 begin
   frm := TfrmMensagens.Create(nil);
   try
     if Tipo='E' then
+    begin
       Texto:=Texto+#13#10+ MsgErro;
+      try
+        sFileName:=FormatDateTime('ddmmyyyy-hhmm',Now)+'.txt';
+        MemoMsgErro:=TMemo.Create(frm);
+        MemoMsgErro.Visible:=False;
+        MemoMsgErro.Parent:=frm;
+        MemoMsgErro.Lines.Add(Texto);
+        MemoMsgErro.Lines.Add(MsgErro);
+        MemoMsgErro.Lines.SaveToFile('C:\AppElanor\Logs\'+sFileName);
+        FreeAndNil(MemoMsgErro);
+      except
+         ShowMessage('Erro ao salvar Log de texto');
+      end;
+    end;
     frm.lblMensagem.Caption := Texto;
     frm.Caption := TITULO;
 

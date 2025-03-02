@@ -88,7 +88,7 @@ begin
   Except
     on  E: EDatabaseError do
     begin
-     tFrmMensagens.Mensagem('Erro ao Incluir produto: PNGButton7Click '+ E.Message,'E',[mbOK]);
+     tFrmMensagens.Mensagem('Erro ao Incluir produto.: PNGButton7Click ','E',[mbOK], E.Message);
 
     end;
   end;
@@ -106,7 +106,7 @@ begin
     Except
      on  E: EDatabaseError do
      begin
-       tFrmMensagens.Mensagem('Erro ao Salvar produto no banco: PNGBSalvarClick '+ E.Message,'E',[mbOK]);
+       tFrmMensagens.Mensagem('Erro ao Salvar produto no banco.: PNGBSalvarClick ' ,'E',[mbOK], E.Message);
 
      end;
 

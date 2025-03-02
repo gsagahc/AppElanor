@@ -78,8 +78,8 @@ end;
 
 procedure TFrmConsultarContaRec.PNGButton3Click(Sender: TObject);
 begin
-   If tFrmMensagens.Mensagem('Deseja confirmar o pagamento do pedido:  '+IBQContaRecPEDIDO.AsString +'  ?' ,'Q',[mbSim, mbNao]) then
-   begin
+  If tFrmMensagens.Mensagem('Deseja confirmar o pagamento do pedido:  '+IBQContaRecPEDIDO.AsString +'  ?' ,'Q',[mbSim, mbNao]) then
+  begin
       if not FrmPrincipal.IBTMain.Active Then
          FrmPrincipal.IBTMain.StartTransaction;
       IBSQLContaRec.Close ;
@@ -88,16 +88,18 @@ begin
       IBSQLContaRec.ParamByName('pSTATUS').AsString    :='PG';
       IBSQLContaRec.ParamByName('pDataPag').AsString      :=FormatDateTime('dd/mm/yyyy', Now());
 
-      try
-        IBSQLContaRec.ExecQuery;
-        FrmPrincipal.IBTMain.Commit;
-        FrmPrincipal.AtualizarTvContaRec;  
-      eXCEPT
-         frmMensagens.Mensagem('Erro ao baixar pedido:'+IBQContaRecPEDIDO.AsString +'?' ,'E',[mbOK]);
+    try
+      IBSQLContaRec.ExecQuery;
+      FrmPrincipal.IBTMain.Commit;
+      FrmPrincipal.AtualizarTvContaRec;
+    except
+      on  E: EDatabaseError do
+      begin
+        frmMensagens.Mensagem('Erro ao baixar pedido:'+IBQContaRecPEDIDO.AsString +'?' ,'E',[mbOK], E.Message);
       end;
 
-   end;
-
+    end;
+  End;
 end;
 
 end.

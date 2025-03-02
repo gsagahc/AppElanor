@@ -92,8 +92,12 @@ begin
     IBTbEstoque.Insert;
     StatusBotoes;
 
+  Except
+    on  E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao Salvar entrada em estoque.: PNGButton7Click ' ,'E',[mbOK], E.Message);
 
-  Except;
+    end;
 
   end;
 

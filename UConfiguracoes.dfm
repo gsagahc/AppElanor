@@ -1,6 +1,6 @@
 object FrmConfiguracoes: TFrmConfiguracoes
   Left = 501
-  Top = 108
+  Top = 109
   BorderStyle = bsDialog
   Caption = 'Configura'#231#245'es'
   ClientHeight = 323

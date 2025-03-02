@@ -77,8 +77,12 @@ begin
     IBTbPrazos.Insert;
     StatusBotoes;
 
-  Except;
+  Except
+    on  E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao Inicializar transação.: PNGButton7Click ' ,'E',[mbOK], E.Message);
 
+    end;
   end;
 
 end;

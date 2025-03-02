@@ -353,6 +353,7 @@ type
     id_fornecedor: Integer;
     Cliente:TCliente;
     id_contapagar:Integer;
+    bUtilizaContaRec:Boolean;
     Procedure  LerIni();
     Procedure Memo_Print(Conteudo:TStrings);
     Function RetornaEndereco(CEP:String): TEndereco;
@@ -448,7 +449,19 @@ begin
      PNGButton5.Enabled := False;
     
    end;
-  If FrmLogin<>Nil  Then
+  IBQUtil1.Close;
+  IBQUtil1.SQL.Clear;
+  IBQUtil1.SQL.Add('SELECT SN_GERACONTASREC FROM TB_CONFIG');
+  try
+    IBQUtil1.Open;
+    bUtilizaContaRec:=IBQUtil1.FieldByName('SN_GERACONTASREC').AsString='S';
+  except
+    on E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao consultar configurações. : '+'FormShow' ,'E',[mbOK], E.Message);
+    End;
+  end;
+  If (FrmLogin<>Nil) and bUtilizaContaRec  Then
   Begin
     AtualizarTvContaRec;
     atualizarTreeView;

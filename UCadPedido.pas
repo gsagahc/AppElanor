@@ -289,7 +289,7 @@ begin
       on E: EDatabaseError do
       begin
         FrmPrincipal.IBTMain.Rollback;
-        tFrmMensagens.Mensagem('Erro ao salvar pedido. : '+'PNGButton5Click/ '+E.Message ,'E',[mbOK])
+        tFrmMensagens.Mensagem('Erro ao salvar pedido. : '+'PNGButton5Click ' ,'E',[mbOK], E.Message)
       End;
     end;
 
@@ -371,7 +371,7 @@ Begin
       except
         on E: EDatabaseError do
         begin
-          tFrmMensagens.Mensagem('Erro ao adicionar produto ' +'PNGBNovoProdClick '+ E.message,'E',[mbOK]);
+          tFrmMensagens.Mensagem('Erro ao adicionar produto ' +'PNGBNovoProdClick ','E',[mbOK],  E.message);
           FrmPrincipal.IBTMain.Rollback;
         end;
         on E: EConvertError do
@@ -431,9 +431,7 @@ begin
                         ' FROM TB_PRODUTOS '+
                         ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
          IBQUtil.Open;
-       //  if (Copy(IBQUtil.FieldByName('TBPRD_NOME').AsString,1 ,2)='EL') or
-     //       (Copy(IBQUtil.FieldByName('TBPRD_NOME').AsString,1 ,5)='PERSO') then
-      //   begin
+     
        sMensagem:= 'A quantidade informada é maior do que o estoque '+
                    'atual deste produto, o estoque ficará negativo.' +
                    'Deseja continuar?' ;
@@ -452,11 +450,6 @@ begin
          IBSQLUTIL.ExecQuery;
          Result:=True;
        end;
-     //    end ;
-       //  else
-       //      tFrmMensagens.Mensagem('A quantidade informada é maior do que o estoque '+
-       //                             'atual deste produto, favor lançar estoque antes.' ,'E',[mbOK]);
-
 
       end;
     End;
@@ -476,7 +469,7 @@ begin
   except
      on E: EDatabaseError do
      begin
-       tFrmMensagens.Mensagem('Erro ao atualizar estoque ' +'AtualizaEstoque '+ E.message,'E',[mbOK]);
+       tFrmMensagens.Mensagem('Erro ao atualizar estoque ' +'AtualizaEstoque ','E',[mbOK], E.message);
           FrmPrincipal.IBTMain.Rollback;
      end;
      on E: EConvertError do
@@ -667,7 +660,11 @@ begin
     CDSItensPedidoTBITPED_VALTOT.AsCurrency :=CDSItensPedidoTBITPED_VALUNI.AsCurrency*CDSItensPedidoTBITPED_QUANT.Value ;
    
   except
+    on  E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao ajustar valor unitário.: CDSItensPedidoTBITPED_VALUNIChange ' ,'E',[mbOK], E.Message);
 
+    end;
   end
 end;
 
@@ -727,7 +724,7 @@ begin
   except
     on E: EDatabaseError do
     begin
-      tFrmMensagens.Mensagem('Erro ao registrar contas a receber ' +'GerarContaRec '+ E.message,'E',[mbOK]);
+      tFrmMensagens.Mensagem('Erro ao registrar contas a receber ' +'GerarContaRec ','E',[mbOK], E.Message);
       FrmPrincipal.IBTMain.Rollback;
     end;
 

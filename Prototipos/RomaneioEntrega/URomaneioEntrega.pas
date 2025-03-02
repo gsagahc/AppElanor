@@ -370,7 +370,7 @@ begin
   except
    on  E: EDatabaseError do
    begin
-     tFrmMensagens.Mensagem('Erro ao gerar romaneio no banco ','E',[mbOK]);
+     tFrmMensagens.Mensagem('Erro ao gerar romaneio no banco ','E',[mbOK], E.Message);
      FrmPrincipal.IBTMain.Rollback;
    end;
   end;

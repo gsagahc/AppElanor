@@ -70,8 +70,12 @@ begin
     IBTbuser.Insert;
     StatusBotoes;
      
-  Except;
+  Except
+    on  E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao cadastrar usuário.: PNGButton7Click ' ,'E',[mbOK], E.Message);
 
+    end;
   end;
 
 end;

@@ -97,8 +97,12 @@ begin
 
     IBTbFornecedores.Insert;
     StatusBotoes;
-  Except;
+  Except
+    on  E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao iniciar transação, ' +'PNGButton7Click','E',[mbOK], E.Message);
 
+    end;
   end;
 
 end;

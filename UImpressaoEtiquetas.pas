@@ -253,7 +253,7 @@ begin
   except
        on  E: EDatabaseError do
        begin
-         tFrmMensagens.Mensagem('Erro na impressão de etiqueta, ' +'PNGBImprimirClick','E',[mbOK]);
+         tFrmMensagens.Mensagem('Erro na impressão de etiqueta, ' +'PNGBImprimirClick','E',[mbOK], E.Message);
 
        end;
   end;
@@ -321,7 +321,7 @@ begin
   except
    on  E: EDatabaseError do
    begin
-     tFrmMensagens.Mensagem('Erro na impressão de etiquetas, ' +'GerarNumLote','E',[mbOK]);
+     tFrmMensagens.Mensagem('Erro na impressão de etiquetas, ' +'GerarNumLote','E',[mbOK], E.Message);
 
    end;
   end;
@@ -357,7 +357,7 @@ begin
     except
        on  E: EDatabaseError do
        begin
-         tFrmMensagens.Mensagem('Erro na verificação de lote, ' +'VerificaLote','E',[mbOK]);
+         tFrmMensagens.Mensagem('Erro na verificação de lote, ' +'VerificaLote','E',[mbOK], E.Message);
 
        end;
     end;
@@ -437,7 +437,7 @@ begin
   except
    on  E: EDatabaseError do
    begin
-     tFrmMensagens.Mensagem('Erro na impressão de etiquetas, ' +'LocalizarPedido','E',[mbOK]);
+     tFrmMensagens.Mensagem('Erro na impressão de etiquetas, ' +'LocalizarPedido','E',[mbOK], E.Message);
 
    end;
   end;

@@ -69,10 +69,16 @@ end;
 
 procedure TFrmConsultarEstoque.FormShow(Sender: TObject);
 begin
- 
-  IBQEstoque.Open;
-  SomarQuantidade;
-  IBQEstoque.First;
+  try
+    IBQEstoque.Open;
+    SomarQuantidade;
+    IBQEstoque.First;
+  except
+    on E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao atualizar dados. : '+'FormShow/ ','E',[mbOK], E.Message )
+    End;
+  end;
 
 end;
 
@@ -107,59 +113,66 @@ end;
 
 procedure TFrmConsultarEstoque.tmr1Timer(Sender: TObject);
 begin
-   if (EditProduto.Text='TODOS') or (EditProduto.Text=EmptyStr) Then
-   Begin
-     IBQEstoque.Close;
-     IBQEstoque.SQL.Clear;
-     IBQEstoque.SQL.Add('SELECT ID_ESTOQUE, '+
-                        'TBPRD_NOME, '+
-                        'TBPRD_PRECOVENDA, '+
-                        'TBPRD_DESCRICAO, '+
-                        'TBPRD_UNIDADE, '+
-                        'TBPRD_CODIGO, '+
-                        'TBES_QUANTI, '+
-                        'TBES_FORMATO, '+
-                        'TBES_TAMANHO, ' +
-                        ' (TBES_QUANTI * TBPRD_PRECOVENDA) AS PRECOTOTAL '+
-                        'FROM TB_ESTOQUE '+
-                        'INNER JOIN TB_PRODUTOS '+
-                        'ON TB_PRODUTOS.ID_PRODUTO=TB_ESTOQUE.ID_PRODUTO ');
-     if not CheckBoxProdutosPeso.Checked then
-       IBQEstoque.SQL.Add(' WHERE TBPRD_NOME NOT LIKE ''%CADARÇO%'' ');
-     if not CheckBoxSegunda.Checked then
-       IBQEstoque.SQL.Add(' AND TB_PRODUTOS.id_produto<>''78'' '+
-                          ' AND TB_PRODUTOS.id_produto<>''132''');
+  try
+     if (EditProduto.Text='TODOS') or (EditProduto.Text=EmptyStr) Then
+     Begin
+       IBQEstoque.Close;
+       IBQEstoque.SQL.Clear;
+       IBQEstoque.SQL.Add('SELECT ID_ESTOQUE, '+
+                          'TBPRD_NOME, '+
+                          'TBPRD_PRECOVENDA, '+
+                          'TBPRD_DESCRICAO, '+
+                          'TBPRD_UNIDADE, '+
+                          'TBPRD_CODIGO, '+
+                          'TBES_QUANTI, '+
+                          'TBES_FORMATO, '+
+                          'TBES_TAMANHO, ' +
+                          ' (TBES_QUANTI * TBPRD_PRECOVENDA) AS PRECOTOTAL '+
+                          'FROM TB_ESTOQUE '+
+                          'INNER JOIN TB_PRODUTOS '+
+                          'ON TB_PRODUTOS.ID_PRODUTO=TB_ESTOQUE.ID_PRODUTO ');
+       if not CheckBoxProdutosPeso.Checked then
+         IBQEstoque.SQL.Add(' WHERE TBPRD_NOME NOT LIKE ''%CADARÇO%'' ');
+       if not CheckBoxSegunda.Checked then
+         IBQEstoque.SQL.Add(' AND TB_PRODUTOS.id_produto<>''78'' '+
+                            ' AND TB_PRODUTOS.id_produto<>''132''');
 
-     IBQEstoque.Open;
-   End
-   Else
-   If (EditProduto.Text<>EmptyStr)  Then
-   Begin
-     IBQEstoque.Close;
-     IBQEstoque.SQL.Clear;
-     IBQEstoque.SQL.Add('SELECT ID_ESTOQUE, '+
-                        'TBPRD_NOME, '+
-                        'TBPRD_PRECOVENDA, '+
-                        'TBPRD_DESCRICAO, '+
-                        'TBPRD_UNIDADE, '+
-                        'TBPRD_CODIGO, '+
-                        'TBES_QUANTI, '+
-                        'TBES_FORMATO, '+
-                        'TBES_TAMANHO, '+
-                        ' (TBES_QUANTI*TBPRD_PRECOVENDA) AS PRECOTOTAL '+
-                        'FROM TB_ESTOQUE '+
-                        'INNER JOIN TB_PRODUTOS '+
-                        'ON TB_PRODUTOS.ID_PRODUTO=TB_ESTOQUE.ID_PRODUTO '+
-                        'WHERE TBPRD_NOME LIKE ''%'+ EditProduto.Text +'%''');
-      if not CheckBoxProdutosPeso.Checked then
-        IBQEstoque.SQL.Add(' AND TBPRD_NOME NOT LIKE ''%CADARÇO%'' ');
-      if not CheckBoxSegunda.Checked then
-       IBQEstoque.SQL.Add(' AND TB_PRODUTOS.id_produto<>''78'' '+
-                          ' AND TB_PRODUTOS.id_produto<>''132''');
+       IBQEstoque.Open;
+     End
+     Else
+     If (EditProduto.Text<>EmptyStr)  Then
+     Begin
+       IBQEstoque.Close;
+       IBQEstoque.SQL.Clear;
+       IBQEstoque.SQL.Add('SELECT ID_ESTOQUE, '+
+                          'TBPRD_NOME, '+
+                          'TBPRD_PRECOVENDA, '+
+                          'TBPRD_DESCRICAO, '+
+                          'TBPRD_UNIDADE, '+
+                          'TBPRD_CODIGO, '+
+                          'TBES_QUANTI, '+
+                          'TBES_FORMATO, '+
+                          'TBES_TAMANHO, '+
+                          ' (TBES_QUANTI*TBPRD_PRECOVENDA) AS PRECOTOTAL '+
+                          'FROM TB_ESTOQUE '+
+                          'INNER JOIN TB_PRODUTOS '+
+                          'ON TB_PRODUTOS.ID_PRODUTO=TB_ESTOQUE.ID_PRODUTO '+
+                          'WHERE TBPRD_NOME LIKE ''%'+ EditProduto.Text +'%''');
+        if not CheckBoxProdutosPeso.Checked then
+          IBQEstoque.SQL.Add(' AND TBPRD_NOME NOT LIKE ''%CADARÇO%'' ');
+        if not CheckBoxSegunda.Checked then
+         IBQEstoque.SQL.Add(' AND TB_PRODUTOS.id_produto<>''78'' '+
+                            ' AND TB_PRODUTOS.id_produto<>''132''');
 
 
-     IBQEstoque.Open;
-   End;
+       IBQEstoque.Open;
+     End;
+  except
+    on E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao atualizar dados. : '+'tmr1Timer ' ,'E',[mbOK], E.Message)
+    End;
+  end;
   SomarQuantidade;
   tmr1.Enabled:=False;
 end;
@@ -182,9 +195,16 @@ end;
 
 procedure TFrmConsultarEstoque.PNGButtonSalvarClick(Sender: TObject);
 begin
-  IBQEstoque.ApplyUpdates;
-  EdtValor.Clear;
-  SomarQuantidade;
+  try
+    IBQEstoque.ApplyUpdates;
+    EdtValor.Clear;
+    SomarQuantidade;
+  except
+    on E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao salvar dados. : '+'PNGButtonSalvarClick'  ,'E',[mbOK], E.Message)
+    End;
+  end;
 end;
 
 procedure TFrmConsultarEstoque.CheckBoxProdutosPesoClick(Sender: TObject);
