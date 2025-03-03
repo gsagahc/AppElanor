@@ -86,11 +86,18 @@ procedure TFrmCadGastos.PNGBSalvarClick(Sender: TObject);
 begin
   If (IBTbGastos.State in [dsEdit, dsInsert]) Then
   Begin
-    IBTbGastosTBG_DATA.AsDateTime    := DTPData.Date;
-    IBTbGastosTBG_EMISSAO.AsDateTime := DTPEmissao.Date;
-    IBTbGastos.Post;
-    FrmPrincipal.IBTMain.Commit;
-    StatusBotoes;
+    try
+      IBTbGastosTBG_DATA.AsDateTime    := DTPData.Date;
+      IBTbGastosTBG_EMISSAO.AsDateTime := DTPEmissao.Date;
+      IBTbGastos.Post;
+      FrmPrincipal.IBTMain.Commit;
+      StatusBotoes;
+    except
+      on  E: EDatabaseError do
+      begin
+        tFrmMensagens.Mensagem('Erro ao salvar dados, ' +'PNGButton7Click','E',[mbOK], E.Message);
+      end;
+    End;
   End;
 end;
 
@@ -178,8 +185,11 @@ begin
     DTPData.SetFocus;
     StatusBotoes;
 
-  Except;
-
+  Except
+    on  E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao iniciar transação, ' +'PNGButton7Click','E',[mbOK], E.Message);
+    end;
   end;
 end;
 

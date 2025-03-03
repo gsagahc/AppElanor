@@ -866,7 +866,7 @@ object FrmCadGastos: TFrmCadGastos
       Left = 24
       Top = 272
       Width = 577
-      Height = 145
+      Height = 132
       Ctl3D = False
       DataField = 'ID_CADDESPESAS'
       DataSource = DSGastos
@@ -1068,30 +1068,8 @@ object FrmCadGastos: TFrmCadGastos
   object IBTbCadDespesa: TIBTable
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
-    Active = True
     BufferChunks = 1000
     CachedUpdates = False
-    FieldDefs = <
-      item
-        Name = 'ID_CADDESPESAS'
-        DataType = ftInteger
-      end
-      item
-        Name = 'TBCADDESP_NOME'
-        DataType = ftString
-        Size = 100
-      end
-      item
-        Name = 'TBCADDESP_TIPO'
-        Attributes = [faFixed]
-        DataType = ftString
-        Size = 12
-      end
-      item
-        Name = 'TBCADDESP_DESCRICAO'
-        DataType = ftString
-        Size = 120
-      end>
     StoreDefs = True
     TableName = 'TB_CADDESPESAS'
     Left = 488

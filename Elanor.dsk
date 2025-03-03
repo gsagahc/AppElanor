@@ -8,48 +8,33 @@ File_5=SourceModule,'C:\git_repository\AppElanor\UReimpressaoRomaneio.pas',0,1,1
 File_6=SourceModule,'C:\git_repository\AppElanor\UConsultaPedDia.pas',0,1,1,90,4,1,0
 
 [Modules]
-Module0=C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas
-Module1=C:\git_repository\AppElanor\UImpressaoEtiquetas.pas
-Module2=C:\git_repository\AppElanor\UConsultarContaREC.pas
-Module3=C:\git_repository\AppElanor\uMensagens.pas
-Module4=C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas
-Module5=C:\git_repository\AppElanor\Prototipos\ContasPagar\UcadContasPagar.pas
-Module6=C:\git_repository\AppElanor\Prototipos\ContasPagar\UCadFornecedor.pas
-Module7=C:\git_repository\AppElanor\UCadPrazos.pas
-Module8=C:\git_repository\AppElanor\UCadCli.pas
-Module9=C:\git_repository\AppElanor\UCadUser.pas
-Module10=C:\git_repository\AppElanor\Prototipos\ModuloSQL\UModuloSql.pas
-Module11=C:\git_repository\AppElanor\UEntradaDeGastos.pas
-Module12=C:\git_repository\AppElanor\UGraficoDeFaturamentoDiario.pas
-Module13=C:\git_repository\AppElanor\UEntraEstoque.pas
-Module14=C:\git_repository\AppElanor\UCadCheque.pas
-Module15=C:\git_repository\AppElanor\UAtendeCliente1.pas
-Module16=C:\git_repository\AppElanor\UConsultarEstoque.pas
-Module17=C:\git_repository\AppElanor\UCadProdutos.pas
-Module18=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-Module19=C:\git_repository\AppElanor\UConfiguracoes.pas
-Module20=C:\git_repository\AppElanor\UCadPedido.pas
-Module21=C:\git_repository\AppElanor\UPrincipal.pas
+Module0=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
+Module1=C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas
+Module2=C:\git_repository\AppElanor\UPrincipal.pas
+Module3=C:\git_repository\AppElanor\UCadPedido.pas
+Module4=C:\git_repository\AppElanor\UConfiguracoes.pas
+Module5=C:\git_repository\AppElanor\UConsultarEstoque.pas
+Module6=C:\git_repository\AppElanor\UEntraEstoque.pas
+Module7=C:\git_repository\AppElanor\UCadCli.pas
+Module8=C:\git_repository\AppElanor\uMensagens.pas
+Module9=C:\git_repository\AppElanor\UEntradaDeGastos.pas
+Module10=C:\git_repository\AppElanor\UCadUser.pas
+Module11=C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas
+Module12=C:\git_repository\AppElanor\Prototipos\ModuloSQL\UModuloSql.pas
+Module13=C:\git_repository\AppElanor\UGraficoDeFaturamentoDiario.pas
+Module14=C:\git_repository\AppElanor\Prototipos\ContasPagar\UCadFornecedor.pas
+Module15=C:\git_repository\AppElanor\Prototipos\ContasPagar\UcadContasPagar.pas
+Module16=C:\git_repository\AppElanor\UConsultarContaREC.pas
+Module17=C:\git_repository\AppElanor\UImpressaoEtiquetas.pas
+Module18=C:\git_repository\AppElanor\UCadCheque.pas
+Module19=C:\git_repository\AppElanor\UAtendeCliente1.pas
+Module20=C:\git_repository\AppElanor\UCadProdutos.pas
+Module21=C:\git_repository\AppElanor\UCadPrazos.pas
 Module22=C:\git_repository\AppElanor\Elanor.dpr
 Count=23
 EditWindowCount=1
 
-[C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UImpressaoEtiquetas.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UConsultarContaREC.pas]
-ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[C:\git_repository\AppElanor\uMensagens.pas]
+[C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -57,24 +42,44 @@ FormOnTop=0
 [C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas]
 ModuleType=SourceModule
 FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UPrincipal.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UCadPedido.pas]
+ModuleType=SourceModule
+FormState=1
 FormOnTop=1
 
-[C:\git_repository\AppElanor\Prototipos\ContasPagar\UcadContasPagar.pas]
+[C:\git_repository\AppElanor\UConfiguracoes.pas]
 ModuleType=SourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\Prototipos\ContasPagar\UCadFornecedor.pas]
+[C:\git_repository\AppElanor\UConsultarEstoque.pas]
 ModuleType=SourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UCadPrazos.pas]
+[C:\git_repository\AppElanor\UEntraEstoque.pas]
 ModuleType=SourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
 [C:\git_repository\AppElanor\UCadCli.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\uMensagens.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UEntradaDeGastos.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -84,12 +89,12 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\git_repository\AppElanor\Prototipos\ModuloSQL\UModuloSql.pas]
+[C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UEntradaDeGastos.pas]
+[C:\git_repository\AppElanor\Prototipos\ModuloSQL\UModuloSql.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -99,9 +104,24 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UEntraEstoque.pas]
+[C:\git_repository\AppElanor\Prototipos\ContasPagar\UCadFornecedor.pas]
 ModuleType=SourceModule
-FormState=1
+FormState=0
+FormOnTop=0
+
+[C:\git_repository\AppElanor\Prototipos\ContasPagar\UcadContasPagar.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UConsultarContaREC.pas]
+ModuleType=SourceModule
+FormState=0
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UImpressaoEtiquetas.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [C:\git_repository\AppElanor\UCadCheque.pas]
@@ -114,34 +134,14 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UConsultarEstoque.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
 [C:\git_repository\AppElanor\UCadProdutos.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas]
+[C:\git_repository\AppElanor\UCadPrazos.pas]
 ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UConfiguracoes.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UCadPedido.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UPrincipal.pas]
-ModuleType=SourceModule
-FormState=1
+FormState=0
 FormOnTop=0
 
 [C:\git_repository\AppElanor\Elanor.dpr]
@@ -155,7 +155,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=23
-CurrentView=16
+CurrentView=22
 View0=0
 View1=1
 View2=2
@@ -186,21 +186,21 @@ Visible=1
 State=2
 Left=118
 Top=125
-Width=999
+Width=1248
 Height=433
 MaxLeft=-8
 MaxTop=107
-MaxWidth=1382
-MaxHeight=629
-ClientWidth=1366
-ClientHeight=590
+MaxWidth=1616
+MaxHeight=761
+ClientWidth=1600
+ClientHeight=722
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
 BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000005605000000000000025500000000000000010000000000000000000000000100000000560500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400000000004006000000000000025500000000000000010000000000000000000000000100000000400600000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=C:\git_repository\AppElanor\Elanor.dpr
@@ -232,9 +232,9 @@ LeftCol=1
 
 [View4]
 Module=C:\git_repository\AppElanor\UPrincipal.pas
-CursorX=3
-CursorY=1596
-TopLine=1585
+CursorX=76
+CursorY=1585
+TopLine=1507
 LeftCol=1
 
 [View5]
@@ -288,8 +288,8 @@ LeftCol=1
 
 [View12]
 Module=C:\git_repository\AppElanor\Prototipos\ContasPagar\UCadFornecedor.pas
-CursorX=9
-CursorY=100
+CursorX=14
+CursorY=105
 TopLine=95
 LeftCol=1
 
@@ -302,9 +302,9 @@ LeftCol=1
 
 [View14]
 Module=C:\git_repository\AppElanor\UEntradaDeGastos.pas
-CursorX=3
-CursorY=181
-TopLine=170
+CursorX=63
+CursorY=48
+TopLine=43
 LeftCol=1
 
 [View15]
@@ -325,7 +325,7 @@ LeftCol=1
 Module=C:\git_repository\AppElanor\uMensagens.pas
 CursorX=124
 CursorY=54
-TopLine=70
+TopLine=16
 LeftCol=1
 
 [View18]
@@ -351,16 +351,16 @@ LeftCol=1
 
 [View21]
 Module=C:\git_repository\AppElanor\Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas
-CursorX=51
-CursorY=28
-TopLine=56
+CursorX=96
+CursorY=68
+TopLine=58
 LeftCol=1
 
 [View22]
 Module=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-CursorX=62
-CursorY=242
-TopLine=303
+CursorX=97
+CursorY=253
+TopLine=241
 LeftCol=1
 
 [Watches]
@@ -398,15 +398,15 @@ Count=0
 Create=1
 Visible=1
 State=2
-Left=-8
+Left=0
 Top=0
-Width=1374
+Width=1366
 Height=123
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1382
+MaxWidth=1616
 MaxHeight=123
-ClientWidth=1366
+ClientWidth=1600
 ClientHeight=84
 
 [ProjectManager]
@@ -459,8 +459,8 @@ ClientHeight=60
 Create=1
 Visible=1
 State=0
-Left=12
-Top=127
+Left=37
+Top=210
 Width=416
 Height=572
 MaxLeft=-1
@@ -472,7 +472,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=107
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Caption
 ExpandedItems=Bands,BorderIcons,Brush,CalColors,FileType,Font,Frame,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title,Title.Font
 HiddenCategories=
 

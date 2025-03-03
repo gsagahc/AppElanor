@@ -162,6 +162,39 @@ object FormEnroladores: TFormEnroladores
         WordWrap = True
         FontSize = 10
       end
+      object QRDBText3: TQRDBText
+        Left = 664
+        Top = 2
+        Width = 48
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1756.833333333333000000
+          5.291666666666667000
+          127.000000000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = IBQuery1
+        DataField = 'MINIMO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = []
+        Mask = '###,##0'
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        FontSize = 10
+      end
     end
     object QRGroup1: TQRGroup
       Left = 38
@@ -357,6 +390,37 @@ object FormEnroladores: TFormEnroladores
         WordWrap = True
         FontSize = 8
       end
+      object QRLabel6: TQRLabel
+        Left = 664
+        Top = 22
+        Width = 33
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1756.833333333333000000
+          58.208333333333330000
+          87.312500000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'M'#237'nimo'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        FontSize = 8
+      end
     end
     object QRBand1: TQRBand
       Left = 38
@@ -430,33 +494,6 @@ object FormEnroladores: TFormEnroladores
         WordWrap = True
         FontSize = 10
       end
-      object QRDBTextMinimo: TQRDBText
-        Left = 552
-        Top = 2
-        Width = 48
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          1460.500000000000000000
-          5.291666666666667000
-          127.000000000000000000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Color = clWhite
-        DataSet = IBQuery1
-        DataField = 'MINIMO'
-        Mask = '###,##0'
-        Transparent = True
-        WordWrap = True
-        FontSize = 10
-      end
       object QRLabel3: TQRLabel
         Left = 499
         Top = 2
@@ -480,6 +517,34 @@ object FormEnroladores: TFormEnroladores
         Color = clWhite
         Transparent = True
         WordWrap = True
+        FontSize = 10
+      end
+      object QRExprMinimo: TQRExpr
+        Left = 550
+        Top = 2
+        Width = 71
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1455.208333333333000000
+          5.291666666666667000
+          187.854166666666700000)
+        Alignment = taRightJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        Master = QuickRepEnroladores
+        ResetAfterPrint = True
+        Transparent = True
+        WordWrap = True
+        Expression = 'SUM(IBQuery1.MINIMO)/COUNT'
+        Mask = '###,##0'
         FontSize = 10
       end
     end
@@ -700,13 +765,19 @@ object FormEnroladores: TFormEnroladores
       '       B.ID_ENROLADOR,'
       '       A.NOME,'
       '       C.tbprd_nome,'
+      ' CASE'
+      '    WHEN'
+      '     (SELECT D.MINIMO FROM tb_p_elast_espec D WHERE'
+      '       D.id_produto = b.tbcp_elastico) IS NOT NULL THEN'
+      '        (SELECT D.MINIMO FROM tb_p_elast_espec D WHERE'
+      '       D.id_produto = b.tbcp_elastico) '
+      '  ELSE'
       '     (SELECT MINIMO FROM TB_CONFIG)'
-      '     AS MINIMO'
+      '  END   AS MINIMO'
       ' FROM  tb_controle_perdas B'
       ' INNER JOIN tb_enroladores A ON A.id_enrolador = B.ID_ENROLADOR'
       ' inner JOIN tb_produtos C ON C.id_produto = B.tbcp_elastico'
-      ' WHERE TBCP_DATA=:pData;'
-      '')
+      ' WHERE TBCP_DATA=:pData;')
     Left = 204
     Top = 14
     ParamData = <
@@ -779,7 +850,6 @@ object FormEnroladores: TFormEnroladores
     end
     object IBQuery1MINIMO: TIntegerField
       FieldName = 'MINIMO'
-      Origin = 'TB_P_ELASTICO_GERAL.MINIMO'
     end
   end
 end

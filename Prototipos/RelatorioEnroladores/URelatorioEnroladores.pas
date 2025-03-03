@@ -47,9 +47,11 @@ type
     QRExpr2: TQRExpr;
     QRExpr5: TQRExpr;
     QRLabel2: TQRLabel;
-    QRDBTextMinimo: TQRDBText;
-    IBQuery1MINIMO: TIntegerField;
     QRLabel3: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRExprMinimo: TQRExpr;
+    IBQuery1MINIMO: TIntegerField;
+    QRLabel6: TQRLabel;
     procedure QRBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
@@ -74,7 +76,7 @@ begin
   if FrmControlePerdas.SN_UsarCores then
   begin
     iNumero:=QRExprResultado.Value.dblResult;
-    if iNumero < QRDBTextMinimo.DataSet.FieldByname('MINIMO').AsInteger then
+    if iNumero < QRExprMinimo.Value.dblResult then
       QRBand1.Color:=clRed
     else
       QRBand1.Color:=clGreen;
