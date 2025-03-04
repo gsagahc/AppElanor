@@ -9,7 +9,7 @@ uses
   IdTCPServer, IdCustomHTTPServer, IdHTTPServer, IdTCPConnection,
   IdTCPClient, IdHTTP, InvokeRegistry, Rio, SOAPHTTPClient, Printers,
   StdCtrls, WinSkinData, WinSkinStore, IBCustomDataSet, IBQuery, ComObj, StrUtils,
-  Buttons, DBClient, IBStoredProc;
+  Buttons, DBClient, IBStoredProc, UParametrosConfig;
 
 type
   TPagamentosPHoje = class
@@ -434,6 +434,9 @@ begin
 end;
 
 procedure TFrmPrincipal.FormShow(Sender: TObject);
+var Parametros:TParametros;
+    sParametro:String;
+
 begin
 
   StatusBar1.Panels.Items[0].Text:='Login: ' + Usuario;
@@ -447,14 +450,13 @@ begin
    begin
      Usurios1.Enabled :=False;
      PNGButton5.Enabled := False;
-    
+
    end;
-  IBQUtil1.Close;
-  IBQUtil1.SQL.Clear;
-  IBQUtil1.SQL.Add('SELECT SN_GERACONTASREC FROM TB_CONFIG');
   try
-    IBQUtil1.Open;
-    bUtilizaContaRec:=IBQUtil1.FieldByName('SN_GERACONTASREC').AsString='S';
+     sParametro:='SN_GERACONTASREC';
+
+    bUtilizaContaRec:= Parametros.returnValParametro(sParametro)='S';
+
   except
     on E: EDatabaseError do
     begin

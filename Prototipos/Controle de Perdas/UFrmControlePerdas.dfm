@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
-  Left = 266
-  Top = 201
+  Left = 267
+  Top = 208
   Width = 1127
   Height = 423
   BorderIcons = []
@@ -14,6 +14,7 @@ object FrmControlePerdas: TFrmControlePerdas
   KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   OnShow = FormShow

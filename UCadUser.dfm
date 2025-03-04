@@ -1,6 +1,6 @@
 object FrmCadUser: TFrmCadUser
   Left = 380
-  Top = 133
+  Top = 134
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de usu'#225'rios'

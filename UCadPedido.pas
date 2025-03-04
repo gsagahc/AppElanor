@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, Grids, DBGrids, DBCtrls, StdCtrls, Mask, pngextra,
   IBSQL, DB, IBQuery, IBCustomDataSet, IBTable, Provider, DBClient,
-  IBUpdateSQL, UPrincipal;
+  IBUpdateSQL, UPrincipal, UParametrosConfig;
 
 
 type
@@ -482,6 +482,7 @@ begin
 end;
 
 procedure TFrmNPedido.FormShow(Sender: TObject);
+var Parametro:TParametros;
 begin
   try
     if not FrmPrincipal.IBTMain.Active Then
@@ -500,12 +501,9 @@ begin
     IBSQLUTIL.ExecQuery;
     IdPedido:= IBSQLUTIL.FieldByName('MAX').AsInteger+1;
     DSPrazos.DataSet.First;
-    IBSQLUTIL.Close;
-    IBSQLUTIL.SQL.Clear;
-    IBSQLUTIL.SQL.Add('SELECT SN_VISUALIZAIMPRESSAO, SN_GERACONTASREC FROM TB_CONFIG');
-    IBSQLUTIL.ExecQuery;
-    bVisualizaImpressao:=IBSQLUTIL.FieldByName('SN_VISUALIZAIMPRESSAO').AsString ='S';
-    bGerarContaRec     :=IBSQLUTIL.FieldByName('SN_GERACONTASREC').AsString ='S';
+  
+    bVisualizaImpressao:=Parametro.returnValParametro('SN_VIS_IMPRESSAO_PED') ='S';
+    bGerarContaRec     :=Parametro.returnValParametro('SN_GERACONTASREC')     ='S';
 
   except
     on E: EDatabaseError do

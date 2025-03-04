@@ -1,6 +1,6 @@
 object FrmCadCli: TFrmCadCli
-  Left = 352
-  Top = 120
+  Left = 354
+  Top = 111
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de clientes'

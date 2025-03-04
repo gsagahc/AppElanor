@@ -1,6 +1,6 @@
 object FrmGraficoFaturamentodia: TFrmGraficoFaturamentodia
-  Left = 215
-  Top = 117
+  Left = 185
+  Top = 12
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Gr'#225'fico de faturamento di'#225'rio'

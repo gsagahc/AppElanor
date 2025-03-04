@@ -1,6 +1,6 @@
 object FrmCadContasaPagar: TFrmCadContasaPagar
   Left = 490
-  Top = 239
+  Top = 240
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de contas a pagar'

@@ -1,6 +1,6 @@
 object frmMensagens: TfrmMensagens
-  Left = 430
-  Top = 321
+  Left = 368
+  Top = 280
   BorderIcons = []
   BorderStyle = bsDialog
   ClientHeight = 203

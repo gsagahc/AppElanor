@@ -1,6 +1,6 @@
 object FrmImpEtiquetas: TFrmImpEtiquetas
   Left = 461
-  Top = 230
+  Top = 231
   Width = 641
   Height = 438
   BorderIcons = []

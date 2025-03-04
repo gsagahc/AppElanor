@@ -1,6 +1,6 @@
 object FormEnroladores: TFormEnroladores
   Left = -7
-  Top = 3
+  Top = 7
   Width = 1050
   Height = 423
   VertScrollBar.Position = 21

@@ -1,6 +1,6 @@
 object FrmConsultarContaRec: TFrmConsultarContaRec
-  Left = 212
-  Top = 220
+  Left = 182
+  Top = 193
   AutoScroll = False
   BorderIcons = []
   Caption = 'Consultar pedidos com pagamento em aberto'

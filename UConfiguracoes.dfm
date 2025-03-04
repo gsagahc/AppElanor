@@ -1,6 +1,8 @@
 object FrmConfiguracoes: TFrmConfiguracoes
-  Left = 501
-  Top = 109
+  Left = 538
+  Top = 174
+  HorzScrollBar.Visible = False
+  BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Configura'#231#245'es'
   ClientHeight = 323
@@ -13,7 +15,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object PanelMain: TPanel
     Left = 0
     Top = 0
     Width = 586
@@ -28,54 +30,126 @@ object FrmConfiguracoes: TFrmConfiguracoes
       Top = 5
       Width = 576
       Height = 270
-      ActivePage = TabSheet1
+      ActivePage = TabSheetConfiguracoes
       Align = alClient
       TabOrder = 0
-      object TabSheet1: TTabSheet
-        Caption = 'Pedidos'
-        object DBCheckBox1: TDBCheckBox
-          Left = 24
-          Top = 32
-          Width = 177
-          Height = 17
-          Caption = 'Gerar contas a receber'
-          DataField = 'SN_GERACONTASREC'
-          DataSource = DSConfiguracoes
+      object TabSheetConfiguracoes: TTabSheet
+        Caption = 'Configura'#231#245'es'
+        object DBGrid1: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 568
+          Height = 184
+          Align = alClient
+          Ctl3D = False
+          DataSource = DSConfig
+          Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentCtl3D = False
           TabOrder = 0
-          ValueChecked = 'S'
-          ValueUnchecked = 'N'
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESC_PARAMETRO'
+              Title.Caption = 'Descri'#231#227'o'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'MS Sans Serif'
+              Title.Font.Style = [fsBold]
+              Width = 474
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'VAL_PARAMETRO'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'MS Sans Serif'
+              Font.Style = [fsBold]
+              ReadOnly = True
+              Title.Caption = 'Valor'
+              Title.Font.Charset = DEFAULT_CHARSET
+              Title.Font.Color = clWindowText
+              Title.Font.Height = -11
+              Title.Font.Name = 'MS Sans Serif'
+              Title.Font.Style = [fsBold]
+              Width = 71
+              Visible = True
+            end>
         end
-        object DBCheckBox2: TDBCheckBox
-          Left = 24
-          Top = 56
-          Width = 137
-          Height = 17
-          Caption = 'Visualizar impress'#227'o'
-          DataField = 'SN_VISUALIZAIMPRESSAO'
-          DataSource = DSConfiguracoes
+        object PanelValores: TPanel
+          Left = 0
+          Top = 184
+          Width = 568
+          Height = 58
+          Align = alBottom
           TabOrder = 1
-          ValueChecked = 'S'
-          ValueUnchecked = 'N'
+          object LabelValores: TLabel
+            Left = 144
+            Top = 20
+            Width = 66
+            Height = 13
+            Caption = 'Valor atual:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'MS Sans Serif'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object NumEditMin: TNumEdit
+            Left = 216
+            Top = 16
+            Width = 121
+            Height = 21
+            TabOrder = 0
+            Text = '0'
+            Visible = False
+            OnExit = NumEditMinExit
+            Numerico = True
+          end
+          object ComboBoxSimNao: TComboBox
+            Left = 216
+            Top = 16
+            Width = 121
+            Height = 22
+            Style = csOwnerDrawFixed
+            ItemHeight = 16
+            ItemIndex = 0
+            TabOrder = 1
+            Text = 'S'
+            Visible = False
+            OnExit = ComboBoxSimNaoExit
+            Items.Strings = (
+              'S'
+              'N')
+          end
         end
       end
       object TabSheetEnroladores: TTabSheet
-        Caption = 'Parametros enroladores'
+        Caption = 'Configura'#231#245'es el'#225'sticos'
         ImageIndex = 1
         object PanelGrid: TPanel
           Left = 0
           Top = 0
           Width = 568
-          Height = 105
-          Align = alTop
+          Height = 152
+          Align = alClient
           Ctl3D = False
           ParentCtl3D = False
           TabOrder = 0
-          object DBGrid1: TDBGrid
+          object DBGridElasticos: TDBGrid
             Left = 1
             Top = 1
             Width = 566
-            Height = 101
-            Align = alTop
+            Height = 150
+            Align = alClient
             DataSource = DsParamExpecificos
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -102,15 +176,15 @@ object FrmConfiguracoes: TFrmConfiguracoes
         end
         object PnlBotoes: TPanel
           Left = 0
-          Top = 105
+          Top = 152
           Width = 568
-          Height = 137
-          Align = alClient
+          Height = 90
+          Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           object PNGButton3: TPNGButton
             Left = 500
-            Top = 7
+            Top = 21
             Width = 57
             Height = 65
             ButtonLayout = pbsImageAbove
@@ -191,7 +265,7 @@ object FrmConfiguracoes: TFrmConfiguracoes
           end
           object PNGButton5: TPNGButton
             Left = 439
-            Top = 7
+            Top = 21
             Width = 57
             Height = 65
             ButtonLayout = pbsImageAbove
@@ -272,36 +346,9 @@ object FrmConfiguracoes: TFrmConfiguracoes
             ButtonStyle = pbsFlat
             OnClick = PNGButton5Click
           end
-          object Label1: TLabel
-            Left = 14
-            Top = 34
-            Width = 74
-            Height = 13
-            Caption = 'Valor m'#237'nimo'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-            WordWrap = True
-          end
-          object Label2: TLabel
-            Left = 80
-            Top = 8
-            Width = 31
-            Height = 13
-            Caption = 'Geral'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
           object PNGButton7: TPNGButton
             Left = 378
-            Top = 7
+            Top = 21
             Width = 57
             Height = 65
             ButtonLayout = pbsImageAbove
@@ -386,61 +433,11 @@ object FrmConfiguracoes: TFrmConfiguracoes
             ButtonStyle = pbsFlat
             OnClick = PNGButton7Click
           end
-          object DBEdit1: TDBEdit
-            Left = 15
-            Top = 54
-            Width = 122
-            Height = 19
-            CharCase = ecUpperCase
-            Ctl3D = False
-            DataField = 'MINIMO'
-            DataSource = DSConfiguracoes
-            ParentCtl3D = False
-            TabOrder = 0
-          end
-          object DBCheckBox3: TDBCheckBox
-            Left = 160
-            Top = 53
-            Width = 161
-            Height = 17
-            Caption = 'Visualizar impress'#227'o'
-            Ctl3D = False
-            DataField = 'SNVISUALIZARRELENROL'
-            DataSource = DSConfiguracoes
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentCtl3D = False
-            ParentFont = False
-            TabOrder = 1
-            ValueChecked = 'S'
-            ValueUnchecked = 'N'
-          end
-          object DBCheckBox4: TDBCheckBox
-            Left = 160
-            Top = 80
-            Width = 209
-            Height = 17
-            Caption = 'Utilizar cores (verde e vermelho)'
-            DataField = 'SN_USARCORESRELENROL'
-            DataSource = DSConfiguracoes
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'MS Sans Serif'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 2
-            ValueChecked = 'True'
-            ValueUnchecked = 'False'
-          end
         end
       end
     end
   end
-  object Panel2: TPanel
+  object PanelOK: TPanel
     Left = 0
     Top = 280
     Width = 586
@@ -460,11 +457,6 @@ object FrmConfiguracoes: TFrmConfiguracoes
       TabOrder = 0
       OnClick = OKBtnClick
     end
-  end
-  object DSConfiguracoes: TDataSource
-    DataSet = IBTableConfig
-    Left = 225
-    Top = 69
   end
   object IBTbParamIndividual: TIBTable
     Database = FrmPrincipal.IBDMain
@@ -533,32 +525,76 @@ object FrmConfiguracoes: TFrmConfiguracoes
       Size = 60
     end
   end
-  object IBTableConfig: TIBTable
+  object IBQueryConfig: TIBQuery
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
+    AfterScroll = IBQueryConfigAfterScroll
     BufferChunks = 1000
-    CachedUpdates = False
-    TableName = 'TB_CONFIG'
-    Left = 193
-    Top = 69
-    object IBTableConfigSN_VISUALIZAIMPRESSAO: TIBStringField
-      FieldName = 'SN_VISUALIZAIMPRESSAO'
+    CachedUpdates = True
+    SQL.Strings = (
+      
+        'select DESC_PARAMETRO, PARAMETRO, TIPO_PARAMETRO, VAL_PARAMETRO,' +
+        'ID_CONFIGURACAO from TB_CONFIG')
+    UpdateObject = IBUpdateConfig
+    Left = 201
+    Top = 150
+    object IBQueryConfigDESC_PARAMETRO: TIBStringField
+      FieldName = 'DESC_PARAMETRO'
+      Origin = 'TB_CONFIG.DESC_PARAMETRO'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object IBQueryConfigVAL_PARAMETRO: TIBStringField
+      FieldName = 'VAL_PARAMETRO'
+      Origin = 'TB_CONFIG.VAL_PARAMETRO'
+      FixedChar = True
+      Size = 5
+    end
+    object IBQueryConfigID_CONFIGURACAO: TIntegerField
+      FieldName = 'ID_CONFIGURACAO'
+      Origin = 'TB_CONFIG.ID_CONFIGURACAO'
+      Required = True
+    end
+    object IBQueryConfigTIPO_PARAMETRO: TIBStringField
+      FieldName = 'TIPO_PARAMETRO'
+      Origin = 'TB_CONFIG.TIPO_PARAMETRO'
+      FixedChar = True
       Size = 1
     end
-    object IBTableConfigSN_GERACONTASREC: TIBStringField
-      FieldName = 'SN_GERACONTASREC'
-      Size = 1
-    end
-    object IBTableConfigMINIMO: TIntegerField
-      FieldName = 'MINIMO'
-    end
-    object IBTableConfigSNVISUALIZARRELENROL: TIBStringField
-      FieldName = 'SNVISUALIZARRELENROL'
-      Size = 1
-    end
-    object IBTableConfigSN_USARCORESRELENROL: TIBStringField
-      FieldName = 'SN_USARCORESRELENROL'
-      Size = 1
-    end
+  end
+  object IBUpdateConfig: TIBUpdateSQL
+    RefreshSQL.Strings = (
+      'Select '
+      '  PARAMETRO,'
+      '  DESC_PARAMETRO,'
+      '  VAL_PARAMETRO,'
+      '  TIPO_PARAMETRO,'
+      '  ID_CONFIGURACAO'
+      'from TB_CONFIG '
+      'where'
+      '  ID_CONFIGURACAO = :ID_CONFIGURACAO')
+    ModifySQL.Strings = (
+      'update TB_CONFIG'
+      'set'
+      '  VAL_PARAMETRO = :VAL_PARAMETRO'
+      'where'
+      '  ID_CONFIGURACAO = :OLD_ID_CONFIGURACAO')
+    InsertSQL.Strings = (
+      'insert into TB_CONFIG'
+      '  (VAL_PARAMETRO)'
+      'values'
+      '  (:VAL_PARAMETRO)')
+    DeleteSQL.Strings = (
+      'delete from TB_CONFIG'
+      'where'
+      '  ID_CONFIGURACAO = :OLD_ID_CONFIGURACAO')
+    Left = 233
+    Top = 150
+  end
+  object DSConfig: TDataSource
+    DataSet = IBQueryConfig
+    Left = 209
+    Top = 181
   end
 end

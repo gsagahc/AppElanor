@@ -1,6 +1,6 @@
 object FrmConsultarEstoque: TFrmConsultarEstoque
-  Left = 274
-  Top = 196
+  Left = 275
+  Top = 203
   Width = 1099
   Height = 446
   HorzScrollBar.Visible = False

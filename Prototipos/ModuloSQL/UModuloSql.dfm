@@ -1,6 +1,6 @@
 object FormConsultaSQL: TFormConsultaSQL
   Left = 226
-  Top = 107
+  Top = 108
   ActiveControl = Panel2
   BorderIcons = []
   BorderStyle = bsDialog

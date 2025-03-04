@@ -92,7 +92,8 @@ uses
   UCadEnrolador in 'UCadEnrolador.pas' {FrmCadEnrolador},
   UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador},
   UConfiguracoes in 'UConfiguracoes.pas' {FrmConfiguracoes},
-  URelatorioEnroladores in 'Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas' {FormEnroladores};
+  URelatorioEnroladores in 'Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas' {FormEnroladores},
+  UParametrosConfig in 'UParametrosConfig.pas';
 
 {$R *.res}
 var

@@ -4,28 +4,22 @@ interface
 
 uses Windows, SysUtils, Classes, Graphics, Forms, Controls, StdCtrls,
   Buttons, ComCtrls, ExtCtrls, DBCtrls, IBCustomDataSet, IBUpdateSQL, DB,
-  IBQuery, Mask, pngextra, Grids, DBGrids, IBTable,Messages;
+  IBQuery, Mask, pngextra, Grids, DBGrids, IBTable,Messages, DBClient,UParametrosConfig,Dialogs,
+  NumEdit;
 
 type
   TFrmConfiguracoes = class(TForm)
-    Panel1: TPanel;
-    Panel2: TPanel;
+    PanelMain: TPanel;
+    PanelOK: TPanel;
     PgControlConfigura: TPageControl;
-    TabSheet1: TTabSheet;
+    TabSheetConfiguracoes: TTabSheet;
     OKBtn: TButton;
-    DBCheckBox1: TDBCheckBox;
-    DBCheckBox2: TDBCheckBox;
-    DSConfiguracoes: TDataSource;
     TabSheetEnroladores: TTabSheet;
     PanelGrid: TPanel;
-    DBGrid1: TDBGrid;
+    DBGridElasticos: TDBGrid;
     PnlBotoes: TPanel;
     PNGButton3: TPNGButton;
     PNGButton5: TPNGButton;
-    Label1: TLabel;
-    Label2: TLabel;
-    DBEdit1: TDBEdit;
-    DBCheckBox3: TDBCheckBox;
     IBTbParamIndividual: TIBTable;
     IBTbParamIndividualNOMEEL: TStringField;
     IBTbParamIndividualID_PRODUTO: TIntegerField;
@@ -34,20 +28,28 @@ type
     IBQProdutos: TIBQuery;
     IBQProdutosID_PRODUTO: TIntegerField;
     IBQProdutosTBPRD_NOME: TIBStringField;
-    DBCheckBox4: TDBCheckBox;
     PNGButton7: TPNGButton;
-    IBTableConfig: TIBTable;
-    IBTableConfigSN_VISUALIZAIMPRESSAO: TIBStringField;
-    IBTableConfigSN_GERACONTASREC: TIBStringField;
-    IBTableConfigMINIMO: TIntegerField;
-    IBTableConfigSNVISUALIZARRELENROL: TIBStringField;
-    IBTableConfigSN_USARCORESRELENROL: TIBStringField;
+    IBQueryConfig: TIBQuery;
+    IBUpdateConfig: TIBUpdateSQL;
+    DSConfig: TDataSource;
+    DBGrid1: TDBGrid;
+    IBQueryConfigDESC_PARAMETRO: TIBStringField;
+    IBQueryConfigVAL_PARAMETRO: TIBStringField;
+    IBQueryConfigID_CONFIGURACAO: TIntegerField;
+    IBQueryConfigTIPO_PARAMETRO: TIBStringField;
+    PanelValores: TPanel;
+    NumEditMin: TNumEdit;
+    ComboBoxSimNao: TComboBox;
+    LabelValores: TLabel;
     procedure OKBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure PNGButton5Click(Sender: TObject);
+    procedure IBQueryConfigAfterScroll(DataSet: TDataSet);
+    procedure ComboBoxSimNaoExit(Sender: TObject);
+    procedure NumEditMinExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -64,8 +66,10 @@ uses UPrincipal, uMensagens;
 procedure TFrmConfiguracoes.OKBtnClick(Sender: TObject);
 begin
   try
+    IBQueryConfig.ApplyUpdates;
+    FrmPrincipal.IBTMain.Commit;
+    FrmPrincipal.IBDMain.CloseDataSets;
 
-    IBTableConfig.Post;
 
   except
     on E: EDatabaseError do
@@ -79,13 +83,23 @@ begin
 end;
 
 procedure TFrmConfiguracoes.FormCreate(Sender: TObject);
-begin
-  IBTableConfig.Open;
-  IBTableConfig.Edit;
-  IBTbParamIndividual.Open;
+var i:Integer;
 
-  IBQProdutos.Open;
-  TabSheet1.PageControl.ActivePageIndex:=0;  
+begin
+  try
+    IBTbParamIndividual.Open;
+    IBQProdutos.Open;
+    TabSheetConfiguracoes.PageControl.ActivePageIndex:=0;
+    IBQueryConfig.Open;
+
+  except
+    on E: EDatabaseError do
+    begin
+      tFrmMensagens.Mensagem('Erro ao ler configurações no banco :' +'OKBtnClick '+ E.message,'E',[mbOK]);
+
+    end;
+  end;
+
 end;
 
 procedure TFrmConfiguracoes.PNGButton7Click(Sender: TObject);
@@ -138,6 +152,36 @@ begin
       FrmPrincipal.IBTMain.Rollback;
     end;
   end;
+end;
+
+procedure TFrmConfiguracoes.IBQueryConfigAfterScroll(DataSet: TDataSet);
+begin
+  if IBQueryConfig.FieldByName('TIPO_PARAMETRO').AsString='I'then
+  begin
+    ComboBoxSimNao.Visible:=False;
+    NumEditMin.Visible:=True;
+    NumEditMin.Text:= IBQueryConfig.FieldByName('VAL_PARAMETRO').AsString;
+  end;
+  if IBQueryConfig.FieldByName('TIPO_PARAMETRO').AsString='C'then
+  begin
+    ComboBoxSimNao.Visible:=True;
+    NumEditMin.Visible:=False;
+    ComboBoxSimNao.ItemIndex:=ComboBoxSimNao.Items.IndexOf(Trim(IBQueryConfig.FieldByName('VAL_PARAMETRO').AsString));
+  end;
+end;
+
+procedure TFrmConfiguracoes.ComboBoxSimNaoExit(Sender: TObject);
+begin
+  IBQueryConfig.Edit;
+  IBQueryConfigVAL_PARAMETRO.AsString:=ComboBoxSimNao.Text;
+  IBQueryConfig.Post;
+end;
+
+procedure TFrmConfiguracoes.NumEditMinExit(Sender: TObject);
+begin
+  IBQueryConfig.Edit;
+  IBQueryConfigVAL_PARAMETRO.AsString:=Trim(NumEditMin.Text);
+  IBQueryConfig.Post;
 end;
 
 end.

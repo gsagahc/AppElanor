@@ -1,6 +1,6 @@
 object FrmCadGastos: TFrmCadGastos
   Left = 394
-  Top = 183
+  Top = 184
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Cadastro de despesas'
@@ -866,7 +866,7 @@ object FrmCadGastos: TFrmCadGastos
       Left = 24
       Top = 272
       Width = 577
-      Height = 132
+      Height = 119
       Ctl3D = False
       DataField = 'ID_CADDESPESAS'
       DataSource = DSGastos

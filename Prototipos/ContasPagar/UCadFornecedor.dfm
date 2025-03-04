@@ -1,6 +1,6 @@
 object FrmCadFornec: TFrmCadFornec
   Left = 345
-  Top = 105
+  Top = 106
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de fornecedores'

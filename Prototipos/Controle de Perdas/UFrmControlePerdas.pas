@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids,pngextra, DB, DBClient, IBCustomDataSet, IBTable, DBGrids,
   ExtCtrls, IBUpdateSQL, IBSQL, IBQuery, DBCtrls, StdCtrls, Mask, ComCtrls, DateUtils,
-  NumEdit, IBStoredProc ;
+  NumEdit, IBStoredProc, UParametrosConfig;
 
 type
   TCPerdas     = class
@@ -153,7 +153,9 @@ type
     procedure DBGrid1DblClick(Sender: TObject);
     function SaldoAnterior(idProduto: Integer):Real ;
     procedure preencherComboboxEnroladores;
+    procedure FormCreate(Sender: TObject);
   private
+    SN_Visualizar:Boolean;
 
   public
     { Public declarations }
@@ -214,7 +216,7 @@ Var Mes, Ano: string;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
     slEnroladores:TStringList;
     i, iQuantidade, iTotal:Integer;
-    SN_Visualizar:Boolean;
+
 
     fTotalSegunda:Real;
 begin
@@ -237,8 +239,6 @@ begin
       IBQUtil.SQL.Clear;
       IBQUtil.SQL.Add('SELECT SNVISUALIZARRELENROL,SN_USARCORESRELENROL FROM TB_CONFIG');
       IBQUtil.Open;
-      SN_Visualizar:=IBQUtil.FieldByName('SNVISUALIZARRELENROL').AsString = 'S';
-      SN_UsarCores :=IBQUtil.FieldByName('SN_USARCORESRELENROL').AsString = 'S';
       IBTBControlePerdas.Open;
 
       While Not CDSPerdas.Eof Do
@@ -719,6 +719,13 @@ begin
 
   End;
 
+end;
+
+procedure TFrmControlePerdas.FormCreate(Sender: TObject);
+var Parametro:TParametros;
+begin
+  SN_Visualizar:=Parametro.returnValParametro('SN_VISUALIZARRELENROL')='S';
+  SN_UsarCores :=Parametro.returnValParametro('SN_UTILIZAR_CORES_RELENROL')='S';
 end;
 
 end.
