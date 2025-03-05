@@ -1,6 +1,6 @@
 object FrmCadProd: TFrmCadProd
-  Left = 395
-  Top = 192
+  Left = 338
+  Top = 166
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de produtos'

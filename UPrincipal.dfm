@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
-  Left = 219
-  Top = 146
+  Left = 188
+  Top = 126
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
