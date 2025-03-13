@@ -235,10 +235,6 @@ begin
     CDSPerdas.First;
     TotalSegunda:=0;
     try
-      IBQUtil.Close;
-      IBQUtil.SQL.Clear;
-      IBQUtil.SQL.Add('SELECT SNVISUALIZARRELENROL,SN_USARCORESRELENROL FROM TB_CONFIG');
-      IBQUtil.Open;
       IBTBControlePerdas.Open;
 
       While Not CDSPerdas.Eof Do

@@ -198,7 +198,6 @@ type
     IBQItensPedidoID_ITENSPEDIDO: TIntegerField;
     IBQItensPedidoTBITPED_QUANT: TIBBCDField;
     DSItens: TDataSource;
-    Estoquegeral1: TMenuItem;
     PedidosporOC1: TMenuItem;
     Incluirobservao1: TMenuItem;
     Faturamentodirio1: TMenuItem;
@@ -309,14 +308,12 @@ type
     procedure Exportarparaexcel1Click(Sender: TObject);
     procedure TreeViewContaPagDblClick(Sender: TObject);
     procedure Pedidosporclienteperodo1Click(Sender: TObject);
-    procedure Estoquegeral1Click(Sender: TObject);
     procedure PedidosporOC1Click(Sender: TObject);
     procedure Incluirobservao1Click(Sender: TObject);
     procedure Faturamentodirio1Click(Sender: TObject);
     procedure Entradadegasto1Click(Sender: TObject);
     procedure Consultardespesas1Click(Sender: TObject);
     procedure PNGButton9Click(Sender: TObject);
-    procedure ExibirEstoqueAtual;
     procedure ConsultaSQL1Click(Sender: TObject);
     procedure Faturamentoestimado1Click(Sender: TObject);
     procedure Porproduto1Click(Sender: TObject);
@@ -1324,11 +1321,6 @@ begin
 
 end;
 
-procedure TFrmPrincipal.Estoquegeral1Click(Sender: TObject);
-begin
-  ExibirEstoqueAtual; 
-end;
-
 procedure TFrmPrincipal.PedidosporOC1Click(Sender: TObject);
 begin
   Application.CreateForm(TFrmConsultarPedOrdemCompra, FrmConsultarPedOrdemCompra);
@@ -1382,39 +1374,6 @@ begin
   FrmConsultarEstoque.ShowModal;
   FreeAndNil(FrmConsultarEstoque);
   StatusBar1.Panels.Items[5].Text:='';
-end;
-
-procedure TFrmPrincipal.ExibirEstoqueAtual;
-Var ValTotal:Currency;
-begin
-  Application.CreateForm(TFrmRelEstoqueAtual, FrmRelEstoqueAtual);
-  FrmRelEstoqueAtual.IBQEstoque.Open;
-  FrmRelEstoqueAtual.CDSEstoque.CreateDataSet;
-  ValTotal:=0;
-  FrmRelEstoqueAtual.IBQEstoque.First;
-  While Not FrmRelEstoqueAtual.IBQEstoque.Eof do
-  begin
-    if  FrmRelEstoqueAtual.IBQEstoqueTBES_QUANTI.AsFloat > 0 then
-    begin
-      FrmRelEstoqueAtual.CDSEstoque.Append;
-      FrmRelEstoqueAtual.CDSEstoqueCODIGO.AsInteger        :=FrmRelEstoqueAtual.IBQEstoqueID_PRODUTO1.AsInteger;
-      FrmRelEstoqueAtual.CDSEstoqueNOME.AsString           :=FrmRelEstoqueAtual.IBQEstoqueTBPRD_NOME.AsString ;
-      FrmRelEstoqueAtual.CDSEstoqueTIPO.AsString           :=FrmRelEstoqueAtual.IBQEstoqueTBES_FORMATO.AsString ;
-      FrmRelEstoqueAtual.CDSEstoqueUNDADE.AsString         :=FrmRelEstoqueAtual.IBQEstoqueTBPRD_UNIDADE.AsString;
-      FrmRelEstoqueAtual.CDSEstoqueQUANTIDADE.AsFloat      :=FrmRelEstoqueAtual.IBQEstoqueTBES_QUANTI.AsFloat;
-      FrmRelEstoqueAtual.CDSEstoquePRECO.AsCurrency        :=FrmRelEstoqueAtual.IBQEstoqueTBPRD_PRECOVENDA.AsCurrency;
-      FrmRelEstoqueAtual.CDSEstoqueVALOR.AsCurrency        :=FrmRelEstoqueAtual.IBQEstoqueTBES_QUANTI.AsFloat*FrmRelEstoqueAtual.IBQEstoqueTBPRD_PRECOVENDA.AsCurrency;
-      ValTotal:=ValTotal+(FrmRelEstoqueAtual.IBQEstoqueTBES_QUANTI.AsInteger*FrmRelEstoqueAtual.IBQEstoqueTBPRD_PRECOVENDA.AsCurrency);
-      FrmRelEstoqueAtual.CDSEstoque.Post;
-    end;
-    FrmRelEstoqueAtual.IBQEstoque.Next;
-  end;
-  FrmRelEstoqueAtual.CDSEstoque.First;
-   //:=FmtStr  CurrToStr(ValTotal);
-  FrmRelEstoqueAtual.QRLValTotal.Caption:='R$ '+  formatfloat('##,###,###.##',ValTotal);
-
-  FrmRelEstoqueAtual.QuickRep1.PreviewModal;
-   FrmRelEstoqueAtual.Free;
 end;
 
 procedure TFrmPrincipal.ConsultaSQL1Click(Sender: TObject);

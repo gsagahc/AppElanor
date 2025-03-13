@@ -1,6 +1,6 @@
 object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
-  Left = 378
-  Top = 154
+  Left = 324
+  Top = 133
   Width = 928
   Height = 480
   Color = clBtnFace
@@ -604,31 +604,6 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
         WordWrap = True
         FontSize = 10
       end
-      object QRLabel5: TQRLabel
-        Left = 315
-        Top = 152
-        Width = 25
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          833.437500000000000000
-          402.166666666666700000
-          66.145833333333330000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Caption = 'Tipo'
-        Color = clWhite
-        Transparent = False
-        WordWrap = True
-        FontSize = 10
-      end
       object QRLabel3: TQRLabel
         Left = 544
         Top = 152
@@ -866,7 +841,7 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
       object QRDBText5: TQRDBText
         Left = 69
         Top = 3
-        Width = 236
+        Width = 292
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -877,7 +852,7 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
           44.979166666666670000
           182.562500000000000000
           7.937500000000000000
-          624.416666666666700000)
+          772.583333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -885,38 +860,6 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
         Color = clWhite
         DataSet = CDSEstoque
         DataField = 'NOME'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Arial'
-        Font.Style = []
-        ParentFont = False
-        Transparent = False
-        WordWrap = True
-        FontSize = 8
-      end
-      object QRDBText2: TQRDBText
-        Left = 314
-        Top = 3
-        Width = 80
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          830.791666666666700000
-          7.937500000000000000
-          211.666666666666700000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = False
-        AutoStretch = False
-        Color = clWhite
-        DataSet = CDSEstoque
-        DataField = 'TIPO'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11

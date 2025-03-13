@@ -772,14 +772,16 @@ object FormEnroladores: TFormEnroladores
       '        (SELECT D.MINIMO FROM tb_p_elast_espec D WHERE'
       '       D.id_produto = b.tbcp_elastico) '
       '  ELSE'
-      '     (SELECT MINIMO FROM TB_CONFIG)'
+      
+        '       (SELECT  CAST(REPLACE(VAL_PARAMETRO, '#39','#39', '#39'.'#39') AS INTEGER' +
+        ') FROM TB_CONFIG WHERE PARAMETRO='#39'MINIMO'#39')'
       '  END   AS MINIMO'
       ' FROM  tb_controle_perdas B'
       ' INNER JOIN tb_enroladores A ON A.id_enrolador = B.ID_ENROLADOR'
       ' inner JOIN tb_produtos C ON C.id_produto = B.tbcp_elastico'
       ' WHERE TBCP_DATA=:pData;')
-    Left = 204
-    Top = 14
+    Left = 508
+    Top = 94
     ParamData = <
       item
         DataType = ftUnknown

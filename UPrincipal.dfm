@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
-  Left = 219
-  Top = 146
+  Left = 162
+  Top = 109
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1658,10 +1658,6 @@ object FrmPrincipal: TFrmPrincipal
       object abeladepreos1: TMenuItem
         Caption = 'Tabela de pre'#231'os'
         OnClick = abeladepreos1Click
-      end
-      object Estoquegeral1: TMenuItem
-        Caption = 'Estoque atual'
-        OnClick = Estoquegeral1Click
       end
       object Despesas2: TMenuItem
         Caption = 'Custos'

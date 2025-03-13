@@ -22,12 +22,10 @@ type
     QRDBText6: TQRDBText;
     QRDBText4: TQRDBText;
     QRDBText5: TQRDBText;
-    QRDBText2: TQRDBText;
     QRDBText7: TQRDBText;
     QRExpr1: TQRExpr;
     QRLabel1: TQRLabel;
     QRLabel4: TQRLabel;
-    QRLabel5: TQRLabel;
     QRLabel3: TQRLabel;
     QRLabel6: TQRLabel;
     IBQEstoqueTBES_QUANTI: TIBBCDField;
