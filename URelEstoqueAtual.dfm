@@ -897,6 +897,7 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = []
+        Mask = '#,,0.000'
         ParentFont = False
         Transparent = False
         WordWrap = True
@@ -986,6 +987,7 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
         Font.Height = -11
         Font.Name = 'Arial'
         Font.Style = []
+        Mask = '#,,0.000'
         ParentFont = False
         Transparent = False
         WordWrap = True
@@ -1111,6 +1113,7 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
     object IBQEstoqueTBPRD_PRECOVENDA: TIBBCDField
       FieldName = 'TBPRD_PRECOVENDA'
       Origin = 'TB_PRODUTOS.TBPRD_PRECOVENDA'
+      DisplayFormat = '#,,0.000'
       currency = True
       Precision = 18
       Size = 4
@@ -1145,6 +1148,8 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
     object IBQEstoqueVALOR: TCurrencyField
       FieldKind = fkCalculated
       FieldName = 'VALOR'
+      DisplayFormat = '#,,0.000'
+      EditFormat = '#,,0.00'
       Calculated = True
     end
   end
@@ -1175,7 +1180,7 @@ object FrmRelEstoqueAtual: TFrmRelEstoqueAtual
     end
     object CDSEstoqueQUANTIDADE: TFloatField
       FieldName = 'QUANTIDADE'
-      DisplayFormat = '###,###,##0.00'
+      DisplayFormat = '#,,0'
     end
   end
 end

@@ -630,10 +630,9 @@ object FrmEntEstoque: TFrmEntEstoque
       TabOrder = 2
       OnChange = CBoxFormatoChange
       Items.Strings = (
-        'ROLO'
-        'CARRETEL'
-        'ENFESTADO'
-        'COM PONTEIRA')
+        'METRO'
+        'COM PONTEIRA'
+        'KG')
     end
     object DBEditTamanho: TDBEdit
       Left = 16
