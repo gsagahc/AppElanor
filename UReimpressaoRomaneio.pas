@@ -16,12 +16,16 @@ type
     CDSRomaneioIdItemRomaneio: TIntegerField;
     IBSQL1: TIBSQL;
     IBQueryUtil: TIBQuery;
+    PNGButtonDeletar: TPNGButton;
+    CDSRomaneioidRomaneio: TIntegerField;
     procedure PNGBCarregarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PNGBImprimirClick(Sender: TObject);
     procedure Excluir1Click(Sender: TObject);
     procedure CDSRomaneioOrdemChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
+    procedure PNGButtonDeletarClick(Sender: TObject);
+
   private
 
 
@@ -44,7 +48,7 @@ begin
     CDSRomaneio.Close;
     IBQRomaneio.Close;
     IBQRomaneio.SQL.Clear;
-    IBQRomaneio.Sql.Add('SELECT TR.*,  '+
+    IBQRomaneio.Sql.Add('SELECT  TR.*,  '+
                                 'IT.*,  '+
                                 'TP.id_pedido,  '+
                                 'TP.tbped_numped,  '+
@@ -58,10 +62,21 @@ begin
                                 'ORDER BY ORDEM DESC');
 
 
+
     IBQRomaneio.ParamByName('pData').AsDate:=DTPickerIni.Date ;
     IBQRomaneio.Open;
     if not IBQRomaneio.IsEmpty then
     begin
+      if DTPickerIni.Date > Now-6 then
+      begin
+        PNGButtonDeletar.Enabled:=True;
+        Excluir1.Visible:=True;
+      end
+      else
+      begin
+        PNGButtonDeletar.Enabled:=False;
+        Excluir1.Visible:=False;
+      end;
       PNGBImprimir.Enabled:= True;
       PNGBOrdenar.Enabled:= True;
       CDSRomaneio.Close;
@@ -82,6 +97,7 @@ begin
         CDSRomaneioQuant.AsInteger         :=IBQRomaneio.FieldByname('QUANTIDADE').AsInteger;
         CDSRomaneioOrdem.AsString          :=IBQRomaneio.FieldByname('ORDEM').AsString;
         CDSRomaneioIdItemRomaneio.AsInteger:=IBQRomaneio.FieldByname('ID_ITENS').AsInteger;
+        CDSRomaneioidRomaneio.AsInteger    :=IBQRomaneio.FieldByName('ID_ROMANEIO').AsInteger;
         CDSRomaneio.Post ;
         IBQRomaneio.Next;
       end;
@@ -155,6 +171,8 @@ begin
       if not FrmPrincipal.IBTMain.Active Then
         FrmPrincipal.IBTMain.StartTransaction;
       IBSQL1.Close;
+      IBSQL1.SQL.Clear;
+      IBSQL1.SQL.Add('DELETE FROM TB_ITENS_ROMANEIO WHERE ID_ITENS=:pITENS');
       IBSQL1.ParamByName('pITENS').AsInteger:=DBGrid2.DataSource.DataSet.FieldByname('IdItemRomaneio').AsInteger;
       IBSQL1.Prepare;
       IBSQL1.ExecQuery;
@@ -182,5 +200,38 @@ begin
 end;
 
 
+
+procedure TFrmReimpressaoRomaneio.PNGButtonDeletarClick(Sender: TObject);
+var idRomaneio:Integer;
+begin
+  inherited;
+  // Código para excluir o romaneio
+  if MessageDlg('Deseja realmente excluir este romaneio e seus itens?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    try
+      if not FrmPrincipal.IBTMain.Active Then
+        FrmPrincipal.IBTMain.StartTransaction;
+      idRomaneio:=CDSRomaneioidRomaneio.AsInteger;
+      IBSQL1.Close;
+      IBSQL1.SQL.Clear;
+      IBSQL1.SQL.Add('DELETE FROM TB_ITENS_ROMANEIO WHERE FK_ROMANEIO=:pidRomaneio');
+      IBSQL1.ParamByName('pidRomaneio').AsInteger:=idRomaneio;
+      IBSQL1.Prepare;
+      IBSQL1.ExecQuery;
+      IBSQL1.Close;
+      IBSQL1.SQL.Clear;
+      IBSQL1.SQL.Add('DELETE FROM TB_ROMANEIO WHERE ID_ROMANEIO=:pidRomaneio');
+      IBSQL1.ParamByName('pidRomaneio').AsInteger:=idRomaneio;
+      IBSQL1.Prepare;
+      IBSQL1.ExecQuery;
+      CDSRomaneio.Close;
+      FrmPrincipal.IBTMain.Commit;
+      FrmPrincipal.IBDMain.CloseDataSets;
+      PNGButtonDeletar.Enabled:=False;
+    except
+
+    end;
+  end;
+end;
 
 end.
