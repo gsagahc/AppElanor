@@ -112,8 +112,8 @@ type
     CDSItensPedidoID_ESTOQUE: TIntegerField;
     RadioGroupBoleto: TRadioGroup;
     IBTbPedidosTBPED_BOLETO: TIBStringField;
-    IBTbPedidosOBS: TIBStringField;
     IBQUtil: TIBQuery;
+    IBTbPedidosOBS: TIBStringField;
     procedure PNGButton4Click(Sender: TObject);
     procedure IBTbPedidosAfterInsert(DataSet: TDataSet);
     procedure PNGButton1Click(Sender: TObject);

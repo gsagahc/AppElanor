@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
-  Left = 267
-  Top = 208
+  Left = 180
+  Top = 156
   Width = 1127
   Height = 423
   BorderIcons = []
@@ -1284,5 +1284,56 @@ object FrmControlePerdas: TFrmControlePerdas
     CachedUpdates = False
     Left = 568
     Top = 289
+  end
+  object CDSPerdasConsolidado: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 576
+    Top = 319
+    object CDSPerdasConsolidadoData: TDateField
+      FieldName = 'Data'
+    end
+    object CDSPerdasConsolidadoMaquina: TIntegerField
+      FieldName = 'Maquina'
+    end
+    object CDSPerdasConsolidadoElastico: TStringField
+      FieldName = 'Elastico'
+      Size = 30
+    end
+    object CDSPerdasConsolidadoComprimento: TIntegerField
+      FieldName = 'Comprimento'
+    end
+    object CDSPerdasConsolidadoPesoB: TFloatField
+      FieldName = 'PesoB'
+    end
+    object CDSPerdasConsolidadoQuantidadeRC: TIntegerField
+      FieldName = 'QuantidadeRC'
+    end
+    object CDSPerdasConsolidadoQuantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object CDSPerdasConsolidadoPrimeira: TFloatField
+      FieldName = 'Primeira'
+    end
+    object CDSPerdasConsolidadoSegunda: TFloatField
+      FieldName = 'Segunda'
+    end
+    object CDSPerdasConsolidadoPercentual: TFloatField
+      FieldName = 'Percentual'
+      Precision = 3
+    end
+    object CDSPerdasConsolidadoNomeElastico: TStringField
+      DisplayWidth = 60
+      FieldName = 'NomeElastico'
+      Size = 60
+    end
+  end
+  object DSPerdasConsolidado: TDataSource
+    DataSet = CDSPerdasConsolidado
+    Left = 608
+    Top = 321
   end
 end

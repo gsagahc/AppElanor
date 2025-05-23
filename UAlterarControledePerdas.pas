@@ -19,7 +19,6 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure PNGImprimirClick(Sender: TObject);
-    procedure PNGBSalvarClick(Sender: TObject);
   private
 
     { Private declarations }
@@ -32,7 +31,7 @@ var
 
 implementation
 
-uses UImpressaoPerdas, UPrincipal,uMensagens, UReimpressaoAlterarPerdas;
+uses UImpressaoPerdas, UPrincipal,uMensagens,UReimpressaoAlterarPerdas;
 
 {$R *.dfm}
 
@@ -136,76 +135,14 @@ begin
 end;
 
 procedure TFrmAlterarControlePerdas.PNGImprimirClick(Sender: TObject);
-Var Mes, Ano: string;
-    Acumulado,TotalSegunda, SaldoSegunda :Real;
 begin
-  if  tFrmMensagens.Mensagem('Deseja salvar estes lançamentos e adicionar ao estoque?','Q',[mbSIM, mbNAO]) then
-  begin
-    CDSPerdas.DisableControls;
-    CDSPerdas.First;
-    TotalSegunda:=0;
-    try
-      IBTBControlePerdas.Open;
-      //
-      While Not CDSPerdas.Eof Do
-      begin
-         IBTBControlePerdas.Append;
-         IBTBControlePerdasTBCP_DATA.AsDateTime       :=CDSPerdasData.AsDateTime;
-         IBTBControlePerdasTBCP_MAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
-         IBTBControlePerdasTBCP_ELASTICO.AsString     :=CDSPerdasElastico.AsString;
-         IBTBControlePerdasTBCP_COMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
-         IBTBControlePerdasTBCP_PESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
-         IBTBControlePerdasTBCP_QUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
-         IBTBControlePerdasTBCP_QUANTIDADE.AsInteger  :=CDSPerdasQuantidade.AsInteger;
-         IBTBControlePerdasTBCP_PRIMEIRA.AsFloat      :=CDSPerdasPrimeira.AsFloat;
-         IBTBControlePerdasTBCP_SEGUNDA.AsFloat       :=CDSPerdasSegunda.AsFloat;
-         IBTBControlePerdasTBCP_PERCENTUAL.AsFloat    :=CDSPerdasPercentual.AsFloat;
-         IBTBControlePerdas.Post;
-         TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
-         AtualizarEstoque;
-         Mes:=Copy (CDSPerdasData.AsString ,4,2);
-         Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
-         CDSPerdas.Next;
-      end;
-
-     
-
-       CDSPerdas.First;
-       CDSPerdas.EnableControls;
-       Application.CreateForm(TFrmImpressaoAlteraPerdas, FrmImpressaoAlteraPerdas);
-       Acumulado:=CalculaAcumuladoMes(Mes, Ano);
-       FrmImpressaoAlteraPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
-       if Acumulado <= 2 then
-       begin
-         FrmImpressaoAlteraPerdas.QRLAcumulado.Color       :=clGreen;
-         FrmImpressaoAlteraPerdas.QRDBText3.Color          :=clGreen;
-       end
-       else
-       begin
-         FrmImpressaoAlteraPerdas.QRLAcumulado.Color       :=clRed;
-         FrmImpressaoAlteraPerdas.QRDBText3.Color          :=clRed;
-       End;
-
-       FrmImpressaoAlteraPerdas.PreviewModal;
-    finally
-      FrmPrincipal.IBTMain.Commit;
-      FreeAndNil(FrmImpressaoAlteraPerdas);
-
-    end;
-    Close;
-  end;
-end;
-
-procedure TFrmAlterarControlePerdas.PNGBSalvarClick(Sender: TObject);
-begin
-
-  IBQConsultarLancamentos.Close;
   IBQConsultarLancamentos.SQL.Clear;
   IBQConsultarLancamentos.SQL.Add(' DELETE FROM TB_CONTROLE_PERDAS '+
                                   ' WHERE TB_CONTROLE_PERDAS.TBCP_DATA =:PDATA');
   IBQConsultarLancamentos.ParamByName('PDATA').AsString :=FormatdateTime('dd/mm/yyyy', DTPData.Date);
   IBQConsultarLancamentos.ExecSQL;
   inherited;
+
 end;
 
 end.

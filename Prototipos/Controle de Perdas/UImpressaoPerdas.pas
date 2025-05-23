@@ -41,7 +41,7 @@ procedure TFrmImpressaoPerdas.QRBand2BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
   if FrmControlePerdas<> nil then
-    begin
+  begin
     if (FrmControlePerdas.CDSPerdasPercentual.AsFloat >= 0) and (FrmControlePerdas.CDSPerdasPercentual.AsFloat <= 2) then
     begin
        QRDBText3.Font.Color := clBlack  ;
@@ -50,8 +50,8 @@ begin
 
     if FrmControlePerdas.CDSPerdasPercentual.AsFloat >= 2 then
     begin
-       QRDBText3.Font.Color := clBlack ;
-       QRDBText3.Color :=clRed;
+      QRDBText3.Font.Color := clBlack ;
+      QRDBText3.Color :=clRed;
     end;
   end
   else
@@ -59,14 +59,14 @@ begin
   begin
     if (FrmAlterarControlePerdas.CDSPerdasPercentual.AsFloat >= 0) and (FrmAlterarControlePerdas.CDSPerdasPercentual.AsFloat <= 2) then
     begin
-       QRDBText3.Font.Color := clBlack  ;
-       QRDBText3.Color := clGreen;
+      QRDBText3.Font.Color := clBlack  ;
+      QRDBText3.Color := clGreen;
     end;
 
     if FrmAlterarControlePerdas.CDSPerdasPercentual.AsFloat >= 2 then
     begin
-       QRDBText3.Font.Color := clBlack ;
-       QRDBText3.Color :=clRed;
+      QRDBText3.Font.Color := clBlack ;
+      QRDBText3.Color :=clRed;
     end;
   end;
 end;

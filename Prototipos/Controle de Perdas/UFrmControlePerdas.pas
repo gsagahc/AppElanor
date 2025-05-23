@@ -124,6 +124,19 @@ type
     Label11: TLabel;
     CDSPerdasMinimoDesejado: TIntegerField;
     IBQueryEnroladoresCad: TIBQuery;
+    CDSPerdasConsolidado: TClientDataSet;
+    CDSPerdasConsolidadoData: TDateField;
+    CDSPerdasConsolidadoMaquina: TIntegerField;
+    CDSPerdasConsolidadoElastico: TStringField;
+    CDSPerdasConsolidadoComprimento: TIntegerField;
+    CDSPerdasConsolidadoPesoB: TFloatField;
+    CDSPerdasConsolidadoQuantidadeRC: TIntegerField;
+    CDSPerdasConsolidadoQuantidade: TIntegerField;
+    CDSPerdasConsolidadoPrimeira: TFloatField;
+    CDSPerdasConsolidadoSegunda: TFloatField;
+    CDSPerdasConsolidadoPercentual: TFloatField;
+    CDSPerdasConsolidadoNomeElastico: TStringField;
+    DSPerdasConsolidado: TDataSource;
     procedure PNGBNovoClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -167,7 +180,8 @@ var
 
 implementation
 
-uses Math, uMensagens,UImpressaoPerdas, UPrincipal, URelatorioEnroladores;
+uses Math, uMensagens,UImpressaoPerdas, UPrincipal, URelatorioEnroladores,
+  UAlterarControledePerdas, UReimpressaoAlterarPerdas;
 
 {$R *.dfm}
 
@@ -216,7 +230,7 @@ Var Mes, Ano: string;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
     slEnroladores:TStringList;
     i, iQuantidade, iTotal:Integer;
-
+    Percentual:Real;
 
     fTotalSegunda:Real;
 begin
@@ -255,11 +269,42 @@ begin
         IBTBControlePerdas.Post;
         IBQueryEnroladoresCad.Close;
         IBQueryEnroladoresCad.SQL.Clear;
+        if not CDSPerdasConsolidado.Locate('Maquina;Elastico',
+               VarArrayOf([Trim(CDSPerdasMaquina.AsString),Trim(CDSPerdasElastico.AsString)]),[loPartialKey] ) then
+        begin
+          CDSPerdasConsolidado.Insert;
+          CDSPerdasConsolidadoDATA.AsDateTime       :=CDSPerdasData.AsDateTime;
+          CDSPerdasConsolidadoMAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
+          CDSPerdasConsolidadoELASTICO.AsString     :=CDSPerdasElastico.AsString;
+          CDSPerdasConsolidadoCOMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
+          CDSPerdasConsolidadoPESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
+          CDSPerdasConsolidadoQUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
+          CDSPerdasConsolidadoQUANTIDADE.AsInteger  :=CDSPerdasQuantidade.AsInteger;
+          CDSPerdasConsolidadoPRIMEIRA.AsFloat      :=CDSPerdasPrimeira.AsFloat;
+          CDSPerdasConsolidadoSEGUNDA.AsFloat       :=CDSPerdasSegunda.AsFloat;
+          CDSPerdasConsolidadoPERCENTUAL.AsFloat    :=CDSPerdasPercentual.AsFloat;
+          CDSPerdasConsolidado.Post;
+        end
+        else
+        begin
+          CDSPerdasConsolidado.Edit;
+          CDSPerdasConsolidadoQUANTIDADERC.AsInteger:=CDSPerdasConsolidadoQUANTIDADERC.AsInteger+ CDSPerdasQuantidadeRC.AsInteger;
+          CDSPerdasConsolidadoQUANTIDADE.AsInteger  :=CDSPerdasConsolidadoQUANTIDADE.AsInteger+ CDSPerdasQuantidade.AsInteger;
+          CDSPerdasConsolidadoPRIMEIRA.AsFloat      :=CDSPerdasConsolidadoPRIMEIRA.AsFloat + CDSPerdasPrimeira.AsFloat;
+          CDSPerdasConsolidadoSEGUNDA.AsFloat       :=CDSPerdasConsolidadoSEGUNDA.AsFloat+ CDSPerdasSegunda.AsFloat;
+          Percentual:=(CDSPerdasConsolidadoSEGUNDA.AsFloat* 100 ) / CDSPerdasConsolidadoPRIMEIRA.AsFloat;
+          CDSPerdasConsolidadoPERCENTUAL.AsFloat    :=Percentual;
+          CDSPerdasConsolidado.Post;
+        end;
+
+
 
         TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
         AtualizarEstoque;
         Mes:=Copy (CDSPerdasData.AsString ,4,2);
         Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
+
+
         CDSPerdas.Next;
       end;
 
@@ -301,27 +346,54 @@ begin
          IBSQLEstoque.ParamByName('TBES_QUANTI').AsFloat:=TotalSegunda;
          IBSQLEstoque.ExecQuery;
        end;
-       CDSPerdas.EnableControls;
-       Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
 
-       Acumulado:=CalculaAcumuladoMes(Mes, Ano);
-       FrmImpressaoPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
-       if Acumulado <= 2 then
+       CDSPerdas.EnableControls;
+       if FrmAlterarControlePerdas = nil then
        begin
-         FrmImpressaoPerdas.QRLAcumulado.Color       :=clGreen;
-         FrmImpressaoPerdas.QRDBText3.Color          :=clGreen;
+         Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
+
+         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         FrmImpressaoPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
+         if Acumulado <= 2 then
+         begin
+           FrmImpressaoPerdas.QRLAcumulado.Color       :=clGreen;
+           FrmImpressaoPerdas.QRDBText3.Color          :=clGreen;
+         end
+         else
+         begin
+           FrmImpressaoPerdas.QRLAcumulado.Color       :=clRed;
+           FrmImpressaoPerdas.QRDBText3.Color          :=clRed;
+         End;
+         if SN_Visualizar Then
+           FrmImpressaoPerdas.PreviewModal
+         else
+           FrmImpressaoPerdas.Print;
+         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         FreeAndNil(FrmImpressaoPerdas);
        end
        else
        begin
-         FrmImpressaoPerdas.QRLAcumulado.Color       :=clRed;
-         FrmImpressaoPerdas.QRDBText3.Color          :=clRed;
-       End;
-       if SN_Visualizar Then
-         FrmImpressaoPerdas.PreviewModal
-       else
-         FrmImpressaoPerdas.Print;
-       Acumulado:=CalculaAcumuladoMes(Mes, Ano);
-       FreeAndNil(FrmImpressaoPerdas);
+         Application.CreateForm(TFrmImpressaoAlteraPerdas, FrmImpressaoAlteraPerdas);
+
+         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         FrmImpressaoAlteraPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
+         if Acumulado <= 2 then
+         begin
+           FrmImpressaoAlteraPerdas.QRLAcumulado.Color       :=clGreen;
+           FrmImpressaoAlteraPerdas.QRDBText3.Color          :=clGreen;
+         end
+         else
+         begin
+           FrmImpressaoAlteraPerdas.QRLAcumulado.Color       :=clRed;
+           FrmImpressaoAlteraPerdas.QRDBText3.Color          :=clRed;
+         End;
+         if SN_Visualizar Then
+           FrmImpressaoAlteraPerdas.PreviewModal
+         else
+           FrmImpressaoAlteraPerdas.Print;
+         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         FreeAndNil(FrmImpressaoAlteraPerdas);
+       end;
        Application.CreateForm(TFormEnroladores, FormEnroladores);
        FormEnroladores.IBQuery1.ParamByName('pData').AsDate:=DTPData.Date;
        FormEnroladores.IBQuery1.Open;
@@ -341,7 +413,7 @@ begin
       begin
         tFrmMensagens.Mensagem('Erro ao registrar dados ' +'PNGImprimirClick '+ E.message,'E',[mbOK]);
         FrmPrincipal.IBTMain.Rollback;
-      end;  
+      end;
 
 
     end;
@@ -372,6 +444,7 @@ begin
   end;
   DTPData.Date := Now-1;
   CDSPerdas.CreateDataSet;
+  CDSPerdasConsolidado.CreateDataSet;
   EditMaquina.SetFocus;
   preencherComboboxEnroladores;
 

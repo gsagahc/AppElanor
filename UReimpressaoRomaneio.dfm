@@ -1,6 +1,6 @@
 inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
-  Left = 481
-  Top = 113
+  Left = 444
+  Top = 299
   Width = 787
   Height = 496
   Caption = 'Gerenciamento de romaneios'

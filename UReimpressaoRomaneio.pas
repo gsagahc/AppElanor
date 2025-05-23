@@ -222,7 +222,7 @@ begin
       IBSQL1.SQL.Clear;
       IBSQL1.SQL.Add('DELETE FROM TB_ROMANEIO WHERE ID_ROMANEIO=:pidRomaneio');
       IBSQL1.ParamByName('pidRomaneio').AsInteger:=idRomaneio;
-      IBSQL1.Prepare;
+      IBSQL1.Prepare;                                                                
       IBSQL1.ExecQuery;
       CDSRomaneio.Close;
       FrmPrincipal.IBTMain.Commit;

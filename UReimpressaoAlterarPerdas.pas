@@ -40,7 +40,7 @@ Uses Math, uMensagens, UAlterarControledePerdas;
 procedure TFrmImpressaoAlteraPerdas.QRBand2BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
-  if FrmAlterarControlePerdas<> nil then
+   if FrmAlterarControlePerdas<> nil then
     begin
     if (FrmAlterarControlePerdas.CDSPerdasPercentual.AsFloat >= 0) and (FrmAlterarControlePerdas.CDSPerdasPercentual.AsFloat <= 2) then
     begin

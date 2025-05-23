@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
-  Left = 162
-  Top = 109
+  Left = 121
+  Top = 76
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1723,10 +1723,6 @@ object FrmPrincipal: TFrmPrincipal
       object CorrigirAlerar1: TMenuItem
         Caption = 'Corrigir/Alerar'
         OnClick = CorrigirAlerar1Click
-      end
-      object Consultarlanamentos1: TMenuItem
-        Caption = 'Consultar lan'#231'amentos'
-        OnClick = Consultarlanamentos1Click
       end
       object Reimpressopordata1: TMenuItem
         Caption = 'Reimpress'#227'o por data'

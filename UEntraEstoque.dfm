@@ -1,6 +1,6 @@
 object FrmEntEstoque: TFrmEntEstoque
-  Left = 408
-  Top = 188
+  Left = 290
+  Top = 127
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Entrada no estoque'

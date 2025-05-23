@@ -1,8 +1,8 @@
 object FrmConsultarPerdas: TFrmConsultarPerdas
-  Left = 292
-  Top = 300
-  Width = 342
-  Height = 142
+  Left = 242
+  Top = 224
+  Width = 379
+  Height = 134
   BorderIcons = []
   Caption = 'Consultar perdas mensais'
   Color = clBtnFace
@@ -19,8 +19,8 @@ object FrmConsultarPerdas: TFrmConsultarPerdas
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 334
-    Height = 115
+    Width = 363
+    Height = 95
     Align = alClient
     TabOrder = 0
     object PNGButton6: TPNGButton
@@ -256,8 +256,8 @@ object FrmConsultarPerdas: TFrmConsultarPerdas
       'FROM  TB_CONTROLE_PERDAS '
       'INNER JOIN TB_PRODUTOS'
       'ON TB_PRODUTOS.ID_PRODUTO=TB_CONTROLE_PERDAS.TBCP_ELASTICO')
-    Left = 168
-    Top = 80
+    Left = 72
+    Top = 56
     object IBQConsultarTBCP_DATA: TDateField
       FieldName = 'TBCP_DATA'
       Origin = 'TB_CONTROLE_PERDAS.TBCP_DATA'
@@ -312,7 +312,7 @@ object FrmConsultarPerdas: TFrmConsultarPerdas
   end
   object DataSource1: TDataSource
     DataSet = IBQConsultar
-    Left = 208
-    Top = 80
+    Left = 112
+    Top = 56
   end
 end

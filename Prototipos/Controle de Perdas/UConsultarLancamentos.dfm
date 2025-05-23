@@ -1,8 +1,8 @@
 object FrmConsultarLancamentos: TFrmConsultarLancamentos
-  Left = 580
-  Top = 301
-  Width = 350
-  Height = 114
+  Left = 476
+  Top = 224
+  Width = 355
+  Height = 130
   BorderIcons = []
   Caption = 'Consultar lan'#231'amentos anteriores'
   Color = clBtnFace
@@ -260,6 +260,24 @@ object FrmConsultarLancamentos: TFrmConsultarLancamentos
       Origin = 'TB_PRODUTOS.TBPRD_NOME'
       Size = 60
     end
+    object IBQConsultarLancamentosTBCP_QUANTIDADE: TIntegerField
+      FieldName = 'TBCP_QUANTIDADE'
+      Origin = 'TB_CONTROLE_PERDAS.TBCP_QUANTIDADE'
+    end
+    object IBQConsultarLancamentosTBCP_PRIMEIRA: TFloatField
+      FieldName = 'TBCP_PRIMEIRA'
+      Origin = 'TB_CONTROLE_PERDAS.TBCP_PRIMEIRA'
+    end
+    object IBQConsultarLancamentosTBCP_SEGUNDA: TFloatField
+      FieldName = 'TBCP_SEGUNDA'
+      Origin = 'TB_CONTROLE_PERDAS.TBCP_SEGUNDA'
+    end
+    object IBQConsultarLancamentosTBCP_ELASTICO: TIBStringField
+      FieldName = 'TBCP_ELASTICO'
+      Origin = 'TB_CONTROLE_PERDAS.TBCP_ELASTICO'
+      FixedChar = True
+      Size = 30
+    end
   end
   object DSConsultar: TDataSource
     DataSet = IBQConsultarLancamentos
@@ -273,5 +291,44 @@ object FrmConsultarLancamentos: TFrmConsultarLancamentos
     CachedUpdates = False
     Left = 72
     Top = 48
+  end
+  object CDSPerdasConsolidado: TClientDataSet
+    Aggregates = <>
+    FieldDefs = <>
+    IndexDefs = <>
+    Params = <>
+    StoreDefs = True
+    Left = 152
+    Top = 7
+    object CDSPerdasConsolidadoData: TDateField
+      FieldName = 'Data'
+    end
+    object CDSPerdasConsolidadoMaquina: TIntegerField
+      FieldName = 'Maquina'
+    end
+    object CDSPerdasConsolidadoElastico: TStringField
+      FieldName = 'Elastico'
+      Size = 30
+    end
+    object CDSPerdasConsolidadoPercentual: TFloatField
+      FieldName = 'Percentual'
+      Precision = 3
+    end
+    object CDSPerdasConsolidadoNomeElastico: TStringField
+      DisplayWidth = 60
+      FieldName = 'NomeElastico'
+      Size = 60
+    end
+    object CDSPerdasConsolidadoPrimeira: TFloatField
+      FieldName = 'Primeira'
+    end
+    object CDSPerdasConsolidadoSegunda: TFloatField
+      FieldName = 'Segunda'
+    end
+  end
+  object DSPerdasConsolidado: TDataSource
+    DataSet = CDSPerdasConsolidado
+    Left = 184
+    Top = 9
   end
 end

@@ -18,6 +18,19 @@ type
     IBQConsultarLancamentosTBCP_DATA: TDateField;
     IBQConsultarLancamentosTBCP_PERCENTUAL: TFloatField;
     IBQConsultarLancamentosTBPRD_NOME: TIBStringField;
+    CDSPerdasConsolidado: TClientDataSet;
+    CDSPerdasConsolidadoData: TDateField;
+    CDSPerdasConsolidadoMaquina: TIntegerField;
+    CDSPerdasConsolidadoElastico: TStringField;
+    CDSPerdasConsolidadoPercentual: TFloatField;
+    CDSPerdasConsolidadoNomeElastico: TStringField;
+    DSPerdasConsolidado: TDataSource;
+    CDSPerdasConsolidadoPrimeira: TFloatField;
+    CDSPerdasConsolidadoSegunda: TFloatField;
+    IBQConsultarLancamentosTBCP_QUANTIDADE: TIntegerField;
+    IBQConsultarLancamentosTBCP_PRIMEIRA: TFloatField;
+    IBQConsultarLancamentosTBCP_SEGUNDA: TFloatField;
+    IBQConsultarLancamentosTBCP_ELASTICO: TIBStringField;
     procedure PNGButton2Click(Sender: TObject);
     procedure PNGButton6Click(Sender: TObject);
     function CalculaAcumuladoMes(sData:TDate ): Real;
@@ -64,11 +77,41 @@ begin
                                   ' WHERE TB_CONTROLE_PERDAS.TBCP_DATA =:PDATA');
   IBQConsultarLancamentos.ParamByName('PDATA').AsString :=FormatdateTime('dd/mm/yyyy', DateTimePicker1.Date);
   IBQConsultarLancamentos.Open;
+  IBQConsultarLancamentos.First;
   if Not IBQConsultarLancamentos.IsEmpty Then
   begin
     Mes:=Copy (IBQConsultarLancamentos.FieldByName('TBCP_DATA').AsString ,4,2);
     Ano:=Copy (IBQConsultarLancamentos.FieldByName('TBCP_DATA').AsString ,7 ,4);
     Acumulado:=CalculaAcumuladoMes(DateTimePicker1.Date);
+    CDSPerdasConsolidado.CreateDataSet;
+    while  not IBQConsultarLancamentos.Eof do
+    begin
+      if not CDSPerdasConsolidado.Locate('Maquina;Elastico',
+               VarArrayOf([Trim(IBQConsultarLancamentosTBCP_MAQUINA.AsString),Trim(IBQConsultarLancamentosTBCP_ELASTICO.AsString)]),[loPartialKey] ) then
+      begin
+        CDSPerdasConsolidado.Insert;
+        CDSPerdasConsolidadoElastico.ASString    :=Trim(IBQConsultarLancamentosTBCP_ELASTICO.AsString);
+        CDSPerdasConsolidadoMaquina.AsString     :=Trim(IBQConsultarLancamentosTBCP_MAQUINA.AsString);
+        CDSPerdasConsolidadoNomeElastico.AsString:=IBQConsultarLancamentosTBPRD_NOME.AsString;
+        CDSPerdasConsolidadoData.AsDateTime      :=IBQConsultarLancamentosTBCP_DATA.AsDateTime;
+        CDSPerdasConsolidadoPrimeira.AsFloat     :=IBQConsultarLancamentosTBCP_PRIMEIRA.AsFloat;
+        CDSPerdasConsolidadoSegunda.AsFloat      :=IBQConsultarLancamentosTBCP_SEGUNDA.AsFloat;
+        if CDSPerdasConsolidadoSegunda.AsFloat> 0 then
+          CDSPerdasConsolidadoPercentual.AsFloat   := (CDSPerdasConsolidadoSegunda.AsFloat*100)/CDSPerdasConsolidadoPrimeira.AsFloat;
+        CDSPerdasConsolidado.Post;
+      end
+      else
+      begin
+        CDSPerdasConsolidado.Edit;
+        CDSPerdasConsolidadoPrimeira.AsFloat:=CDSPerdasConsolidadoPrimeira.AsFloat+IBQConsultarLancamentosTBCP_PRIMEIRA.AsFloat;
+        CDSPerdasConsolidadoSegunda.AsFloat :=CDSPerdasConsolidadoSegunda.AsFloat+ IBQConsultarLancamentosTBCP_SEGUNDA.AsFloat;
+        if CDSPerdasConsolidadoSegunda.AsFloat> 0 then
+          CDSPerdasConsolidadoPercentual.AsFloat   := (CDSPerdasConsolidadoSegunda.AsFloat*100)/CDSPerdasConsolidadoPrimeira.AsFloat;
+        CDSPerdasConsolidado.Post;
+      end;
+
+      IBQConsultarLancamentos.Next;
+    end;
     Application.CreateForm(TFrmReImpressaoPerdas, FrmReImpressaoPerdas);
     FrmReImpressaoPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
     if Acumulado <= 2 then

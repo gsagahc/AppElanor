@@ -64,16 +64,19 @@ var
   FormEnroladores: TFormEnroladores;
 
 implementation
-Uses UFrmControlePerdas, UPrincipal;
+Uses UFrmControlePerdas, UPrincipal, UParametrosConfig;
 {$R *.dfm}
 
 
 
 procedure TFormEnroladores.QRBand1BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
-var iNumero:Real;
+  var  iNumero:Real;
+   Parametro:TParametros;
+   SN_UsarCores:Boolean;
 begin
-  if FrmControlePerdas.SN_UsarCores then
+  SN_UsarCores :=Parametro.returnValParametro('SN_UTILIZAR_CORES_RELENROL')='S';
+  if SN_UsarCores then
   begin
     iNumero:=QRExprResultado.Value.dblResult;
     if iNumero < QRExprMinimo.Value.dblResult then

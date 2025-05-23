@@ -1,5 +1,5 @@
 object FrmNPedido: TFrmNPedido
-  Left = 246
+  Left = 212
   Top = 0
   BorderIcons = []
   BorderStyle = bsSingle
@@ -997,7 +997,6 @@ object FrmNPedido: TFrmNPedido
     FieldDefs = <
       item
         Name = 'ID_PEDIDO'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -1071,7 +1070,6 @@ object FrmNPedido: TFrmNPedido
       end
       item
         Name = 'TBPED_ESTADO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 2
       end
@@ -1082,7 +1080,6 @@ object FrmNPedido: TFrmNPedido
       end
       item
         Name = 'TBPED_CANCELADO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end
@@ -1094,11 +1091,10 @@ object FrmNPedido: TFrmNPedido
       item
         Name = 'OBS'
         DataType = ftString
-        Size = 60
+        Size = 150
       end
       item
         Name = 'TBPED_BOLETO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 1
       end>
@@ -1180,9 +1176,8 @@ object FrmNPedido: TFrmNPedido
       Size = 1
     end
     object IBTbPedidosOBS: TIBStringField
-      DisplayWidth = 100
       FieldName = 'OBS'
-      Size = 100
+      Size = 150
     end
   end
   object IBTbItensPedido: TIBTable

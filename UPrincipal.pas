@@ -239,7 +239,6 @@ type
     Romaneiodeentrega1: TMenuItem;
     Produo1: TMenuItem;
     Controledeperdas1: TMenuItem;
-    Consultarlanamentos1: TMenuItem;
     PNGButton11: TPNGButton;
     Reimpressopordata1: TMenuItem;
     Despesas1: TMenuItem;

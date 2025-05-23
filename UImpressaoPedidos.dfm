@@ -1,9 +1,9 @@
 object FrmImprePedidos: TFrmImprePedidos
-  Left = 340
-  Top = 152
+  Left = 292
+  Top = 133
   Width = 928
   Height = 482
-  VertScrollBar.Position = 5
+  VertScrollBar.Position = 144
   BorderIcons = []
   Caption = 'Impress'#227'o de pedidos'
   Color = clBtnFace
@@ -18,7 +18,7 @@ object FrmImprePedidos: TFrmImprePedidos
   TextHeight = 13
   object QuickRepEmpresa: TQuickRep
     Left = 88
-    Top = 5
+    Top = -134
     Width = 794
     Height = 1123
     Frame.Color = clBlack
@@ -3563,10 +3563,9 @@ object FrmImprePedidos: TFrmImprePedidos
       Size = 150
     end
     object IBQImpressaoPedOBS: TIBStringField
-      DisplayWidth = 100
       FieldName = 'OBS'
       Origin = 'TB_PEDIDOS.OBS'
-      Size = 100
+      Size = 150
     end
   end
   object DSImpressaoPed: TDataSource
@@ -3816,7 +3815,7 @@ object FrmImprePedidos: TFrmImprePedidos
     end
     object CDsPedidoOBS: TStringField
       FieldName = 'OBS'
-      Size = 80
+      Size = 150
     end
   end
 end

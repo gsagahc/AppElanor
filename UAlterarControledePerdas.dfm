@@ -1,29 +1,33 @@
 inherited FrmAlterarControlePerdas: TFrmAlterarControlePerdas
+  Top = 86
   Height = 537
   Caption = 'FrmAlterarControlePerdas'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Top = 169
-    Height = 329
+    Top = 217
+    Height = 281
     inherited DBGrid1: TDBGrid
-      Height = 327
+      Height = 279
       ReadOnly = False
     end
   end
   inherited Panel2: TPanel
-    Height = 169
+    Height = 217
     inherited PNGBNovo: TPNGButton
       Visible = False
     end
     inherited PNGBSalvar: TPNGButton
       Visible = False
     end
+    inherited ComboBoxEnroladores: TComboBox
+      TabOrder = 11
+    end
     object PanelMsg: TPanel
       Left = 1
-      Top = 143
-      Width = 1081
+      Top = 191
+      Width = 1109
       Height = 25
       Align = alBottom
       BevelOuter = bvNone

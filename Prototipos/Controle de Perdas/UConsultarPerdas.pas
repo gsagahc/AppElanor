@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, pngextra, ExtCtrls, DB, IBCustomDataSet, IBQuery, DateUtils,
-  IBTable, StdCtrls, Mask  ;
+  IBTable, StdCtrls, Mask,
+  DBClient  ;
 
  
 
