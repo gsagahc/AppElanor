@@ -96,8 +96,10 @@ begin
         CDSPerdasConsolidadoData.AsDateTime      :=IBQConsultarLancamentosTBCP_DATA.AsDateTime;
         CDSPerdasConsolidadoPrimeira.AsFloat     :=IBQConsultarLancamentosTBCP_PRIMEIRA.AsFloat;
         CDSPerdasConsolidadoSegunda.AsFloat      :=IBQConsultarLancamentosTBCP_SEGUNDA.AsFloat;
-        if CDSPerdasConsolidadoSegunda.AsFloat> 0 then
-          CDSPerdasConsolidadoPercentual.AsFloat   := (CDSPerdasConsolidadoSegunda.AsFloat*100)/CDSPerdasConsolidadoPrimeira.AsFloat;
+        if CDSPerdasConsolidadoSegunda.AsFloat > 0 then
+          CDSPerdasConsolidadoPercentual.AsFloat   := (CDSPerdasConsolidadoSegunda.AsFloat*100)/CDSPerdasConsolidadoPrimeira.AsFloat
+        else
+          CDSPerdasConsolidadoPercentual.AsFloat:=0;
         CDSPerdasConsolidado.Post;
       end
       else

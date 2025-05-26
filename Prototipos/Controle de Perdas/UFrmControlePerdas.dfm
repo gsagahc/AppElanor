@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
-  Left = 180
-  Top = 156
+  Left = 173
+  Top = 136
   Width = 1127
   Height = 423
   BorderIcons = []
@@ -986,6 +986,9 @@ object FrmControlePerdas: TFrmControlePerdas
     end
     object CDSPerdasMinimoDesejado: TIntegerField
       FieldName = 'MinimoDesejado'
+    end
+    object CDSPerdasId: TIntegerField
+      FieldName = 'Id'
     end
   end
   object DSProdutos: TDataSource

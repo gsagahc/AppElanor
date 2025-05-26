@@ -1,6 +1,6 @@
 object FrmConsultarLancamentos: TFrmConsultarLancamentos
-  Left = 476
-  Top = 224
+  Left = 458
+  Top = 198
   Width = 355
   Height = 130
   BorderIcons = []

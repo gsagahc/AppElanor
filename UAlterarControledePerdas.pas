@@ -18,7 +18,8 @@ type
     procedure EditQuantidadeRCExit(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure PNGImprimirClick(Sender: TObject);
+    procedure CDSPerdasAfterScroll(DataSet: TDataSet);
+    procedure PNGButton1Click(Sender: TObject);
   private
 
     { Private declarations }
@@ -50,10 +51,15 @@ begin
                                   '        TBCP_PRIMEIRA, '+
                                   '        TBCP_SEGUNDA, '+
                                   '        TBCP_PERCENTUAL, '+
-                                  '        TB_PRODUTOS.TBPRD_NOME NOME '+
+                                  '        TB_PRODUTOS.TBPRD_NOME NOME, '+
+                                  '        E.ID_ENROLADOR,     '+
+                                  '        E.NOME NOME_ENROL,     '+
+                                  '        ID_CONTROLEPERDAS    '+
                                   ' FROM TB_CONTROLE_PERDAS  '+
                                   ' INNER JOIN TB_PRODUTOS   '+
                                   ' ON TB_PRODUTOS.ID_PRODUTO=TB_CONTROLE_PERDAS.TBCP_ELASTICO '+
+                                  ' INNER JOIN TB_ENROLADORES E  '+
+                                  ' ON E.ID_ENROLADOR = TB_CONTROLE_PERDAS.ID_ENROLADOR '+
                                   ' WHERE TB_CONTROLE_PERDAS.TBCP_DATA =:PDATA');
   IBQConsultarLancamentos.ParamByName('PDATA').AsString :=FormatdateTime('dd/mm/yyyy', DTPData.Date);
   IBQConsultarLancamentos.Open;
@@ -63,18 +69,21 @@ begin
     while not IBQConsultarLancamentos.Eof do
       begin
         CDSPerdas.Append;
-        CDSPerdasData.AsDateTime      :=IBQConsultarLancamentos.FieldByname('TBCP_DATA').AsDateTime;
-        CDSPerdasMaquina.AsInteger    :=IBQConsultarLancamentos.FieldByname('TBCP_MAQUINA').AsInteger;
-        CDSPerdasElastico.AsString    :=IBQConsultarLancamentos.FieldByname('TBCP_ELASTICO').AsString;
-        CDSPerdasComprimento.AsInteger:= IBQConsultarLancamentos.FieldByname('TBCP_COMPRIMENTO').AsInteger;
-        CDSPerdasPrimeira.AsString    := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_PRIMEIRA').AsFloat);
-        CDSPerdasPesoB.AsString       := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_PESOB').AsFloat);
-        CDSPerdasQuantidadeRC.AsString:= IBQConsultarLancamentos.FieldByname('TBCP_QUANTIDADERC').AsString;
-        CDSPerdasPercentual.AsString  :=FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_PERCENTUAL').AsFloat);
-        CDSPerdasNomeElastico.AsString:=IBQConsultarLancamentos.FieldByname('NOME').AsString;
-        CDSPerdasCBoxIndex.AsInteger  := ComboBoxElastico.Items.IndexOf(IBQConsultarLancamentos.FieldByname('NOME').AsString);
-        CDSPerdasQuantidade.AsInteger := IBQConsultarLancamentos.FieldByname('TBCP_QUANTIDADE').AsInteger;
-        CDSPerdasSegunda.AsString     := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_SEGUNDA').AsFloat);
+        CDSPerdasData.AsDateTime       := IBQConsultarLancamentos.FieldByname('TBCP_DATA').AsDateTime;
+        CDSPerdasMaquina.AsInteger     := IBQConsultarLancamentos.FieldByname('TBCP_MAQUINA').AsInteger;
+        CDSPerdasElastico.AsString     := IBQConsultarLancamentos.FieldByname('TBCP_ELASTICO').AsString;
+        CDSPerdasComprimento.AsInteger := IBQConsultarLancamentos.FieldByname('TBCP_COMPRIMENTO').AsInteger;
+        CDSPerdasPrimeira.AsString     := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_PRIMEIRA').AsFloat);
+        CDSPerdasPesoB.AsString        := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_PESOB').AsFloat);
+        CDSPerdasQuantidadeRC.AsString := IBQConsultarLancamentos.FieldByname('TBCP_QUANTIDADERC').AsString;
+        CDSPerdasPercentual.AsString   := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_PERCENTUAL').AsFloat);
+        CDSPerdasNomeElastico.AsString := IBQConsultarLancamentos.FieldByname('NOME').AsString;
+        CDSPerdasCBoxIndex.AsInteger   := ComboBoxElastico.Items.IndexOf(IBQConsultarLancamentos.FieldByname('NOME').AsString);
+        CDSPerdasQuantidade.AsInteger  := IBQConsultarLancamentos.FieldByname('TBCP_QUANTIDADE').AsInteger;
+        CDSPerdasSegunda.AsString      := FormatFloat('00.###',IBQConsultarLancamentos.FieldByname('TBCP_SEGUNDA').AsFloat);
+        CDSPerdasEnrolador.AsInteger   := IBQConsultarLancamentos.FieldByname('ID_ENROLADOR').AsInteger;
+        CDSPerdasNomeEnrolador.AsString:= IBQConsultarLancamentos.FieldByname('NOME_ENROL').AsString;
+        CDSPerdasId.AsInteger          := IBQConsultarLancamentos.FieldByName('ID_CONTROLEPERDAS').AsInteger;
         CDSPerdas.Post;
         IBQConsultarLancamentos.Next;
 
@@ -89,23 +98,23 @@ end;
 procedure TFrmAlterarControlePerdas.FormShow(Sender: TObject);
 begin
   inherited;
-  DTPData.Date:=Now;
-  DTPData.SetFocus;
+ // DTPData.Date:=Now;
+//  DTPData.SetFocus;
 End;
 
 procedure TFrmAlterarControlePerdas.EditSegundaExit(Sender: TObject);
 begin
   inherited;
-  if EditSegunda.Text <> EmptyStr then
-  try
-    EditPercentual.Text := FormatFloat( '#,###.00' ,(StrToFloat(EditSegunda.Text)*100/StrToFloat(EditPrimeira.Text)));
-  except
-   on E: Exception do
-    begin
-
-    end;
-
-  end;
+//  if EditSegunda.Text <> EmptyStr then
+//  try
+//    EditPercentual.Text := FormatFloat( '#,###.00' ,(StrToFloat(EditSegunda.Text)*100/StrToFloat(EditPrimeira.Text)));
+//  except
+//   on E: Exception do
+//    begin
+//
+//    end;
+//
+//  end;
 end;
 
 procedure TFrmAlterarControlePerdas.EditQuantidadeRCExit(Sender: TObject);
@@ -134,14 +143,31 @@ begin
   end;
 end;
 
-procedure TFrmAlterarControlePerdas.PNGImprimirClick(Sender: TObject);
+procedure TFrmAlterarControlePerdas.CDSPerdasAfterScroll(
+  DataSet: TDataSet);
 begin
-  IBQConsultarLancamentos.SQL.Clear;
-  IBQConsultarLancamentos.SQL.Add(' DELETE FROM TB_CONTROLE_PERDAS '+
-                                  ' WHERE TB_CONTROLE_PERDAS.TBCP_DATA =:PDATA');
-  IBQConsultarLancamentos.ParamByName('PDATA').AsString :=FormatdateTime('dd/mm/yyyy', DTPData.Date);
-  IBQConsultarLancamentos.ExecSQL;
   inherited;
+  ComboBoxEnroladores.ItemIndex:=ComboBoxEnroladores.Items.IndexOf(CDSPerdasNomeEnrolador.AsString);
+end;
+
+procedure TFrmAlterarControlePerdas.PNGButton1Click(Sender: TObject);
+begin
+  if tFrmMensagens.Mensagem('Deseja excluir os dados selecionados?','Q',[mbSIM, mbNAO]) then
+  begin
+    if not FrmPrincipal.IBTMain.Active then
+      FrmPrincipal.IBTMain.StartTransaction;
+
+    IBQConsultarLancamentos.SQL.Clear;
+    IBQConsultarLancamentos.SQL.Add(' DELETE FROM TB_CONTROLE_PERDAS '+
+                                  ' WHERE TB_CONTROLE_PERDAS.TBCP_DATA =:PDATA');
+    IBQConsultarLancamentos.ParamByName('PDATA').AsDateTime :=CDSPerdasData.AsDateTime;
+    IBQConsultarLancamentos.ExecSQL;
+    FrmPrincipal.IBTMain.Commit;
+    FrmPrincipal.IBDMain.CloseDataSets;
+   
+    Close;
+  end;
+
 
 end;
 

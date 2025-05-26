@@ -137,6 +137,7 @@ type
     CDSPerdasConsolidadoPercentual: TFloatField;
     CDSPerdasConsolidadoNomeElastico: TStringField;
     DSPerdasConsolidado: TDataSource;
+    CDSPerdasId: TIntegerField;
     procedure PNGBNovoClick(Sender: TObject);
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -276,6 +277,7 @@ begin
           CDSPerdasConsolidadoDATA.AsDateTime       :=CDSPerdasData.AsDateTime;
           CDSPerdasConsolidadoMAQUINA.AsInteger     :=CDSPerdasMaquina.AsInteger;
           CDSPerdasConsolidadoELASTICO.AsString     :=CDSPerdasElastico.AsString;
+          CDSPerdasConsolidadoNomeElastico.AsString :=CDSPerdasNomeElastico.AsString;
           CDSPerdasConsolidadoCOMPRIMENTO.AsInteger :=CDSPerdasComprimento.AsInteger;
           CDSPerdasConsolidadoPESOB.AsFloat         :=CDSPerdasPesoB.AsFloat;
           CDSPerdasConsolidadoQUANTIDADERC.AsInteger:=CDSPerdasQuantidadeRC.AsInteger;
@@ -445,7 +447,8 @@ begin
   DTPData.Date := Now-1;
   CDSPerdas.CreateDataSet;
   CDSPerdasConsolidado.CreateDataSet;
-  EditMaquina.SetFocus;
+  if EditMaquina.CanFocus Then
+    EditMaquina.SetFocus;
   preencherComboboxEnroladores;
 
 end;
@@ -633,6 +636,7 @@ end;
 
 procedure TFrmControlePerdas.PNGBSalvarClick(Sender: TObject);
 begin
+ 
   if (ComboBoxEnroladores.ItemIndex < 0) and (CDSPerdas.State  in [dsInsert]) Then
   begin
     tFrmMensagens.Mensagem('Favor selecionar um enrolador na lista.' ,'E',[mbOK]);

@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
-  Left = 121
-  Top = 76
+  Left = 182
+  Top = 113
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1640,7 +1640,7 @@ object FrmPrincipal: TFrmPrincipal
         OnClick = Pedidosaprazo1Click
       end
       object Faturamentodirio1: TMenuItem
-        Caption = 'Faturamento di'#225'rio'
+        Caption = 'Faturamento'
         OnClick = Faturamentodirio1Click
       end
       object Faturamentoestimado1: TMenuItem
@@ -1658,6 +1658,10 @@ object FrmPrincipal: TFrmPrincipal
       object abeladepreos1: TMenuItem
         Caption = 'Tabela de pre'#231'os'
         OnClick = abeladepreos1Click
+      end
+      object Estoquegeral1: TMenuItem
+        Caption = 'Estoque atual'
+        OnClick = Estoquegeral1Click
       end
       object Despesas2: TMenuItem
         Caption = 'Custos'
@@ -1721,7 +1725,7 @@ object FrmPrincipal: TFrmPrincipal
         OnClick = Controledeperdas1Click
       end
       object CorrigirAlerar1: TMenuItem
-        Caption = 'Corrigir/Alerar'
+        Caption = 'Excluir lan'#231'amentos'
         OnClick = CorrigirAlerar1Click
       end
       object Reimpressopordata1: TMenuItem
