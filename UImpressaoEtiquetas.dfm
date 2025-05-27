@@ -789,6 +789,10 @@ object FrmImpEtiquetas: TFrmImpEtiquetas
     object CDSEtiquetaRomaneio: TIntegerField
       FieldName = 'Romaneio'
     end
+    object CDSEtiquetaNome_abreviado: TStringField
+      FieldName = 'NOME_ABREVIADO'
+      Size = 6
+    end
   end
   object IBQueryUtil: TIBQuery
     Database = FrmPrincipal.IBDMain

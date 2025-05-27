@@ -35,11 +35,11 @@ type
     QRShape1: TQRShape;
     QRLabel10: TQRLabel;
     QRDBText9: TQRDBText;
-    QRQCode: TQRImage;
     QRLabelUnidade: TQRLabel;
     QRLabelPedido: TQRLabel;
     QRLabelMensagem: TQRLabel;
     QLbRomaneio: TQRLabel;
+    QRDBText10: TQRDBText;
   private
     { Private declarations }
   public

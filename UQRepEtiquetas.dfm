@@ -3,7 +3,6 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
   Top = 103
   Width = 928
   Height = 480
-  VertScrollBar.Position = 39
   BorderIcons = [biSystemMenu]
   Caption = 'impress'#227'o de etiquetas'
   Color = clBtnFace
@@ -18,7 +17,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
   TextHeight = 13
   object QuickRep1: TQuickRep
     Left = 16
-    Top = -23
+    Top = 16
     Width = 794
     Height = 1123
     Frame.Color = clBlack
@@ -1287,24 +1286,6 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         WordWrap = True
         FontSize = 12
       end
-      object QRQCode: TQRImage
-        Left = 544
-        Top = 48
-        Width = 137
-        Height = 145
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          383.645833333333300000
-          1439.333333333333000000
-          127.000000000000000000
-          362.479166666666700000)
-        Center = True
-        Stretch = True
-      end
       object QRLabelUnidade: TQRLabel
         Left = 304
         Top = 416
@@ -1393,24 +1374,25 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         FontSize = 10
       end
       object QLbRomaneio: TQRLabel
-        Left = 546
+        Left = 514
         Top = 208
-        Width = 135
-        Height = 111
+        Width = 70
+        Height = 112
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          293.687500000000000000
-          1444.625000000000000000
+          296.333333333333300000
+          1359.958333333333000000
           550.333333333333300000
-          357.187500000000000000)
+          185.208333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
+        Caption = 'N'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -1421,6 +1403,38 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Transparent = False
         WordWrap = True
         FontSize = 72
+      end
+      object QRDBText10: TQRDBText
+        Left = 504
+        Top = 24
+        Width = 209
+        Height = 89
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          235.479166666666700000
+          1333.500000000000000000
+          63.500000000000000000
+          552.979166666666700000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = True
+        Color = clWhite
+        DataSet = FrmImpEtiquetas.CDSEtiqueta
+        DataField = 'NOME_ABREVIADO'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -64
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        FontSize = 48
       end
     end
     object QRShape1: TQRShape

@@ -70,6 +70,7 @@ type
     Label12: TLabel;
     CDSEtiquetaRomaneio: TIntegerField;
     EdtRomaneio: TEdit;
+    CDSEtiquetaNome_abreviado: TStringField;
     procedure PNGButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
@@ -132,14 +133,16 @@ begin
                             ' TBPRD_PRECOCUSTO,'+
                             ' TBPRD_PRECOVENDA,'+
                             ' TBPRD_DESCRICAO, '+
-                            ' TBPRD_UNIDADE '+
+                            ' TBPRD_UNIDADE, '+
+                            ' NOME_ABREVIADO '+
                      'FROM TB_PRODUTOS '+
                      'WHERE  ID_PRODUTO='+IntToStr(FrmPrincipal.IdProduto));
      IBSQL1.ExecQuery;
      Produto.Nome:=Trim(IBSQL1.FieldByName('TBPRD_NOME').AsString);
      Produto.Unidade:=Trim(IBSQL1.FieldByName('TBPRD_UNIDADE').AsString);
      CDSEtiqueta.Edit;
-     CDSEtiquetaPRODUTO.AsString := IBSQL1.FieldByName('TBPRD_NOME').AsString;
+     CDSEtiquetaPRODUTO.AsString       := IBSQL1.FieldByName('TBPRD_NOME').AsString;
+     CDSEtiquetaNome_abreviado.AsString:= IBSQL1.FieldByName('NOME_ABREVIADO').AsString;
      Produto.Id :=IBSQL1.FieldByName('ID_PRODUTO').AsInteger;
      if Produto.Unidade ='M' then
        ComboBoxUnidade.ItemIndex := 0;
@@ -245,7 +248,10 @@ begin
     FrmQrepEtiquetas.QRLabelUnidade.Caption  :=ComboBoxUnidade.Text;
     FrmQrepEtiquetas.QRLabelPedido.Caption   := 'PEDIDO: ' + EditPedido.Text;
     FrmQrepEtiquetas.QRLabelMensagem.Caption := FrmQrepEtiquetas.QRLabelMensagem.Caption + 'Embalado em: '+ DataLote + ' Validade: 3 anos';
-    FrmQrepEtiquetas.QLbRomaneio.Caption:= EdtRomaneio.Text;
+    if Trim(EdtRomaneio.Text)<> EmptyStr then
+      FrmQrepEtiquetas.QLbRomaneio.Caption:='N:' + EdtRomaneio.Text
+    else
+      FrmQrepEtiquetas.QLbRomaneio.Caption:='';
     FrmQrepEtiquetas.QuickRep1.Print;
     //QRCode1.Image:=nil;
     FreeAndNil(FrmQrepEtiquetas);

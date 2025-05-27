@@ -702,7 +702,7 @@ object FrmCadProd: TFrmCadProd
     end
     object Label3: TLabel
       Left = 16
-      Top = 210
+      Top = 252
       Width = 87
       Height = 13
       Caption = 'Pre'#231'o de custo'
@@ -716,7 +716,7 @@ object FrmCadProd: TFrmCadProd
     end
     object Label4: TLabel
       Left = 16
-      Top = 250
+      Top = 292
       Width = 91
       Height = 13
       Caption = 'Pre'#231'o de venda'
@@ -744,7 +744,7 @@ object FrmCadProd: TFrmCadProd
     end
     object Label6: TLabel
       Left = 16
-      Top = 128
+      Top = 170
       Width = 28
       Height = 13
       Caption = 'NCM'
@@ -758,10 +758,24 @@ object FrmCadProd: TFrmCadProd
     end
     object Label7: TLabel
       Left = 16
-      Top = 168
+      Top = 210
       Width = 110
       Height = 13
       Caption = 'Unidade de medida'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 16
+      Top = 128
+      Width = 92
+      Height = 13
+      Caption = 'Nome Resumido'
+      FocusControl = DBEdit2
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -784,7 +798,7 @@ object FrmCadProd: TFrmCadProd
     end
     object DBEdit3: TDBEdit
       Left = 16
-      Top = 226
+      Top = 268
       Width = 577
       Height = 19
       CharCase = ecUpperCase
@@ -796,7 +810,7 @@ object FrmCadProd: TFrmCadProd
     end
     object DBEdit4: TDBEdit
       Left = 16
-      Top = 266
+      Top = 308
       Width = 577
       Height = 19
       CharCase = ecUpperCase
@@ -834,7 +848,7 @@ object FrmCadProd: TFrmCadProd
     end
     object DBEdit6: TDBEdit
       Left = 16
-      Top = 144
+      Top = 186
       Width = 577
       Height = 19
       CharCase = ecUpperCase
@@ -846,7 +860,7 @@ object FrmCadProd: TFrmCadProd
     end
     object DBEdit7: TDBEdit
       Left = 16
-      Top = 184
+      Top = 226
       Width = 577
       Height = 19
       CharCase = ecUpperCase
@@ -855,6 +869,18 @@ object FrmCadProd: TFrmCadProd
       DataSource = DSProdutos
       ParentCtl3D = False
       TabOrder = 3
+    end
+    object DBEdit2: TDBEdit
+      Left = 16
+      Top = 144
+      Width = 577
+      Height = 19
+      CharCase = ecUpperCase
+      Ctl3D = False
+      DataField = 'NOME_ABREVIADO'
+      DataSource = DSProdutos
+      ParentCtl3D = False
+      TabOrder = 7
     end
   end
   object IBUSQLProdutos: TIBUpdateSQL
@@ -882,7 +908,6 @@ object FrmCadProd: TFrmCadProd
     FieldDefs = <
       item
         Name = 'ID_PRODUTO'
-        Attributes = [faRequired]
         DataType = ftInteger
       end
       item
@@ -913,21 +938,28 @@ object FrmCadProd: TFrmCadProd
       end
       item
         Name = 'TBPRD_UNIDADE'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 3
       end
       item
         Name = 'TBPRD_NCM'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 10
       end
       item
         Name = 'TBPRD_CODIGO'
-        Attributes = [faFixed]
         DataType = ftString
         Size = 4
+      end
+      item
+        Name = 'SNESTOCAVEL'
+        DataType = ftString
+        Size = 1
+      end
+      item
+        Name = 'NOME_ABREVIADO'
+        DataType = ftString
+        Size = 6
       end>
     StoreDefs = True
     TableName = 'TB_PRODUTOS'
@@ -970,6 +1002,10 @@ object FrmCadProd: TFrmCadProd
       DisplayFormat = '#0.000'
       Precision = 18
       Size = 4
+    end
+    object IBTbProdutosNOME_ABREVIADO: TIBStringField
+      FieldName = 'NOME_ABREVIADO'
+      Size = 6
     end
   end
   object IBSQLProdutos: TIBSQL

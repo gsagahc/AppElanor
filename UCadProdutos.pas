@@ -47,6 +47,9 @@ type
     DBEdit1: TDBEdit;
     DBEdit6: TDBEdit;
     DBEdit7: TDBEdit;
+    DBEdit2: TDBEdit;
+    Label8: TLabel;
+    IBTbProdutosNOME_ABREVIADO: TIBStringField;
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGBSalvarClick(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
