@@ -1027,9 +1027,9 @@ object FrmRelFaturamentoMensal: TFrmRelFaturamentoMensal
         FontSize = 10
       end
       object QRLabel10: TQRLabel
-        Left = 49
+        Left = 121
         Top = 62
-        Width = 149
+        Width = 78
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -1038,14 +1038,14 @@ object FrmRelFaturamentoMensal: TFrmRelFaturamentoMensal
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          129.645833333333300000
+          320.145833333333300000
           164.041666666666700000
-          394.229166666666700000)
+          206.375000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Dias trabalhados no m'#234's:'
+        Caption = 'Dias no m'#234's:'
         Color = clWhite
         Transparent = False
         WordWrap = True

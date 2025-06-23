@@ -1,52 +1,31 @@
 [Closed Files]
-File_0=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\Forms.pas',0,1,3114,1,730,0,0
-File_1=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.dfm',0,1,1,1,1,0,0
-File_2=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\DB.pas',0,1,25,1,37,0,0
-File_3=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarPerdasMes.pas',0,1,40,36,40,1,0
-File_4=SourceModule,'C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas',0,1,97,30,108,1,0
-File_5=SourceModule,'C:\git_repository\AppElanor\UReimpressaoRomaneio.pas',0,1,223,86,225,1,0
-File_6=SourceModule,'C:\git_repository\AppElanor\UImpressaoPedidos.pas',0,1,1,1,1,1,0
+File_0=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarLancamentos.pas',0,1,54,1,45,1,0
+File_1=SourceModule,'C:\git_repository\AppElanor\UReimpressaoPerdas.pas',0,1,46,44,52,1,0
+File_2=SourceModule,'C:\git_repository\AppElanor\UImpressaoEtiquetas.pas',0,1,241,67,254,1,0
+File_3=SourceModule,'C:\git_repository\AppElanor\UQRepEtiquetas.pas',0,1,38,125,42,3,0
+File_4=SourceModule,'C:\git_repository\AppElanor\UCadProdutos.pas',0,1,115,42,116,1,0
+File_5=SourceModule,'C:\git_repository\AppElanor\UCadPedido.pas',0,1,229,33,241,1,0
+File_6=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\Forms.pas',0,1,3114,1,730,0,0
+File_7=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.dfm',0,1,1,1,1,0,0
+File_8=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\DB.pas',0,1,25,1,37,0,0
+File_9=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarPerdasMes.pas',0,1,40,36,40,1,0
 
 [Modules]
-Module0=C:\git_repository\AppElanor\UQRepEtiquetas.pas
-Module1=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarLancamentos.pas
-Module2=C:\git_repository\AppElanor\UReimpressaoPerdas.pas
-Module3=C:\git_repository\AppElanor\UImpressaoEtiquetas.pas
-Module4=C:\git_repository\AppElanor\UPrincipal.pas
-Module5=C:\git_repository\AppElanor\UCadPedido.pas
-Module6=C:\git_repository\AppElanor\UAlterarControledePerdas.pas
-Module7=C:\git_repository\AppElanor\UCadProdutos.pas
-Module8=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-Module9=C:\git_repository\AppElanor\Elanor.dpr
-Count=10
+Module0=C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas
+Module1=C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas
+Module2=C:\git_repository\AppElanor\UAlterarControledePerdas.pas
+Module3=C:\git_repository\AppElanor\UPrincipal.pas
+Module4=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
+Module5=C:\git_repository\AppElanor\Elanor.dpr
+Count=6
 EditWindowCount=1
 
-[C:\git_repository\AppElanor\UQRepEtiquetas.pas]
+[C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarLancamentos.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UReimpressaoPerdas.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UImpressaoEtiquetas.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UPrincipal.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=1
-
-[C:\git_repository\AppElanor\UCadPedido.pas]
+[C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -56,7 +35,7 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UCadProdutos.pas]
+[C:\git_repository\AppElanor\UPrincipal.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -76,40 +55,36 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=10
-CurrentView=5
+ViewCount=6
+CurrentView=3
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
 View5=5
-View6=6
-View7=7
-View8=8
-View9=9
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=2
-Left=263
-Top=67
+Left=329
+Top=84
 Width=1017
 Height=653
 MaxLeft=-8
 MaxTop=107
-MaxWidth=1296
-MaxHeight=581
-ClientWidth=1280
-ClientHeight=542
+MaxWidth=1616
+MaxHeight=761
+ClientWidth=1600
+ClientHeight=722
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
 BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=000004000000000000050000000000000255000000000000000100000000000000000000000001000000004006000000000000010000000014050000000000000100000000000500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=000004000000000040060000000000000255000000000000000100000000000000000000000001000000004006000000000000010000000014050000000000000100000000400600000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=C:\git_repository\AppElanor\Elanor.dpr
@@ -127,54 +102,26 @@ LeftCol=1
 
 [View2]
 Module=C:\git_repository\AppElanor\UPrincipal.pas
-CursorX=43
-CursorY=396
-TopLine=394
+CursorX=1
+CursorY=1436
+TopLine=1431
 LeftCol=1
 
 [View3]
-Module=C:\git_repository\AppElanor\UCadProdutos.pas
-CursorX=117
-CursorY=115
-TopLine=115
+Module=C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas
+CursorX=95
+CursorY=81
+TopLine=66
 LeftCol=1
 
 [View4]
-Module=C:\git_repository\AppElanor\UImpressaoEtiquetas.pas
-CursorX=55
-CursorY=245
-TopLine=235
+Module=C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas
+CursorX=143
+CursorY=57
+TopLine=42
 LeftCol=1
 
 [View5]
-Module=C:\git_repository\AppElanor\UQRepEtiquetas.pas
-CursorX=125
-CursorY=42
-TopLine=38
-LeftCol=1
-
-[View6]
-Module=C:\git_repository\AppElanor\UCadPedido.pas
-CursorX=33
-CursorY=241
-TopLine=229
-LeftCol=1
-
-[View7]
-Module=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarLancamentos.pas
-CursorX=1
-CursorY=45
-TopLine=60
-LeftCol=1
-
-[View8]
-Module=C:\git_repository\AppElanor\UReimpressaoPerdas.pas
-CursorX=44
-CursorY=52
-TopLine=46
-LeftCol=1
-
-[View9]
 Module=C:\git_repository\AppElanor\UAlterarControledePerdas.pas
 CursorX=127
 CursorY=138
@@ -204,10 +151,11 @@ LRDockWidth=426
 Dockable=1
 
 [Breakpoints]
-Count=3
+Count=4
 Breakpoint0='C:\AppElanor_Fontes\ULogin.pas',50,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='C:\AppElanor_Fontes\UCadCli.pas',216,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint2='C:\AppElanor_Fontes\UCadPedido.pas',514,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint3='C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas',128,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -218,13 +166,13 @@ Visible=1
 State=2
 Left=0
 Top=0
-Width=1280
+Width=1600
 Height=123
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1296
+MaxWidth=1616
 MaxHeight=123
-ClientWidth=1280
+ClientWidth=1600
 ClientHeight=84
 
 [ProjectManager]
@@ -248,7 +196,7 @@ Create=1
 Visible=0
 State=0
 Left=1
-Top=10
+Top=13
 Width=1036
 Height=416
 MaxLeft=-1
@@ -290,7 +238,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=136
 ArrangeBy=Name
-SelectedItem=Name
+SelectedItem=Caption
 ExpandedItems=Anchors,Bands,BorderIcons,Brush,CalColors,Constraints,FileType,Frame,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title
 HiddenCategories=
 
@@ -333,11 +281,11 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=510
+Height=622
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=510
+ClientHeight=622
 TBDockHeight=305
 LRDockWidth=140
 Dockable=1
@@ -348,11 +296,11 @@ Visible=1
 State=0
 Left=12
 Top=0
-Width=1522
+Width=1588
 Height=85
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1522
+ClientWidth=1588
 ClientHeight=85
 TBDockHeight=85
 LRDockWidth=443

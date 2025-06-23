@@ -1,6 +1,6 @@
 inherited FrmAlterarControlePerdas: TFrmAlterarControlePerdas
-  Left = 80
-  Top = 73
+  Left = 100
+  Top = 91
   Width = 1064
   Height = 383
   Caption = 'Excluir lan'#231'amentos'

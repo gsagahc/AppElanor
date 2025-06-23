@@ -1,6 +1,6 @@
 object FrmQrepEtiquetas: TFrmQrepEtiquetas
-  Left = 224
-  Top = 103
+  Left = 280
+  Top = 129
   Width = 928
   Height = 480
   BorderIcons = [biSystemMenu]

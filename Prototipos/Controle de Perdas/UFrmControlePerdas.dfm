@@ -1,6 +1,6 @@
 object FrmControlePerdas: TFrmControlePerdas
-  Left = 173
-  Top = 136
+  Left = 216
+  Top = 170
   Width = 1127
   Height = 423
   BorderIcons = []
