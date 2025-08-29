@@ -1434,6 +1434,7 @@ begin
   StatusBar1.Panels.Items[5].Text:= FrmConsultarFatMensal.Caption;
   FrmConsultarFatMensal.ShowModal;
   FreeAndNil(FrmConsultarFatMensal);
+  StatusBar1.Panels.Items[5].Text:='';
 end;
 
 
