@@ -255,6 +255,8 @@ type
     IBSPATUALIZAMOVI: TIBStoredProc;
     Enroladores1: TMenuItem;
     Configuraes1: TMenuItem;
+    IBQPedidosTBPED_VENC04: TDateField;
+    IBQPedidos_OBSTBPED_VENC04: TDateField;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -1434,6 +1436,7 @@ begin
   StatusBar1.Panels.Items[5].Text:= FrmConsultarFatMensal.Caption;
   FrmConsultarFatMensal.ShowModal;
   FreeAndNil(FrmConsultarFatMensal);
+  StatusBar1.Panels.Items[5].Text:='';
 end;
 
 

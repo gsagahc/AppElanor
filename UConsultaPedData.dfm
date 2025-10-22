@@ -624,6 +624,18 @@ object FrmConsultarPedData: TFrmConsultarPedData
         end
         item
           Expanded = False
+          FieldName = 'TBPED_VENC04'
+          Title.Caption = 'Vencimento'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'TBUSR_NOME'
           Title.Caption = 'Pedido emitido por'
           Title.Font.Charset = DEFAULT_CHARSET
@@ -714,6 +726,7 @@ object FrmConsultarPedData: TFrmConsultarPedData
       '          TBPED_VENC01,'
       '          TBPED_VENC02,'
       '          TBPED_VENC03,'
+      '          TBPED_VENC04,'
       '          TB_PEDIDOS.ID_USUARIO,'
       '          TBPED_BAIRRO,'
       '          TBPED_CNPJ,'
@@ -805,6 +818,10 @@ object FrmConsultarPedData: TFrmConsultarPedData
     object IBQPedidosTBPED_VENC03: TDateField
       FieldName = 'TBPED_VENC03'
       Origin = 'TB_PEDIDOS.TBPED_VENC03'
+    end
+    object IBQPedidosTBPED_VENC04: TDateField
+      FieldName = 'TBPED_VENC04'
+      Origin = 'TB_PEDIDOS.TBPED_VENC04'
     end
     object IBQPedidosID_USUARIO: TIntegerField
       FieldName = 'ID_USUARIO'

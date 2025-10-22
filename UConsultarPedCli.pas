@@ -63,6 +63,7 @@ type
     Label5: TLabel;
     DTPickerIni: TDateTimePicker;
     DTPickerFin: TDateTimePicker;
+    IBQPedidosTBPED_VENC04: TDateField;
     procedure PNGButton2Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PNGButton1Click(Sender: TObject);
@@ -124,6 +125,7 @@ begin
                               ' TBPED_VENC01, '+
                               ' TBPED_VENC02, '+
                               ' TBPED_VENC03, '+
+                              ' TBPED_VENC04, '+
                               ' TB_PEDIDOS.ID_USUARIO, '+
                               ' TBPED_BAIRRO, '+
                               ' TBPED_CNPJ, '+

@@ -42,6 +42,10 @@ type
     IBQPrazosTBPRZ_PRAZO03: TIntegerField;
     IBQPrazosTBPRZ_NOME: TIBStringField;
     IBTbPrazosID_PRAZO: TIntegerField;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    IBQPrazosTBPRZ_PRAZO04: TIntegerField;
+    IBTbPrazosTBPRZ_PRAZO04: TIntegerField;
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);

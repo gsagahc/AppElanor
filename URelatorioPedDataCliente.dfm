@@ -679,6 +679,17 @@ object FrmRelatorioPedDataCli: TFrmRelatorioPedDataCli
           FieldName = 'TBPED_MOTIVOCANCEL'
           Title.Caption = 'Motivo do cancelamento'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TBPED_VENC04'
+          Title.Caption = 'Vencimento'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Visible = True
         end>
     end
     object Panel3: TPanel

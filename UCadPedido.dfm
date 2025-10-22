@@ -567,9 +567,9 @@ object FrmNPedido: TFrmNPedido
       TabOrder = 10
     end
     object RadioGroupBoleto: TRadioGroup
-      Left = 432
+      Left = 576
       Top = 168
-      Width = 313
+      Width = 169
       Height = 41
       Caption = 'Boleto'
       Columns = 2
@@ -587,6 +587,18 @@ object FrmNPedido: TFrmNPedido
       ParentFont = False
       TabOrder = 11
       TabStop = True
+    end
+    object DBEdit10: TDBEdit
+      Left = 432
+      Top = 184
+      Width = 121
+      Height = 19
+      Ctl3D = False
+      DataField = 'TBPED_VENC04'
+      DataSource = DsPedido
+      Enabled = False
+      ParentCtl3D = False
+      TabOrder = 12
     end
   end
   object PanelProdutos: TPanel
@@ -1097,6 +1109,10 @@ object FrmNPedido: TFrmNPedido
         Name = 'TBPED_BOLETO'
         DataType = ftString
         Size = 1
+      end
+      item
+        Name = 'TBPED_VENC04'
+        DataType = ftDate
       end>
     IndexDefs = <
       item
@@ -1178,6 +1194,9 @@ object FrmNPedido: TFrmNPedido
     object IBTbPedidosOBS: TIBStringField
       FieldName = 'OBS'
       Size = 150
+    end
+    object IBTbPedidosTBPED_VENC04: TDateField
+      FieldName = 'TBPED_VENC04'
     end
   end
   object IBTbItensPedido: TIBTable

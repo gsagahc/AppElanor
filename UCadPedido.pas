@@ -114,6 +114,8 @@ type
     IBTbPedidosTBPED_BOLETO: TIBStringField;
     IBQUtil: TIBQuery;
     IBTbPedidosOBS: TIBStringField;
+    DBEdit10: TDBEdit;
+    IBTbPedidosTBPED_VENC04: TDateField;
     procedure PNGButton4Click(Sender: TObject);
     procedure IBTbPedidosAfterInsert(DataSet: TDataSet);
     procedure PNGButton1Click(Sender: TObject);
@@ -423,34 +425,35 @@ begin
       End
       Else
       Begin
-      If Quantidade > Estoque.Quantidade  Then
-         // Se produto for elástico então Result True
-         IBQUtil.Close;
-         IBQUtil.SQL.Clear;
-         IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
-                        ' FROM TB_PRODUTOS '+
-                        ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
-         IBQUtil.Open;
-     
-       sMensagem:= 'A quantidade informada é maior do que o estoque '+
-                   'atual deste produto, o estoque ficará negativo.' +
-                   'Deseja continuar?' ;
-       if  tFrmMensagens.Mensagem(sMensagem,'Q',[mbSIM, mbNAO]) Then
-       Begin
-         IBSQLUTIL.Close;
-         IBSQLUTIL.SQL.Clear;
-         IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                          ' SET ' +
-                          ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
-                          ' WHERE ID_PRODUTO=:pIdProduto ' +
-                          ' AND ID_ESTOQUE= :pIdEstoque ');
-         IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
-         IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
-         IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
-         IBSQLUTIL.ExecQuery;
-         Result:=True;
-       end;
+        If Quantidade > Estoque.Quantidade  Then
+        begin
+           // Se produto for elástico então Result True
+           IBQUtil.Close;
+           IBQUtil.SQL.Clear;
+           IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
+                          ' FROM TB_PRODUTOS '+
+                          ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
+           IBQUtil.Open;
 
+         sMensagem:= 'A quantidade informada é maior do que o estoque '+
+                     'atual deste produto, o estoque ficará 0 (zero).' +
+                     'Deseja continuar?' ;
+          if  tFrmMensagens.Mensagem(sMensagem,'Q',[mbSIM, mbNAO]) Then
+          Begin
+            IBSQLUTIL.Close;
+            IBSQLUTIL.SQL.Clear;
+            IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                             ' SET ' +
+                             ' TBES_QUANTI = :pQuantidade ' +
+                             ' WHERE ID_PRODUTO=:pIdProduto ' +
+                             ' AND ID_ESTOQUE= :pIdEstoque ');
+            IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
+            IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
+            IBSQLUTIL.ParamByName('pQuantidade').Value := 0 ;
+            IBSQLUTIL.ExecQuery;
+            Result:=True;
+          end;
+        end;
       end;
     End;
     If Operacao ='S' Then
@@ -690,6 +693,10 @@ begin
      Begin
        IBTbPedidosTBPED_VENC03.AsString:= FormatDateTime('dd/mm/yyyy', now()+IBSQLCliente.FieldByName('TBPRZ_PRAZO03').AsInteger);
      end;
+    If  IBSQLCliente.FieldByName('TBPRZ_PRAZO04').AsInteger  <> 0 Then
+    Begin
+       IBTbPedidosTBPED_VENC04.AsString:= FormatDateTime('dd/mm/yyyy', now()+IBSQLCliente.FieldByName('TBPRZ_PRAZO04').AsInteger);
+    end;
 end;
 
 procedure TFrmNPedido.CDSItensPedidoTBITPED_QUANTChange(Sender: TField);

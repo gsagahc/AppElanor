@@ -59,6 +59,7 @@ type
     Label3: TLabel;
     DTPickerIni: TDateTimePicker;
     DTPickerFin: TDateTimePicker;
+    IBQPedidosTBPED_VENC04: TDateField;
     procedure PNGButton2Click(Sender: TObject);
     procedure PNGButton1Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);

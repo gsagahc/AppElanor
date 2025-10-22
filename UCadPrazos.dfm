@@ -4,7 +4,7 @@ object FrmCadPrazos: TFrmCadPrazos
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de prazos'
-  ClientHeight = 258
+  ClientHeight = 289
   ClientWidth = 606
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object FrmCadPrazos: TFrmCadPrazos
   TextHeight = 13
   object PnlBottom: TPanel
     Left = 0
-    Top = 181
+    Top = 212
     Width = 606
     Height = 77
     Align = alBottom
@@ -670,7 +670,7 @@ object FrmCadPrazos: TFrmCadPrazos
     Left = 0
     Top = 0
     Width = 606
-    Height = 181
+    Height = 212
     Align = alClient
     TabOrder = 1
     object Label1: TLabel
@@ -728,6 +728,20 @@ object FrmCadPrazos: TFrmCadPrazos
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label3: TLabel
+      Left = 16
+      Top = 168
+      Width = 111
+      Height = 13
+      Caption = 'Quantidade de dias'
+      FocusControl = DBEdit3
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object DBEdit2: TDBEdit
       Left = 16
       Top = 64
@@ -738,7 +752,7 @@ object FrmCadPrazos: TFrmCadPrazos
       DataField = 'TBPRZ_PRAZO01'
       DataSource = DSPrazos
       ParentCtl3D = False
-      TabOrder = 0
+      TabOrder = 1
     end
     object DBEdit5: TDBEdit
       Left = 16
@@ -750,7 +764,7 @@ object FrmCadPrazos: TFrmCadPrazos
       DataField = 'TBPRZ_PRAZO02'
       DataSource = DSPrazos
       ParentCtl3D = False
-      TabOrder = 1
+      TabOrder = 2
     end
     object DBEdit1: TDBEdit
       Left = 16
@@ -763,7 +777,7 @@ object FrmCadPrazos: TFrmCadPrazos
       DataField = 'TBPRZ_NOME'
       DataSource = DSPrazos
       ParentCtl3D = False
-      TabOrder = 3
+      TabOrder = 0
     end
     object DBEdit6: TDBEdit
       Left = 16
@@ -775,7 +789,19 @@ object FrmCadPrazos: TFrmCadPrazos
       DataField = 'TBPRZ_PRAZO03'
       DataSource = DSPrazos
       ParentCtl3D = False
-      TabOrder = 2
+      TabOrder = 3
+    end
+    object DBEdit3: TDBEdit
+      Left = 16
+      Top = 184
+      Width = 577
+      Height = 19
+      CharCase = ecUpperCase
+      Ctl3D = False
+      DataField = 'TBPRZ_PRAZO04'
+      DataSource = DSPrazos
+      ParentCtl3D = False
+      TabOrder = 4
     end
   end
   object IBUSQLPrazos: TIBUpdateSQL
@@ -853,6 +879,10 @@ object FrmCadPrazos: TFrmCadPrazos
       FieldName = 'TBPRZ_PRAZO03'
       Origin = 'TB_PRAZOS.TBPRZ_PRAZO03'
     end
+    object IBQPrazosTBPRZ_PRAZO04: TIntegerField
+      FieldName = 'TBPRZ_PRAZO04'
+      Origin = 'TB_PRAZOS.TBPRZ_PRAZO04'
+    end
     object IBQPrazosTBPRZ_NOME: TIBStringField
       FieldName = 'TBPRZ_NOME'
       Origin = 'TB_PRAZOS.TBPRZ_NOME'
@@ -887,6 +917,10 @@ object FrmCadPrazos: TFrmCadPrazos
         Name = 'TBPRZ_NOME'
         DataType = ftString
         Size = 30
+      end
+      item
+        Name = 'TBPRZ_PRAZO04'
+        DataType = ftInteger
       end>
     IndexDefs = <
       item
@@ -913,6 +947,9 @@ object FrmCadPrazos: TFrmCadPrazos
     end
     object IBTbPrazosID_PRAZO: TIntegerField
       FieldName = 'ID_PRAZO'
+    end
+    object IBTbPrazosTBPRZ_PRAZO04: TIntegerField
+      FieldName = 'TBPRZ_PRAZO04'
     end
   end
   object IBSQLPrazos: TIBSQL

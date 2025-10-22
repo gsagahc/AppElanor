@@ -1,36 +1,39 @@
 [Closed Files]
-File_0=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarLancamentos.pas',0,1,54,1,45,1,0
-File_1=SourceModule,'C:\git_repository\AppElanor\UReimpressaoPerdas.pas',0,1,46,44,52,1,0
-File_2=SourceModule,'C:\git_repository\AppElanor\UImpressaoEtiquetas.pas',0,1,241,67,254,1,0
-File_3=SourceModule,'C:\git_repository\AppElanor\UQRepEtiquetas.pas',0,1,38,125,42,3,0
-File_4=SourceModule,'C:\git_repository\AppElanor\UCadProdutos.pas',0,1,115,42,116,1,0
-File_5=SourceModule,'C:\git_repository\AppElanor\UCadPedido.pas',0,1,229,33,241,1,0
-File_6=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\Forms.pas',0,1,3114,1,730,0,0
-File_7=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.dfm',0,1,1,1,1,0,0
-File_8=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\DB.pas',0,1,25,1,37,0,0
-File_9=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarPerdasMes.pas',0,1,40,36,40,1,0
+File_0=SourceModule,'C:\git_repository\AppElanor\UAlterarControledePerdas.pas',0,1,126,127,138,1,0
+File_1=SourceModule,'C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas',0,1,66,95,81,1,0
+File_2=SourceModule,'C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas',0,1,42,143,57,1,0
+File_3=SourceModule,'C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UConsultarLancamentos.pas',0,1,54,1,45,1,0
+File_4=SourceModule,'C:\git_repository\AppElanor\UReimpressaoPerdas.pas',0,1,46,44,52,1,0
+File_5=SourceModule,'C:\git_repository\AppElanor\UImpressaoEtiquetas.pas',0,1,241,67,254,1,0
+File_6=SourceModule,'C:\git_repository\AppElanor\UQRepEtiquetas.pas',0,1,38,125,42,3,0
+File_7=SourceModule,'C:\git_repository\AppElanor\UCadProdutos.pas',0,1,115,42,116,1,0
+File_8=SourceModule,'c:\program files (x86)\borland\delphi7\source\vcl\Forms.pas',0,1,3114,1,730,0,0
 
 [Modules]
-Module0=C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas
-Module1=C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas
-Module2=C:\git_repository\AppElanor\UAlterarControledePerdas.pas
-Module3=C:\git_repository\AppElanor\UPrincipal.pas
-Module4=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
-Module5=C:\git_repository\AppElanor\Elanor.dpr
-Count=6
+Module0=C:\git_repository\AppElanor\UConsultaPedData.pas
+Module1=C:\git_repository\AppElanor\UConsultaPedProduto.pas
+Module2=C:\git_repository\AppElanor\UPrincipal.pas
+Module3=C:\git_repository\AppElanor\UConsultarPedCli.pas
+Module4=C:\git_repository\AppElanor\UCadPedido.pas
+Module5=C:\git_repository\AppElanor\URelatorioPedPrazo.pas
+Module6=C:\git_repository\AppElanor\URelatorioPedDataCliente.pas
+Module7=C:\git_repository\AppElanor\URelatorioPedOrdemCompra.pas
+Module8=C:\git_repository\AppElanor\URelatorioPedData.pas
+Module9=C:\git_repository\AppElanor\UImpressaoPedidos.pas
+Module10=C:\git_repository\AppElanor\UCadPrazos.pas
+Module11=C:\git_repository\AppElanor\UBuscarPrazos.pas
+Module12=C:\AppElanor_Fontes\pngdelphi-master\pngdelphi-master\pngextra.pas
+Module13=C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas
+Module14=C:\git_repository\AppElanor\Elanor.dpr
+Count=15
 EditWindowCount=1
 
-[C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas]
+[C:\git_repository\AppElanor\UConsultaPedData.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UAlterarControledePerdas.pas]
+[C:\git_repository\AppElanor\UConsultaPedProduto.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -38,6 +41,56 @@ FormOnTop=0
 [C:\git_repository\AppElanor\UPrincipal.pas]
 ModuleType=SourceModule
 FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UConsultarPedCli.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UCadPedido.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\URelatorioPedPrazo.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\URelatorioPedDataCliente.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\URelatorioPedOrdemCompra.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\URelatorioPedData.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UImpressaoPedidos.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UCadPrazos.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\git_repository\AppElanor\UBuscarPrazos.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\AppElanor_Fontes\pngdelphi-master\pngdelphi-master\pngextra.pas]
+ModuleType=SourceModule
+FormState=0
 FormOnTop=0
 
 [C:\git_repository\AppElanor\Prototipos\Controle de Perdas\UFrmControlePerdas.pas]
@@ -50,19 +103,28 @@ ModuleType=SourceModule
 FormState=0
 FormOnTop=0
 
-[C:\Program Files (x86)\Borland\Delphi7\Projects\ProjectGroup1.bpg]
+[C:\Arquivos de programas\Borland\Delphi7\Projects\ProjectGroup1.bpg]
 FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=6
-CurrentView=3
+ViewCount=15
+CurrentView=9
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
 View5=5
+View6=6
+View7=7
+View8=8
+View9=9
+View10=10
+View11=11
+View12=12
+View13=13
+View14=14
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -70,14 +132,14 @@ Visible=1
 State=2
 Left=329
 Top=84
-Width=1017
+Width=1271
 Height=653
-MaxLeft=-8
-MaxTop=107
-MaxWidth=1616
-MaxHeight=761
+MaxLeft=-4
+MaxTop=104
+MaxWidth=1608
+MaxHeight=770
 ClientWidth=1600
-ClientHeight=722
+ClientHeight=736
 LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
@@ -103,29 +165,92 @@ LeftCol=1
 [View2]
 Module=C:\git_repository\AppElanor\UPrincipal.pas
 CursorX=1
-CursorY=1436
-TopLine=1431
+CursorY=1448
+TopLine=1433
 LeftCol=1
 
 [View3]
-Module=C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas
-CursorX=95
-CursorY=81
-TopLine=66
+Module=C:\git_repository\AppElanor\URelatorioPedPrazo.pas
+CursorX=49
+CursorY=140
+TopLine=130
 LeftCol=1
 
 [View4]
-Module=C:\git_repository\AppElanor\Prototipos\EstimativaMensal\URelFaturamentoMes.pas
-CursorX=143
-CursorY=57
-TopLine=42
+Module=C:\git_repository\AppElanor\URelatorioPedDataCliente.pas
+CursorX=1
+CursorY=51
+TopLine=36
 LeftCol=1
 
 [View5]
-Module=C:\git_repository\AppElanor\UAlterarControledePerdas.pas
-CursorX=127
-CursorY=138
-TopLine=126
+Module=C:\git_repository\AppElanor\URelatorioPedOrdemCompra.pas
+CursorX=1
+CursorY=11
+TopLine=1
+LeftCol=1
+
+[View6]
+Module=C:\git_repository\AppElanor\URelatorioPedData.pas
+CursorX=1
+CursorY=49
+TopLine=34
+LeftCol=1
+
+[View7]
+Module=C:\git_repository\AppElanor\UConsultaPedProduto.pas
+CursorX=36
+CursorY=59
+TopLine=46
+LeftCol=1
+
+[View8]
+Module=C:\git_repository\AppElanor\UConsultarPedCli.pas
+CursorX=83
+CursorY=99
+TopLine=105
+LeftCol=1
+
+[View9]
+Module=C:\git_repository\AppElanor\UConsultaPedData.pas
+CursorX=1
+CursorY=96
+TopLine=94
+LeftCol=1
+
+[View10]
+Module=C:\AppElanor_Fontes\pngdelphi-master\pngdelphi-master\pngextra.pas
+CursorX=1
+CursorY=308
+TopLine=280
+LeftCol=1
+
+[View11]
+Module=C:\git_repository\AppElanor\UCadPrazos.pas
+CursorX=145
+CursorY=14
+TopLine=1
+LeftCol=1
+
+[View12]
+Module=C:\git_repository\AppElanor\UCadPedido.pas
+CursorX=62
+CursorY=444
+TopLine=443
+LeftCol=1
+
+[View13]
+Module=C:\git_repository\AppElanor\UImpressaoPedidos.pas
+CursorX=46
+CursorY=223
+TopLine=206
+LeftCol=1
+
+[View14]
+Module=C:\git_repository\AppElanor\UBuscarPrazos.pas
+CursorX=75
+CursorY=11
+TopLine=10
 LeftCol=1
 
 [Watches]
@@ -144,8 +269,8 @@ Width=426
 Height=157
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=410
-ClientHeight=118
+ClientWidth=418
+ClientHeight=131
 TBDockHeight=157
 LRDockWidth=426
 Dockable=1
@@ -154,7 +279,7 @@ Dockable=1
 Count=4
 Breakpoint0='C:\AppElanor_Fontes\ULogin.pas',50,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='C:\AppElanor_Fontes\UCadCli.pas',216,'',0,1,'',1,0,0,'',1,'','',''
-Breakpoint2='C:\AppElanor_Fontes\UCadPedido.pas',514,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint2='C:\AppElanor_Fontes\UCadPedido.pas',516,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint3='C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas',128,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
@@ -167,13 +292,13 @@ State=2
 Left=0
 Top=0
 Width=1600
-Height=123
+Height=112
 MaxLeft=-1
 MaxTop=-1
-MaxWidth=1616
-MaxHeight=123
+MaxWidth=1608
+MaxHeight=112
 ClientWidth=1600
-ClientHeight=84
+ClientHeight=78
 
 [ProjectManager]
 Create=1
@@ -185,8 +310,8 @@ Width=438
 Height=303
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=422
-ClientHeight=264
+ClientWidth=430
+ClientHeight=277
 TBDockHeight=303
 LRDockWidth=438
 Dockable=1
@@ -201,8 +326,8 @@ Width=1036
 Height=416
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1020
-ClientHeight=377
+ClientWidth=1028
+ClientHeight=382
 DumpPane=79
 DisassemblyPane=187
 RegisterPane=231
@@ -215,7 +340,7 @@ State=0
 Left=200
 Top=107
 Width=156
-Height=89
+Height=84
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=150
@@ -225,21 +350,21 @@ ClientHeight=60
 Create=1
 Visible=1
 State=0
-Left=19
-Top=117
+Left=110
+Top=313
 Width=387
 Height=620
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=371
-ClientHeight=581
+ClientWidth=379
+ClientHeight=594
 TBDockHeight=294
 LRDockWidth=190
 Dockable=1
 SplitPos=136
 ArrangeBy=Name
-SelectedItem=Caption
-ExpandedItems=Anchors,Bands,BorderIcons,Brush,CalColors,Constraints,FileType,Frame,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title
+SelectedItem=SQL
+ExpandedItems=Anchors,Bands,BorderIcons,Brush,CalColors,Constraints,FileType,Frame,HorzScrollBar,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title
 HiddenCategories=
 
 [CallStackWindow]
@@ -252,8 +377,8 @@ Width=294
 Height=161
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=278
-ClientHeight=122
+ClientWidth=286
+ClientHeight=135
 TBDockHeight=161
 LRDockWidth=294
 Dockable=1
@@ -268,8 +393,8 @@ Width=190
 Height=246
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=174
-ClientHeight=207
+ClientWidth=182
+ClientHeight=220
 TBDockHeight=246
 LRDockWidth=190
 Dockable=1
@@ -281,11 +406,11 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=622
+Height=636
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=622
+ClientHeight=636
 TBDockHeight=305
 LRDockWidth=140
 Dockable=1

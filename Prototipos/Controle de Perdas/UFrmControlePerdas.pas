@@ -177,7 +177,7 @@ type
   end;
 
 var
-  FrmControlePerdas: TFrmControlePerdas;
+   FrmControlePerdas: TFrmControlePerdas;
 
 implementation
 
@@ -227,7 +227,7 @@ begin
 end;
 
 procedure TFrmControlePerdas.PNGImprimirClick(Sender: TObject);
-Var Mes, Ano: string;
+Var Mes, Ano: Integer;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
     slEnroladores:TStringList;
     i, iQuantidade, iTotal:Integer;
@@ -303,8 +303,10 @@ begin
 
         TotalSegunda:=TotalSegunda+CDSPerdasSegunda.AsFloat;
         AtualizarEstoque;
-        Mes:=Copy (CDSPerdasData.AsString ,4,2);
-        Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
+        Ano := YearOf(DTPData.Date);
+        Mes := MonthOf(DTPData.Date);
+       //  Mes:=Copy (CDSPerdasData.AsString ,4,2);
+       // Ano:=Copy (CDSPerdasData.AsString ,7 ,4);
 
 
         CDSPerdas.Next;
@@ -352,9 +354,10 @@ begin
        CDSPerdas.EnableControls;
        if FrmAlterarControlePerdas = nil then
        begin
-         Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
+         if FrmImpressaoPerdas= nil then
+           Application.CreateForm(TFrmImpressaoPerdas, FrmImpressaoPerdas);
 
-         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         Acumulado:=CalculaAcumuladoMes(IntToStr(Mes),IntToStr(Ano));
          FrmImpressaoPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
          if Acumulado <= 2 then
          begin
@@ -370,14 +373,14 @@ begin
            FrmImpressaoPerdas.PreviewModal
          else
            FrmImpressaoPerdas.Print;
-         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         Acumulado:=CalculaAcumuladoMes(IntToStr(Mes), intToStr(Ano));
          FreeAndNil(FrmImpressaoPerdas);
        end
        else
        begin
          Application.CreateForm(TFrmImpressaoAlteraPerdas, FrmImpressaoAlteraPerdas);
 
-         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         Acumulado:=CalculaAcumuladoMes(IntToStr(Mes), IntToStr(Ano));
          FrmImpressaoAlteraPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
          if Acumulado <= 2 then
          begin
@@ -393,7 +396,7 @@ begin
            FrmImpressaoAlteraPerdas.PreviewModal
          else
            FrmImpressaoAlteraPerdas.Print;
-         Acumulado:=CalculaAcumuladoMes(Mes, Ano);
+         Acumulado:=CalculaAcumuladoMes(IntToStr(Mes), IntToStr(Ano));
          FreeAndNil(FrmImpressaoAlteraPerdas);
        end;
        Application.CreateForm(TFormEnroladores, FormEnroladores);

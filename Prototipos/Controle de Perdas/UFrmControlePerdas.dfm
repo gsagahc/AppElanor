@@ -23,15 +23,15 @@ object FrmControlePerdas: TFrmControlePerdas
   object Panel1: TPanel
     Left = 0
     Top = 201
-    Width = 1111
-    Height = 183
+    Width = 1119
+    Height = 188
     Align = alClient
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1109
-      Height = 181
+      Width = 1117
+      Height = 186
       TabStop = False
       Align = alClient
       BorderStyle = bsNone
@@ -125,7 +125,7 @@ object FrmControlePerdas: TFrmControlePerdas
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1111
+    Width = 1119
     Height = 201
     Align = alTop
     TabOrder = 1

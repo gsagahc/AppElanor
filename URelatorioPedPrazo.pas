@@ -62,6 +62,7 @@ type
     PNGButton8: TPNGButton;
     PNGButton7: TPNGButton;
     EditCliente: TEdit;
+    IBQPedidosTBPED_VENC04: TDateField;
     procedure PNGButton2Click(Sender: TObject);
     procedure PNGButton1Click(Sender: TObject);
     procedure DBGrid1DblClick(Sender: TObject);

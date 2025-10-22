@@ -208,6 +208,9 @@ type
     CDsPedidoTBPRD_NOME6: TStringField;
     CDsPedidoOBS: TStringField;
     IBQImpressaoPedOBS: TIBStringField;
+    QRDBText10: TQRDBText;
+    IBQImpressaoPedTBPED_VENC04: TDateField;
+    CDsPedidoTBPED_VENC04: TDateField;
     procedure IBQImpressaoPedAfterOpen(DataSet: TDataSet);
     procedure QRBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -277,6 +280,8 @@ begin
         CDsPedidoTBPED_VENC02.AsDateTime  :=  IBQImpressaoPed.FieldByName('TBPED_VENC02').AsDateTime ;
       if Not IBQImpressaoPed.FieldByName('TBPED_VENC03').IsNull  Then
         CDsPedidoTBPED_VENC03.AsDateTime  :=  IBQImpressaoPed.FieldByName('TBPED_VENC03').AsDateTime ;
+      if Not IBQImpressaoPed.FieldByName('TBPED_VENC04').IsNull  Then
+        CDsPedidoTBPED_VENC04.AsDateTime  :=  IBQImpressaoPed.FieldByName('TBPED_VENC04').AsDateTime ;
       //Alimentando Itens Pedido
          //Produto 1       ]
       while Not IBQImpressaoPed.Eof do
