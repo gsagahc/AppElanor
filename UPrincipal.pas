@@ -70,7 +70,8 @@ Type TEstoque = Class
      Quantidade:Real;
      Tamanho:string;
      Formato:String;
-     Unidade:String; 
+     Unidade:String;
+    
 End;
 
 Type TEndereco = Class

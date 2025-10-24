@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, UPrincipal, pngextra, ExtCtrls, DB, IBCustomDataSet, IBQuery,
-  Grids, DBGrids;
+  Grids, DBGrids, StdCtrls;
 
 type
   TFrmEstoqueNegativo = class(TForm)
@@ -17,6 +17,7 @@ type
     DataSource1: TDataSource;
     PNGButton5: TPNGButton;
     IBQuery2: TIBQuery;
+    RadioGroupTipo: TRadioGroup;
     procedure PNGButton6Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure PNGButton2Click(Sender: TObject);
@@ -43,6 +44,11 @@ begin
                     'FROM TB_ESTOQUE, TB_PRODUTOS  '+
                    'WHERE TBES_QUANTI < 0  '+
                     ' AND TB_ESTOQUE.ID_PRODUTO = TB_PRODUTOS.TBPRD_CODIGO ');
+  if RadioGroupTipo.ItemIndex=0 then
+    IBQuery1.SQL.Add('AND TB_PRODUTOS.tbprd_nome LIKE ''CADAR%'';')
+  else
+    IBQuery1.SQL.Add('AND TB_PRODUTOS.tbprd_nome not LIKE ''CADAR%'';');
+
   try
     IBQuery1.Open;
     if not IBQuery1.IsEmpty then

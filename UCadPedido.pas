@@ -333,7 +333,6 @@ Begin
         If Quantidade > 0 Then
         Begin
           IsNumber :=True;
-
           If AtualizaEstoque(Estoque, Quantidade, 'D') Then
           Begin
             QuantItens:=QuantItens+1;
@@ -351,7 +350,7 @@ Begin
             End
             Else
               CDSItensPedidoTBITPED_UNIDADE.AsString:=IBQProdutos.FieldbyName('TBPRD_UNIDADE').AsString;
-           
+
 
             //Verificar se tem preço especial
             IBSQLUTIL.Close;
@@ -404,82 +403,87 @@ begin
   Result:=False;
   lEstoque:= TEstoque.Create;
   lEstoque:=(pEstoque as TEstoque)  ;
-  try
-    If Operacao ='D' Then
-    Begin
-
-      If Quantidade <= Estoque.Quantidade    Then
+  //Se não for cadarço atualizar estoque
+  if Copy(lEstoque.Nome, 0,5)<>'CADAR' then
+  begin
+    try
+      If Operacao ='D' Then
       Begin
-        IBSQLUTIL.Close;
-        IBSQLUTIL.SQL.Clear;
-        IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                          ' SET ' +
-                          ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
-                          'WHERE ID_PRODUTO=:pIdProduto ' +
-                          ' AND ID_ESTOQUE= :pIdEstoque ');
-        IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
-        IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
-        IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
-        IBSQLUTIL.ExecQuery;
-        Result:=True;
-      End
-      Else
-      Begin
-        If Quantidade > Estoque.Quantidade  Then
-        begin
+        If Quantidade <= Estoque.Quantidade    Then
+        Begin
+          IBSQLUTIL.Close;
+          IBSQLUTIL.SQL.Clear;
+          IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                            ' SET ' +
+                            ' TBES_QUANTI =TBES_QUANTI - :pQuantidade ' +
+                            'WHERE ID_PRODUTO=:pIdProduto ' +
+                            ' AND ID_ESTOQUE= :pIdEstoque ');
+          IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
+          IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
+          IBSQLUTIL.ParamByName('pQuantidade').Value := Quantidade;
+          IBSQLUTIL.ExecQuery;
+          Result:=True;
+        End
+        Else
+        Begin
+          If Quantidade > Estoque.Quantidade  Then
+          begin
            // Se produto for elástico então Result True
-           IBQUtil.Close;
-           IBQUtil.SQL.Clear;
-           IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
-                          ' FROM TB_PRODUTOS '+
-                          ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
-           IBQUtil.Open;
-
-         sMensagem:= 'A quantidade informada é maior do que o estoque '+
-                     'atual deste produto, o estoque ficará 0 (zero).' +
-                     'Deseja continuar?' ;
-          if  tFrmMensagens.Mensagem(sMensagem,'Q',[mbSIM, mbNAO]) Then
-          Begin
-            IBSQLUTIL.Close;
-            IBSQLUTIL.SQL.Clear;
-            IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                             ' SET ' +
-                             ' TBES_QUANTI = :pQuantidade ' +
-                             ' WHERE ID_PRODUTO=:pIdProduto ' +
-                             ' AND ID_ESTOQUE= :pIdEstoque ');
-            IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
-            IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
-            IBSQLUTIL.ParamByName('pQuantidade').Value := 0 ;
-            IBSQLUTIL.ExecQuery;
-            Result:=True;
+            IBQUtil.Close;
+            IBQUtil.SQL.Clear;
+            IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
+                            ' FROM TB_PRODUTOS '+
+                            ' WHERE ID_PRODUTO='+IntToStr(Estoque.Id_produto));
+            IBQUtil.Open;
+            sMensagem:= 'A quantidade informada é maior do que o estoque '+
+                       'atual deste produto, o estoque ficará negativo.' +
+                       'Deseja continuar?' ;
+            if  tFrmMensagens.Mensagem(sMensagem,'Q',[mbSIM, mbNAO]) Then
+            Begin
+              IBSQLUTIL.Close;
+              IBSQLUTIL.SQL.Clear;
+              IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                                ' SET ' +
+                                ' TBES_QUANTI = :pQuantidade ' +
+                                ' WHERE ID_PRODUTO=:pIdProduto ' +
+                                ' AND ID_ESTOQUE= :pIdEstoque ');
+              IBSQLUTIL.ParamByName('pIdProduto').AsInteger := lEstoque.Id_produto  ;
+              IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque ;
+              IBSQLUTIL.ParamByName('pQuantidade').Value := Estoque.Quantidade - Quantidade;
+              IBSQLUTIL.ExecQuery;
+              Result:=True;
+            end;
           end;
         end;
-      end;
-    End;
-    If Operacao ='S' Then
-    Begin
-      IBSQLUTIL.Close;
-      IBSQLUTIL.SQL.Clear;
-      IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                        ' SET ' +
-                        ' TBES_QUANTI = TBES_QUANTI + :pQuantidade ' +
-                        'WHERE ID_ESTOQUE=:pIdEstoque ' );
-      IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque;
-      IBSQLUTIL.ParamByName('pQuantidade').Value := lEstoque.Quantidade ;
-      IBSQLUTIL.ExecQuery;
-      Result:=True;
-    End;
-  except
-     on E: EDatabaseError do
-     begin
-       tFrmMensagens.Mensagem('Erro ao atualizar estoque ' +'AtualizaEstoque ','E',[mbOK], E.message);
-          FrmPrincipal.IBTMain.Rollback;
-     end;
-     on E: EConvertError do
-     Begin
-       (tFrmMensagens.Mensagem('Favor digitar apenas números','I',[mbOK]));
      End;
-  end;
+     If Operacao ='S' Then
+     Begin
+       IBSQLUTIL.Close;
+       IBSQLUTIL.SQL.Clear;
+       IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                         ' SET ' +
+                         ' TBES_QUANTI = TBES_QUANTI + :pQuantidade ' +
+                         'WHERE ID_ESTOQUE=:pIdEstoque ' );
+       IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque;
+       IBSQLUTIL.ParamByName('pQuantidade').Value := lEstoque.Quantidade ;
+       IBSQLUTIL.ExecQuery;
+       Result:=True;
+     End;
+    except
+      on E: EDatabaseError do
+      begin
+        tFrmMensagens.Mensagem('Erro ao atualizar estoque ' +'AtualizaEstoque ','E',[mbOK], E.message);
+           FrmPrincipal.IBTMain.Rollback;
+      end;
+      on E: EConvertError do
+      Begin
+        (tFrmMensagens.Mensagem('Favor digitar apenas números','I',[mbOK]));
+      End;
+    end;
+  end
+  else
+    Result:=True;
+
 
 
 end;

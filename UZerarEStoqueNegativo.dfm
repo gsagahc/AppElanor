@@ -311,6 +311,18 @@ object FrmEstoqueNegativo: TFrmEstoqueNegativo
       Enabled = False
       OnClick = PNGButton5Click
     end
+    object RadioGroupTipo: TRadioGroup
+      Left = 32
+      Top = 16
+      Width = 313
+      Height = 49
+      Columns = 2
+      ItemIndex = 0
+      Items.Strings = (
+        'Cadar'#231'os'
+        'El'#225'sticos')
+      TabOrder = 0
+    end
   end
   object IBQuery1: TIBQuery
     Database = FrmPrincipal.IBDMain
