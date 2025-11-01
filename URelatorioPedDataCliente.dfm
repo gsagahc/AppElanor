@@ -665,6 +665,22 @@ object FrmRelatorioPedDataCli: TFrmRelatorioPedDataCli
         end
         item
           Expanded = False
+          FieldName = 'TBPED_VENC04'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          Title.Caption = 'Vencimento'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'TBUSR_NOME'
           Title.Caption = 'Pedido emitido por'
           Title.Font.Charset = DEFAULT_CHARSET

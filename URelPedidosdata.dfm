@@ -91,10 +91,10 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          272.520833333333300000
-          58.208333333333330000
+          272.520833333333400000
+          58.208333333333340000
           10.583333333333330000
-          264.583333333333300000)
+          264.583333333333400000)
         AutoSize = True
         Picture.Data = {
           0A544A504547496D616765AA270000FFD8FFE000104A46494600010101006000
@@ -534,9 +534,9 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          60.854166666666670000
+          60.854166666666680000
           529.166666666666700000
-          296.333333333333300000
+          296.333333333333400000
           809.625000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -592,9 +592,9 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          42.333333333333330000
+          42.333333333333340000
           2.645833333333333000
-          84.666666666666670000)
+          84.666666666666680000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -655,7 +655,7 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          550.333333333333300000
+          550.333333333333400000
           2.645833333333333000
           63.500000000000000000)
         Alignment = taLeftJustify
@@ -686,7 +686,7 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          656.166666666666700000
+          656.166666666666800000
           2.645833333333333000
           158.750000000000000000)
         Alignment = taLeftJustify
@@ -720,7 +720,7 @@ object FrmRelPedidos: TFrmRelPedidos
           44.979166666666670000
           952.500000000000000000
           2.645833333333333000
-          66.145833333333330000)
+          66.145833333333340000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -844,7 +844,7 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          42.333333333333330000
+          42.333333333333340000
           39.687500000000000000
           87.312500000000000000)
         Alignment = taLeftJustify
@@ -907,7 +907,7 @@ object FrmRelPedidos: TFrmRelPedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          42.333333333333330000
+          42.333333333333340000
           79.375000000000000000
           153.458333333333300000)
         Alignment = taLeftJustify
@@ -1052,6 +1052,38 @@ object FrmRelPedidos: TFrmRelPedidos
         Transparent = False
         WordWrap = True
         FontSize = 10
+      end
+      object QRDBText9: TQRDBText
+        Left = 344
+        Top = 30
+        Width = 72
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          910.166666666666600000
+          79.375000000000000000
+          190.500000000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = FrmPrincipal.IBQPedidos
+        DataField = 'TBPED_VENC04'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        FontSize = 7
       end
     end
     object QRGroup1: TQRGroup
