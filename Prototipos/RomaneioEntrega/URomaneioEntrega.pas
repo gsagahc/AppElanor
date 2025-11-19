@@ -256,7 +256,6 @@ end;
 procedure TFrmRomaneioEntrega.PNGBImprimirClick(Sender: TObject);
 Var Branco:Boolean;
     Caixas:Integer;
-    Indice:Integer;
     Numero: Integer;
     StringNumeros:string;
 begin
@@ -288,10 +287,7 @@ begin
      begin
        Caixas := CDSRomaneio.FieldByName('Quant').AsInteger;
        Numero:= Numero + 1;
-       for Indice :=0 To Caixas -1 do
-       Begin
-         StringNumeros:= StringNumeros+IntToStr(Numero) + ' ';
-       end;
+       StringNumeros:= IntToStr(Numero);
        CDSRomaneio.Edit;
        CDSRomaneioNum.AsString :=StringNumeros;
        StringNumeros:='';
