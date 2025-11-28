@@ -19,7 +19,6 @@ type
     DBGridElasticos: TDBGrid;
     PnlBotoes: TPanel;
     PNGButton3: TPNGButton;
-    PNGButton5: TPNGButton;
     IBTbParamIndividual: TIBTable;
     IBTbParamIndividualNOMEEL: TStringField;
     IBTbParamIndividualID_PRODUTO: TIntegerField;
@@ -46,7 +45,6 @@ type
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure PNGButton5Click(Sender: TObject);
     procedure IBQueryConfigAfterScroll(DataSet: TDataSet);
     procedure ComboBoxSimNaoExit(Sender: TObject);
     procedure NumEditMinExit(Sender: TObject);
@@ -139,19 +137,6 @@ begin
         else
           selectedindex := 0;
 
-end;
-
-procedure TFrmConfiguracoes.PNGButton5Click(Sender: TObject);
-begin
-  try
-    IBTbParamIndividual.Post;
-  Except
-    on E: EDatabaseError do
-    begin
-      tFrmMensagens.Mensagem('Erro ao salvar configurações no banco :' +'OKBtnClick '+ E.message,'E',[mbOK]);
-      FrmPrincipal.IBTMain.Rollback;
-    end;
-  end;
 end;
 
 procedure TFrmConfiguracoes.IBQueryConfigAfterScroll(DataSet: TDataSet);

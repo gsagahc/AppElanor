@@ -21,7 +21,7 @@ type
     QRLabel5: TQRLabel;
     QRLabel6: TQRLabel;
     QRLAcumulado: TQRLabel;
-    QRSysData1: TQRSysData;
+    QRDBText4: TQRDBText;
     procedure QRBand2BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
