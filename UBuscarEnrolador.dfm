@@ -14,6 +14,7 @@ object FrmBuscarEnrolador: TFrmBuscarEnrolador
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -60,13 +61,14 @@ object FrmBuscarEnrolador: TFrmBuscarEnrolador
       Height = 32
       Align = alTop
       TabOrder = 1
-      object CheckBox1: TCheckBox
+      object CheckInativos: TCheckBox
         Left = 104
         Top = 8
         Width = 97
         Height = 17
         Caption = 'Exibir inativos'
         TabOrder = 0
+        OnClick = CheckInativosClick
       end
     end
   end
@@ -78,6 +80,7 @@ object FrmBuscarEnrolador: TFrmBuscarEnrolador
     CachedUpdates = False
     SQL.Strings = (
       'SELECT *  FROM TB_ENROLADORES')
+    Filtered = True
     Left = 440
     Top = 40
     object IBQEnroladorNOME: TIBStringField
