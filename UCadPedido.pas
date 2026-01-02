@@ -429,6 +429,7 @@ begin
           If Quantidade > Estoque.Quantidade  Then
           begin
            // Se produto for elástico então Result True
+
             IBQUtil.Close;
             IBQUtil.SQL.Clear;
             IBQUtil.Sql.Add('SELECT TBPRD_NOME '+
@@ -453,22 +454,25 @@ begin
               IBSQLUTIL.ExecQuery;
               Result:=True;
             end;
+
+
           end;
-        end;
-     End;
-     If Operacao ='S' Then
-     Begin
-       IBSQLUTIL.Close;
-       IBSQLUTIL.SQL.Clear;
-       IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
-                         ' SET ' +
-                         ' TBES_QUANTI = TBES_QUANTI + :pQuantidade ' +
-                         'WHERE ID_ESTOQUE=:pIdEstoque ' );
-       IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque;
-       IBSQLUTIL.ParamByName('pQuantidade').Value := lEstoque.Quantidade ;
-       IBSQLUTIL.ExecQuery;
-       Result:=True;
-     End;
+         
+        End;
+      end;
+      If Operacao ='S' Then
+      Begin
+        IBSQLUTIL.Close;
+        IBSQLUTIL.SQL.Clear;
+        IBSQLUTIL.Sql.Add('UPDATE TB_ESTOQUE ' +
+                          ' SET ' +
+                          ' TBES_QUANTI = TBES_QUANTI + :pQuantidade ' +
+                          'WHERE ID_ESTOQUE=:pIdEstoque ' );
+        IBSQLUTIL.ParamByName('pIdEstoque').AsInteger :=lEstoque.Id_estoque;
+        IBSQLUTIL.ParamByName('pQuantidade').Value := lEstoque.Quantidade ;
+        IBSQLUTIL.ExecQuery;
+        Result:=True;
+      End;
     except
       on E: EDatabaseError do
       begin
@@ -483,6 +487,7 @@ begin
   end
   else
     Result:=True;
+ 
 
 
 

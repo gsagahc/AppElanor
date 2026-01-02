@@ -1,9 +1,9 @@
 object FormEnroladores: TFormEnroladores
-  Left = -7
-  Top = 13
+  Left = 479
+  Top = 368
   Width = 1050
   Height = 423
-  VertScrollBar.Position = 21
+  VertScrollBar.Position = 47
   Caption = 'Relat'#243'rio de Produ'#231#227'o dos Enroladores'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,7 +17,7 @@ object FormEnroladores: TFormEnroladores
   TextHeight = 13
   object QuickRepEnroladores: TQuickRep
     Left = 68
-    Top = 23
+    Top = -3
     Width = 816
     Height = 1056
     Frame.Color = clBlack
@@ -25,7 +25,7 @@ object FormEnroladores: TFormEnroladores
     Frame.DrawBottom = False
     Frame.DrawLeft = False
     Frame.DrawRight = False
-    DataSet = IBQuery1
+    DataSet = CdsEnroladores
     Description.Strings = (
       
         'This report shows how to create a master/detail report from a TQ' +
@@ -85,7 +85,7 @@ object FormEnroladores: TFormEnroladores
       object QRDBText4: TQRDBText
         Left = 6
         Top = 0
-        Width = 90
+        Width = 62
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -96,14 +96,14 @@ object FormEnroladores: TFormEnroladores
           44.979166666666670000
           15.875000000000000000
           0.000000000000000000
-          238.125000000000000000)
+          164.041666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
         Color = clWhite
-        DataSet = IBQuery1
-        DataField = 'TBPRD_NOME'
+        DataSet = CdsEnroladores
+        DataField = 'Prd_Nome'
         Transparent = False
         WordWrap = True
         FontSize = 10
@@ -120,7 +120,7 @@ object FormEnroladores: TFormEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          862.541666666666700000
+          862.541666666666800000
           5.291666666666667000
           185.208333333333300000)
         Alignment = taRightJustify
@@ -128,8 +128,8 @@ object FormEnroladores: TFormEnroladores
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = IBQuery1
-        DataField = 'TBCP_QUANTIDADE'
+        DataSet = CdsEnroladores
+        DataField = 'Quantidade'
         Mask = '###,##0'
         Transparent = False
         WordWrap = True
@@ -138,7 +138,7 @@ object FormEnroladores: TFormEnroladores
       object QRDBText2: TQRDBText
         Left = 448
         Top = 1
-        Width = 106
+        Width = 52
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -149,14 +149,14 @@ object FormEnroladores: TFormEnroladores
           44.979166666666670000
           1185.333333333333000000
           2.645833333333333000
-          280.458333333333300000)
+          137.583333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
         Color = clWhite
-        DataSet = IBQuery1
-        DataField = 'TBCP_SEGUNDA'
+        DataSet = CdsEnroladores
+        DataField = 'Segunda'
         Mask = '#0.000'
         Transparent = False
         WordWrap = True
@@ -165,7 +165,7 @@ object FormEnroladores: TFormEnroladores
       object QRDBText3: TQRDBText
         Left = 664
         Top = 2
-        Width = 48
+        Width = 43
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -176,14 +176,14 @@ object FormEnroladores: TFormEnroladores
           44.979166666666670000
           1756.833333333333000000
           5.291666666666667000
-          127.000000000000000000)
+          113.770833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
         Color = clWhite
-        DataSet = IBQuery1
-        DataField = 'MINIMO'
+        DataSet = CdsEnroladores
+        DataField = 'Minimo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -13
@@ -213,7 +213,7 @@ object FormEnroladores: TFormEnroladores
       Size.Values = (
         55.562500000000000000
         1957.916666666667000000)
-      Expression = 'NOME'
+      Expression = 'CdsEnroladores.Nome'
       FooterBand = QRBand1
       Master = QuickRepEnroladores
       ReprintOnNewPage = False
@@ -237,7 +237,7 @@ object FormEnroladores: TFormEnroladores
         AutoSize = True
         AutoStretch = False
         Color = clWhite
-        DataSet = IBQuery1
+        DataSet = CdsEnroladores
         DataField = 'NOME'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -267,7 +267,6 @@ object FormEnroladores: TFormEnroladores
       Size.Values = (
         100.541666666666700000
         1957.916666666667000000)
-      Expression = 'orderno'
       FooterBand = QRBand2
       Master = QuickRepEnroladores
       ReprintOnNewPage = False
@@ -283,9 +282,9 @@ object FormEnroladores: TFormEnroladores
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          42.333333333333330000
+          42.333333333333340000
           5.291666666666667000
-          336.020833333333300000)
+          336.020833333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -309,8 +308,8 @@ object FormEnroladores: TFormEnroladores
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          862.541666666666700000
-          58.208333333333330000
+          862.541666666666800000
+          58.208333333333340000
           148.166666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -372,7 +371,7 @@ object FormEnroladores: TFormEnroladores
         Size.Values = (
           44.979166666666670000
           1185.333333333333000000
-          58.208333333333330000
+          58.208333333333340000
           116.416666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -403,7 +402,7 @@ object FormEnroladores: TFormEnroladores
         Size.Values = (
           44.979166666666670000
           1756.833333333333000000
-          58.208333333333330000
+          58.208333333333340000
           87.312500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -465,7 +464,7 @@ object FormEnroladores: TFormEnroladores
         ResetAfterPrint = True
         Transparent = True
         WordWrap = True
-        Expression = 'SUM(IBQuery1.TBCP_QUANTIDADE)/COUNT'
+        Expression = 'SUM(CdsEnroladores.Quantidade)'
         Mask = '###,##0'
         FontSize = 10
       end
@@ -543,7 +542,7 @@ object FormEnroladores: TFormEnroladores
         ResetAfterPrint = True
         Transparent = True
         WordWrap = True
-        Expression = 'SUM(IBQuery1.MINIMO)/COUNT'
+        Expression = 'SUM(CdsEnroladores.Minimo)/COUNT'
         Mask = '###,##0'
         FontSize = 10
       end
@@ -590,7 +589,7 @@ object FormEnroladores: TFormEnroladores
         ResetAfterPrint = True
         Transparent = True
         WordWrap = True
-        Expression = 'SUM(IBQuery1.TBCP_QUANTIDADE)'
+        Expression = 'SUM(CdsEnroladores.Quantidade)'
         Mask = '###,##0'
         FontSize = 10
       end
@@ -668,7 +667,7 @@ object FormEnroladores: TFormEnroladores
         ResetAfterPrint = True
         Transparent = True
         WordWrap = True
-        Expression = 'SUM(IBQuery1.TBCP_SEGUNDA)'
+        Expression = 'SUM(CdsEnroladores.Segunda)'
         Mask = '#0.00'
         FontSize = 10
       end
@@ -780,8 +779,8 @@ object FormEnroladores: TFormEnroladores
       ' INNER JOIN tb_enroladores A ON A.id_enrolador = B.ID_ENROLADOR'
       ' inner JOIN tb_produtos C ON C.id_produto = B.tbcp_elastico'
       ' WHERE TBCP_DATA=:pData;')
-    Left = 508
-    Top = 94
+    Left = 404
+    Top = 198
     ParamData = <
       item
         DataType = ftUnknown
@@ -852,6 +851,62 @@ object FormEnroladores: TFormEnroladores
     end
     object IBQuery1MINIMO: TIntegerField
       FieldName = 'MINIMO'
+    end
+  end
+  object CdsEnroladores: TClientDataSet
+    Aggregates = <
+      item
+        Visible = False
+      end>
+    Params = <>
+    Left = 364
+    Top = 197
+    object CdsEnroladoresData: TDateField
+      FieldName = 'Data'
+    end
+    object CdsEnroladoresMaquina: TIntegerField
+      FieldName = 'Maquina'
+    end
+    object CdsEnroladoresElastico: TStringField
+      FieldName = 'Elastico'
+    end
+    object CdsEnroladoresComprimento: TIntegerField
+      FieldName = 'Comprimento'
+    end
+    object CdsEnroladoresPesoB: TFloatField
+      FieldName = 'PesoB'
+    end
+    object CdsEnroladoresQuantidadeRC: TIntegerField
+      FieldName = 'QuantidadeRC'
+    end
+    object CdsEnroladoresQuantidade: TIntegerField
+      FieldName = 'Quantidade'
+    end
+    object CdsEnroladoresPrimeira: TFloatField
+      FieldName = 'Primeira'
+    end
+    object CdsEnroladoresSegunda: TFloatField
+      FieldName = 'Segunda'
+    end
+    object CdsEnroladoresPercentual: TFloatField
+      FieldName = 'Percentual'
+    end
+    object CdsEnroladoresControlePerdas: TIntegerField
+      FieldName = 'ControlePerdas'
+    end
+    object CdsEnroladoresID_Enrolador: TIntegerField
+      FieldName = 'ID_Enrolador'
+    end
+    object CdsEnroladoresNome: TStringField
+      DisplayWidth = 100
+      FieldName = 'Nome'
+      Size = 100
+    end
+    object CdsEnroladoresPrd_Nome: TStringField
+      FieldName = 'Prd_Nome'
+    end
+    object CdsEnroladoresMinimo: TIntegerField
+      FieldName = 'Minimo'
     end
   end
 end

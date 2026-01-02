@@ -1631,8 +1631,12 @@ object FrmPrincipal: TFrmPrincipal
         Caption = 'Pedidos por OBS'
         OnClick = PedidosporOC1Click
       end
+      object PedidosporclienteProdutoPerodo1: TMenuItem
+        Caption = 'Pedidos por Cliente/Produto/Per'#237'odo'
+        OnClick = PedidosporclienteProdutoPerodo1Click
+      end
       object Pedidosporclienteperodo1: TMenuItem
-        Caption = 'Pedidos por cliente/per'#237'odo'
+        Caption = 'Pedidos por Cliente/Per'#237'odo'
         OnClick = Pedidosporclienteperodo1Click
       end
       object Pedidosaprazo1: TMenuItem

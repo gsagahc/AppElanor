@@ -189,6 +189,7 @@ begin
            ' TBPED_VENC01, '+
            ' TBPED_VENC02, '+
            ' TBPED_VENC03, '+
+           ' TBPED_VENC04, '+
            ' TB_PEDIDOS.ID_USUARIO, '+
            ' TBPED_BAIRRO, '+
            ' TBPED_CNPJ, '+

@@ -258,6 +258,7 @@ type
     Configuraes1: TMenuItem;
     IBQPedidosTBPED_VENC04: TDateField;
     IBQPedidos_OBSTBPED_VENC04: TDateField;
+    PedidosporclienteProdutoPerodo1: TMenuItem;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -339,6 +340,7 @@ type
     procedure Skin1Click(Sender: TObject);
     procedure Enroladores1Click(Sender: TObject);
     procedure Configuraes1Click(Sender: TObject);
+    procedure PedidosporclienteProdutoPerodo1Click(Sender: TObject);
   private
        TotalGeral:Currency;
     { Private declarations }
@@ -388,7 +390,8 @@ uses UCadProdutos, UEntraEstoque, UCadUser, UCadPedido, UCadCli,
   USelecionarSkin, UFrmControlePerdas, UConsultarPerdas,
   UConsultarLancamentos, UCadastroDespesas, USelecionarDespesas,
   UBuscarLote, UZerarEStoqueNegativo, UAlterarControledePerdas,
-  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes;
+  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes,
+  URelatorioPedDataClienteProduto;
 
    
 
@@ -1624,6 +1627,16 @@ begin
   FreeAndNil(FrmConfiguracoes);
   StatusBar1.Panels.Items[5].Text:='';
 
+end;
+
+procedure TFrmPrincipal.PedidosporclienteProdutoPerodo1Click(
+  Sender: TObject);
+begin
+  Application.CreateForm(TFrmRelatorioPedDataCliProd, FrmRelatorioPedDataCliProd);
+  StatusBar1.Panels.Items[5].Text:= FrmRelatorioPedDataCliProd.Caption;
+  FrmRelatorioPedDataCliProd.ShowModal;
+  FreeAndNil(FrmRelatorioPedDataCliProd);
+  StatusBar1.Panels.Items[5].Text:='';
 end;
 
 end.

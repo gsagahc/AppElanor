@@ -847,4 +847,12 @@ object FrmCadEnrolador: TFrmCadEnrolador
     Left = 432
     Top = 8
   end
+  object IBQueryUtil: TIBQuery
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 440
+    Top = 104
+  end
 end

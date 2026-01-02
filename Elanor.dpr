@@ -93,7 +93,8 @@ uses
   UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador},
   UConfiguracoes in 'UConfiguracoes.pas' {FrmConfiguracoes},
   URelatorioEnroladores in 'Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas' {FormEnroladores},
-  UParametrosConfig in 'UParametrosConfig.pas';
+  UParametrosConfig in 'UParametrosConfig.pas',
+  URelatorioPedDataClienteProduto in 'URelatorioPedDataClienteProduto.pas' {FrmRelatorioPedDataCliProd};
 
 {$R *.res}
 var

@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, QuickRpt, QRCtrls, ExtCtrls, DB, DBTables, IBCustomDataSet,
-  IBQuery, IBDatabase;
+  IBQuery, IBDatabase, DBClient;
 
 type
   TFormEnroladores = class(TForm)
@@ -52,6 +52,22 @@ type
     QRExprMinimo: TQRExpr;
     IBQuery1MINIMO: TIntegerField;
     QRLabel6: TQRLabel;
+    CdsEnroladores: TClientDataSet;
+    CdsEnroladoresData: TDateField;
+    CdsEnroladoresMaquina: TIntegerField;
+    CdsEnroladoresElastico: TStringField;
+    CdsEnroladoresComprimento: TIntegerField;
+    CdsEnroladoresPesoB: TFloatField;
+    CdsEnroladoresQuantidadeRC: TIntegerField;
+    CdsEnroladoresQuantidade: TIntegerField;
+    CdsEnroladoresPrimeira: TFloatField;
+    CdsEnroladoresSegunda: TFloatField;
+    CdsEnroladoresPercentual: TFloatField;
+    CdsEnroladoresControlePerdas: TIntegerField;
+    CdsEnroladoresID_Enrolador: TIntegerField;
+    CdsEnroladoresNome: TStringField;
+    CdsEnroladoresPrd_Nome: TStringField;
+    CdsEnroladoresMinimo: TIntegerField;
     procedure QRBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
@@ -64,7 +80,7 @@ var
   FormEnroladores: TFormEnroladores;
 
 implementation
-Uses UFrmControlePerdas, UPrincipal, UParametrosConfig;
+Uses UFrmControlePerdas, UPrincipal, UParametrosConfig, QRExpr;
 {$R *.dfm}
 
 
@@ -78,11 +94,11 @@ begin
   SN_UsarCores :=Parametro.returnValParametro('SN_UTILIZAR_CORES_RELENROL')='S';
   if SN_UsarCores then
   begin
-    iNumero:=QRExprResultado.Value.dblResult;
-    if iNumero < QRExprMinimo.Value.dblResult then
-      QRBand1.Color:=clRed
+    iNumero:=QRExprResultado.Value.intResult;
+    if iNumero >= QRExprMinimo.Value.dblResult then
+      QRBand1.Color:=clGreen
     else
-      QRBand1.Color:=clGreen;
+      QRBand1.Color:=clRed;
   end;
 
 end;

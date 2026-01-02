@@ -229,7 +229,6 @@ end;
 procedure TFrmControlePerdas.PNGImprimirClick(Sender: TObject);
 Var Mes, Ano: Integer;
     Acumulado,TotalSegunda, SaldoSegunda :Real;
-    slEnroladores:TStringList;
     i, iQuantidade, iTotal:Integer;
     Percentual:Real;
 
@@ -246,7 +245,6 @@ begin
       Fields :='Elastico' ;
       Options := [ixDescending];
     end;
-    slEnroladores:=TStringList.Create;
     CDSPerdas.First;
     TotalSegunda:=0;
     try
@@ -372,7 +370,7 @@ begin
          if SN_Visualizar Then
            FrmImpressaoPerdas.PreviewModal
          else
-           FrmImpressaoPerdas.Print;
+         FrmImpressaoPerdas.Print;
          Acumulado:=CalculaAcumuladoMes(IntToStr(Mes), intToStr(Ano));
          FreeAndNil(FrmImpressaoPerdas);
        end
@@ -400,8 +398,31 @@ begin
          FreeAndNil(FrmImpressaoAlteraPerdas);
        end;
        Application.CreateForm(TFormEnroladores, FormEnroladores);
+       FormEnroladores.CdsEnroladores.CreateDataSet;
        FormEnroladores.IBQuery1.ParamByName('pData').AsDate:=DTPData.Date;
        FormEnroladores.IBQuery1.Open;
+       FormEnroladores.IBQuery1.First;
+       while not FormEnroladores.IBQuery1.Eof do
+       begin
+         FormEnroladores.CdsEnroladores.Append;
+         FormEnroladores.CdsEnroladoresData.AsDateTime          :=FormEnroladores.IBQuery1TBCP_DATA.AsDateTime;
+         FormEnroladores.CdsEnroladoresMaquina.AsInteger        :=FormEnroladores.IBQuery1TBCP_MAQUINA.AsInteger;
+         FormEnroladores.CdsEnroladoresElastico.AsString        :=FormEnroladores.IBQuery1TBCP_ELASTICO.AsString;
+         FormEnroladores.CdsEnroladoresComprimento.AsInteger    :=FormEnroladores.IBQuery1TBCP_COMPRIMENTO.AsInteger;
+         FormEnroladores.CdsEnroladoresPesoB.AsFloat            :=FormEnroladores.IBQuery1TBCP_PESOB.AsFloat;
+         FormEnroladores.CdsEnroladoresQuantidadeRC.AsInteger   :=FormEnroladores.IBQuery1TBCP_QUANTIDADERC.AsInteger;
+         FormEnroladores.CdsEnroladoresQuantidade.AsInteger     :=FormEnroladores.IBQuery1TBCP_QUANTIDADE.AsInteger;
+         FormEnroladores.CdsEnroladoresPrimeira.AsFloat         :=FormEnroladores.IBQuery1TBCP_PRIMEIRA.AsFloat;
+         FormEnroladores.CdsEnroladoresSegunda.AsFloat          :=FormEnroladores.IBQuery1TBCP_SEGUNDA.AsFloat;
+         FormEnroladores.CdsEnroladoresPercentual.AsFloat       :=FormEnroladores.IBQuery1TBCP_PERCENTUAL.AsFloat;
+         FormEnroladores.CdsEnroladoresControlePerdas.AsInteger :=FormEnroladores.IBQuery1ID_CONTROLEPERDAS.AsInteger;
+         FormEnroladores.CdsEnroladoresID_Enrolador.AsInteger   :=FormEnroladores.IBQuery1ID_ENROLADOR.AsInteger;
+         FormEnroladores.CdsEnroladoresNome.AsString            :=FormEnroladores.IBQuery1NOME.AsString;
+         FormEnroladores.CdsEnroladoresPrd_Nome.AsString        :=FormEnroladores.IBQuery1TBPRD_NOME.AsString;
+         FormEnroladores.CdsEnroladoresMinimo.AsInteger         :=FormEnroladores.IBQuery1MINIMO.AsInteger;
+         FormEnroladores.CdsEnroladores.Post;
+         FormEnroladores.IBQuery1.Next;
+       end;
        if SN_Visualizar then
        begin
          FormEnroladores.QuickRepEnroladores.PreviewModal;
@@ -460,22 +481,30 @@ procedure TFrmControlePerdas.AtualizarEstoque;
 Var
     SaldoAtual:Integer;
     IdEstoque:Integer;
+    sUnidade:String;
 begin
    SaldoAtual:=0;
    IdEstoque:=0;
 
-  //Verificar se já tem entrada estoque e guardar saldo atual
-  IBQEstoque.Close;
-  IBQEstoque.SQL.Clear;
-  IBQEstoque.SQL.Add('SELECT TBES_QUANTI, '+
-                            'ID_ESTOQUE '+
-                     'FROM TB_ESTOQUE '+
-                     'WHERE ID_PRODUTO=:pProduto ');
-
-
-  IBQEstoque.ParamByName('pProduto').AsInteger :=CDSPerdasElastico.AsInteger;
 
   Try
+     //Verificar qual produto e se unidade é metro ou KG
+    IBQUtil.Close;
+    IBQUtil.SQL.Clear;
+    IBQUtil.SQL.Add('SELECT * FROM TB_PRODUTOS WHERE ID_PRODUTO=:pID_Produto');
+    IBQUtil.ParamByName('pID_Produto').AsInteger:=CDSPerdasElastico.AsInteger;
+    IBQUtil.Open;
+    sUnidade:=Trim(IBQUtil.FieldByName('TBPRD_UNIDADE').AsString);
+    //Verificar se já tem entrada estoque e guardar saldo atual
+    IBQEstoque.Close;
+    IBQEstoque.SQL.Clear;
+    IBQEstoque.SQL.Add('SELECT TBES_QUANTI, '+
+                              'ID_ESTOQUE '+
+                       'FROM TB_ESTOQUE '+
+                       'WHERE ID_PRODUTO=:pProduto ');
+
+
+    IBQEstoque.ParamByName('pProduto').AsInteger :=CDSPerdasElastico.AsInteger;
 
     IBQEstoque.Open;
     if Not IBQEstoque.IsEmpty then
@@ -490,7 +519,10 @@ begin
                            'TBES_QUANTI = :TBES_QUANTI '+
                            'WHERE '+
                            'ID_ESTOQUE = :ID_ESTOQUE ');
-      IBSQLEstoque.ParamByName('TBES_QUANTI').AsInteger:=SaldoAtual+CDSPerdasQuantidade.AsInteger;
+      if (sUnidade='M') or (sUnidade='METRO') then
+        IBSQLEstoque.ParamByName('TBES_QUANTI').AsInteger:=SaldoAtual+CDSPerdasQuantidade.AsInteger;
+      if sUnidade='KG' then
+        IBSQLEstoque.ParamByName('TBES_QUANTI').AsFloat:=SaldoAtual+CDSPerdasPesoB.AsFloat;
       IBSQLEstoque.ParamByName('ID_ESTOQUE').AsInteger:=IdEstoque;
       IBSQLEstoque.ExecQuery;
     end
