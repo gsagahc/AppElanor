@@ -1,7 +1,7 @@
 object FrmControlePerdas: TFrmControlePerdas
-  Left = 216
-  Top = 170
-  Width = 1127
+  Left = 154
+  Top = 228
+  Width = 1135
   Height = 423
   BorderIcons = []
   Caption = 'Lan'#231'amento de produ'#231#227'o dos enroladores'
@@ -23,14 +23,14 @@ object FrmControlePerdas: TFrmControlePerdas
   object Panel1: TPanel
     Left = 0
     Top = 201
-    Width = 1119
+    Width = 1127
     Height = 188
     Align = alClient
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 1117
+      Width = 1125
       Height = 186
       TabStop = False
       Align = alClient
@@ -125,7 +125,7 @@ object FrmControlePerdas: TFrmControlePerdas
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1119
+    Width = 1127
     Height = 201
     Align = alTop
     TabOrder = 1

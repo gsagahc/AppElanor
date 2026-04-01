@@ -1,6 +1,6 @@
 object FrmCadEnrolador: TFrmCadEnrolador
-  Left = 449
-  Top = 216
+  Left = 450
+  Top = 192
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de enroladores'
@@ -846,5 +846,13 @@ object FrmCadEnrolador: TFrmCadEnrolador
     DataSet = IBTbEnrolador
     Left = 432
     Top = 8
+  end
+  object IBQueryUtil: TIBQuery
+    Database = FrmPrincipal.IBDMain
+    Transaction = FrmPrincipal.IBTMain
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 440
+    Top = 104
   end
 end

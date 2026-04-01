@@ -1,6 +1,6 @@
 object FrmCadProd: TFrmCadProd
-  Left = 423
-  Top = 208
+  Left = 425
+  Top = 185
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de produtos'
@@ -959,7 +959,7 @@ object FrmCadProd: TFrmCadProd
       item
         Name = 'NOME_ABREVIADO'
         DataType = ftString
-        Size = 6
+        Size = 10
       end>
     StoreDefs = True
     TableName = 'TB_PRODUTOS'
@@ -1005,7 +1005,7 @@ object FrmCadProd: TFrmCadProd
     end
     object IBTbProdutosNOME_ABREVIADO: TIBStringField
       FieldName = 'NOME_ABREVIADO'
-      Size = 6
+      Size = 10
     end
   end
   object IBSQLProdutos: TIBSQL

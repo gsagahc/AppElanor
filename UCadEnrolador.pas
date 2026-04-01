@@ -33,6 +33,7 @@ type
     IBTbEnroladorSN_ATIVO: TIBStringField;
     DBChBoxSNAtivo: TDBCheckBox;
     IBTbEnroladorID_ENROLADOR: TIntegerField;
+    IBQueryUtil: TIBQuery;
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButton5Click(Sender: TObject);
     procedure PNGButton3Click(Sender: TObject);
@@ -83,7 +84,10 @@ begin
     if (tFrmMensagens.Mensagem('Deleja salvar este enrolador?','Q',[mbSim, mbNao])) then
     begin
       try
-        IBTbEnroladorSN_ATIVO.AsString:='S';
+        if DBChBoxSNAtivo.Checked then
+          IBTbEnroladorSN_ATIVO.AsString:='S'
+        else
+         IBTbEnroladorSN_ATIVO.AsString:='N';
         IBTbEnrolador.Post;
         FrmPrincipal.IBTMain.Commit;
         FrmPrincipal.IBDMain.CloseDataSets;
@@ -99,7 +103,23 @@ end;
 procedure TFrmCadEnrolador.PNGButton3Click(Sender: TObject);
 begin
   if (tFrmMensagens.Mensagem('Deleja deletar o enrolador selecionado?','Q',[mbSim, mbNao])) then
-     IBTbEnrolador.Delete;
+  begin
+    IBQueryUtil.Close;
+    IBQueryUtil.SQL.Clear;
+    IBQueryUtil.SQL.Add('SELECT COUNT(*) AS QTD FROM TB_CONTROLE_PERDAS WHERE ID_ENROLADOR=:pEnrolador');
+    IBQueryUtil.ParamByName('pEnrolador').AsInteger:=IBTbEnroladorID_ENROLADOR.AsInteger;
+    IBQueryUtil.Open;
+    if IBQueryUtil.FieldByName('QTD').AsInteger =0 Then
+      IBTbEnrolador.Delete
+    else
+    begin
+      tFrmMensagens.Mensagem('Já existe lançamento de produção para este funcionário, ele será inativado no sistema' ,'E',[mbOK]);
+      IBTbEnrolador.Edit;
+      IBTbEnroladorSN_ATIVO.AsString:='N';
+      IBTbEnrolador.Post;
+
+    end;
+  end;
   StatusBotoes;
 end;
 

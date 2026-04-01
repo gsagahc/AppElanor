@@ -1,6 +1,6 @@
 object FrmImprePedidos: TFrmImprePedidos
   Left = 292
-  Top = 133
+  Top = 151
   Width = 928
   Height = 482
   VertScrollBar.Position = 19
@@ -968,9 +968,9 @@ object FrmImprePedidos: TFrmImprePedidos
         FontSize = 10
       end
       object QRLabel36: TQRLabel
-        Left = 253
+        Left = 229
         Top = 162
-        Width = 78
+        Width = 42
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -979,14 +979,14 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          669.395833333333400000
+          605.895833333333400000
           428.625000000000000000
-          206.375000000000000000)
+          111.125000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Pagamento:'
+        Caption = 'Prazo:'
         Color = clWhite
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1147,7 +1147,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Shape = qrsHorLine
       end
       object QRDBText26: TQRDBText
-        Left = 333
+        Left = 277
         Top = 162
         Width = 88
         Height = 17
@@ -1158,7 +1158,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          881.062500000000000000
+          732.895833333333400000
           428.625000000000000000
           232.833333333333400000)
         Alignment = taLeftJustify
@@ -1199,9 +1199,9 @@ object FrmImprePedidos: TFrmImprePedidos
         FontSize = 10
       end
       object QRShape20: TQRShape
-        Left = 444
+        Left = 400
         Top = 158
-        Width = 274
+        Width = 318
         Height = 25
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -1209,14 +1209,14 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          66.145833333333320000
-          1174.750000000000000000
+          66.145833333333340000
+          1058.333333333333000000
           418.041666666666700000
-          724.958333333333200000)
+          841.375000000000000000)
         Shape = qrsRectangle
       end
       object QRLabel40: TQRLabel
-        Left = 454
+        Left = 405
         Top = 161
         Width = 50
         Height = 17
@@ -1227,7 +1227,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1201.208333333333000000
+          1071.562500000000000000
           425.979166666666700000
           132.291666666666700000)
         Alignment = taLeftJustify
@@ -1247,7 +1247,7 @@ object FrmImprePedidos: TFrmImprePedidos
         FontSize = 10
       end
       object QRDBText30: TQRDBText
-        Left = 509
+        Left = 460
         Top = 161
         Width = 99
         Height = 17
@@ -1258,7 +1258,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1346.729166666667000000
+          1217.083333333333000000
           425.979166666666700000
           261.937500000000000000)
         Alignment = taLeftJustify

@@ -18,6 +18,8 @@ type
     IBQueryUtil: TIBQuery;
     PNGButtonDeletar: TPNGButton;
     CDSRomaneioidRomaneio: TIntegerField;
+    PNGButton7: TPNGButton;
+    PNGButtonRomaneio: TPNGButton;
     procedure PNGBCarregarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PNGBImprimirClick(Sender: TObject);
@@ -25,9 +27,11 @@ type
     procedure CDSRomaneioOrdemChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
     procedure PNGButtonDeletarClick(Sender: TObject);
-
+    procedure PNGButton7Click(Sender: TObject);
+    procedure PNGButtonRomaneioClick(Sender: TObject);
+    procedure SalvarAlteracaoBanco;
   private
-
+    fk_romaneio:Integer;
 
     { Private declarations }
   public
@@ -38,7 +42,8 @@ var
   FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio;
 
 implementation
-uses uMensagens, URelReimpressaoRomaneio, Math, UPrincipal, DateUtils;
+uses uMensagens, URelReimpressaoRomaneio, Math, UPrincipal, DateUtils,
+  UAdicionarItensRomaneio;
 {$R *.dfm}
 
 procedure TFrmReimpressaoRomaneio.PNGBCarregarClick(Sender: TObject);
@@ -65,16 +70,19 @@ begin
 
     IBQRomaneio.ParamByName('pData').AsDate:=DTPickerIni.Date ;
     IBQRomaneio.Open;
+    fk_romaneio:= IBQRomaneio.FieldByname('ID_ROMANEIO').AsInteger;
     if not IBQRomaneio.IsEmpty then
     begin
       if DTPickerIni.Date > Now-6 then
       begin
         PNGButtonDeletar.Enabled:=True;
+        PNGButtonRomaneio.Enabled:=True;
         Excluir1.Visible:=True;
       end
       else
       begin
         PNGButtonDeletar.Enabled:=False;
+        PNGButtonRomaneio.Enabled:=False;
         Excluir1.Visible:=False;
       end;
       PNGBImprimir.Enabled:= True;
@@ -126,26 +134,10 @@ end;
 procedure TFrmReimpressaoRomaneio.PNGBImprimirClick(Sender: TObject);
 begin
   try
-    if not FrmPrincipal.IBTMain.Active Then
-      FrmPrincipal.IBTMain.StartTransaction;
+
     CDSRomaneio.DisableControls;
     CDSRomaneio.First;
-    while Not CDSRomaneio.EOf do
-    begin
-      IBQRomaneio.SQL.Clear;
-      IBQRomaneio.SQL.Add('UPDATE  TB_ITENS_ROMANEIO SET QUANTIDADE=:pQuantidade, '+
-                                                          'ORDEM=:pOrdem,'+
-                                                          'CAIXAS=:pCaixas '+
-                          'WHERE ID_ITENS = :pItens ');
-
-      IBQRomaneio.ParamByName('pQuantidade').AsString:=CDSRomaneio.FieldByName('Quant').AsString;
-      IBQRomaneio.ParamByName('pOrdem').AsString:=CDSRomaneioOrdem.AsString;
-      IBQRomaneio.ParamByName('pCaixas').AsString:=CDSRomaneioNum.AsString;
-      IBQRomaneio.ParamByName('pItens').AsInteger:=CDSRomaneioIdItemRomaneio.AsInteger;
-      IBQRomaneio.ExecSQL;
-      CDSRomaneio.Next;
-    End;
-    FrmPrincipal.IBTMain.Commit;
+    SalvarAlteracaoBanco;
     FrmPrincipal.IBDMain.CloseDataSets;
   except
    on  E: EDatabaseError do
@@ -206,6 +198,39 @@ var idRomaneio:Integer;
 begin
   inherited;
   // Código para excluir o romaneio
+  if MessageDlg('Deseja realmente excluir a linha selecionada?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    try
+      CDSRomaneio.Delete;
+    except
+
+    end;
+  end;
+end;
+
+procedure TFrmReimpressaoRomaneio.PNGButton7Click(Sender: TObject);
+var   ImagemMemory: TMemoryStream;
+begin
+  inherited;
+  Application.CreateForm(TFrmAdicionarItensRomaneio, FrmAdicionarItensRomaneio  );
+  FrmAdicionarItensRomaneio.ShowModal;
+  ImagemMemory:= TMemoryStream.Create;
+  Image1.Picture.Graphic.SaveToStream(ImagemMemory);
+  CDSRomaneio.Insert;
+  CDSRomaneioPedido.AsString  := FrmAdicionarItensRomaneio.CDSPedidosPedido.AsString;
+  CDSRomaneioData.AsDateTime  := FrmAdicionarItensRomaneio.CDSPedidosData.AsDateTime;
+  CDSRomaneioCliente.AsString := FrmAdicionarItensRomaneio.CDSPedidosCliente.AsString;
+  CDSRomaneioIdPedido.AsInteger := FrmAdicionarItensRomaneio.CDSPedidosIDpedido.AsInteger;
+  CDSRomaneioImagem.LoadFromStream(ImagemMemory);
+  CDSRomaneio.Post;
+  FreeAndNil(FrmAdicionarItensRomaneio);
+end;
+
+procedure TFrmReimpressaoRomaneio.PNGButtonRomaneioClick(Sender: TObject);
+var idRomaneio:Integer;
+begin
+  inherited;
+  // Código para excluir o romaneio
   if MessageDlg('Deseja realmente excluir este romaneio e seus itens?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
     try
@@ -232,6 +257,51 @@ begin
 
     end;
   end;
+
+end;
+
+procedure TFrmReimpressaoRomaneio.SalvarAlteracaoBanco;
+begin
+  try
+    CDSRomaneio.DisableControls;
+    CDSRomaneio.First;
+    IBQRomaneio.SQL.Clear;
+    IBQRomaneio.SQL.Add('DELETE FROM TB_ITENS_ROMANEIO WHERE FK_ROMANEIO=:pfk_romaneio');
+    IBQRomaneio.ParamByName('pfk_romaneio').AsInteger:=fk_romaneio;
+    IBQRomaneio.ExecSQL;
+    while Not CDSRomaneio.EOf do
+    begin
+      IBQRomaneio.SQL.Clear;
+      IBQRomaneio.SQL.Add('INSERT INTO  TB_ITENS_ROMANEIO (FK_ROMANEIO, '+
+                                                          'QUANTIDADE, '+
+                                                          'CLIENTE, '+
+                                                          'ORDEM,  '+
+                                                          'FK_PEDIDO, '+
+                                                          'CAIXAS) '+
+
+                           'VALUES (:pFK, :pQuantidade, :pFk_cliente,:pOrdem, :pPedido, :pCaixas)');
+
+      IBQRomaneio.ParamByName('pFK').AsInteger:=fk_romaneio;
+      IBQRomaneio.ParamByName('pQuantidade').AsString:=CDSRomaneio.FieldByName('Quant').AsString;
+      IBQRomaneio.ParamByName('pFk_cliente').AsString:=CDSRomaneioCliente.AsString;
+      IBQRomaneio.ParamByName('pOrdem').AsString:=CDSRomaneioOrdem.AsString;
+      IBQRomaneio.ParamByName('pPedido').AsString:=CDSRomaneioIdPedido.AsString;
+      IBQRomaneio.ParamByName('pCaixas').AsString:=CDSRomaneioNum.AsString;
+      IBQRomaneio.ExecSQL;
+
+
+      CDSRomaneio.Next;
+    End;
+    FrmPrincipal.IBTMain.Commit;
+    FrmPrincipal.IBDMain.CloseDataSets;
+  except
+   on  E: EDatabaseError do
+   begin
+     tFrmMensagens.Mensagem('Erro ao gerar romaneio no banco ','E',[mbOK], E.Message);
+     FrmPrincipal.IBTMain.Rollback;
+   end;
+  end;
+
 end;
 
 end.

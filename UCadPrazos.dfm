@@ -1,6 +1,6 @@
 object FrmCadPrazos: TFrmCadPrazos
   Left = 381
-  Top = 161
+  Top = 182
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Cadastro de prazos'

@@ -1,6 +1,6 @@
 object FrmImpEtiquetas: TFrmImpEtiquetas
-  Left = 576
-  Top = 289
+  Left = 578
+  Top = 258
   Width = 641
   Height = 438
   BorderIcons = []
@@ -22,8 +22,8 @@ object FrmImpEtiquetas: TFrmImpEtiquetas
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 625
-    Height = 399
+    Width = 633
+    Height = 404
     Align = alClient
     TabOrder = 0
     object Label1: TLabel
@@ -791,7 +791,7 @@ object FrmImpEtiquetas: TFrmImpEtiquetas
     end
     object CDSEtiquetaNome_abreviado: TStringField
       FieldName = 'NOME_ABREVIADO'
-      Size = 6
+      Size = 10
     end
   end
   object IBQueryUtil: TIBQuery

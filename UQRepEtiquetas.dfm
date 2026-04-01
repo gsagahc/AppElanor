@@ -1,6 +1,6 @@
 object FrmQrepEtiquetas: TFrmQrepEtiquetas
-  Left = 280
-  Top = 129
+  Left = 150
+  Top = 116
   Width = 928
   Height = 480
   BorderIcons = [biSystemMenu]
@@ -125,7 +125,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Size.Values = (
           108.479166666666700000
           26.458333333333330000
-          470.958333333333300000
+          470.958333333333400000
           108.479166666666700000)
         AutoSize = True
         Center = True
@@ -409,8 +409,8 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawRight = False
         Size.Values = (
           108.479166666666700000
-          629.708333333333300000
-          470.958333333333300000
+          629.708333333333400000
+          470.958333333333400000
           105.833333333333300000)
         AutoSize = True
         Center = True
@@ -681,9 +681,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
-          592.666666666666700000
-          656.166666666666700000
+          74.083333333333340000
+          592.666666666666800000
+          656.166666666666800000
           111.125000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -712,9 +712,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
-          740.833333333333300000
+          740.833333333333400000
           222.250000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -743,7 +743,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
           825.500000000000000000
           113.770833333333300000)
@@ -774,9 +774,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
-          910.166666666666700000
+          910.166666666666600000
           190.500000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -805,9 +805,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
-          994.833333333333300000
+          994.833333333333400000
           246.062500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -836,7 +836,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
           1206.500000000000000000
           142.875000000000000000)
@@ -867,7 +867,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
           1100.666666666667000000
           182.562500000000000000)
@@ -898,7 +898,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           1164.166666666667000000
           1206.500000000000000000
           238.125000000000000000)
@@ -929,9 +929,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           277.812500000000000000
-          740.833333333333300000
+          740.833333333333400000
           209.020833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -961,7 +961,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           150.812500000000000000
           825.500000000000000000
           261.937500000000000000)
@@ -993,9 +993,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           227.541666666666700000
-          910.166666666666700000
+          910.166666666666600000
           177.270833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1025,9 +1025,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333320000
           285.750000000000000000
-          994.833333333333300000
+          994.833333333333200000
           1600.729166666667000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1057,10 +1057,10 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           211.666666666666700000
           1100.666666666667000000
-          312.208333333333300000)
+          312.208333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1089,7 +1089,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           1164.166666666667000000
           1100.666666666667000000
           254.000000000000000000)
@@ -1120,7 +1120,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           1426.104166666667000000
           1100.666666666667000000
           240.770833333333300000)
@@ -1152,7 +1152,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           174.625000000000000000
           1206.500000000000000000
           238.125000000000000000)
@@ -1184,7 +1184,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           1420.812500000000000000
           1206.500000000000000000
           161.395833333333300000)
@@ -1219,7 +1219,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
           320.145833333333300000
           21.166666666666670000
           7.937500000000000000
-          933.979166666666700000)
+          933.979166666666800000)
         DataField = 'IMAGEM'
         DataSet = FrmImpEtiquetas.CDSEtiqueta
       end
@@ -1234,9 +1234,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           1375.833333333333000000
-          910.166666666666700000
+          910.166666666666600000
           209.020833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1265,9 +1265,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           1603.375000000000000000
-          910.166666666666700000
+          910.166666666666600000
           195.791666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1297,8 +1297,8 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
-          804.333333333333300000
+          74.083333333333320000
+          804.333333333333200000
           1100.666666666667000000
           320.145833333333300000)
         Alignment = taLeftJustify
@@ -1328,9 +1328,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          74.083333333333330000
+          74.083333333333340000
           21.166666666666670000
-          656.166666666666700000
+          656.166666666666800000
           193.145833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1384,9 +1384,9 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          296.333333333333300000
+          296.333333333333400000
           1359.958333333333000000
-          550.333333333333300000
+          550.333333333333400000
           185.208333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1405,7 +1405,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         FontSize = 72
       end
       object QRDBText10: TQRDBText
-        Left = 504
+        Left = 456
         Top = 24
         Width = 209
         Height = 89
@@ -1416,7 +1416,7 @@ object FrmQrepEtiquetas: TFrmQrepEtiquetas
         Frame.DrawRight = False
         Size.Values = (
           235.479166666666700000
-          1333.500000000000000000
+          1206.500000000000000000
           63.500000000000000000
           552.979166666666700000)
         Alignment = taLeftJustify

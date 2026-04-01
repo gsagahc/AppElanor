@@ -1,6 +1,6 @@
 object FrmRelatorioPedData: TFrmRelatorioPedData
   Left = 318
-  Top = 186
+  Top = 211
   AutoScroll = False
   BorderIcons = []
   Caption = 'Consultar pedidos por per'#237'odo'

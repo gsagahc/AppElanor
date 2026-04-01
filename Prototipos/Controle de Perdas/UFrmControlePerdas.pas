@@ -372,7 +372,7 @@ begin
          if SN_Visualizar Then
            FrmImpressaoPerdas.PreviewModal
          else
-           FrmImpressaoPerdas.Print;
+         FrmImpressaoPerdas.Print;
          Acumulado:=CalculaAcumuladoMes(IntToStr(Mes), intToStr(Ano));
          FreeAndNil(FrmImpressaoPerdas);
        end
@@ -460,22 +460,30 @@ procedure TFrmControlePerdas.AtualizarEstoque;
 Var
     SaldoAtual:Integer;
     IdEstoque:Integer;
+    sUnidade:String;
 begin
    SaldoAtual:=0;
    IdEstoque:=0;
 
-  //Verificar se já tem entrada estoque e guardar saldo atual
-  IBQEstoque.Close;
-  IBQEstoque.SQL.Clear;
-  IBQEstoque.SQL.Add('SELECT TBES_QUANTI, '+
-                            'ID_ESTOQUE '+
-                     'FROM TB_ESTOQUE '+
-                     'WHERE ID_PRODUTO=:pProduto ');
-
-
-  IBQEstoque.ParamByName('pProduto').AsInteger :=CDSPerdasElastico.AsInteger;
 
   Try
+     //Verificar qual produto e se unidade é metro ou KG
+    IBQUtil.Close;
+    IBQUtil.SQL.Clear;
+    IBQUtil.SQL.Add('SELECT * FROM TB_PRODUTOS WHERE ID_PRODUTO=:pID_Produto');
+    IBQUtil.ParamByName('pID_Produto').AsInteger:=CDSPerdasElastico.AsInteger;
+    IBQUtil.Open;
+    sUnidade:=Trim(IBQUtil.FieldByName('TBPRD_UNIDADE').AsString);
+    //Verificar se já tem entrada estoque e guardar saldo atual
+    IBQEstoque.Close;
+    IBQEstoque.SQL.Clear;
+    IBQEstoque.SQL.Add('SELECT TBES_QUANTI, '+
+                              'ID_ESTOQUE '+
+                       'FROM TB_ESTOQUE '+
+                       'WHERE ID_PRODUTO=:pProduto ');
+
+
+    IBQEstoque.ParamByName('pProduto').AsInteger :=CDSPerdasElastico.AsInteger;
 
     IBQEstoque.Open;
     if Not IBQEstoque.IsEmpty then
@@ -490,7 +498,10 @@ begin
                            'TBES_QUANTI = :TBES_QUANTI '+
                            'WHERE '+
                            'ID_ESTOQUE = :ID_ESTOQUE ');
-      IBSQLEstoque.ParamByName('TBES_QUANTI').AsInteger:=SaldoAtual+CDSPerdasQuantidade.AsInteger;
+      if (sUnidade='M') or (sUnidade='METRO') then
+        IBSQLEstoque.ParamByName('TBES_QUANTI').AsInteger:=SaldoAtual+CDSPerdasQuantidade.AsInteger;
+      if sUnidade='KG' then
+        IBSQLEstoque.ParamByName('TBES_QUANTI').AsFloat:=SaldoAtual+CDSPerdasPesoB.AsFloat;
       IBSQLEstoque.ParamByName('ID_ESTOQUE').AsInteger:=IdEstoque;
       IBSQLEstoque.ExecQuery;
     end
