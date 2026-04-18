@@ -1,41 +1,38 @@
-object FrmBuscarCliente: TFrmBuscarCliente
-  Left = 411
-  Top = 393
-  ActiveControl = EditNome
+object FrmBuscarMovimentacao: TFrmBuscarMovimentacao
+  Left = 267
+  Top = 231
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Localizar'
-  ClientHeight = 291
-  ClientWidth = 605
+  ClientHeight = 355
+  ClientWidth = 611
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
-  OnKeyUp = FormKeyUp
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 96
-    Width = 605
-    Height = 195
+    Top = 88
+    Width = 611
+    Height = 267
     Align = alBottom
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 603
-      Height = 193
+      Width = 609
+      Height = 265
       Align = alClient
       BorderStyle = bsNone
       Ctl3D = False
-      DataSource = DSCliente
+      DataSource = DSProdutos
       ParentCtl3D = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -47,26 +44,51 @@ object FrmBuscarCliente: TFrmBuscarCliente
       Columns = <
         item
           Expanded = False
-          FieldName = 'TBCLI_NOME'
-          Title.Caption = 'Nome'
+          FieldName = 'DATA'
+          Title.Caption = 'C'#243'digo'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBCLI_CNPJ'
-          Title.Caption = 'CNPJ'
+          FieldName = 'TIPO'
+          PickList.Strings = (
+            'ENTRADA'
+            'SA'#205'DA')
+          Title.Caption = 'Entrada/Sa'#237'da'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 221
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBCLI_BAIRRO'
-          Title.Caption = 'Bairro'
+          FieldName = 'QUANTIDADE'
+          Title.Caption = 'Quantidade'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 110
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBCLI_CIDADE'
-          Title.Caption = 'Cidade'
+          FieldName = 'DANFE'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 251
           Visible = True
         end>
     end
@@ -74,8 +96,8 @@ object FrmBuscarCliente: TFrmBuscarCliente
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 605
-    Height = 97
+    Width = 611
+    Height = 89
     Align = alTop
     TabOrder = 1
     object PNGButton2: TPNGButton
@@ -267,24 +289,11 @@ object FrmBuscarCliente: TFrmBuscarCliente
       OnClick = PNGButton6Click
     end
     object Label1: TLabel
-      Left = 24
-      Top = 7
-      Width = 33
-      Height = 13
-      Caption = 'Nome'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label2: TLabel
-      Left = 24
-      Top = 47
+      Left = 15
+      Top = 25
       Width = 32
       Height = 13
-      Caption = 'CNPJ'
+      Caption = 'Data:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -292,60 +301,41 @@ object FrmBuscarCliente: TFrmBuscarCliente
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object EditNome: TEdit
-      Left = 24
-      Top = 23
-      Width = 409
-      Height = 19
-      CharCase = ecUpperCase
-      Ctl3D = False
-      ParentCtl3D = False
+    object DateTimePicker1: TDateTimePicker
+      Left = 56
+      Top = 24
+      Width = 393
+      Height = 21
+      Date = 46127.525394710650000000
+      Time = 46127.525394710650000000
       TabOrder = 0
-      OnChange = EditNomeChange
-    end
-    object EditCNPJ: TEdit
-      Left = 24
-      Top = 63
-      Width = 409
-      Height = 19
-      Ctl3D = False
-      MaxLength = 19
-      ParentCtl3D = False
-      TabOrder = 1
-      OnChange = EditCNPJChange
     end
   end
-  object IBQCliente: TIBQuery
+  object DSProdutos: TDataSource
+    DataSet = IBQProdutos
+    Left = 496
+  end
+  object IBQProdutos: TIBQuery
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
-      'SELECT ID_CLIENTE,'
-      '               TBCLI_NOME,'
-      '               TBCLI_CNPJ,'
-      '               TBCLI_BAIRRO,'
-      '               TBCLI_CIDADE,'
-      '               TBCLI_ENDERECO,'
-      '               TBCLI_ESTADO,'
-      '               ID_PRAZO,'
-      '               CEP,'
-      '               TBCLI_SNLOTE,'
-      '               TBCLI_BOLETO'
-      ' FROM TB_CLIENTES'
-      'ORDER BY TBCLI_NOME')
-    Left = 216
-    Top = 90
-  end
-  object DSCliente: TDataSource
-    DataSet = IBQCliente
-    Left = 184
-    Top = 88
+      
+        'select ID_MOV,DANFE, DATA, ENTRADA_SAIDA, ESTOQUE_ANTERIOR, ESTO' +
+        'QUE_APOS, FABRICANTE, QUANTIDADE,'
+      'CASE ENTRADA_SAIDA'
+      '  WHEN '#39'E'#39'  THEN '#39'ENTRADA'#39
+      '   WHEN '#39'S'#39'  THEN '#39'SA'#205'DA'#39
+      'END AS TIPO '
+      'from TB_MOV_ACETONA')
+    Left = 496
+    Top = 32
   end
   object TimerBusca: TTimer
     Enabled = False
     OnTimer = TimerBuscaTimer
-    Left = 248
-    Top = 88
+    Left = 496
+    Top = 64
   end
 end

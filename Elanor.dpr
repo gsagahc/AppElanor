@@ -93,7 +93,13 @@ uses
   UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador},
   UConfiguracoes in 'UConfiguracoes.pas' {FrmConfiguracoes},
   URelatorioEnroladores in 'Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas' {FormEnroladores},
-  UParametrosConfig in 'UParametrosConfig.pas';
+  UParametrosConfig in 'UParametrosConfig.pas',
+  UAdicionarItensRomaneio in 'UAdicionarItensRomaneio.pas' {FrmAdicionarItensRomaneio},
+  UCadMovAcetona in 'UCadMovAcetona.pas' {FrmCadMovAcetona},
+  UBuscarMovimentacao in 'UBuscarMovimentacao.pas' {FrmBuscarMovimentacao},
+  URelatorioMovAcetona in 'URelatorioMovAcetona.pas' {FrmBuscarMovPeriodo},
+  URelMovimentacaoAcetona in 'URelMovimentacaoAcetona.pas' {FrmRelMovAcetona},
+  UExibirEstoqueAcetona in 'UExibirEstoqueAcetona.pas' {FormExibirEstoqueAcetona};
 
 {$R *.res}
 var
@@ -106,6 +112,7 @@ begin
     Application.Initialize;
     Application.Title := 'Sistema de Gestão Elanor';
     Application.CreateForm(TFrmPrincipal, FrmPrincipal);
+  Application.CreateForm(TFormExibirEstoqueAcetona, FormExibirEstoqueAcetona);
   Try
       FrmPrincipal.IBDMain.Close;
       FrmPrincipal.IBDMain.DatabaseName:= FrmPrincipal.BancoDados;

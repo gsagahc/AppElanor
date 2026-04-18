@@ -1,41 +1,38 @@
-object FrmBuscarCliente: TFrmBuscarCliente
-  Left = 411
-  Top = 393
-  ActiveControl = EditNome
+object FrmBuscarMovPeriodo: TFrmBuscarMovPeriodo
+  Left = 267
+  Top = 231
   BorderIcons = []
   BorderStyle = bsSingle
-  Caption = 'Localizar'
-  ClientHeight = 291
-  ClientWidth = 605
+  Caption = 'Relat'#243'rio de movimenta'#231#245'es'
+  ClientHeight = 355
+  ClientWidth = 563
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
-  KeyPreview = True
   OldCreateOrder = False
   Position = poDesktopCenter
-  OnKeyUp = FormKeyUp
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
-    Top = 96
-    Width = 605
-    Height = 195
+    Top = 88
+    Width = 563
+    Height = 267
     Align = alBottom
     TabOrder = 0
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
-      Width = 603
-      Height = 193
+      Width = 561
+      Height = 265
       Align = alClient
       BorderStyle = bsNone
       Ctl3D = False
-      DataSource = DSCliente
+      DataSource = DSProdutos
       ParentCtl3D = False
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -47,26 +44,64 @@ object FrmBuscarCliente: TFrmBuscarCliente
       Columns = <
         item
           Expanded = False
-          FieldName = 'TBCLI_NOME'
-          Title.Caption = 'Nome'
+          FieldName = 'DATA'
+          Title.Caption = 'C'#243'digo'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBCLI_CNPJ'
-          Title.Caption = 'CNPJ'
+          FieldName = 'TIPO'
+          PickList.Strings = (
+            'ENTRADA'
+            'SA'#205'DA')
+          Title.Caption = 'Entrada/Sa'#237'da'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 136
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBCLI_BAIRRO'
-          Title.Caption = 'Bairro'
+          FieldName = 'QUANTIDADE'
+          Title.Caption = 'Quantidade'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 110
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'TBCLI_CIDADE'
-          Title.Caption = 'Cidade'
+          FieldName = 'ESTOQUE_APOS'
+          Title.Caption = 'Estoque atual'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 103
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DANFE'
+          Title.Caption = 'Nota fiscal'
+          Title.Font.Charset = DEFAULT_CHARSET
+          Title.Font.Color = clWindowText
+          Title.Font.Height = -11
+          Title.Font.Name = 'MS Sans Serif'
+          Title.Font.Style = [fsBold]
+          Width = 128
           Visible = True
         end>
     end
@@ -74,12 +109,12 @@ object FrmBuscarCliente: TFrmBuscarCliente
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 605
-    Height = 97
+    Width = 563
+    Height = 89
     Align = alTop
     TabOrder = 1
     object PNGButton2: TPNGButton
-      Left = 528
+      Left = 496
       Top = 12
       Width = 57
       Height = 65
@@ -180,7 +215,7 @@ object FrmBuscarCliente: TFrmBuscarCliente
       OnClick = PNGButton2Click
     end
     object PNGButton6: TPNGButton
-      Left = 464
+      Left = 368
       Top = 12
       Width = 57
       Height = 65
@@ -267,11 +302,11 @@ object FrmBuscarCliente: TFrmBuscarCliente
       OnClick = PNGButton6Click
     end
     object Label1: TLabel
-      Left = 24
-      Top = 7
-      Width = 33
+      Left = 15
+      Top = 25
+      Width = 50
       Height = 13
-      Caption = 'Nome'
+      Caption = 'Per'#237'odo:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -279,73 +314,131 @@ object FrmBuscarCliente: TFrmBuscarCliente
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label2: TLabel
-      Left = 24
-      Top = 47
-      Width = 32
-      Height = 13
-      Caption = 'CNPJ'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'MS Sans Serif'
-      Font.Style = [fsBold]
-      ParentFont = False
+    object PNGButton1: TPNGButton
+      Left = 431
+      Top = 12
+      Width = 57
+      Height = 65
+      ButtonLayout = pbsImageAbove
+      Caption = 'Imprimir'
+      ImageNormal.Data = {
+        89504E470D0A1A0A0000000D4948445200000020000000200806000000737A7A
+        F4000000097048597300002E2300002E230178A53F760000085F4944415478DA
+        A5576B4C55D9155EFBDC73E1C215798B08A6880A88C25888C1A88CD57674880A
+        26C634F6479346658CC6F93399C9FCA8333A5393DA6052A53F341A8BDA66F835
+        3E12455B1F131F283A15225691910910C17BE531208FFB3A8F7E6B730EDEB982
+        92742727E7DCBBCFDEEB5BDF5AEBDBEB88BD7BF752E4300C835C2E17391C0EF2
+        F97CA4280A99A6495319FC9E1082745DA7478F1E91A66994949444797979343A
+        3A2AF70A1F2212006FA0AA2ABD7CF992060606666264601353F0AEEF18FC0AAF
+        773A9D4A5F5F9F06074AB66EDD5ABE67CF9E3FCD9E3DBB7ECE9C3922100898E1
+        20C60184238F8B8B53AE5EBD6ACC9A35EBC0E1C3873FF3FBFD3A403926C3C06B
+        ED8BD9E33D983D7662EEDCB9545959B91780F6AD5CB952191A1A32786E4206EC
+        4DA64F9FAEDCBC7993E0FDE123478EECC2A621A076BECDFB502824E9B6EFBC4F
+        5B5B9B366FDE3CB16BD7AE7D08E5D7CB962D132323236F67803D6084172F5EA4
+        ACACACAADADADA4F8218F82F2A9C01FB7DBEB351F69A0DDB20787476766AB9B9
+        B9EACE9D3BBF80E1AF972F5FAE0C0F0F1B93028011313838685EBA74297FC78E
+        1D5FA5A6A62EDEB46953360C710E28360006693FDB866DCFED8BF7EBEAEAD273
+        72721C60E04B00F8EAAD0078534E9EDEDE5EE3DAB56BE50F1F3E3C870D283939
+        D94045283C3F51EC230D8703E8EEEED691FD0E30F06E0056F68B9E9E1EF3F6ED
+        DB1B6EDCB8F16D47470721731DD1D1D13C2FEC10D965194E3933117EE7798FC7
+        A3E7E7E73BC0E69728C177036006BC5EAF71EFDEBD0DF5F5F5E75B5A5A0C2E9D
+        98981811C900FF9ECC7B9B015481BE70E1420960AA0C28608001948385731012
+        83B39801E80CC07C5DEB9AC6C6ADF8E359B79E75FD350084736A006C95E31080
+        01F3FEFDFBE577EED49F7BF0A0C9C8CDCB13D3DCB1425A27BB0A602CA45920C6
+        0CEAB882FC1CB240E90600F4E985058B1C1F01C0F0D010031000607295D95524
+        0158F4B2A7CEFEFE7E1DDEAF43199EFBFE7E83F17EE90AF26BAAE2F36BE40FB2
+        C81858AC638DED31C71CC683215215DE8799D229365AD0D0D0A09EBFE83DC747
+        95955F4001F703800A75D5619C5F947A202093C414B3DCBE7AF58A5A5B5BB97E
+        D7D77E73FA7CE37F3DC60B7FB69296122B7C0142F2098A895248752AE4C0B361
+        8EB1621826000088665020A8614E274FCF28CD8AEBD136972D706CDFF1F1FECE
+        8E8E3D4B972EE53CA3848404E934E485C4C1830705626DBE78F12273C182051F
+        CE9F3FBFB4A8A878F97B85F9D9CDED82EA1A86E9FDA244C1DE938052B283B00B
+        9BF2AE1B2CBF6379C1FF319828006CED1CA5D469C3E6EF3F4CA33B0DFF19FAB1
+        ED59E3F3E7CF1B9063F760EF0A6C0D66646408B179F36601AF8B4F9F3E5D5750
+        5090129EE92DED2374F2D24F9435D385F84221551812BA34AA4BDD277999F20E
+        26F43156981D6F5F904AF21DB4E5838C37F4E3C2850BCDD086DF20397B65561D
+        3B76ECFCB66DDB368092001243E5EC50A18A6DDD41FAF33FBB297D5A1F7CD749
+        897251C81907000C8248D3CD9F19172642432AC5BB5DD4F63C40EB96AAE6EFD6
+        CC44AEB0763036193303C91E05E3FB51EA7F14B1B1B15977EFDEBD8172C9342D
+        B5419A095528D4D5A7D3D6AA2734F2EA47C8B486328926C3198FCD3887148A52
+        B95FD0114B94659028803C09FAA127C20986DCB46F7B3AFDF6D7A93237C08A69
+        E90797A180DC3FA8A8A8582250E7EBAE5FBF7E0AF1481A0700A09C709E7E8D3E
+        FF470FAAC04FBE900FC9871020CB818DF828489AEEA6BE9FFC343ACCE527609C
+        C83F6A52B48A9005A2E9B32D6EDAB432194C490014064081D4772D5EBC385B20
+        E92AA0FD7F0780449EE443C7940088FA47046DAF6E45F98D505CBC133A41C862
+        F86EA9027B661A0A85D87B1F2EBF75F719E47D6952D5EE5FD0C6D2C44800AC03
+        9CF8DEC2C2C2F902A755795D5D5D4D767676226ADA26819831BFA1D21FFED642
+        DFDD6DA63837A28B3E822F870580B31E1240010D65E817F09E240BBE219D5292
+        33A8767F21FDAA305602552C05E56500A03436367A8A8B8B73054EABF23367CE
+        D46466663203E172270DB5F42B74EB8701D24301722104AA42921D46A033001D
+        0070418724034179295490358DCA7EE9A058974A63DB8E9F2166545494686E6E
+        F640177204EAB1024D474D5A5A5A020E97F1DE8FD1B2CAA1A4517E0EC47CCC6A
+        646BFA469326972353744DB203C125BB0563E56300385DC5D3A74FBD2B56ACC8
+        11C8FEF293274FD6A4A4A424DACDA7753292DBEDB604676A1DF1CFD00992B4A3
+        B26567CD03BD25EF65C6C7C70BB46BDE55AB56E508884FC5D1A3476BD03A2730
+        00CE0150445046BA72E5CAD48DBF41C458CCE1202D59B2C4362E01B0F4B7B7B7
+        7BD7AC59230194575757D7001527A1AC123C13DA2809E0FF1D3046972F5F96FA
+        6F8542DA40B3E359BF7E7D0EEBC0EA43870E7D8317926D0698FADDBB772B5046
+        9E37719209F13A8B5F333E093B567F69A2BF14B76EDD3221F306AA4CB2C0D39C
+        84E8967A376EDC9823D2D3D38B8E1F3FFE2FE840329F4E76FCD9FBD2D25273C6
+        8C19823B9F89BE096C5091733630F606F92556AF5ECDBDA53CBE79708BF7ECD9
+        B36E34BCF378A50B31FAA4A4A4E40336C432895084F0DF227C48A4591D8C4293
+        8C8998B17836C1A478FCF8B1EFECD9B30DF8D8E1164E3209074D38F8ED93274F
+        AAC5DAB56B090D881386E22D15D4704F873A5E8548A5A29994C2617B166ED06E
+        4C99B14816180070F38B2618D882A4FB377EC7585AA3839181B2B2325D1C3870
+        0087484036983898A8A9A989E3F7695555D55FD0D3C9EFC4706AEDCE9869E40F
+        58C492B86AF839920906876F0B3A75EAD479B080B3A782B8E9E16464D0E31D91
+        D566734B465028E2A6B4A8A8A88285698C65E99D0807C26BE40698B39BD03773
+        D13401CC898C6FC2BB7F050003DF86C2EA09E5E93CDE94DA9FE410083A71E284
+        6D90A9376802C19BC208977503A2431C6E847A5C1919FCFF00BEE3D5BFE74929
+        180000000049454E44AE426082}
+      ButtonStyle = pbsFlat
+      OnClick = PNGButton1Click
     end
-    object EditNome: TEdit
-      Left = 24
-      Top = 23
-      Width = 409
-      Height = 19
-      CharCase = ecUpperCase
-      Ctl3D = False
-      ParentCtl3D = False
+    object DateTimePicker1: TDateTimePicker
+      Left = 75
+      Top = 24
+      Width = 129
+      Height = 21
+      Date = 46127.525394710650000000
+      Time = 46127.525394710650000000
       TabOrder = 0
-      OnChange = EditNomeChange
     end
-    object EditCNPJ: TEdit
-      Left = 24
-      Top = 63
-      Width = 409
-      Height = 19
-      Ctl3D = False
-      MaxLength = 19
-      ParentCtl3D = False
+    object DateTimePicker2: TDateTimePicker
+      Left = 219
+      Top = 24
+      Width = 129
+      Height = 21
+      Date = 46128.481098263890000000
+      Time = 46128.481098263890000000
       TabOrder = 1
-      OnChange = EditCNPJChange
     end
   end
-  object IBQCliente: TIBQuery
+  object DSProdutos: TDataSource
+    DataSet = IBQProdutos
+    Left = 496
+  end
+  object IBQProdutos: TIBQuery
     Database = FrmPrincipal.IBDMain
     Transaction = FrmPrincipal.IBTMain
     BufferChunks = 1000
     CachedUpdates = False
     SQL.Strings = (
-      'SELECT ID_CLIENTE,'
-      '               TBCLI_NOME,'
-      '               TBCLI_CNPJ,'
-      '               TBCLI_BAIRRO,'
-      '               TBCLI_CIDADE,'
-      '               TBCLI_ENDERECO,'
-      '               TBCLI_ESTADO,'
-      '               ID_PRAZO,'
-      '               CEP,'
-      '               TBCLI_SNLOTE,'
-      '               TBCLI_BOLETO'
-      ' FROM TB_CLIENTES'
-      'ORDER BY TBCLI_NOME')
-    Left = 216
-    Top = 90
-  end
-  object DSCliente: TDataSource
-    DataSet = IBQCliente
-    Left = 184
-    Top = 88
+      
+        'select ID_MOV,DANFE, DATA, ENTRADA_SAIDA, ESTOQUE_ANTERIOR, ESTO' +
+        'QUE_APOS, FABRICANTE, QUANTIDADE,'
+      'CASE ENTRADA_SAIDA'
+      '  WHEN '#39'E'#39'  THEN '#39'ENTRADA'#39
+      '   WHEN '#39'S'#39'  THEN '#39'SA'#205'DA'#39
+      'END AS TIPO '
+      'from TB_MOV_ACETONA')
+    Left = 496
+    Top = 32
   end
   object TimerBusca: TTimer
     Enabled = False
     OnTimer = TimerBuscaTimer
-    Left = 248
-    Top = 88
+    Left = 496
+    Top = 64
   end
 end
