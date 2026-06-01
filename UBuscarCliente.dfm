@@ -1,6 +1,6 @@
 object FrmBuscarCliente: TFrmBuscarCliente
-  Left = 516
-  Top = 339
+  Left = 411
+  Top = 393
   ActiveControl = EditNome
   BorderIcons = []
   BorderStyle = bsSingle

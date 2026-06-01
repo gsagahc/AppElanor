@@ -258,6 +258,11 @@ type
     Configuraes1: TMenuItem;
     IBQPedidosTBPED_VENC04: TDateField;
     IBQPedidos_OBSTBPED_VENC04: TDateField;
+    Acetona1: TMenuItem;
+    Acetona2: TMenuItem;
+    Entradaesada1: TMenuItem;
+    Estoque2: TMenuItem;
+    Relatrio1: TMenuItem;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -339,6 +344,9 @@ type
     procedure Skin1Click(Sender: TObject);
     procedure Enroladores1Click(Sender: TObject);
     procedure Configuraes1Click(Sender: TObject);
+    procedure Entradaesada1Click(Sender: TObject);
+    procedure Relatrio1Click(Sender: TObject);
+    procedure Estoque2Click(Sender: TObject);
   private
        TotalGeral:Currency;
     { Private declarations }
@@ -388,7 +396,10 @@ uses UCadProdutos, UEntraEstoque, UCadUser, UCadPedido, UCadCli,
   USelecionarSkin, UFrmControlePerdas, UConsultarPerdas,
   UConsultarLancamentos, UCadastroDespesas, USelecionarDespesas,
   UBuscarLote, UZerarEStoqueNegativo, UAlterarControledePerdas,
-  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes;
+  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes,
+  UCadMovAcetona,
+  URelatorioMovAcetona,
+  UExibirEstoqueAcetona;
 
    
 
@@ -1624,6 +1635,34 @@ begin
   FreeAndNil(FrmConfiguracoes);
   StatusBar1.Panels.Items[5].Text:='';
 
+end;
+
+procedure TFrmPrincipal.Entradaesada1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadMovAcetona, FrmCadMovAcetona);
+  StatusBar1.Panels.Items[5].Text:= FrmCadMovAcetona.Caption;
+  FrmCadMovAcetona.ShowModal;
+  FreeAndNil(FrmCadMovAcetona);
+  StatusBar1.Panels.Items[5].Text:='';
+end;
+
+procedure TFrmPrincipal.Relatrio1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFrmBuscarMovPeriodo, FrmBuscarMovPeriodo);
+  StatusBar1.Panels.Items[5].Text:= FrmBuscarMovPeriodo.Caption;
+  FrmBuscarMovPeriodo.ShowModal;
+  FreeAndNil(FrmBuscarMovPeriodo);
+  StatusBar1.Panels.Items[5].Text:='';
+
+end;
+
+procedure TFrmPrincipal.Estoque2Click(Sender: TObject);
+begin
+  Application.CreateForm(TFormExibirEstoqueAcetona,FormExibirEstoqueAcetona);
+  StatusBar1.Panels.Items[5].Text:= FormExibirEstoqueAcetona.Caption;
+  FormExibirEstoqueAcetona.ShowModal;
+  FreeAndNil(FormExibirEstoqueAcetona);
+  StatusBar1.Panels.Items[5].Text:='';
 end;
 
 end.

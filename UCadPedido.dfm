@@ -1,5 +1,5 @@
 object FrmNPedido: TFrmNPedido
-  Left = 265
+  Left = 173
   Top = 0
   BorderIcons = []
   BorderStyle = bsSingle

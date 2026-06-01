@@ -1,6 +1,6 @@
 object FrmPrincipal: TFrmPrincipal
-  Left = 150
-  Top = 143
+  Left = 96
+  Top = 166
   Align = alClient
   AlphaBlendValue = 100
   BorderIcons = [biSystemMenu]
@@ -1573,6 +1573,24 @@ object FrmPrincipal: TFrmPrincipal
       object EStoquenegativo1: TMenuItem
         Caption = 'Estoque negativo'
         OnClick = EStoquenegativo1Click
+      end
+      object Acetona1: TMenuItem
+        Caption = 'Acetona'
+      end
+    end
+    object Acetona2: TMenuItem
+      Caption = 'Acetona'
+      object Entradaesada1: TMenuItem
+        Caption = 'Entrada e sa'#237'da'
+        OnClick = Entradaesada1Click
+      end
+      object Estoque2: TMenuItem
+        Caption = 'Estoque'
+        OnClick = Estoque2Click
+      end
+      object Relatrio1: TMenuItem
+        Caption = 'Relat'#243'rio'
+        OnClick = Relatrio1Click
       end
     end
     object Pedidos1: TMenuItem
