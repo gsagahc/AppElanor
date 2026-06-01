@@ -40,16 +40,15 @@ Uses UConsultarLancamentos, Math, UFrmControlePerdas;
 procedure TFrmReImpressaoPerdas.QRBand2BeforePrint(Sender: TQRCustomBand;
   var PrintBand: Boolean);
 begin
-  if (FrmConsultarLancamentos.IBQConsultarLancamentosTBCP_PERCENTUAL.AsFloat >= 0) and (FrmConsultarLancamentos.IBQConsultarLancamentosTBCP_PERCENTUAL.AsFloat <= 2) then
+  if (QRDBText3.DataSet.FieldbyName('PERCENTUAL').AsFloat >= 0) and (QRDBText3.DataSet.FieldbyName('PERCENTUAL').AsFloat <= 2) then
   begin
-     QRDBText3.Font.Color := clBlack  ;
-     QRDBText3.Color := clGreen;
-  end;
-
-  if FrmConsultarLancamentos.IBQConsultarLancamentosTBCP_PERCENTUAL.AsFloat >= 2 then
-  begin
-     QRDBText3.Font.Color := clBlack ;
-     QRDBText3.Color :=clRed;
+    QRDBText3.Font.Color := clBlack  ;
+    QRDBText3.Color := clGreen;
+  end
+  Else
+  Begin
+    QRDBText3.Font.Color := clBlack ;
+    QRDBText3.Color :=clRed;
   end;  
 end;
 
