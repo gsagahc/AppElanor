@@ -36,6 +36,11 @@ type
     QRGroup1: TQRGroup;
     QRLabel9: TQRLabel;
     QRLTotal: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRDBText9: TQRDBText;
+    QRLabel11: TQRLabel;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
     procedure QRBand2BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private

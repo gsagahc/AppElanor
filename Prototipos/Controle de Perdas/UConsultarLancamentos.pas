@@ -33,7 +33,7 @@ type
     IBQConsultarLancamentosTBCP_ELASTICO: TIBStringField;
     procedure PNGButton2Click(Sender: TObject);
     procedure PNGButton6Click(Sender: TObject);
-    function CalculaAcumuladoMes(sData:TDate ): Real;
+    function CalculaAcumuladoMes(sMes, sAno:string): Real;
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -55,7 +55,7 @@ begin
 end;
 
 procedure TFrmConsultarLancamentos.PNGButton6Click(Sender: TObject);
-Var Mes, Ano: string;
+Var Mes, Ano: Integer;
     Acumulado: Real;
 begin
   IBQConsultarLancamentos.Close;
@@ -80,9 +80,10 @@ begin
   IBQConsultarLancamentos.First;
   if Not IBQConsultarLancamentos.IsEmpty Then
   begin
-    Mes:=Copy (IBQConsultarLancamentos.FieldByName('TBCP_DATA').AsString ,4,2);
-    Ano:=Copy (IBQConsultarLancamentos.FieldByName('TBCP_DATA').AsString ,7 ,4);
-    Acumulado:=CalculaAcumuladoMes(DateTimePicker1.Date);
+    Ano := YearOf(IBQConsultarLancamentos.FieldByName('TBCP_DATA').AsDateTime);
+    Mes := MonthOf(IBQConsultarLancamentos.FieldByName('TBCP_DATA').AsDateTime);
+
+   
     CDSPerdasConsolidado.CreateDataSet;
     while  not IBQConsultarLancamentos.Eof do
     begin
@@ -115,12 +116,13 @@ begin
       IBQConsultarLancamentos.Next;
     end;
     Application.CreateForm(TFrmReImpressaoPerdas, FrmReImpressaoPerdas);
+    Acumulado:=CalculaAcumuladoMes(IntToStr(Mes),IntToStr(Ano));
     FrmReImpressaoPerdas.QRLAcumulado.Caption:=FormatFloat( '#,##0.00' ,Acumulado);
     if Acumulado <= 2 then
-    begin
-      FrmReImpressaoPerdas.QRLAcumulado.Color       :=clGreen;
-      FrmReImpressaoPerdas.QRDBText3.Color          :=clGreen;
-    end
+      begin
+        FrmReImpressaoPerdas.QRLAcumulado.Color       :=clGreen;
+        FrmReImpressaoPerdas.QRDBText3.Color          :=clGreen;
+      end
     else
     begin
       FrmReImpressaoPerdas.QRLAcumulado.Color       :=clRed;
@@ -133,23 +135,22 @@ begin
 end;
 
 
-function TFrmConsultarLancamentos.CalculaAcumuladoMes(sData:TDate): Real;
+function TFrmConsultarLancamentos.CalculaAcumuladoMes(sMes, sAno:string): Real;
 var SomaPrimeira, SomaSegunda:Real;
     MeseAno:String;
-
+    DiasMes:String;
 begin
    SomaPrimeira:=0.0;
    SomaSegunda:=0.0;
-  // DiasMes:=IntToStr(DaysInMonth(EncodeDate(StrToInt(sAno), StrToInt(sMes), 15)));
-//   MeseAno :=FormatDateTime()
+   DiasMes:=IntToStr(DaysInMonth(EncodeDate(StrToInt(sAno), StrToInt(sMes), 15)));
    Result:=0.0;
    IBQUtil.Close;
    IBQUtil.SQL.Clear;
    IBQUtil.SQL.Add(' SELECT TBCP_PRIMEIRA, TBCP_SEGUNDA  '+
                    ' FROM  TB_CONTROLE_PERDAS '+
                    ' WHERE TBCP_DATA BETWEEN :pDataIni AND :pDataFin');
-   IBQUtil.ParamByName('pDataIni').AsString:='01/'+FormatDateTime('MM/yyyy', sData);
-   IBQUtil.ParamByName('pDataFin').AsString:= DateToStr(sData);
+   IBQUtil.ParamByName('pDataIni').AsString:= '01/'+sMes+'/'+sAno;
+   IBQUtil.ParamByName('pDataFin').AsString:=  DiasMes+'/'+sMes+'/'+sAno;;
    IBQUtil.Open;
    If Not IBQUtil.IsEmpty then
    begin

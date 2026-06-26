@@ -88,12 +88,16 @@ begin
                     ' TB_USUARIO.TBUSR_NOME, '+
                     ' TBPED_CANCELADO, '+
                     ' TBPED_MOTIVOCANCEL, '+
-                    ' OBS '+
+                    ' OBS, '+
+                    ' TB_ITENSPEDIDO.TBITPED_VALUNI, '+
+                    ' TB_ITENSPEDIDO.TBITPED_QUANT '+
          ' FROM TB_PEDIDOS '+
          ' INNER JOIN TB_PRAZOS '+
          ' ON (TB_PRAZOS.ID_PRAZO=TB_PEDIDOS.ID_PRAZO) '+
          ' INNER JOIN TB_USUARIO '+
          ' ON TB_USUARIO.ID_USUARIO=TB_PEDIDOS.ID_USUARIO '+
+         ' INNER JOIN TB_ITENSPEDIDO '+
+         ' ON TB_ITENSPEDIDO.ID_PEDIDO=TB_PEDIDOS.ID_PEDIDO '+
          ' WHERE TBPED_DATA BETWEEN :pDataIni AND :pDataFin '+
          ' AND TBPED_NOME LIKE ''%' +EdtNome.Text+'%''';
   If Not CBoxCancelados.Checked  Then
