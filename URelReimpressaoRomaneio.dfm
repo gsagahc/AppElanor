@@ -48,11 +48,14 @@ inherited FrmPrintRomaneio1: TFrmPrintRomaneio1
         FontSize = 10
       end
       inherited QRDBText4: TQRDBText
+        Width = 28
+        Height = 17
         Size.Values = (
-          89.958333333333330000
+          44.979166666666670000
           1166.812500000000000000
           2.645833333333333000
-          719.666666666666700000)
+          74.083333333333330000)
+        AutoSize = True
         DataSet = FrmReimpressaoRomaneio.CDSRomaneio
         FontSize = 10
       end
@@ -63,6 +66,40 @@ inherited FrmPrintRomaneio1: TFrmPrintRomaneio1
           0.000000000000000000
           105.833333333333300000)
         DataSet = FrmReimpressaoRomaneio.CDSRomaneio
+        FontSize = 10
+      end
+      object QRDBText6: TQRDBText [5]
+        Left = 612
+        Top = 0
+        Width = 31
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1619.250000000000000000
+          0.000000000000000000
+          82.020833333333330000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = FrmReimpressaoRomaneio.CDSRomaneio
+        DataField = 'Valor'
+        Transparent = False
+        WordWrap = True
+        FontSize = 10
+      end
+      inherited QRDBText7: TQRDBText
+        Size.Values = (
+          44.979166666666670000
+          1619.250000000000000000
+          2.645833333333333000
+          82.020833333333330000)
         FontSize = 10
       end
     end
@@ -173,6 +210,70 @@ inherited FrmPrintRomaneio1: TFrmPrintRomaneio1
           95.250000000000000000)
         FontSize = 10
       end
+      object QRLabel9: TQRLabel [13]
+        Left = 608
+        Top = 136
+        Width = 49
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1608.666666666667000000
+          359.833333333333300000
+          129.645833333333300000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Valores'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        FontSize = 10
+      end
+      inherited QRLabel11: TQRLabel
+        Size.Values = (
+          44.979166666666670000
+          1608.666666666667000000
+          359.833333333333300000
+          129.645833333333300000)
+        FontSize = 10
+      end
+    end
+    inherited QRLabel8: TQRLabel
+      Size.Values = (
+        44.979166666666670000
+        148.166666666666700000
+        2772.833333333333000000
+        224.895833333333300000)
+      FontSize = 10
+    end
+    inherited QRExpr2: TQRExpr
+      Left = 616
+      Size.Values = (
+        44.979166666666670000
+        1629.833333333333000000
+        2772.833333333333000000
+        179.916666666666700000)
+      FontSize = 10
+    end
+    inherited QRLabel10: TQRLabel
+      Size.Values = (
+        44.979166666666670000
+        1397.000000000000000000
+        2772.833333333333000000
+        187.854166666666700000)
+      FontSize = 10
     end
   end
 end

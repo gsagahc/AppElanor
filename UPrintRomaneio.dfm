@@ -3,7 +3,6 @@ object FrmPrintRomaneio: TFrmPrintRomaneio
   Top = 265
   Width = 928
   Height = 480
-  VertScrollBar.Position = 716
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +15,7 @@ object FrmPrintRomaneio: TFrmPrintRomaneio
   TextHeight = 13
   object QuickRep1: TQuickRep
     Left = 62
-    Top = -682
+    Top = 34
     Width = 794
     Height = 1123
     Frame.Color = clBlack
@@ -158,18 +157,18 @@ object FrmPrintRomaneio: TFrmPrintRomaneio
       object QRDBText4: TQRDBText
         Left = 441
         Top = 1
-        Width = 272
-        Height = 34
+        Width = 104
+        Height = 24
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          89.958333333333330000
+          63.500000000000000000
           1166.812500000000000000
           2.645833333333333000
-          719.666666666666700000)
+          275.166666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -203,6 +202,32 @@ object FrmPrintRomaneio: TFrmPrintRomaneio
         Color = clWhite
         DataSet = FrmRomaneioEntrega.CDSRomaneio
         DataField = 'Ordem'
+        Transparent = False
+        WordWrap = True
+        FontSize = 10
+      end
+      object QRDBText7: TQRDBText
+        Left = 612
+        Top = 1
+        Width = 31
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1619.250000000000000000
+          2.645833333333333000
+          82.020833333333330000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = FrmRomaneioEntrega.CDSRomaneio
+        DataField = 'Valor'
         Transparent = False
         WordWrap = True
         FontSize = 10
@@ -903,6 +928,37 @@ object FrmPrintRomaneio: TFrmPrintRomaneio
         Transparent = False
         FontSize = 10
       end
+      object QRLabel11: TQRLabel
+        Left = 608
+        Top = 136
+        Width = 49
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1608.666666666667000000
+          359.833333333333300000
+          129.645833333333300000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Valores'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        FontSize = 10
+      end
     end
     object QRLabel8: TQRLabel
       Left = 56
@@ -924,6 +980,65 @@ object FrmPrintRomaneio: TFrmPrintRomaneio
       AutoSize = True
       AutoStretch = False
       Caption = 'Respons'#225'vel:'
+      Color = clWhite
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Arial'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      FontSize = 10
+    end
+    object QRExpr2: TQRExpr
+      Left = 600
+      Top = 1048
+      Width = 68
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        1587.500000000000000000
+        2772.833333333333000000
+        179.916666666666700000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Color = clWhite
+      Master = QuickRep1
+      ResetAfterPrint = False
+      Transparent = False
+      WordWrap = True
+      Expression = 'SUM(Valor)'
+      Mask = 'R$ ##.###,##;0;'
+      FontSize = 10
+    end
+    object QRLabel10: TQRLabel
+      Left = 528
+      Top = 1048
+      Width = 71
+      Height = 17
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        44.979166666666670000
+        1397.000000000000000000
+        2772.833333333333000000
+        187.854166666666700000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = 'Valor total:'
       Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

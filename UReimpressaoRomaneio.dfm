@@ -295,22 +295,22 @@ inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
   inherited Panel2: TPanel
     Top = 81
     Width = 779
-    Height = 381
+    Height = 388
     Visible = False
     inherited DBGrid1: TDBGrid
       Width = 777
-      Height = 379
+      Height = 386
       Visible = False
     end
   end
   inherited Panel3: TPanel
     Top = 81
     Width = 779
-    Height = 381
+    Height = 388
     Visible = True
     inherited DBGrid2: TDBGrid
       Width = 777
-      Height = 379
+      Height = 386
       PopupMenu = PopupMenu1
       Columns = <
         item

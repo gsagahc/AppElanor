@@ -182,7 +182,7 @@ procedure TFrmImpEtiquetas.PNGBImprimirClick(Sender: TObject);
 var sTexto:string;
 begin
   try
-    If CDSEtiquetaCLIENTE.AsString = 'ESTOQUE' Then
+    If EditPedido.Text =  EmptyStr Then
     Begin
       //inserir lote
       IBQueryUtil.Close;

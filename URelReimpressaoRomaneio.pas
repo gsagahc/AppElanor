@@ -8,6 +8,8 @@ uses
 
 type
   TFrmPrintRomaneio1 = class(TFrmPrintRomaneio)
+    QRLabel9: TQRLabel;
+    QRDBText6: TQRDBText;
   private
     { Private declarations }
   public
