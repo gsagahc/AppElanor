@@ -30,6 +30,11 @@ type
     QRLabel7: TQRLabel;
     QRSysData1: TQRSysData;
     QRLabel8: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRLabel11: TQRLabel;
+    QRExpr2: TQRExpr;
+    QRLabel10: TQRLabel;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,8 +45,19 @@ var
   FrmPrintRomaneio: TFrmPrintRomaneio;
 
 implementation
-Uses URomaneioEntrega;
+Uses URomaneioEntrega, Math, UPrincipal;
 
 {$R *.dfm}
+
+procedure TFrmPrintRomaneio.FormCreate(Sender: TObject);
+begin
+ if not FrmPrincipal.sn_ImprimirValoresRomaneio Then
+  begin
+    QRLabel11.Caption :='';
+    QRLabel10.Caption :='';
+    QRDBText7.DataSet:=Nil;
+    QRExpr2.Expression:='';
+  End;                    
+end;
 
 end.

@@ -1,7 +1,11 @@
 inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
   Left = 370
+<<<<<<< HEAD
   Top = 286
-  Width = 921
+=======
+  Top = 252
+>>>>>>> fc88a97d8934102a190109badd4311e0d39f4ace
+  Width = 787
   Height = 496
   Caption = 'Gerenciamento de romaneios'
   OldCreateOrder = True
@@ -9,31 +13,31 @@ inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 905
+    Width = 779
     Height = 81
     inherited PNGBCarregar: TPNGButton
-      Left = 397
+      Left = 269
       Top = 8
     end
     inherited PNGBProximo: TPNGButton
-      Left = 459
+      Left = 331
       Top = 8
       Visible = False
     end
     inherited PNGBImprimir: TPNGButton
-      Left = 584
+      Left = 456
       Top = 8
     end
     inherited PNGBVoltar: TPNGButton
-      Left = 836
+      Left = 708
       Top = 8
     end
     inherited PNGBOrdenar: TPNGButton
-      Left = 521
+      Left = 393
       Top = 8
     end
     object PNGButtonDeletar: TPNGButton [5]
-      Left = 646
+      Left = 518
       Top = 7
       Width = 57
       Height = 65
@@ -115,7 +119,7 @@ inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
       OnClick = PNGButtonDeletarClick
     end
     object PNGButton7: TPNGButton [6]
-      Left = 772
+      Left = 644
       Top = 7
       Width = 57
       Height = 65
@@ -202,7 +206,7 @@ inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
       OnClick = PNGButton7Click
     end
     object PNGButtonRomaneio: TPNGButton [7]
-      Left = 709
+      Left = 581
       Top = 7
       Width = 57
       Height = 65
@@ -291,29 +295,26 @@ inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
       Left = 150
       Visible = False
     end
-    inherited ChBoxMostrarValores: TCheckBox
-      Left = 256
-    end
   end
   inherited Panel2: TPanel
     Top = 81
-    Width = 905
-    Height = 376
+    Width = 779
+    Height = 381
     Visible = False
     inherited DBGrid1: TDBGrid
-      Width = 903
-      Height = 374
+      Width = 777
+      Height = 379
       Visible = False
     end
   end
   inherited Panel3: TPanel
     Top = 81
-    Width = 905
-    Height = 376
+    Width = 779
+    Height = 381
     Visible = True
     inherited DBGrid2: TDBGrid
-      Width = 903
-      Height = 374
+      Width = 777
+      Height = 379
       PopupMenu = PopupMenu1
       Columns = <
         item

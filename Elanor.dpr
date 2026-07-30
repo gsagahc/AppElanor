@@ -93,7 +93,13 @@ uses
   UBuscarEnrolador in 'UBuscarEnrolador.pas' {FrmBuscarEnrolador},
   UConfiguracoes in 'UConfiguracoes.pas' {FrmConfiguracoes},
   URelatorioEnroladores in 'Prototipos\RelatorioEnroladores\URelatorioEnroladores.pas' {FormEnroladores},
-  UParametrosConfig in 'UParametrosConfig.pas';
+  UParametrosConfig in 'UParametrosConfig.pas',
+  UAdicionarItensRomaneio in 'UAdicionarItensRomaneio.pas' {FrmAdicionarItensRomaneio},
+  UCadMovAcetona in 'UCadMovAcetona.pas' {FrmCadMovAcetona},
+  UBuscarMovimentacao in 'UBuscarMovimentacao.pas' {FrmBuscarMovimentacao},
+  URelatorioMovAcetona in 'URelatorioMovAcetona.pas' {FrmBuscarMovPeriodo},
+  URelMovimentacaoAcetona in 'URelMovimentacaoAcetona.pas' {FrmRelMovAcetona},
+  UExibirEstoqueAcetona in 'UExibirEstoqueAcetona.pas' {FormExibirEstoqueAcetona};
 
 {$R *.res}
 var
@@ -106,30 +112,7 @@ begin
     Application.Initialize;
     Application.Title := 'Sistema de Gestão Elanor';
     Application.CreateForm(TFrmPrincipal, FrmPrincipal);
-  Try
-      FrmPrincipal.IBDMain.Close;
-      FrmPrincipal.IBDMain.DatabaseName:= FrmPrincipal.BancoDados;
-      FrmPrincipal.IBDMain.Open;
-      If  not FrmPrincipal.IBTMain.Active Then
-        FrmPrincipal.IBTMain.StartTransaction;
-      FrmPrincipal.IBSQLUTIL.Close;
-      FrmPrincipal.IBSQLUTIL.SQL.Clear;
-      FrmPrincipal.IBSQLUTIL.SQL.Add('SELECT NOME FROM TB_BASE');
-      FrmPrincipal.IBSQLUTIL.ExecQuery;
-      FrmPrincipal.StatusBar1.Panels.Items[1].Text:='Base: '+FrmPrincipal.IBSQLUTIL.FieldByName('NOME').AsString;
 
-      if (Copy(FrmPrincipal.IBDMain.DatabaseName,1,12) = 'C:\AppElanor')  Then
-        FrmPrincipal.StatusBar1.Panels.Items[1].Text:=FrmPrincipal.StatusBar1.Panels.Items[1].Text + ' (LOCAL)'
-      else
-        FrmPrincipal.StatusBar1.Panels.Items[1].Text:=FrmPrincipal.StatusBar1.Panels.Items[1].Text + ' (REMOTO)';
-    Except
-      begin
-        tFrmMensagens.Mensagem('Não é possível conectar ao banco de dados, '+
-                               'verifique sua conexão de rede ou o arquivo Config.ini e em '+
-                               'seguida tente novamente.','E',[mbOK]);
-         Application.Terminate;
-      end;
-    End;
     Application.Run;
   end
   Else

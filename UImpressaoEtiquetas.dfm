@@ -1,6 +1,6 @@
 object FrmImpEtiquetas: TFrmImpEtiquetas
   Left = 578
-  Top = 258
+  Top = 300
   Width = 641
   Height = 438
   BorderIcons = []
@@ -23,7 +23,7 @@ object FrmImpEtiquetas: TFrmImpEtiquetas
     Left = 0
     Top = 0
     Width = 633
-    Height = 404
+    Height = 411
     Align = alClient
     TabOrder = 0
     object Label1: TLabel

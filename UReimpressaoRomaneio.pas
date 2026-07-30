@@ -22,7 +22,6 @@ type
     PNGButtonRomaneio: TPNGButton;
     procedure PNGBCarregarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure PNGBImprimirClick(Sender: TObject);
     procedure Excluir1Click(Sender: TObject);
     procedure CDSRomaneioOrdemChange(Sender: TField);
     procedure FormCreate(Sender: TObject);
@@ -30,11 +29,14 @@ type
     procedure PNGButton7Click(Sender: TObject);
     procedure PNGButtonRomaneioClick(Sender: TObject);
     procedure SalvarAlteracaoBanco;
+    procedure impimirRomaneio;
+    procedure PNGBImprimirClick(Sender: TObject);
   private
     fk_romaneio:Integer;
 
     { Private declarations }
   public
+
     { Public declarations }
   end;
 
@@ -42,8 +44,8 @@ var
   FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio;
 
 implementation
-uses uMensagens, URelReimpressaoRomaneio, Math, UPrincipal, DateUtils,
-  UAdicionarItensRomaneio;
+uses uMensagens, Math, UPrincipal, DateUtils,
+  UAdicionarItensRomaneio, UPrintRomaneio, URelReimpressaoRomaneio;
 {$R *.dfm}
 
 procedure TFrmReimpressaoRomaneio.PNGBCarregarClick(Sender: TObject);
@@ -128,28 +130,6 @@ begin
   inherited;
   DBGrid2.Visible:=True;
   DTPickerIni.Enabled:=True;
-
-end;
-
-procedure TFrmReimpressaoRomaneio.PNGBImprimirClick(Sender: TObject);
-begin
-  try
-
-    CDSRomaneio.DisableControls;
-    CDSRomaneio.First;
-    SalvarAlteracaoBanco;
-    FrmPrincipal.IBDMain.CloseDataSets;
-  except
-   on  E: EDatabaseError do
-   begin
-     tFrmMensagens.Mensagem('Erro ao gerar romaneio no banco ','E',[mbOK]);
-     FrmPrincipal.IBTMain.Rollback;
-   end;
-  end;
-  Application.CreateForm(TFrmPrintRomaneio1,FrmPrintRomaneio1);
-  FrmPrintRomaneio1.QuickRep1.Preview;
-  FrmPrintRomaneio1.Free;
-
 
 end;
 
@@ -301,6 +281,33 @@ begin
      FrmPrincipal.IBTMain.Rollback;
    end;
   end;
+
+end;
+
+procedure TFrmReimpressaoRomaneio.impimirRomaneio;
+begin
+  Application.CreateForm(TFrmReimpressaoRomaneios,FrmReimpressaoRomaneios);
+  FrmReimpressaoRomaneios.QuickRep1.Preview;
+  FrmReimpressaoRomaneios.Free;
+  try
+
+    CDSRomaneio.DisableControls;
+    CDSRomaneio.First;
+    SalvarAlteracaoBanco;
+    FrmPrincipal.IBDMain.CloseDataSets;
+  except
+   on  E: EDatabaseError do
+   begin
+     tFrmMensagens.Mensagem('Erro ao gerar romaneio no banco ','E',[mbOK]);
+     FrmPrincipal.IBTMain.Rollback;
+   end;
+  end;
+
+end;
+
+procedure TFrmReimpressaoRomaneio.PNGBImprimirClick(Sender: TObject);
+begin
+   impimirRomaneio;
 
 end;
 

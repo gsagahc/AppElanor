@@ -258,6 +258,13 @@ type
     Configuraes1: TMenuItem;
     IBQPedidosTBPED_VENC04: TDateField;
     IBQPedidos_OBSTBPED_VENC04: TDateField;
+    Acetona1: TMenuItem;
+    Acetona2: TMenuItem;
+    Entradaesada1: TMenuItem;
+    Estoque2: TMenuItem;
+    Relatrio1: TMenuItem;
+    IBQPedidosTBITPED_VALUNI: TIBBCDField;
+    IBQPedidosTBITPED_QUANT: TIBBCDField;
     procedure Produtos1Click(Sender: TObject);
     procedure ToolButton1Click(Sender: TObject);
     procedure ToolButton4Click(Sender: TObject);
@@ -339,6 +346,9 @@ type
     procedure Skin1Click(Sender: TObject);
     procedure Enroladores1Click(Sender: TObject);
     procedure Configuraes1Click(Sender: TObject);
+    procedure Entradaesada1Click(Sender: TObject);
+    procedure Relatrio1Click(Sender: TObject);
+    procedure Estoque2Click(Sender: TObject);
   private
        TotalGeral:Currency;
     { Private declarations }
@@ -356,6 +366,7 @@ type
     Cliente:TCliente;
     id_contapagar:Integer;
     bUtilizaContaRec:Boolean;
+    sn_ImprimirValoresRomaneio :Boolean;
     Procedure  LerIni();
     Procedure Memo_Print(Conteudo:TStrings);
     Function RetornaEndereco(CEP:String): TEndereco;
@@ -388,7 +399,10 @@ uses UCadProdutos, UEntraEstoque, UCadUser, UCadPedido, UCadCli,
   USelecionarSkin, UFrmControlePerdas, UConsultarPerdas,
   UConsultarLancamentos, UCadastroDespesas, USelecionarDespesas,
   UBuscarLote, UZerarEStoqueNegativo, UAlterarControledePerdas,
-  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes;
+  UReimpressaoRomaneio, UCadEnrolador,  UConfiguracoes,
+  UCadMovAcetona,
+  URelatorioMovAcetona,
+  UExibirEstoqueAcetona;
 
    
 
@@ -456,9 +470,8 @@ begin
    end;
   try
      sParametro:='SN_GERACONTASREC';
-
-    bUtilizaContaRec:= Parametros.returnValParametro(sParametro)='S';
-
+     If IBDMain.TestConnected then
+       bUtilizaContaRec:= Parametros.returnValParametro(sParametro)='S';
   except
     on E: EDatabaseError do
     begin
@@ -570,11 +583,36 @@ end;
 procedure TFrmPrincipal.FormCreate(Sender: TObject);
 begin
   LerIni;
+  Try
+      FrmPrincipal.IBDMain.Close;
+      FrmPrincipal.IBDMain.DatabaseName:= FrmPrincipal.BancoDados;
+      FrmPrincipal.IBDMain.Open;
+      If  not FrmPrincipal.IBTMain.Active Then
+        FrmPrincipal.IBTMain.StartTransaction;
+      FrmPrincipal.IBSQLUTIL.Close;
+      FrmPrincipal.IBSQLUTIL.SQL.Clear;
+      FrmPrincipal.IBSQLUTIL.SQL.Add('SELECT NOME FROM TB_BASE');
+      FrmPrincipal.IBSQLUTIL.ExecQuery;
+      FrmPrincipal.StatusBar1.Panels.Items[1].Text:='Base: '+FrmPrincipal.IBSQLUTIL.FieldByName('NOME').AsString;
+
+      if (Copy(FrmPrincipal.IBDMain.DatabaseName,1,12) = 'C:\AppElanor')  Then
+        FrmPrincipal.StatusBar1.Panels.Items[1].Text:=FrmPrincipal.StatusBar1.Panels.Items[1].Text + ' (LOCAL)'
+      else
+        FrmPrincipal.StatusBar1.Panels.Items[1].Text:=FrmPrincipal.StatusBar1.Panels.Items[1].Text + ' (REMOTO)';
+    Except
+      begin
+        tFrmMensagens.Mensagem('Não é possível conectar ao banco de dados, '+
+                               'verifique sua conexão de rede ou o arquivo Config.ini e em '+
+                               'seguida tente novamente.','E',[mbOK]);
+         Application.Terminate;
+      end;
+  End;
   SendMessage(Handle, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
   Application.OnMessage := OnMessageOwn;
   IdUsuario:=11;
   Usuario:='MASTER';
   UserAdm :='S';
+  sn_ImprimirValoresRomaneio:=True;
 end;
 
 procedure TFrmPrincipal.Reimprimir1Click(Sender: TObject);
@@ -1624,6 +1662,34 @@ begin
   FreeAndNil(FrmConfiguracoes);
   StatusBar1.Panels.Items[5].Text:='';
 
+end;
+
+procedure TFrmPrincipal.Entradaesada1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFrmCadMovAcetona, FrmCadMovAcetona);
+  StatusBar1.Panels.Items[5].Text:= FrmCadMovAcetona.Caption;
+  FrmCadMovAcetona.ShowModal;
+  FreeAndNil(FrmCadMovAcetona);
+  StatusBar1.Panels.Items[5].Text:='';
+end;
+
+procedure TFrmPrincipal.Relatrio1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFrmBuscarMovPeriodo, FrmBuscarMovPeriodo);
+  StatusBar1.Panels.Items[5].Text:= FrmBuscarMovPeriodo.Caption;
+  FrmBuscarMovPeriodo.ShowModal;
+  FreeAndNil(FrmBuscarMovPeriodo);
+  StatusBar1.Panels.Items[5].Text:='';
+
+end;
+
+procedure TFrmPrincipal.Estoque2Click(Sender: TObject);
+begin
+  Application.CreateForm(TFormExibirEstoqueAcetona,FormExibirEstoqueAcetona);
+  StatusBar1.Panels.Items[5].Text:= FormExibirEstoqueAcetona.Caption;
+  FormExibirEstoqueAcetona.ShowModal;
+  FreeAndNil(FormExibirEstoqueAcetona);
+  StatusBar1.Panels.Items[5].Text:='';
 end;
 
 end.
