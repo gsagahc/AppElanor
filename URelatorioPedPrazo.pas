@@ -100,6 +100,7 @@ procedure TFrmConsultarPedPrazo.PNGButton1Click(Sender: TObject);
 begin
 
   IBQPedidos.Close;
+  IBQItensPedido.Close;
   montarSql;
   IBQPedidos.ParamByName('pDataIni').AsDate:=DTPickerIni.Date ;
   IBQPedidos.ParamByName('pDataFin').AsDate:=DTPickerFin.Date ;
@@ -167,39 +168,81 @@ end;
 procedure TFrmConsultarPedPrazo.montarSql;
 var Sql:String;
 begin
-  Sql:='SELECT    TB_PEDIDOS.ID_PEDIDO, '+
-           ' TBPED_DATA, '+
-           ' TB_PEDIDOS.id_cliente, '+
-           ' TB_PEDIDOS.TBPED_NOME, '+
-           ' TBPED_ENDERECO, '+
-           ' TBPED_CIDADE, '+
-           ' TBPED_ESTADO, '+
-           ' TBPED_TELEFONE, '+
-           ' TB_PEDIDOS.ID_PRAZO, '+
-           ' TBPED_VALTOTAL, '+
-           ' TBPED_VENC01, '+
-           ' TBPED_VENC02, '+
-           ' TBPED_VENC03, '+
-           ' TBPED_VENC04, '+
-           ' TB_PEDIDOS.ID_USUARIO, '+
-           ' TBPED_BAIRRO, '+
-           ' TBPED_CNPJ, '+
-           ' TB_PRAZOS.TBPRZ_NOME, '+
-           ' TBPED_NUMPED, '+
-           ' TB_USUARIO.TBUSR_NOME, '+
-           ' TBPED_CANCELADO '+
-   ' FROM TB_PEDIDOS '+
-   ' INNER JOIN TB_PRAZOS '+
-      ' ON (TB_PRAZOS.ID_PRAZO=TB_PEDIDOS.ID_PRAZO) '+
-   ' INNER JOIN TB_USUARIO '+
-      ' ON TB_USUARIO.ID_USUARIO=TB_PEDIDOS.ID_USUARIO '+
-   ' WHERE TBPED_DATA BETWEEN :pDataIni AND :pDataFin ';
+  Sql:='SELECT   '+
+                'P.ID_PEDIDO, '+
+                'P.TBPED_DATA, '+
+                'P.ID_CLIENTE, '+
+                'P.TBPED_NOME, '+
+                'P.TBPED_ENDERECO, '+
+                'P.TBPED_CIDADE, '+
+                'P.TBPED_ESTADO, '+
+                'P.TBPED_TELEFONE, '+
+                'P.ID_PRAZO, '+
+                'P.TBPED_VALTOTAL, '+
+                'P.TBPED_VENC01, '+
+                'P.TBPED_VENC02, '+
+                'P.TBPED_VENC03, '+
+                'P.TBPED_VENC04, '+
+                'P.ID_USUARIO, '+
+                'P.TBPED_BAIRRO, '+
+                'P.TBPED_CNPJ, '+
+                'PR.TBPRZ_NOME, '+
+                'P.TBPED_NUMPED,  '+
+                'U.TBUSR_NOME, '+
+                'P.TBPED_CANCELADO, '+
+                'P.TBPED_MOTIVOCANCEL, '+
+                'P.OBS,   '+
 
-     Sql:= Sql + ' AND TB_PEDIDOS.TBPED_NOME LIKE ''%' + EditCliente.Text+ '%''' ;
+                'LIST(I.TBITPED_QUANT, '', '') AS ITENS_QUANTIDADES,  '+
+                'LIST(I.TBITPED_VALUNI, '', '') AS ITENS_VALORES_UNITARIOS '+
 
-   Sql:=Sql+' AND TB_PEDIDOS.ID_PRAZO<>:pPrazo '+
-            'AND (TBPED_CANCELADO IS NULL OR TBPED_CANCELADO <>''S'') '+
-            ' ORDER BY TBPED_NUMPED ';
+            'FROM TB_PEDIDOS P  '+
+
+            'INNER JOIN TB_PRAZOS PR  '+
+                'ON PR.ID_PRAZO = P.ID_PRAZO  '+
+
+            'INNER JOIN TB_USUARIO U '+
+                'ON U.ID_USUARIO = P.ID_USUARIO  '+
+
+            'INNER JOIN TB_ITENSPEDIDO I '+
+                'ON I.ID_PEDIDO = P.ID_PEDIDO  '+
+
+            'WHERE  '+
+                'P.TBPED_DATA >= :pDataIni  '+
+                'AND P.TBPED_DATA < :pDataFin  '+
+                ' AND P.TBPED_NOME LIKE ''%' + EditCliente.Text+ '%''' ;
+
+   Sql:=Sql+' AND P.ID_PRAZO<>:pPrazo '+
+            'AND (P.TBPED_CANCELADO IS NULL OR P.TBPED_CANCELADO <>''S'') '+
+            ' GROUP BY   '+
+                      'P.ID_PEDIDO, '+
+                      'P.TBPED_DATA, '+
+                      'P.ID_CLIENTE, '+
+                      'P.TBPED_NOME,  '+
+                      'P.TBPED_ENDERECO, '+
+                      'P.TBPED_CIDADE, '+
+                      'P.TBPED_ESTADO, '+
+                      'P.TBPED_TELEFONE, '+
+                      'P.ID_PRAZO,  '+
+                      'P.TBPED_VALTOTAL, '+
+                      'P.TBPED_VENC01, '+
+                      'P.TBPED_VENC02, '+
+                      'P.TBPED_VENC03, '+
+                      'P.TBPED_VENC04, '+
+                      'P.ID_USUARIO, '+
+                      'P.TBPED_BAIRRO, '+
+                      'P.TBPED_CNPJ, '+
+                      'PR.TBPRZ_NOME,  '+
+                      'P.TBPED_NUMPED, '+
+                      'U.TBUSR_NOME, '+
+                      'P.TBPED_CANCELADO, '+
+                      'P.TBPED_MOTIVOCANCEL, '+
+                      'P.OBS  '+
+
+                  'ORDER BY '+
+                     ' P.ID_PEDIDO; ';
+
+
   IBQPedidos.Close;
   IBQPedidos.Sql.Clear;
   IBQPedidos.Sql.Add(Sql);

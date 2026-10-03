@@ -1123,6 +1123,33 @@ object FrmRelPedidos: TFrmRelPedidos
         WordWrap = True
         FontSize = 8
       end
+      object QRExpr1: TQRExpr
+        Left = 552
+        Top = 0
+        Width = 125
+        Height = 15
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          39.687500000000000000
+          1460.500000000000000000
+          0.000000000000000000
+          330.729166666666700000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        Master = QuickRep1
+        ResetAfterPrint = False
+        Transparent = False
+        WordWrap = True
+        Expression = 'SUM(TBPED_VALTOTAL)'
+        FontSize = 8
+      end
     end
   end
 end

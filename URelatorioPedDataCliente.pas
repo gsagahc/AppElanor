@@ -65,42 +65,86 @@ procedure TFrmRelatorioPedDataCli.PNGButton1Click(Sender: TObject);
 var StrSql:string;
 begin
   FrmPrincipal.IBQPedidos.Close;
+  FrmPrincipal.IBQItensPedido.Close;
   FrmPrincipal.IBQPedidos.SQL.Clear;
-  StrSql:= 'SELECT DISTINCT TB_PEDIDOS.ID_PEDIDO, '+
-                    ' TBPED_DATA, '+
-                    ' TB_PEDIDOS.id_cliente, '+
-                    ' TB_PEDIDOS.TBPED_NOME, '+
-                    ' TBPED_ENDERECO, '+
-                    ' TBPED_CIDADE, '+
-                    ' TBPED_ESTADO, '+
-                    ' TBPED_TELEFONE, '+
-                    ' TB_PEDIDOS.ID_PRAZO, '+
-                    ' TBPED_VALTOTAL, '+
-                    ' TBPED_VENC01, '+
-                    ' TBPED_VENC02, '+
-                    ' TBPED_VENC03, '+
-                    ' TBPED_VENC04, '+
-                    ' TB_PEDIDOS.ID_USUARIO, '+
-                    ' TBPED_BAIRRO, '+
-                    ' TBPED_CNPJ, '+
-                    ' TB_PRAZOS.TBPRZ_NOME, '+
-                    ' TBPED_NUMPED, '+
-                    ' TB_USUARIO.TBUSR_NOME, '+
-                    ' TBPED_CANCELADO, '+
-                    ' TBPED_MOTIVOCANCEL, '+
-                    ' OBS '+
-         ' FROM TB_PEDIDOS '+
-         ' INNER JOIN TB_PRAZOS '+
-         ' ON (TB_PRAZOS.ID_PRAZO=TB_PEDIDOS.ID_PRAZO) '+
-         ' INNER JOIN TB_USUARIO '+
-         ' ON TB_USUARIO.ID_USUARIO=TB_PEDIDOS.ID_USUARIO '+
-         ' WHERE TBPED_DATA BETWEEN :pDataIni AND :pDataFin '+
-         ' AND TBPED_NOME LIKE ''%' +EdtNome.Text+'%''';
-  If Not CBoxCancelados.Checked  Then
-    StrSql:= StrSql +  ' AND (TBPED_CANCELADO IS NULL or TBPED_CANCELADO<>''S'')';
+  FrmPrincipal.IBQPedidos.SQL.Add('SELECT   '+
+                                        'P.ID_PEDIDO, '+
+                                        'P.TBPED_DATA, '+
+                                        'P.ID_CLIENTE, '+
+                                        'P.TBPED_NOME, '+
+                                        'P.TBPED_ENDERECO, '+
+                                        'P.TBPED_CIDADE, '+
+                                        'P.TBPED_ESTADO, '+
+                                        'P.TBPED_TELEFONE, '+
+                                        'P.ID_PRAZO, '+
+                                        'P.TBPED_VALTOTAL, '+
+                                        'P.TBPED_VENC01, '+
+                                        'P.TBPED_VENC02, '+
+                                        'P.TBPED_VENC03, '+
+                                        'P.TBPED_VENC04, '+
+                                        'P.ID_USUARIO, '+
+                                        'P.TBPED_BAIRRO, '+
+                                        'P.TBPED_CNPJ, '+
+                                        'PR.TBPRZ_NOME, '+
+                                        'P.TBPED_NUMPED,  '+
+                                        'U.TBUSR_NOME, '+
+                                        'P.TBPED_CANCELADO, '+
+                                        'P.TBPED_MOTIVOCANCEL, '+
+                                        'P.OBS,   '+
 
-  StrSql:= StrSql+' ORDER BY TBPED_NUMPED ';
-  FrmPrincipal.IBQPedidos.SQL.Add(StrSql);
+                                        'LIST(I.TBITPED_QUANT, '', '') AS ITENS_QUANTIDADES,  '+
+                                        'LIST(I.TBITPED_VALUNI, '', '') AS ITENS_VALORES_UNITARIOS '+
+
+                                    'FROM TB_PEDIDOS P  '+
+
+                                    'INNER JOIN TB_PRAZOS PR  '+
+                                        'ON PR.ID_PRAZO = P.ID_PRAZO  '+
+
+                                    'INNER JOIN TB_USUARIO U '+
+                                        'ON U.ID_USUARIO = P.ID_USUARIO  '+
+
+                                    'INNER JOIN TB_ITENSPEDIDO I '+
+                                        'ON I.ID_PEDIDO = P.ID_PEDIDO  '+
+
+                                    'WHERE  '+
+                                        'P.TBPED_DATA >= :pDataIni  '+
+                                        'AND P.TBPED_DATA < :pDataFin  '+
+
+                                   ' AND TBPED_NOME LIKE ''%' +EdtNome.Text+'%''');
+
+  If Not CBoxCancelados.Checked  Then
+    FrmPrincipal.IBQPedidos.SQL.Add(' AND (P.TBPED_CANCELADO IS NULL or P.TBPED_CANCELADO<>''S'')');
+
+  FrmPrincipal.IBQPedidos.SQL.Add(' GROUP BY   '+
+                                            'P.ID_PEDIDO, '+
+                                            'P.TBPED_DATA, '+
+                                            'P.ID_CLIENTE, '+
+                                            'P.TBPED_NOME,  '+
+                                            'P.TBPED_ENDERECO, '+
+                                            'P.TBPED_CIDADE, '+
+                                            'P.TBPED_ESTADO, '+
+                                            'P.TBPED_TELEFONE, '+
+                                            'P.ID_PRAZO,  '+
+                                            'P.TBPED_VALTOTAL, '+
+                                            'P.TBPED_VENC01, '+
+                                            'P.TBPED_VENC02, '+
+                                            'P.TBPED_VENC03, '+
+                                            'P.TBPED_VENC04, '+
+                                            'P.ID_USUARIO, '+
+                                            'P.TBPED_BAIRRO, '+
+                                            'P.TBPED_CNPJ, '+
+                                            'PR.TBPRZ_NOME,  '+
+                                            'P.TBPED_NUMPED, '+
+                                            'U.TBUSR_NOME, '+
+                                            'P.TBPED_CANCELADO, '+
+                                            'P.TBPED_MOTIVOCANCEL, '+
+                                            'P.OBS  '+
+
+                                        'ORDER BY '+
+                                           ' P.ID_PEDIDO; ');
+
+
+
   FrmPrincipal.IBQPedidos.ParamByName('pDataIni').AsDate:=DTPickerIni.Date ;
   FrmPrincipal.IBQPedidos.ParamByName('pDataFin').AsDate:=DTPickerFin.Date ;
   FrmPrincipal.IBQPedidos.Open;

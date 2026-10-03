@@ -422,6 +422,7 @@ object FrmConsultarPedOrdemCompra: TFrmConsultarPedOrdemCompra
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -433,6 +434,7 @@ object FrmConsultarPedOrdemCompra: TFrmConsultarPedOrdemCompra
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
@@ -503,12 +505,14 @@ object FrmConsultarPedOrdemCompra: TFrmConsultarPedOrdemCompra
           Title.Font.Height = -11
           Title.Font.Name = 'MS Sans Serif'
           Title.Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'TBPED_MOTIVOCANCEL'
           Title.Caption = 'Motivo do cancelamento'
+          Width = 64
           Visible = True
         end
         item
@@ -519,6 +523,7 @@ object FrmConsultarPedOrdemCompra: TFrmConsultarPedOrdemCompra
           Font.Height = -11
           Font.Name = 'MS Sans Serif'
           Font.Style = [fsBold]
+          Width = 64
           Visible = True
         end>
     end
