@@ -20,6 +20,7 @@ type
     CDSRomaneioidRomaneio: TIntegerField;
     PNGButton7: TPNGButton;
     PNGButtonRomaneio: TPNGButton;
+    CheckBox1: TCheckBox;
     procedure PNGBCarregarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Excluir1Click(Sender: TObject);

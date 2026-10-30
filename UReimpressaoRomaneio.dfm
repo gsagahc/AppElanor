@@ -291,8 +291,14 @@ inherited FrmReimpressaoRomaneio: TFrmReimpressaoRomaneio
       Left = 150
       Visible = False
     end
-    inherited ChBoxMostrarValores: TCheckBox
-      Left = 256
+    object CheckBox1: TCheckBox
+      Left = 272
+      Top = 16
+      Width = 97
+      Height = 17
+      Caption = 'CheckBox1'
+      TabOrder = 2
+      Visible = False
     end
   end
   inherited Panel2: TPanel

@@ -1787,11 +1787,11 @@ object FrmPrincipal: TFrmPrincipal
     end
   end
   object IBDMain: TIBDatabase
-    Connected = True
     DatabaseName = 'C:\AppElanor\DATABASE-PRODUCAO.FDB'
     Params.Strings = (
       'user_name=sysdba'
-      'password=P4o3l8l1')
+      'password=P4o3l8l1'
+      'lc_ctype=ISO8859_1')
     LoginPrompt = False
     IdleTimer = 0
     SQLDialect = 3
@@ -1800,7 +1800,7 @@ object FrmPrincipal: TFrmPrincipal
     Top = 96
   end
   object IBTMain: TIBTransaction
-    Active = True
+    Active = False
     DefaultDatabase = IBDMain
     AutoStopAction = saNone
     Left = 72
