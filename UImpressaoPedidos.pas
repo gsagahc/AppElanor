@@ -211,6 +211,8 @@ type
     QRDBText10: TQRDBText;
     IBQImpressaoPedTBPED_VENC04: TDateField;
     CDsPedidoTBPED_VENC04: TDateField;
+    QRLabel2: TQRLabel;
+    QRDBText11: TQRDBText;
     procedure IBQImpressaoPedAfterOpen(DataSet: TDataSet);
     procedure QRBand1BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -273,6 +275,7 @@ begin
       CDsPedidoTBPRZ_NOME.AsString         :=  IBQImpressaoPed.FieldByName('TBPRZ_NOME').AsString;
       CDsPedidoTBPED_MOTIVOCANCEL.AsString :=  IBQImpressaoPed.FieldByName('TBPED_MOTIVOCANCEL').AsString;
       CDsPedidoOBS.AsString                :=  IBQImpressaoPed.FieldByName('OBS').AsString;
+      CDsPedidoTBPED_TELEFONE.AsString     :=  IBQImpressaoPed.FieldByName('TBPED_TELEFONE').AsString;
       //Vencimentos
       if Not IBQImpressaoPed.FieldByName('TBPED_VENC01').IsNull   Then
         CDsPedidoTBPED_VENC01.AsDateTime  :=  IBQImpressaoPed.FieldByName('TBPED_VENC01').AsDateTime ;

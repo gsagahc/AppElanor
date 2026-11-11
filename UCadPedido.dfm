@@ -1,6 +1,6 @@
 object FrmNPedido: TFrmNPedido
-  Left = 265
-  Top = 0
+  Left = 213
+  Top = 77
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Novo pedido'
@@ -377,7 +377,7 @@ object FrmNPedido: TFrmNPedido
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 307
+      Left = 251
       Top = 88
       Width = 40
       Height = 13
@@ -390,7 +390,7 @@ object FrmNPedido: TFrmNPedido
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 687
+      Left = 527
       Top = 88
       Width = 17
       Height = 13
@@ -429,6 +429,19 @@ object FrmNPedido: TFrmNPedido
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label11: TLabel
+      Left = 583
+      Top = 88
+      Width = 51
+      Height = 13
+      Caption = 'Telefone'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object DBEditCli: TDBEdit
       Left = 24
       Top = 24
@@ -445,26 +458,26 @@ object FrmNPedido: TFrmNPedido
     object DBEdit2: TDBEdit
       Left = 24
       Top = 104
-      Width = 273
+      Width = 217
       Height = 19
       CharCase = ecUpperCase
       Ctl3D = False
       DataField = 'TBPED_BAIRRO'
       DataSource = DsPedido
       ParentCtl3D = False
-      TabOrder = 2
+      TabOrder = 3
     end
     object DBEdit3: TDBEdit
-      Left = 307
+      Left = 251
       Top = 104
-      Width = 369
+      Width = 270
       Height = 19
       CharCase = ecUpperCase
       Ctl3D = False
       DataField = 'TBPED_CIDADE'
       DataSource = DsPedido
       ParentCtl3D = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object DBLookupComboBox1: TDBLookupComboBox
       Left = 24
@@ -478,7 +491,7 @@ object FrmNPedido: TFrmNPedido
       ListField = 'TBPRZ_NOME'
       ListSource = DSPrazos
       ParentCtl3D = False
-      TabOrder = 5
+      TabOrder = 7
       OnCloseUp = DBLookupComboBox1CloseUp
       OnExit = DBLookupComboBox1Exit
     end
@@ -504,7 +517,7 @@ object FrmNPedido: TFrmNPedido
       DataSource = DsPedido
       Enabled = False
       ParentCtl3D = False
-      TabOrder = 6
+      TabOrder = 8
     end
     object DBEdit6: TDBEdit
       Left = 160
@@ -516,7 +529,7 @@ object FrmNPedido: TFrmNPedido
       DataSource = DsPedido
       Enabled = False
       ParentCtl3D = False
-      TabOrder = 7
+      TabOrder = 9
     end
     object DBEdit7: TDBEdit
       Left = 296
@@ -528,19 +541,19 @@ object FrmNPedido: TFrmNPedido
       DataSource = DsPedido
       Enabled = False
       ParentCtl3D = False
-      TabOrder = 8
+      TabOrder = 10
     end
     object DBEdit8: TDBEdit
-      Left = 686
+      Left = 528
       Top = 104
-      Width = 60
+      Width = 50
       Height = 19
       CharCase = ecUpperCase
       Ctl3D = False
       DataField = 'TBPED_ESTADO'
       DataSource = DsPedido
       ParentCtl3D = False
-      TabOrder = 4
+      TabOrder = 5
     end
     object DBEdit1: TDBEdit
       Left = 632
@@ -551,7 +564,7 @@ object FrmNPedido: TFrmNPedido
       DataField = 'TBPED_CEP'
       DataSource = DsPedido
       ParentCtl3D = False
-      TabOrder = 9
+      TabOrder = 2
       OnExit = DBEdit1Exit
     end
     object DBEdit9: TDBEdit
@@ -564,7 +577,7 @@ object FrmNPedido: TFrmNPedido
       DataField = 'OBS'
       DataSource = DsPedido
       ParentCtl3D = False
-      TabOrder = 10
+      TabOrder = 12
     end
     object RadioGroupBoleto: TRadioGroup
       Left = 576
@@ -585,7 +598,7 @@ object FrmNPedido: TFrmNPedido
         'N'#227'o')
       ParentCtl3D = False
       ParentFont = False
-      TabOrder = 11
+      TabOrder = 13
       TabStop = True
     end
     object DBEdit10: TDBEdit
@@ -598,7 +611,18 @@ object FrmNPedido: TFrmNPedido
       DataSource = DsPedido
       Enabled = False
       ParentCtl3D = False
-      TabOrder = 12
+      TabOrder = 11
+    end
+    object DBEditTelefone: TDBEdit
+      Left = 584
+      Top = 104
+      Width = 161
+      Height = 19
+      Ctl3D = False
+      DataField = 'TBPED_TELEFONE'
+      DataSource = DsPedido
+      ParentCtl3D = False
+      TabOrder = 6
     end
   end
   object PanelProdutos: TPanel

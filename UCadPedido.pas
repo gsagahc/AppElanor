@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, Grids, DBGrids, DBCtrls, StdCtrls, Mask, pngextra,
   IBSQL, DB, IBQuery, IBCustomDataSet, IBTable, Provider, DBClient,
-  IBUpdateSQL, UPrincipal, UParametrosConfig;
+  IBUpdateSQL, UPrincipal, UParametrosConfig,  StrUtils;
 
 
 type
@@ -116,6 +116,8 @@ type
     IBTbPedidosOBS: TIBStringField;
     DBEdit10: TDBEdit;
     IBTbPedidosTBPED_VENC04: TDateField;
+    Label11: TLabel;
+    DBEditTelefone: TDBEdit;
     procedure PNGButton4Click(Sender: TObject);
     procedure IBTbPedidosAfterInsert(DataSet: TDataSet);
     procedure PNGButton1Click(Sender: TObject);
@@ -138,6 +140,7 @@ type
     procedure DBLookupComboBox1Exit(Sender: TObject);
     procedure DBLookupComboBox1CloseUp(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
+
       Shift: TShiftState);
     procedure LimparDBEdits;
   private
@@ -148,6 +151,8 @@ type
     Estoque:TEstoque;
     bVisualizaImpressao,
     bGerarContaRec: Boolean;
+    function ValidarTelefone(Fone: string): Boolean;
+    function SomenteNumeros(const Str: string): string;
   public
      StrFormato:String;
      StrTamanho:String;
@@ -213,90 +218,99 @@ var ValTotal:Currency;
 begin
   if (tFrmMensagens.Mensagem('Deseja confirmar este pedido? Favor verificar os '+
                               ' dados inseridos','Q',[mbSim, mbNao])) then
-  Begin
-    try
-      NumParcelas :=0;
-      If (DBEditCli.Text=EmptyStr) Or (DBLookupComboBox1.Text=EmptyStr) Or
-         (CDSItensPedido.IsEmpty ) Then
-        tFrmMensagens.Mensagem('Pedido incompleto, favor verificar.' ,'E',[mbOK])
-      Else
-      Begin
-        If  not IBTbItensPedido.Active then
-            IBTbItensPedido.Open;
-       //Atualizae itens Pedido
-        ValTotal :=0;
-        CDSItensPedido.First;
-        While Not CDSItensPedido.Eof do
-        Begin
-          IBTbItensPedido.Append;
-          IBTbItensPedidoID_PEDIDO.AsInteger:=IdPedido;
-          IBTbItensPedidoTBITPED_UNIDADE.AsString:=CDSItensPedidoTBITPED_UNIDADE.AsString;
-          IBTbItensPedidoTBITPED_TAMANHO.AsString:=CDSItensPedidoTAMANHO.AsString;
-          IBTbItensPedidoID_PRODUTO.AsInteger:=CDSItensPedidoID_PRODUTO.AsInteger;
-          IBTbItensPedidoTBITPED_QUANT.Value :=CDSItensPedidoTBITPED_QUANT.Value ;
-          IBTbItensPedidoTBITPED_VALUNI.AsCurrency:=CDSItensPedidoTBITPED_VALUNI.AsCurrency;
-          IBTbItensPedidoTBITPED_VALTOT.AsCurrency:=CDSItensPedidoTBITPED_VALTOT.AsCurrency;
-          IBTbItensPedidoTBITPED_TIPO.AsString    :=CDSItensPedidoFORMATO.AsString;
-          ValTotal:=ValTotal+CDSItensPedidoTBITPED_VALTOT.AsCurrency;
-          IBTbItensPedido.Post;
-
-          FrmPrincipal.atualizaMovimentacao(CDSItensPedidoID_PRODUTO.AsInteger,IdPedido,CDSItensPedidoTBITPED_QUANT.Value,0,'S',CDSItensPedidoFORMATO.AsString);
-          CDSItensPedido.Next;
-        End;
-
-        //Não gerar contarec se for boleto.
-        If RadioGroupBoleto.ItemIndex = 1 Then
-        Begin
-          IBTbPedidosTBPED_BOLETO.AsString:='N';
-          if IBTbPedidosTBPED_VENC01.AsDateTime <> 0 then
-             NumParcelas:=NumParcelas+1;
-          if IBTbPedidosTBPED_VENC02.AsDateTime <> 0 then
-              NumParcelas:=NumParcelas+1;
-          if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
-             NumParcelas:=NumParcelas+1;
-          if bGerarContaRec Then
-          begin
-            if IBTbPedidosTBPED_VENC01.AsDateTime <> 0 then
-              GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC01.AsDateTime );
-            if IBTbPedidosTBPED_VENC02.AsDateTime <> 0 then
-              GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC02.AsDateTime);
-            if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
-              GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC03.AsDateTime);
-          end;
-        end
-        else
-          IBTbPedidosTBPED_BOLETO.AsString:='S';
-
-
-        IBTbPedidosTBPED_VALTOTAL.AsCurrency:=ValTotal;
-        IBTbPedidosID_USUARIO.AsInteger:=FrmPrincipal.IdUsuario;
-        IBTbPedidosTBPED_NUMPED.AsString:=NumPed;
-        IBTbPedidosTBPED_DATA.AsString :=FormatDateTime('DD/MM/YYYY',Now());
-        IBTbPedidos.Post;
-
-        CDSItensPedido.EmptyDataSet;
-        FrmPrincipal.IBTMain.Commit;
-        FrmPrincipal.IBDMain.CloseDataSets;
-        Application.CreateForm(TFrmImprePedidos, FrmImprePedidos);
-        FrmImprePedidos.IBQImpressaoPed.ParamByName('pIDPedido').AsInteger:=IdPedido;
-        FrmImprePedidos.IBQImpressaoPed.Open;
-        FrmImprePedidos.MontarCDs;
-        if bVisualizaImpressao Then
-          FrmImprePedidos.QuickRepEmpresa.Preview
-        else
-          FrmImprePedidos.QuickRepEmpresa.Print;
-        Close;
-      End;
-    Except
-      on E: EDatabaseError do
+  begin
+    if Not(ValidarTelefone(DBEditTelefone.Text)) then
+    begin
+      tFrmMensagens.Mensagem('Telefone inválido. Favor verificar' ,'E',[mbOK]);
+      Exit;
+    End;  
+    If (DBEditCli.Text=EmptyStr) Or (DBLookupComboBox1.Text=EmptyStr) Or
+       (CDSItensPedido.IsEmpty ) Then
+    begin
+      tFrmMensagens.Mensagem('Pedido incompleto, favor verificar.' ,'E',[mbOK])
+    end  
+    else
       begin
-        FrmPrincipal.IBTMain.Rollback;
-        tFrmMensagens.Mensagem('Erro ao salvar pedido. : '+'PNGButton5Click ' ,'E',[mbOK], E.Message)
-      End;
-    end;
+       try
+           NumParcelas :=0;
 
+        Begin
+          If  not IBTbItensPedido.Active then
+              IBTbItensPedido.Open;
+         //Atualizae itens Pedido
+          ValTotal :=0;
+          CDSItensPedido.First;
+          While Not CDSItensPedido.Eof do
+          Begin
+            IBTbItensPedido.Append;
+            IBTbItensPedidoID_PEDIDO.AsInteger:=IdPedido;
+            IBTbItensPedidoTBITPED_UNIDADE.AsString:=CDSItensPedidoTBITPED_UNIDADE.AsString;
+            IBTbItensPedidoTBITPED_TAMANHO.AsString:=CDSItensPedidoTAMANHO.AsString;
+            IBTbItensPedidoID_PRODUTO.AsInteger:=CDSItensPedidoID_PRODUTO.AsInteger;
+            IBTbItensPedidoTBITPED_QUANT.Value :=CDSItensPedidoTBITPED_QUANT.Value ;
+            IBTbItensPedidoTBITPED_VALUNI.AsCurrency:=CDSItensPedidoTBITPED_VALUNI.AsCurrency;
+            IBTbItensPedidoTBITPED_VALTOT.AsCurrency:=CDSItensPedidoTBITPED_VALTOT.AsCurrency;
+            IBTbItensPedidoTBITPED_TIPO.AsString    :=CDSItensPedidoFORMATO.AsString;
+            ValTotal:=ValTotal+CDSItensPedidoTBITPED_VALTOT.AsCurrency;
+            IBTbItensPedido.Post;
+
+          //  FrmPrincipal.atualizaMovimentacao(CDSItensPedidoID_PRODUTO.AsInteger,IdPedido,CDSItensPedidoTBITPED_QUANT.Value,0,'S',CDSItensPedidoFORMATO.AsString);
+            CDSItensPedido.Next;
+          End;
+
+          //Não gerar contarec se for boleto.
+          If RadioGroupBoleto.ItemIndex = 1 Then
+          Begin
+            IBTbPedidosTBPED_BOLETO.AsString:='N';
+            if IBTbPedidosTBPED_VENC01.AsDateTime <> 0 then
+               NumParcelas:=NumParcelas+1;
+            if IBTbPedidosTBPED_VENC02.AsDateTime <> 0 then
+                NumParcelas:=NumParcelas+1;
+            if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
+               NumParcelas:=NumParcelas+1;
+            if bGerarContaRec Then
+            begin
+              if IBTbPedidosTBPED_VENC01.AsDateTime <> 0 then
+                GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC01.AsDateTime );
+              if IBTbPedidosTBPED_VENC02.AsDateTime <> 0 then
+                GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC02.AsDateTime);
+              if IBTbPedidosTBPED_VENC03.AsDateTime <> 0 then
+                GerarContaRec(idpedido, ValTotal, (ValTotal/NumParcelas) , IBTbPedidosTBPED_VENC03.AsDateTime);
+            end;
+          end
+          else
+            IBTbPedidosTBPED_BOLETO.AsString:='S';
+
+
+          IBTbPedidosTBPED_VALTOTAL.AsCurrency:=ValTotal;
+          IBTbPedidosID_USUARIO.AsInteger:=FrmPrincipal.IdUsuario;
+          IBTbPedidosTBPED_NUMPED.AsString:=NumPed;
+          IBTbPedidosTBPED_DATA.AsString :=FormatDateTime('DD/MM/YYYY',Now());
+          IBTbPedidos.Post;
+
+          CDSItensPedido.EmptyDataSet;
+          FrmPrincipal.IBTMain.Commit;
+          FrmPrincipal.IBDMain.CloseDataSets;
+          Application.CreateForm(TFrmImprePedidos, FrmImprePedidos);
+          FrmImprePedidos.IBQImpressaoPed.ParamByName('pIDPedido').AsInteger:=IdPedido;
+          FrmImprePedidos.IBQImpressaoPed.Open;
+          FrmImprePedidos.MontarCDs;
+          if bVisualizaImpressao Then
+            FrmImprePedidos.QuickRepEmpresa.Preview
+          else
+            FrmImprePedidos.QuickRepEmpresa.Print;
+          Close;
+        End;
+      Except
+        on E: EDatabaseError do
+        begin
+          FrmPrincipal.IBTMain.Rollback;
+          tFrmMensagens.Mensagem('Erro ao salvar pedido. : '+'PNGButton5Click ' ,'E',[mbOK], E.Message)
+        End;
+      end;
+
+    End;
   End;
-
 end;
 
 procedure TFrmNPedido.PNGBNovoProdClick(Sender: TObject);
@@ -600,7 +614,7 @@ begin
        IBTbPedidosID_PRAZO.AsInteger      := IBSQLCliente.FieldByName('ID_PRAZO').AsInteger ;
        IBTbPedidosTBPED_CEP.AsString      := IBSQLCliente.FieldByName('CEP').AsString;
        IBTbPedidosTBPED_ESTADO.AsString   := IBSQLCliente.FieldByName('TBCLI_ESTADO').AsString;
-
+       IBTbPedidosTBPED_TELEFONE.AsString := IBSQLCliente.FieldByName('TBCLI_TELEFONE').AsString;
        If IBSQLCliente.FieldByName('TBCLI_BOLETO').AsString='S' then
          RadioGroupBoleto.ItemIndex :=0
        else
@@ -821,6 +835,64 @@ begin
        (FrmNPedido.Components[CompNo] as TDBEdit).Clear;
      DBEditCli.DataSource.DataSet.ClearFields;       
   end;
+
+end;
+
+
+function TFrmNPedido.ValidarTelefone(Fone: string): Boolean;
+var
+  ApenasDigitos: string;
+  DDD: Integer;
+  PrimeiroDigito: Char;
+begin
+  if Trim(DBEditTelefone.Text)<>EmptyStr Then
+  Begin
+    Result := False;
+    ApenasDigitos := SomenteNumeros(Fone);
+
+    // Verifica se tem 10 (fixo) ou 11 (celular) dígitos
+    if (Length(ApenasDigitos) <> 10) and (Length(ApenasDigitos) <> 11) then
+     Result := False;
+
+    // Extrai o DDD (dois primeiros dígitos)
+    try
+      DDD := StrToInt(Copy(ApenasDigitos, 1, 2));
+    except
+      Result := False;
+    end;
+
+    // Valida se o DDD está entre os intervalos válidos no Brasil (11 a 99)
+    if (DDD < 11) or (DDD > 99) then
+      Result := False;
+
+    PrimeiroDigito := ApenasDigitos[3]; // O dígito após o DDD
+
+    // Regra para Telefone Fixo (10 dígitos): deve começar com 2, 3, 4 ou 5
+    if Length(ApenasDigitos) = 10 then
+    begin
+      if PrimeiroDigito in ['2'..'5'] then
+        Result := True;
+    end
+    // Regra para Celular (11 dígitos): o terceiro dígito deve ser '9'
+    else if Length(ApenasDigitos) = 11 then
+    begin
+      if PrimeiroDigito = '9' then
+        Result := True;
+    end;
+  End
+  Else
+    Result:=False;
+
+end;
+
+function TFrmNPedido.SomenteNumeros(const Str: string): string;
+var
+  I: Integer;
+begin
+  Result := '';
+  for I := 1 to Length(Str) do
+    if Str[I] in ['0'..'9'] then
+      Result := Result + Str[I];
 
 end;
 

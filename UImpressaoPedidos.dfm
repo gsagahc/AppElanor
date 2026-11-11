@@ -159,10 +159,10 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          272.520833333333400000
-          58.208333333333340000
+          272.520833333333300000
+          58.208333333333330000
           10.583333333333330000
-          264.583333333333400000)
+          264.583333333333300000)
         AutoSize = True
         Picture.Data = {
           0A544A504547496D616765AA270000FFD8FFE000104A46494600010101006000
@@ -555,7 +555,7 @@ object FrmImprePedidos: TFrmImprePedidos
           44.979166666666670000
           402.166666666666700000
           169.333333333333300000
-          629.708333333333400000)
+          629.708333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -604,7 +604,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           52.916666666666670000
           1402.291666666667000000
-          84.666666666666680000
+          84.666666666666670000
           161.395833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -636,7 +636,7 @@ object FrmImprePedidos: TFrmImprePedidos
           52.916666666666670000
           1402.291666666667000000
           148.166666666666700000
-          66.145833333333340000)
+          66.145833333333330000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -792,7 +792,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           169.333333333333300000
-          304.270833333333400000
+          304.270833333333300000
           238.125000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -867,7 +867,7 @@ object FrmImprePedidos: TFrmImprePedidos
           44.979166666666670000
           209.020833333333300000
           365.125000000000000000
-          328.083333333333400000)
+          328.083333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -979,7 +979,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          605.895833333333400000
+          605.895833333333300000
           428.625000000000000000
           111.125000000000000000)
         Alignment = taLeftJustify
@@ -1011,7 +1011,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           127.000000000000000000
-          431.270833333333400000
+          431.270833333333300000
           222.250000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1037,7 +1037,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           15.875000000000000000
-          431.270833333333400000
+          431.270833333333300000
           103.187500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1099,7 +1099,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           169.333333333333300000
-          304.270833333333400000
+          304.270833333333300000
           238.125000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1158,9 +1158,9 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          732.895833333333400000
+          732.895833333333300000
           428.625000000000000000
-          232.833333333333400000)
+          232.833333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1359,7 +1359,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           23.812500000000000000
-          502.708333333333400000
+          502.708333333333300000
           230.187500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1390,7 +1390,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           261.937500000000000000
-          502.708333333333400000
+          502.708333333333300000
           267.229166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1416,7 +1416,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           547.687500000000000000
-          502.708333333333400000
+          502.708333333333300000
           267.229166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1442,7 +1442,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           833.437500000000000000
-          502.708333333333400000
+          502.708333333333300000
           267.229166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1467,9 +1467,9 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          18.520833333333340000
-          590.020833333333400000
-          58.208333333333340000)
+          18.520833333333330000
+          590.020833333333300000
+          58.208333333333330000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1562,8 +1562,8 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          121.708333333333400000
-          590.020833333333400000
+          121.708333333333300000
+          590.020833333333300000
           161.395833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1593,8 +1593,8 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          312.208333333333400000
-          590.020833333333400000
+          312.208333333333300000
+          590.020833333333300000
           113.770833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -1689,8 +1689,8 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           465.666666666666700000
-          590.020833333333400000
-          359.833333333333400000)
+          590.020833333333300000
+          359.833333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1720,8 +1720,8 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           1415.520833333333000000
-          590.020833333333400000
-          232.833333333333400000)
+          590.020833333333300000
+          232.833333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1815,7 +1815,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           1661.583333333333000000
-          590.020833333333400000
+          590.020833333333300000
           187.854166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -2982,7 +2982,7 @@ object FrmImprePedidos: TFrmImprePedidos
           44.979166666666670000
           209.020833333333300000
           365.125000000000000000
-          328.083333333333400000)
+          328.083333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -3064,7 +3064,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          18.520833333333340000
+          18.520833333333330000
           1071.562500000000000000
           68.791666666666670000)
         Alignment = taLeftJustify
@@ -3097,7 +3097,7 @@ object FrmImprePedidos: TFrmImprePedidos
           44.979166666666670000
           116.416666666666700000
           1071.562500000000000000
-          60.854166666666680000)
+          60.854166666666670000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -3320,7 +3320,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Size.Values = (
           44.979166666666670000
           1119.187500000000000000
-          502.708333333333400000
+          502.708333333333300000
           267.229166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
@@ -3329,6 +3329,63 @@ object FrmImprePedidos: TFrmImprePedidos
         Color = clWhite
         DataSet = CDsPedido
         DataField = 'TBPED_VENC04'
+        Transparent = False
+        WordWrap = True
+        FontSize = 10
+      end
+      object QRLabel2: TQRLabel
+        Left = 566
+        Top = 116
+        Width = 37
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1497.541666666667000000
+          306.916666666666700000
+          97.895833333333330000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Fone:'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        FontSize = 10
+      end
+      object QRDBText11: TQRDBText
+        Left = 608
+        Top = 115
+        Width = 105
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666670000
+          1608.666666666667000000
+          304.270833333333300000
+          277.812500000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = CDsPedido
+        DataField = 'TBPED_TELEFONE'
         Transparent = False
         WordWrap = True
         FontSize = 10
