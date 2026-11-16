@@ -83,7 +83,7 @@ object FrmImprePedidos: TFrmImprePedidos
       object QRShape16: TQRShape
         Left = 0
         Top = 134
-        Width = 367
+        Width = 497
         Height = 25
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -91,10 +91,10 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          66.145833333333320000
+          66.145833333333330000
           0.000000000000000000
           354.541666666666700000
-          971.020833333333200000)
+          1314.979166666667000000)
         Shape = qrsRectangle
       end
       object QRShape24: TQRShape
@@ -879,37 +879,6 @@ object FrmImprePedidos: TFrmImprePedidos
         WordWrap = True
         FontSize = 10
       end
-      object QRLabel34: TQRLabel
-        Left = 370
-        Top = 138
-        Width = 30
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          978.958333333333300000
-          365.125000000000000000
-          79.375000000000000000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Caption = 'Cep:'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-        WordWrap = True
-        FontSize = 10
-      end
       object QRLabel35: TQRLabel
         Left = 501
         Top = 137
@@ -942,7 +911,7 @@ object FrmImprePedidos: TFrmImprePedidos
         FontSize = 10
       end
       object QRDBText25: TQRDBText
-        Left = 500
+        Left = 548
         Top = 137
         Width = 165
         Height = 17
@@ -953,7 +922,7 @@ object FrmImprePedidos: TFrmImprePedidos
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1322.916666666667000000
+          1449.916666666667000000
           362.479166666666700000
           436.562500000000000000)
         Alignment = taLeftJustify
@@ -1089,7 +1058,7 @@ object FrmImprePedidos: TFrmImprePedidos
       object QRDBText28: TQRDBText
         Left = 64
         Top = 115
-        Width = 90
+        Width = 489
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -1100,10 +1069,10 @@ object FrmImprePedidos: TFrmImprePedidos
           44.979166666666670000
           169.333333333333300000
           304.270833333333300000
-          238.125000000000000000)
+          1293.812500000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
-        AutoSize = True
+        AutoSize = False
         AutoStretch = False
         Color = clWhite
         DataSet = CDsPedido
@@ -1168,32 +1137,6 @@ object FrmImprePedidos: TFrmImprePedidos
         Color = clWhite
         DataSet = CDsPedido
         DataField = 'TBPRZ_NOME'
-        Transparent = False
-        WordWrap = True
-        FontSize = 10
-      end
-      object QRDBText24: TQRDBText
-        Left = 403
-        Top = 138
-        Width = 78
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          44.979166666666670000
-          1066.270833333333000000
-          365.125000000000000000
-          206.375000000000000000)
-        Alignment = taLeftJustify
-        AlignToBand = False
-        AutoSize = True
-        AutoStretch = False
-        Color = clWhite
-        DataSet = CDsPedido
-        DataField = 'TBPED_CEP'
         Transparent = False
         WordWrap = True
         FontSize = 10
@@ -2971,7 +2914,7 @@ object FrmImprePedidos: TFrmImprePedidos
       object QRDBText29: TQRDBText
         Left = 79
         Top = 138
-        Width = 124
+        Width = 410
         Height = 17
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -2982,10 +2925,10 @@ object FrmImprePedidos: TFrmImprePedidos
           44.979166666666670000
           209.020833333333300000
           365.125000000000000000
-          328.083333333333300000)
+          1084.791666666667000000)
         Alignment = taLeftJustify
         AlignToBand = False
-        AutoSize = True
+        AutoSize = False
         AutoStretch = False
         Color = clWhite
         DataSet = CDsPedido

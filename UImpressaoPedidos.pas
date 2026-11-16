@@ -112,8 +112,6 @@ type
     QRLabel33: TQRLabel;
     QRDBText23: TQRDBText;
     QRShape16: TQRShape;
-    QRLabel34: TQRLabel;
-    QRDBText24: TQRDBText;
     QRLabel35: TQRLabel;
     QRDBText25: TQRDBText;
     QRDBText26: TQRDBText;
