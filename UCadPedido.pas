@@ -254,7 +254,7 @@ begin
             ValTotal:=ValTotal+CDSItensPedidoTBITPED_VALTOT.AsCurrency;
             IBTbItensPedido.Post;
 
-          //  FrmPrincipal.atualizaMovimentacao(CDSItensPedidoID_PRODUTO.AsInteger,IdPedido,CDSItensPedidoTBITPED_QUANT.Value,0,'S',CDSItensPedidoFORMATO.AsString);
+            FrmPrincipal.atualizaMovimentacao(CDSItensPedidoID_PRODUTO.AsInteger,IdPedido,CDSItensPedidoTBITPED_QUANT.Value,0,'S',CDSItensPedidoFORMATO.AsString);
             CDSItensPedido.Next;
           End;
 

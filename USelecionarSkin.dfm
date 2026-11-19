@@ -144,7 +144,6 @@ object FrmSelectSkin: TFrmSelectSkin
       ParentCtl3D = False
       ShowGlyphs = True
       TabOrder = 0
-      OnChange = FileListBox1Change
     end
   end
 end

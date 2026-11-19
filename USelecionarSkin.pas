@@ -14,7 +14,6 @@ type
     FileListBox1: TFileListBox;
     procedure FormShow(Sender: TObject);
     procedure PNGButton2Click(Sender: TObject);
-    procedure FileListBox1Change(Sender: TObject);
     procedure gravarIni;
   private
     { Private declarations }
@@ -39,12 +38,6 @@ procedure TFrmSelectSkin.PNGButton2Click(Sender: TObject);
 begin
   gravarIni;
   Close;
-end;
-
-procedure TFrmSelectSkin.FileListBox1Change(Sender: TObject);
-begin
-  FrmPrincipal.SkinData1.SkinFile:=FileListBox1.FileName;
-  
 end;
 
 procedure TFrmSelectSkin.gravarIni;

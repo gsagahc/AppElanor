@@ -8,7 +8,7 @@ uses
   pngextra, IBSQL, jpeg, ExtCtrls, IniFiles, IdBaseComponent, IdComponent,
   IdTCPServer, IdCustomHTTPServer, IdHTTPServer, IdTCPConnection,
   IdTCPClient, IdHTTP, InvokeRegistry, Rio, SOAPHTTPClient, Printers,
-  StdCtrls, WinSkinData, WinSkinStore, IBCustomDataSet, IBQuery, ComObj, StrUtils,
+  StdCtrls, IBCustomDataSet, IBQuery, ComObj, StrUtils,
   Buttons, DBClient, IBStoredProc, UParametrosConfig;
 
 type
@@ -206,7 +206,6 @@ type
     EStoquenegativo1: TMenuItem;
     CorrigirAlerar1: TMenuItem;
     Reimpressoromaneio1: TMenuItem;
-    SkinData1: TSkinData;
     Skin1: TMenuItem;
     IBSPATUALIZAMOVI: TIBStoredProc;
     Enroladores1: TMenuItem;
@@ -754,8 +753,7 @@ begin
   ArqIni := TIniFile.Create(caminho+'Config.ini');
   try
     BancoDados := ArqIni.ReadString('Configuracoes', 'DATABASE', BancoDados);
-    SkinData1.SkinFile := ArqIni.ReadString('Configuracoes', 'SKIN', SkinData1.SkinFile);
-    SkinData1.Active:=True;
+   
   finally
     ArqIni.Free;
   end;
@@ -1640,7 +1638,7 @@ begin
   except
    on E: EDatabaseError do
    begin
-     tFrmMensagens.Mensagem('Erro ao atualizar movimentação do estoque.','E',[mbOK], E.Message);
+     //tFrmMensagens.Mensagem('Erro ao atualizar movimentação do estoque.','E',[mbOK], E.Message);
 
    end;
   end;

@@ -1,30 +1,27 @@
 [Closed Files]
-File_0=SourceModule,'C:\git_repository\AppElanor\URelatorioPedData.pas',0,1,161,107,173,1,0
-File_1=SourceModule,'C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas',0,1,274,96,291,1,0
-File_2=SourceModule,'C:\git_repository\AppElanor\UReimpressaoRomaneio.pas',0,1,74,68,45,1,0
-File_3=SourceModule,'C:\git_repository\AppElanor\UPrintRomaneio.pas',0,1,32,73,34,1,0
-File_4=SourceModule,'C:\git_repository\AppElanor\UConsultaPedData.pas',0,1,94,1,117,1,0
-File_5=SourceModule,'C:\git_repository\AppElanor\URelPedidosdata.pas',0,1,52,3,52,1,0
-File_6=SourceModule,'C:\git_repository\AppElanor\URelatorioPedDataCliente.pas',0,1,55,99,57,1,0
-File_7=SourceModule,'C:\git_repository\AppElanor\URelatorioPedOrdemCompra.pas',0,1,1,63,99,1,0
+File_0=SourceModule,'C:\git_repository\AppElanor\UConsultarPedCli.pas',0,1,76,73,82,1,0
+File_1=SourceModule,'C:\git_repository\AppElanor\UCadCli.pas',0,1,203,61,220,0,0
+File_2=SourceModule,'C:\AppElanor_Fontes\VCLSkin4.8\Source\winsubclass.pas',0,1,939,1,957,0,0
+File_3=SourceModule,'C:\git_repository\AppElanor\URelatorioPedData.pas',0,1,161,107,173,1,0
+File_4=SourceModule,'C:\git_repository\AppElanor\Prototipos\RomaneioEntrega\URomaneioEntrega.pas',0,1,274,96,291,1,0
+File_5=SourceModule,'C:\git_repository\AppElanor\UReimpressaoRomaneio.pas',0,1,74,68,45,1,0
+File_6=SourceModule,'C:\git_repository\AppElanor\UPrintRomaneio.pas',0,1,32,73,34,1,0
 
 [Modules]
-Module0=C:\git_repository\AppElanor\UCadCli.pas
-Module1=C:\git_repository\AppElanor\Elanor.dpr
+Module0=C:\git_repository\AppElanor\UPrincipal.pas
+Module1=C:\git_repository\AppElanor\USelecionarSkin.pas
 Module2=C:\git_repository\AppElanor\UCadPedido.pas
-Module3=C:\git_repository\AppElanor\UConsultarPedCli.pas
-Module4=C:\git_repository\AppElanor\UPrincipal.pas
-Module5=C:\git_repository\AppElanor\UImpressaoPedidos.pas
-Module6=C:\AppElanor_Fontes\VCLSkin4.8\Source\winsubclass.pas
-Count=7
+Module3=C:\git_repository\AppElanor\UImpressaoPedidos.pas
+Module4=C:\git_repository\AppElanor\Elanor.dpr
+Count=5
 EditWindowCount=1
 
-[C:\git_repository\AppElanor\UCadCli.pas]
+[C:\git_repository\AppElanor\UPrincipal.pas]
 ModuleType=SourceModule
-FormState=0
+FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\Elanor.dpr]
+[C:\git_repository\AppElanor\USelecionarSkin.pas]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -34,22 +31,12 @@ ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
-[C:\git_repository\AppElanor\UConsultarPedCli.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\git_repository\AppElanor\UPrincipal.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
 [C:\git_repository\AppElanor\UImpressaoPedidos.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
-[C:\AppElanor_Fontes\VCLSkin4.8\Source\winsubclass.pas]
+[C:\git_repository\AppElanor\Elanor.dpr]
 ModuleType=SourceModule
 FormState=0
 FormOnTop=0
@@ -59,24 +46,22 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=7
-CurrentView=4
+ViewCount=5
+CurrentView=1
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
-View5=5
-View6=6
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
 Visible=1
 State=2
-Left=329
-Top=84
-Width=1037
-Height=684
+Left=498
+Top=147
+Width=868
+Height=485
 MaxLeft=-8
 MaxTop=107
 MaxWidth=1382
@@ -87,57 +72,43 @@ LeftPanelSize=140
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=60
+BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000005605000000000000023C000000000000000100000000000000000000000001000000004006000000000000010000000014050000000000000100000000560500000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=000004000000000000000000000000000000000000000000000100000000000000000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
-Module=C:\git_repository\AppElanor\UPrincipal.pas
-CursorX=56
-CursorY=669
-TopLine=667
+Module=C:\git_repository\AppElanor\Elanor.dpr
+CursorX=20
+CursorY=3
+TopLine=1
 LeftCol=1
 
 [View1]
-Module=C:\git_repository\AppElanor\UConsultarPedCli.pas
-CursorX=73
-CursorY=82
-TopLine=76
+Module=C:\git_repository\AppElanor\UPrincipal.pas
+CursorX=4
+CursorY=756
+TopLine=745
 LeftCol=1
 
 [View2]
-Module=C:\git_repository\AppElanor\UCadPedido.pas
-CursorX=85
-CursorY=613
-TopLine=601
+Module=C:\git_repository\AppElanor\USelecionarSkin.pas
+CursorX=3
+CursorY=46
+TopLine=34
 LeftCol=1
 
 [View3]
-Module=C:\git_repository\AppElanor\Elanor.dpr
-CursorX=78
-CursorY=111
-TopLine=103
+Module=C:\git_repository\AppElanor\UCadPedido.pas
+CursorX=111
+CursorY=316
+TopLine=541
 LeftCol=1
 
 [View4]
-Module=C:\git_repository\AppElanor\UCadCli.pas
-CursorX=61
-CursorY=220
-TopLine=203
-LeftCol=1
-
-[View5]
 Module=C:\git_repository\AppElanor\UImpressaoPedidos.pas
-CursorX=61
-CursorY=218
-TopLine=211
-LeftCol=1
-
-[View6]
-Module=C:\AppElanor_Fontes\VCLSkin4.8\Source\winsubclass.pas
-CursorX=1
-CursorY=957
-TopLine=939
+CursorX=2
+CursorY=212
+TopLine=209
 LeftCol=1
 
 [Watches]
@@ -163,9 +134,10 @@ LRDockWidth=426
 Dockable=1
 
 [Breakpoints]
-Count=2
+Count=3
 Breakpoint0='C:\AppElanor_Fontes\ULogin.pas',50,'',0,1,'',1,0,0,'',1,'','',''
 Breakpoint1='C:\AppElanor_Fontes\Prototipos\EstimativaMensal\UConsultaFaturamentoMes.pas',128,'',0,1,'',1,0,0,'',1,'','',''
+Breakpoint2='C:\git_repository\AppElanor\UPrincipal.pas',1628,'',0,1,'',1,0,0,'',1,'','',''
 
 [AddressBreakpoints]
 Count=0
@@ -248,7 +220,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=136
 ArrangeBy=Name
-SelectedItem=OnExit
+SelectedItem=Name
 ExpandedItems=Anchors,Bands,BorderIcons,Brush,CalColors,Constraints,FileType,Frame,HorzScrollBar,ListSource,Options,Page,PrinterSettings,Size,SkinControls,Title
 HiddenCategories=
 
@@ -291,11 +263,11 @@ State=0
 Left=0
 Top=12
 Width=140
-Height=515
+Height=490
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=140
-ClientHeight=515
+ClientHeight=490
 TBDockHeight=305
 LRDockWidth=140
 Dockable=1
@@ -307,12 +279,12 @@ State=0
 Left=12
 Top=0
 Width=1354
-Height=60
+Height=85
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1354
-ClientHeight=60
-TBDockHeight=60
+ClientHeight=85
+TBDockHeight=85
 LRDockWidth=443
 Dockable=1
 
